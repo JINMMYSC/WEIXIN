@@ -12,7 +12,7 @@ final class HostViewController: UIViewController {
         title.numberOfLines = 0
 
         let detail = UILabel()
-        detail.text = "当前为基础工程，输入引擎尚未接入。\n可在下方输入框切换原版键盘并记录采样。"
+        detail.text = "候选、分页、选词和本地学习链路已接通。\n当前使用小型基线词表，用于真机验证交互；尚未接入原版词库和排序模型。"
         detail.font = .preferredFont(forTextStyle: .body)
         detail.adjustsFontForContentSizeCategory = true
         detail.numberOfLines = 0
@@ -40,4 +40,3 @@ final class HostViewController: UIViewController {
         ])
     }
 }
-

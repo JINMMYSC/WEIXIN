@@ -23,4 +23,11 @@ final class PinyinEngineTests: XCTestCase {
         ])
         XCTAssertEqual(engine.candidates(for: "N-I").map(\.text), ["尼", "你"])
     }
+
+    func testBootstrapEngineProvidesAuditableOfflineCandidates() {
+        let engine = BootstrapPinyinEngine()
+        XCTAssertEqual(engine.candidates(for: "NIHAO").map(\.text), ["你好"])
+        XCTAssertEqual(engine.candidates(for: "wei-xin").map(\.text), ["微信"])
+        XCTAssertTrue(engine.candidates(for: "not-in-bootstrap-table").isEmpty)
+    }
 }

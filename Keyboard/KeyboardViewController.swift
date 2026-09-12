@@ -1,7 +1,14 @@
 import UIKit
 
 final class KeyboardViewController: UIInputViewController {
-    private let sessionBridge = KeyboardSessionBridge()
+    private let learningStore = InMemoryCandidateLearningStore()
+    private lazy var sessionBridge = KeyboardSessionBridge(
+        engine: LearningAwarePinyinEngine(
+            base: BootstrapPinyinEngine().weighted,
+            learning: learningStore
+        ),
+        learning: learningStore
+    )
     private let compositionLabel = UILabel()
     private let candidateStack = UIStackView()
     private let theme = KeyboardTheme.system
@@ -17,6 +24,7 @@ final class KeyboardViewController: UIInputViewController {
         compositionLabel.font = .monospacedSystemFont(ofSize: 20, weight: .medium)
         compositionLabel.textAlignment = .center
         compositionLabel.accessibilityIdentifier = "composition-text"
+        compositionLabel.textColor = theme.candidateTextColor
 
         candidateStack.axis = .horizontal
         candidateStack.spacing = 12
@@ -65,7 +73,7 @@ final class KeyboardViewController: UIInputViewController {
         arranged.append(controls)
         let stack = UIStackView(arrangedSubviews: arranged)
         stack.axis = .vertical
-        stack.spacing = 16
+        stack.spacing = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stack)
         NSLayoutConstraint.activate([
@@ -74,7 +82,7 @@ final class KeyboardViewController: UIInputViewController {
             stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
         updateCandidates()
-        let height = view.heightAnchor.constraint(equalToConstant: 216)
+        let height = view.heightAnchor.constraint(equalToConstant: 300)
         height.priority = .defaultHigh
         height.isActive = true
     }
@@ -86,6 +94,8 @@ final class KeyboardViewController: UIInputViewController {
             button.backgroundColor = theme.keyColor
             button.setTitleColor(theme.keyTextColor, for: .normal)
             button.titleLabel?.font = .systemFont(ofSize: 19)
+            button.layer.cornerRadius = 6
+            button.accessibilityLabel = "字母 \(letter)"
             button.addAction(UIAction { [weak self] _ in
                 self?.handleInputEvent(.insert(String(letter)))
             }, for: .touchUpInside)

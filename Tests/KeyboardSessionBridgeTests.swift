@@ -68,4 +68,20 @@ final class KeyboardSessionBridgeTests: XCTestCase {
         XCTAssertEqual(bridge.restoreLearning(snapshot!), true)
         XCTAssertEqual(learning.selectionCount(for: "你"), 1)
     }
+
+    func testLearningReordersBootstrapCandidatesOnNextComposition() {
+        let learning = InMemoryCandidateLearningStore()
+        let bridge = KeyboardSessionBridge(
+            engine: LearningAwarePinyinEngine(base: BootstrapPinyinEngine().weighted, learning: learning),
+            learning: learning
+        )
+        var output = bridge.handle(.insert("ni"))
+        XCTAssertEqual(output.snapshot.candidates.first?.text, "你")
+        guard let learned = output.snapshot.candidates.first(where: { $0.text == "尼" }) else {
+            return XCTFail("bootstrap candidate missing")
+        }
+        _ = bridge.selectCandidate(learned)
+        output = bridge.handle(.insert("ni"))
+        XCTAssertEqual(output.snapshot.candidates.first?.text, "尼")
+    }
 }
