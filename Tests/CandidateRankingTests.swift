@@ -17,4 +17,12 @@ final class CandidateRankingTests: XCTestCase {
     func testEmptyInputProducesEmptyResult() {
         XCTAssertTrue(CandidateRanker().rank([]).isEmpty)
     }
+
+    func testNonFiniteScoresFallBehindFiniteScores() {
+        let result = CandidateRanker().rank([
+            ScoredCandidate(candidate: InputCandidate(id: 1, text: "异常"), score: .nan),
+            ScoredCandidate(candidate: InputCandidate(id: 2, text: "正常"), score: 0)
+        ])
+        XCTAssertEqual(result.map(\.text), ["正常", "异常"])
+    }
 }
