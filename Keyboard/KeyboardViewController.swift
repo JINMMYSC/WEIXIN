@@ -127,7 +127,11 @@ final class KeyboardViewController: UIInputViewController {
     }
 
     func handleInputEvent(_ event: InputEvent) {
+        let wasComposing = !sessionBridge.snapshot.composingText.isEmpty
         let output = sessionBridge.handle(event)
+        if case .deleteBackward = event, !wasComposing, output.snapshot.composingText.isEmpty {
+            textDocumentProxy.deleteBackward()
+        }
         if let committedText = output.committedText {
             textDocumentProxy.insertText(committedText)
         }

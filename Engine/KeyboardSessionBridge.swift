@@ -13,6 +13,8 @@ final class KeyboardSessionBridge {
     private var nextRequestID = 0
     private var version = 0
 
+    var snapshot: InputSnapshot { session.snapshot }
+
     init(
         session: InputSession = InputSession(),
         engine: PinyinEngine = EmptyPinyinEngine(),
