@@ -55,4 +55,4 @@
 
 指定地址：https://github.com/JINMMYSC/WEIXIN
 
-本轮已尝试 Git 只读访问：网络放行后返回缺少认证，未读取到远程分支。浏览器访问超时。尚未克隆、提交、推送或创建 Actions 工作流；不能判断仓库是否为空、是否私有或账号是否具备写权限。
+已通过 GitHub CLI 验证 JINMMYSC 对该私有仓库有管理员权限。基础工程位于 codex/ios-bootstrap 分支，已推送并触发 Actions；构建状态以实际 CI 运行记录为准。尚未配置实机签名，原版采样结果仍需填写。
