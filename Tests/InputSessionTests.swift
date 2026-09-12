@@ -40,4 +40,16 @@ final class InputSessionTests: XCTestCase {
     func testFreshSessionIsValid() {
         XCTAssertTrue(InputSession().validate())
     }
+
+    func testReplayProducesDeterministicSnapshots() {
+        let replay = InputReplay([
+            .insert("ni"), .insert("hao"), .deleteBackward, .commitPending, .reset
+        ])
+        let first = replay.run()
+        let second = replay.run()
+        XCTAssertEqual(first, second)
+        XCTAssertEqual(first.last, InputSnapshot(committedText: "", composingText: "", candidates: []))
+        XCTAssertEqual(first[2].composingText, "niha")
+        XCTAssertEqual(first[3].committedText, "niha")
+    }
 }

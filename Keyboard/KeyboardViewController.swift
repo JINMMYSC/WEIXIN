@@ -21,6 +21,23 @@ final class KeyboardViewController: UIInputViewController {
         candidateStack.distribution = .fillEqually
         candidateStack.accessibilityIdentifier = "candidate-bar"
 
+        let previousCandidates = UIButton(type: .system)
+        previousCandidates.setTitle("‹", for: .normal)
+        previousCandidates.accessibilityIdentifier = "previous-candidates"
+        previousCandidates.addTarget(self, action: #selector(previousCandidatePage), for: .touchUpInside)
+        let nextCandidates = UIButton(type: .system)
+        nextCandidates.setTitle("›", for: .normal)
+        nextCandidates.accessibilityIdentifier = "next-candidates"
+        nextCandidates.addTarget(self, action: #selector(nextCandidatePage), for: .touchUpInside)
+        let candidateRow = UIStackView(arrangedSubviews: [previousCandidates, candidateStack, nextCandidates])
+        candidateRow.axis = .horizontal
+        candidateRow.spacing = 4
+        candidateRow.alignment = .fill
+        candidateRow.distribution = .fill
+        candidateStack.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        previousCandidates.setContentHuggingPriority(.required, for: .horizontal)
+        nextCandidates.setContentHuggingPriority(.required, for: .horizontal)
+
         let next = UIButton(type: .system)
         next.setTitle("切换键盘", for: .normal)
         next.accessibilityIdentifier = "next-keyboard"
@@ -41,7 +58,7 @@ final class KeyboardViewController: UIInputViewController {
         enter.addTarget(self, action: #selector(insertNewline), for: .touchUpInside)
         let controls = UIStackView(arrangedSubviews: [delete, space, enter, commit, next])
         controls.distribution = .fillEqually
-        var arranged: [UIView] = [compositionLabel, candidateStack]
+        var arranged: [UIView] = [compositionLabel, candidateRow]
         arranged.append(contentsOf: rows)
         arranged.append(controls)
         let stack = UIStackView(arrangedSubviews: arranged)
@@ -128,6 +145,16 @@ final class KeyboardViewController: UIInputViewController {
             }, for: .touchUpInside)
             candidateStack.addArrangedSubview(button)
         }
+    }
+
+    @objc private func previousCandidatePage() {
+        candidatePager.previousPage()
+        updateCandidates()
+    }
+
+    @objc private func nextCandidatePage() {
+        candidatePager.nextPage()
+        updateCandidates()
     }
 
     private func selectCandidate(_ candidate: InputCandidate) {
