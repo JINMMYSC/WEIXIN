@@ -86,4 +86,12 @@ final class InputSessionTests: XCTestCase {
         let replay = InputReplay(events)
         XCTAssertEqual(try InputReplay(data: replay.encoded()), replay)
     }
+
+    func testReplayCanExerciseCandidateBridgeEndToEnd() {
+        let replay = InputReplay([.insert("ni"), .commitPending])
+        let bridge = KeyboardSessionBridge(engine: TablePinyinEngine(table: ["ni": ["你"]]))
+        let outputs = replay.run(on: bridge)
+        XCTAssertEqual(outputs[0].snapshot.candidates.map(\.text), ["你"])
+        XCTAssertEqual(outputs[1].committedText, "ni")
+    }
 }

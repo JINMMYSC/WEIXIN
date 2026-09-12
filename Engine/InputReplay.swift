@@ -21,4 +21,8 @@ struct InputReplay: Codable, Equatable {
     func run(on session: InputSession = InputSession()) -> [InputSnapshot] {
         events.map { session.process($0) }
     }
+
+    func run(on bridge: KeyboardSessionBridge) -> [KeyboardOutput] {
+        events.map { bridge.handle($0) }
+    }
 }
