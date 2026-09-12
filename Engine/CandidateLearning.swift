@@ -6,6 +6,10 @@ protocol CandidateLearningStore: AnyObject {
     func reset()
 }
 
+struct CandidateLearningSnapshot: Codable, Equatable {
+    let counts: [String: Int]
+}
+
 /// Small deterministic offline store. The weighting is intentionally exposed
 /// as a seam; it is not a claim about the original app's learning algorithm.
 final class InMemoryCandidateLearningStore: CandidateLearningStore {
@@ -19,6 +23,28 @@ final class InMemoryCandidateLearningStore: CandidateLearningStore {
     func selectionCount(for text: String) -> Int { counts[text, default: 0] }
 
     func reset() { counts.removeAll(keepingCapacity: true) }
+
+    func snapshot() -> CandidateLearningSnapshot {
+        CandidateLearningSnapshot(counts: counts)
+    }
+
+    @discardableResult
+    func restore(_ snapshot: CandidateLearningSnapshot) -> Bool {
+        guard snapshot.counts.allSatisfy({ !$0.key.isEmpty && $0.value >= 0 }) else { return false }
+        counts = snapshot.counts
+        return true
+    }
+
+    func serializedSnapshot() throws -> Data {
+        try JSONEncoder().encode(snapshot())
+    }
+
+    func restore(serialized data: Data) throws {
+        let decoded = try JSONDecoder().decode(CandidateLearningSnapshot.self, from: data)
+        guard restore(decoded) else { throw RestoreError.invalidSnapshot }
+    }
+
+    enum RestoreError: Error, Equatable { case invalidSnapshot }
 }
 
 struct LearningAwarePinyinEngine: PinyinEngine {

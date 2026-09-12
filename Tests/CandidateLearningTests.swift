@@ -23,4 +23,16 @@ final class CandidateLearningTests: XCTestCase {
         store.recordSelection(InputCandidate(id: 0, text: ""))
         XCTAssertEqual(store.selectionCount(for: ""), 0)
     }
+
+    func testLearningSnapshotRoundTripsAndRejectsInvalidCounts() throws {
+        let source = InMemoryCandidateLearningStore()
+        source.recordSelection(InputCandidate(id: 0, text: "你"))
+        let data = try source.serializedSnapshot()
+        let restored = InMemoryCandidateLearningStore()
+        try restored.restore(serialized: data)
+        XCTAssertEqual(restored.selectionCount(for: "你"), 1)
+
+        let invalid = CandidateLearningSnapshot(counts: ["你": -1])
+        XCTAssertFalse(restored.restore(invalid))
+    }
 }
