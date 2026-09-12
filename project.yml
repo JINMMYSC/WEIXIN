@@ -13,7 +13,7 @@ targets:
   WeixinRebuild:
     type: application
     platform: iOS
-    sources: [App]
+    sources: [App, Engine]
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.jinmmysc.weixinrebuild
@@ -61,4 +61,3 @@ schemes:
         WeixinRebuild: all
     test:
       targets: [HostTests]
-
