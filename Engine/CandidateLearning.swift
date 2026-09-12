@@ -6,13 +6,18 @@ protocol CandidateLearningStore: AnyObject {
     func reset()
 }
 
+protocol SnapshottingCandidateLearningStore: CandidateLearningStore {
+    func snapshot() -> CandidateLearningSnapshot
+    @discardableResult func restore(_ snapshot: CandidateLearningSnapshot) -> Bool
+}
+
 struct CandidateLearningSnapshot: Codable, Equatable {
     let counts: [String: Int]
 }
 
 /// Small deterministic offline store. The weighting is intentionally exposed
 /// as a seam; it is not a claim about the original app's learning algorithm.
-final class InMemoryCandidateLearningStore: CandidateLearningStore {
+final class InMemoryCandidateLearningStore: SnapshottingCandidateLearningStore {
     private var counts: [String: Int] = [:]
 
     func recordSelection(_ candidate: InputCandidate) {

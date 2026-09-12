@@ -15,6 +15,15 @@ final class KeyboardSessionBridge {
 
     var snapshot: InputSnapshot { session.snapshot }
 
+    func learningSnapshot() -> CandidateLearningSnapshot? {
+        (learning as? SnapshottingCandidateLearningStore)?.snapshot()
+    }
+
+    @discardableResult
+    func restoreLearning(_ snapshot: CandidateLearningSnapshot) -> Bool {
+        (learning as? SnapshottingCandidateLearningStore)?.restore(snapshot) ?? false
+    }
+
     init(
         session: InputSession = InputSession(),
         engine: PinyinEngine = EmptyPinyinEngine(),

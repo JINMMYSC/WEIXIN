@@ -58,4 +58,14 @@ final class KeyboardSessionBridgeTests: XCTestCase {
         XCTAssertEqual(output?.snapshot.composingText, "")
         XCTAssertNil(KeyboardSessionBridge().commitFirstCandidate())
     }
+
+    func testBridgeExposesLearningSnapshotRestore() {
+        let learning = InMemoryCandidateLearningStore()
+        let bridge = KeyboardSessionBridge(learning: learning)
+        learning.recordSelection(InputCandidate(id: 1, text: "你"))
+        let snapshot = bridge.learningSnapshot()
+        learning.reset()
+        XCTAssertEqual(bridge.restoreLearning(snapshot!), true)
+        XCTAssertEqual(learning.selectionCount(for: "你"), 1)
+    }
 }
