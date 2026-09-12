@@ -36,4 +36,8 @@ final class InputSessionTests: XCTestCase {
         try restored.restore(serialized: data)
         XCTAssertEqual(restored.snapshot, source.snapshot)
     }
+
+    func testFreshSessionIsValid() {
+        XCTAssertTrue(InputSession().validate())
+    }
 }

@@ -70,4 +70,8 @@ final class InputSession {
     func restore(serialized data: Data) throws {
         restore(try JSONDecoder().decode(InputSnapshot.self, from: data))
     }
+
+    func validate() -> Bool {
+        !snapshot.committedText.contains("\0") && !snapshot.composingText.contains("\0")
+    }
 }
