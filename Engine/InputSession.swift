@@ -16,6 +16,11 @@ struct InputSnapshot: Equatable, Codable {
     let committedText: String
     let composingText: String
     let candidates: [InputCandidate]
+
+    var isValid: Bool {
+        guard !committedText.contains("\0"), !composingText.contains("\0") else { return false }
+        return candidates.allSatisfy { $0.id >= 0 && !$0.text.isEmpty && !$0.text.contains("\0") }
+    }
 }
 
 final class InputSession {
@@ -70,7 +75,14 @@ final class InputSession {
     }
 
     func restore(_ snapshot: InputSnapshot) {
+        _ = restoreIfValid(snapshot)
+    }
+
+    @discardableResult
+    func restoreIfValid(_ snapshot: InputSnapshot) -> Bool {
+        guard snapshot.isValid else { return false }
         self.snapshot = snapshot
+        return true
     }
 
     func serializedSnapshot() throws -> Data {
@@ -78,10 +90,15 @@ final class InputSession {
     }
 
     func restore(serialized data: Data) throws {
-        restore(try JSONDecoder().decode(InputSnapshot.self, from: data))
+        let decoded = try JSONDecoder().decode(InputSnapshot.self, from: data)
+        guard restoreIfValid(decoded) else { throw RestoreError.invalidSnapshot }
+    }
+
+    enum RestoreError: Error, Equatable {
+        case invalidSnapshot
     }
 
     func validate() -> Bool {
-        !snapshot.committedText.contains("\0") && !snapshot.composingText.contains("\0")
+        snapshot.isValid
     }
 }

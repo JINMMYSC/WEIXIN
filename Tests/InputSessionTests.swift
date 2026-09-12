@@ -41,6 +41,31 @@ final class InputSessionTests: XCTestCase {
         XCTAssertTrue(InputSession().validate())
     }
 
+    func testInvalidCandidateStateIsRejectedByValidation() {
+        let session = InputSession()
+        _ = session.replaceCandidates([
+            InputCandidate(id: -1, text: "坏")
+        ])
+        XCTAssertFalse(session.validate())
+        XCTAssertFalse(InputSnapshot(
+            committedText: "",
+            composingText: "",
+            candidates: [InputCandidate(id: 1, text: "")]
+        ).isValid)
+    }
+
+    func testSerializedInvalidSnapshotCannotBeRestored() throws {
+        let invalid = InputSnapshot(
+            committedText: "",
+            composingText: "",
+            candidates: [InputCandidate(id: -1, text: "坏")]
+        )
+        let data = try JSONEncoder().encode(invalid)
+        XCTAssertThrowsError(try InputSession().restore(serialized: data)) { error in
+            XCTAssertEqual(error as? InputSession.RestoreError, .invalidSnapshot)
+        }
+    }
+
     func testReplayProducesDeterministicSnapshots() {
         let replay = InputReplay([
             .insert("ni"), .insert("hao"), .deleteBackward, .commitPending, .reset
