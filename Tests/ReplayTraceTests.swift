@@ -13,6 +13,7 @@ final class ReplayTraceTests: XCTestCase {
             metadata: ReplayMetadata(appVersion: "3.5.3", deviceModel: "iPhone", osVersion: "iOS", settingsFingerprint: "clean", learningState: "empty")
         )
         XCTAssertTrue(trace.differences().isEmpty)
+        XCTAssertTrue(trace.isWellFormed)
         XCTAssertEqual(try ReplayTrace(data: trace.encoded()), trace)
     }
 
@@ -22,5 +23,10 @@ final class ReplayTraceTests: XCTestCase {
             expectedSnapshots: [InputSnapshot(committedText: "", composingText: "x", candidates: [])]
         )
         XCTAssertEqual(trace.differences().map(\.step), [0])
+    }
+
+    func testTraceWithMissingBaselineStepIsNotWellFormed() {
+        let trace = ReplayTrace(events: [.insert("n"), .insert("i")], expectedSnapshots: [])
+        XCTAssertFalse(trace.isWellFormed)
     }
 }

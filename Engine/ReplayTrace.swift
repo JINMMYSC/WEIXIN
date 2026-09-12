@@ -13,6 +13,10 @@ struct ReplayTrace: Codable, Equatable {
     let expectedSnapshots: [InputSnapshot]
     let metadata: ReplayMetadata?
 
+    var isWellFormed: Bool {
+        replay.events.count == expectedSnapshots.count && expectedSnapshots.allSatisfy(\.isValid)
+    }
+
     init(
         events: [InputEvent],
         expectedSnapshots: [InputSnapshot],
