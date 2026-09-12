@@ -1,0 +1,15 @@
+{
+  "sha256": "0727DA4A5E48AC9637AF994AE26635104D1E0F5EE2FD73BA673D7F4F8EF16760",
+  "size": 727244,
+  "records": 21487,
+  "zeroEntryRecords": 2850,
+  "unexplainedTails": [
+    {
+      "index": 21486,
+      "offset": 727160,
+      "entries": 4,
+      "trailingBytes": 32,
+      "trailingHex": "2B-00-00-00-01-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00"
+    }
+  ]
+}

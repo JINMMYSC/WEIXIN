@@ -22,62 +22,85 @@ struct EditPinyinIndex {
         case invalidEntryCount(offset: Int)
         case nonMonotonicOffsets(offset: Int)
         case payloadOutOfBounds(offset: Int)
+        case invalidRecordLength
     }
 
     let records: [EditPinyinRecord]
+    let trailingData: Data
 
     init(data: Data) throws {
-        var cursor = 0
-        var parsed: [EditPinyinRecord] = []
-        while cursor < data.count {
-            let recordOffset = cursor
-            guard let count = data.readUInt32LE(at: cursor) else {
-                throw ParseError.truncatedHeader(offset: recordOffset)
+        let container = try IndexedResource(data: data)
+        var decodedRecords: [EditPinyinRecord] = []
+        var fileTrailer = Data()
+        for (index, block) in container.records.enumerated() {
+            let decoded = try Self.decodeRecord(block)
+            if index + 1 < container.records.count && !decoded.trailing.isEmpty {
+                throw ParseError.invalidRecordLength
             }
-            cursor += 4
-            guard count > 0, count <= 64 else {
-                throw ParseError.invalidEntryCount(offset: recordOffset)
-            }
-            let keyBytes = Int(count) * 4
-            let endBytes = Int(count) * 2
-            guard cursor + keyBytes + endBytes <= data.count else {
-                throw ParseError.truncatedHeader(offset: recordOffset)
-            }
-            var keys: [UInt32] = []
-            keys.reserveCapacity(Int(count))
-            for _ in 0..<count {
-                guard let key = data.readUInt32LE(at: cursor) else {
-                    throw ParseError.truncatedHeader(offset: recordOffset)
-                }
-                keys.append(key)
-                cursor += 4
-            }
-            var ends: [UInt16] = []
-            ends.reserveCapacity(Int(count))
-            var previous: UInt16 = 0
-            for index in 0..<count {
-                guard let end = data.readUInt16LE(at: cursor) else {
-                    throw ParseError.truncatedHeader(offset: recordOffset)
-                }
-                if index > 0 && end < previous {
-                    throw ParseError.nonMonotonicOffsets(offset: recordOffset)
-                }
-                ends.append(end)
-                previous = end
-                cursor += 2
-            }
-            let payloadLength = Int(ends.last ?? 0)
-            guard cursor + payloadLength <= data.count else {
-                throw ParseError.payloadOutOfBounds(offset: recordOffset)
-            }
-            parsed.append(EditPinyinRecord(
-                keys: keys,
-                endOffsets: ends,
-                payload: data.subdata(in: cursor..<(cursor + payloadLength))
-            ))
-            cursor += payloadLength
+            decodedRecords.append(decoded.record)
+            if index + 1 == container.records.count { fileTrailer = decoded.trailing }
         }
-        records = parsed
+        records = decodedRecords
+        trailingData = fileTrailer
+    }
+
+    /// Decodes an isolated record block, not a complete dictionary file.
+    init(recordData: Data) throws {
+        let decoded = try Self.decodeRecord(recordData)
+        guard decoded.trailing.isEmpty else { throw ParseError.invalidRecordLength }
+        records = [decoded.record]
+        trailingData = Data()
+    }
+
+    private static func decodeRecord(_ data: Data) throws -> (record: EditPinyinRecord, trailing: Data) {
+        var cursor = 0
+        guard let count = data.readUInt32LE(at: cursor) else {
+            throw ParseError.truncatedHeader(offset: 0)
+        }
+        cursor += 4
+        let entryCount = Int(count)
+        guard entryCount <= (data.count - cursor) / 6 else {
+            throw ParseError.invalidEntryCount(offset: 0)
+        }
+        let keyBytes = entryCount * 4
+        let endBytes = entryCount * 2
+        guard cursor + keyBytes + endBytes <= data.count else {
+            throw ParseError.truncatedHeader(offset: 0)
+        }
+        var keys: [UInt32] = []
+        keys.reserveCapacity(entryCount)
+        for _ in 0..<entryCount {
+            guard let key = data.readUInt32LE(at: cursor) else {
+                throw ParseError.truncatedHeader(offset: 0)
+            }
+            keys.append(key)
+            cursor += 4
+        }
+        var ends: [UInt16] = []
+        ends.reserveCapacity(entryCount)
+        var previous: UInt16 = 0
+        for index in 0..<entryCount {
+            guard let end = data.readUInt16LE(at: cursor) else {
+                throw ParseError.truncatedHeader(offset: 0)
+            }
+            if index > 0 && end < previous {
+                throw ParseError.nonMonotonicOffsets(offset: 0)
+            }
+            ends.append(end)
+            previous = end
+            cursor += 2
+        }
+        let payloadLength = Int(ends.last ?? 0)
+        guard cursor + payloadLength <= data.count else {
+            throw ParseError.payloadOutOfBounds(offset: 0)
+        }
+        let payloadEnd = cursor + payloadLength
+        let record = EditPinyinRecord(
+            keys: keys,
+            endOffsets: ends,
+            payload: data.subdata(in: cursor..<payloadEnd)
+        )
+        return (record, data.subdata(in: payloadEnd..<data.count))
     }
 }
 
