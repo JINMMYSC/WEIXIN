@@ -44,6 +44,17 @@ final class KeyboardSessionBridge {
         return KeyboardOutput(snapshot: snapshot, committedText: candidate.text)
     }
 
+    /// Applies an asynchronous engine result only when it is newer than the
+    /// result already shown for this session.
+    @discardableResult
+    func applyCandidateUpdate(_ update: CandidateUpdate) -> Bool {
+        guard candidateStore.apply(update) else { return false }
+        version = max(version, update.version)
+        nextRequestID = max(nextRequestID, update.requestID)
+        _ = session.replaceCandidates(update.candidates)
+        return true
+    }
+
     private func refreshCandidates(for composingText: String) {
         version += 1
         nextRequestID += 1
@@ -52,7 +63,6 @@ final class KeyboardSessionBridge {
             requestID: nextRequestID,
             candidates: engine.candidates(for: composingText)
         )
-        guard candidateStore.apply(update) else { return }
-        session.replaceCandidates(update.candidates)
+        _ = applyCandidateUpdate(update)
     }
 }

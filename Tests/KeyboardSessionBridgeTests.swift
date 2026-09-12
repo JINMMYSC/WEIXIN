@@ -35,4 +35,18 @@ final class KeyboardSessionBridgeTests: XCTestCase {
         _ = bridge.selectCandidate(candidate)
         XCTAssertEqual(learning.selectionCount(for: "你"), 1)
     }
+
+    func testLateAsyncCandidateUpdateCannotOverwriteNewerInput() {
+        let bridge = KeyboardSessionBridge()
+        _ = bridge.handle(.insert("n"))
+        XCTAssertTrue(bridge.applyCandidateUpdate(CandidateUpdate(
+            version: 4, requestID: 10,
+            candidates: [InputCandidate(id: 0, text: "你")]
+        )))
+        XCTAssertFalse(bridge.applyCandidateUpdate(CandidateUpdate(
+            version: 3, requestID: 99,
+            candidates: [InputCandidate(id: 0, text: "旧")]
+        )))
+        XCTAssertEqual(bridge.handle(.insert("i")).snapshot.composingText, "ni")
+    }
 }
