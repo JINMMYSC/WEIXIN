@@ -29,4 +29,10 @@ final class ReplayTraceTests: XCTestCase {
         let trace = ReplayTrace(events: [.insert("n"), .insert("i")], expectedSnapshots: [])
         XCTAssertFalse(trace.isWellFormed)
     }
+
+    func testTraceWithoutProvenanceMetadataIsNotWellFormed() {
+        let snapshot = InputSnapshot(committedText: "", composingText: "n", candidates: [])
+        let trace = ReplayTrace(events: [.insert("n")], expectedSnapshots: [snapshot])
+        XCTAssertFalse(trace.isWellFormed)
+    }
 }
