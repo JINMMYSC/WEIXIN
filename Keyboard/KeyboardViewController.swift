@@ -110,7 +110,15 @@ final class KeyboardViewController: UIInputViewController {
     }
 
     @objc private func insertSpace() {
-        handleInputEvent(.insert(" "))
+        if let output = sessionBridge.commitFirstCandidate() {
+            textDocumentProxy.insertText(output.committedText ?? "")
+            textDocumentProxy.setMarkedText("", selectedRange: NSRange(location: 0, length: 0))
+            compositionLabel.text = output.snapshot.composingText
+            updateCandidates(output.snapshot.candidates)
+        } else {
+            handleInputEvent(.commitPending)
+            textDocumentProxy.insertText(" ")
+        }
     }
 
     @objc private func insertNewline() {

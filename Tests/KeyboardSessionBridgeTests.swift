@@ -49,4 +49,13 @@ final class KeyboardSessionBridgeTests: XCTestCase {
         )))
         XCTAssertEqual(bridge.handle(.insert("i")).snapshot.composingText, "ni")
     }
+
+    func testCommitFirstCandidateClearsComposition() {
+        let bridge = KeyboardSessionBridge(engine: TablePinyinEngine(table: ["ni": ["你"]]))
+        _ = bridge.handle(.insert("ni"))
+        let output = bridge.commitFirstCandidate()
+        XCTAssertEqual(output?.committedText, "你")
+        XCTAssertEqual(output?.snapshot.composingText, "")
+        XCTAssertNil(KeyboardSessionBridge().commitFirstCandidate())
+    }
 }

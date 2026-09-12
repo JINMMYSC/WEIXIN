@@ -44,6 +44,11 @@ final class KeyboardSessionBridge {
         return KeyboardOutput(snapshot: snapshot, committedText: candidate.text)
     }
 
+    func commitFirstCandidate() -> KeyboardOutput? {
+        guard let candidate = session.snapshot.candidates.first else { return nil }
+        return selectCandidate(candidate)
+    }
+
     /// Applies an asynchronous engine result only when it is newer than the
     /// result already shown for this session.
     @discardableResult
