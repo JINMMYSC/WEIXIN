@@ -1,6 +1,8 @@
 import UIKit
 
 final class KeyboardViewController: UIInputViewController {
+    private let sessionBridge = KeyboardSessionBridge()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemBackground
@@ -33,5 +35,16 @@ final class KeyboardViewController: UIInputViewController {
 
     @objc private func switchKeyboard() {
         advanceToNextInputMode()
+    }
+
+    func handleInputEvent(_ event: InputEvent) {
+        let output = sessionBridge.handle(event)
+        if let committedText = output.committedText {
+            textDocumentProxy.insertText(committedText)
+        }
+        textDocumentProxy.setMarkedText(
+            output.snapshot.composingText,
+            selectedRange: NSRange(location: output.snapshot.composingText.utf16.count, length: 0)
+        )
     }
 }

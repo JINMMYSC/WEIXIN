@@ -54,6 +54,8 @@ jobs:
           mkdir -p build/ipa/Payload
           cp -R build/Device/Build/Products/Release-iphoneos/WeixinRebuild.app build/ipa/Payload/
           ditto -c -k --keepParent build/ipa/Payload build/WeixinRebuild-unsigned.ipa
+          unzip -Z1 build/WeixinRebuild-unsigned.ipa | grep -Fx 'Payload/WeixinRebuild.app/Info.plist'
+          unzip -Z1 build/WeixinRebuild-unsigned.ipa | grep -Fx 'Payload/WeixinRebuild.app/PlugIns/RebuildKeyboard.appex/Info.plist'
       - name: Upload build reports
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
