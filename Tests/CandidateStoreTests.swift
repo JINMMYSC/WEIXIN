@@ -38,6 +38,15 @@ final class CandidateStoreTests: XCTestCase {
         XCTAssertEqual(try JSONDecoder().decode(CandidateUpdate.self, from: data), update)
     }
 
+    func testMalformedCandidateUpdatesAreRejected() {
+        let store = CandidateStore()
+        XCTAssertFalse(store.apply(CandidateUpdate(version: -1, requestID: 0, candidates: [])))
+        XCTAssertFalse(store.apply(CandidateUpdate(version: 0, requestID: 0, candidates: [
+            InputCandidate(id: 1, text: "甲"), InputCandidate(id: 1, text: "乙")
+        ])))
+        XCTAssertNil(store.current)
+    }
+
     func testResetDropsAllCandidateState() {
         let store = CandidateStore()
         _ = store.apply(CandidateUpdate(version: 1, requestID: 1, candidates: [InputCandidate(id: 1, text: "你")]))

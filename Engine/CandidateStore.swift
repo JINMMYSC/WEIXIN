@@ -11,6 +11,11 @@ final class CandidateStore {
 
     @discardableResult
     func apply(_ update: CandidateUpdate) -> Bool {
+        var ids = Set<Int>()
+        guard update.version >= 0, update.requestID >= 0,
+              update.candidates.allSatisfy({ $0.id >= 0 && !$0.text.isEmpty && !$0.text.contains("\0") && ids.insert($0.id).inserted }) else {
+            return false
+        }
         guard let current else {
             self.current = update
             return true
