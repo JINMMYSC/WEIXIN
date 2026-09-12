@@ -5,6 +5,7 @@ final class KeyboardViewController: UIInputViewController {
     private let compositionLabel = UILabel()
     private let candidateStack = UIStackView()
     private let theme = KeyboardTheme.system
+    private var candidatePager = CandidatePager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,13 @@ final class KeyboardViewController: UIInputViewController {
         let commit = UIButton(type: .system)
         commit.setTitle("提交", for: .normal)
         commit.addTarget(self, action: #selector(commitPending), for: .touchUpInside)
-        let controls = UIStackView(arrangedSubviews: [delete, commit, next])
+        let space = UIButton(type: .system)
+        space.setTitle("空格", for: .normal)
+        space.addTarget(self, action: #selector(insertSpace), for: .touchUpInside)
+        let enter = UIButton(type: .system)
+        enter.setTitle("换行", for: .normal)
+        enter.addTarget(self, action: #selector(insertNewline), for: .touchUpInside)
+        let controls = UIStackView(arrangedSubviews: [delete, space, enter, commit, next])
         controls.distribution = .fillEqually
         var arranged: [UIView] = [compositionLabel, candidateStack]
         arranged.append(contentsOf: rows)
@@ -82,6 +89,15 @@ final class KeyboardViewController: UIInputViewController {
         handleInputEvent(.commitPending)
     }
 
+    @objc private func insertSpace() {
+        handleInputEvent(.insert(" "))
+    }
+
+    @objc private func insertNewline() {
+        handleInputEvent(.commitPending)
+        textDocumentProxy.insertText("\n")
+    }
+
     func handleInputEvent(_ event: InputEvent) {
         let output = sessionBridge.handle(event)
         if let committedText = output.committedText {
@@ -96,12 +112,14 @@ final class KeyboardViewController: UIInputViewController {
     }
 
     func showCandidates(_ candidates: [InputCandidate]) {
-        updateCandidates(candidates)
+        candidatePager.replace(with: candidates)
+        updateCandidates()
     }
 
-    private func updateCandidates(_ candidates: [InputCandidate]) {
+    private func updateCandidates(_ candidates: [InputCandidate]? = nil) {
+        if let candidates { candidatePager.replace(with: candidates) }
         candidateStack.arrangedSubviews.forEach { candidateStack.removeArrangedSubview($0); $0.removeFromSuperview() }
-        for candidate in candidates.prefix(5) {
+        for candidate in candidatePager.visibleCandidates {
             let button = UIButton(type: .system)
             button.setTitle(candidate.text, for: .normal)
             button.setTitleColor(theme.candidateTextColor, for: .normal)

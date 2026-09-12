@@ -27,4 +27,13 @@ final class InputSessionTests: XCTestCase {
         let snapshot = session.commitCandidate("你")
         XCTAssertEqual(snapshot, InputSnapshot(committedText: "你", composingText: "", candidates: []))
     }
+
+    func testSnapshotCanBeSerializedAndRestored() throws {
+        let source = InputSession()
+        _ = source.process(.insert("ni"))
+        let data = try source.serializedSnapshot()
+        let restored = InputSession()
+        try restored.restore(serialized: data)
+        XCTAssertEqual(restored.snapshot, source.snapshot)
+    }
 }

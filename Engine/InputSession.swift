@@ -7,12 +7,12 @@ enum InputEvent: Equatable {
     case reset
 }
 
-struct InputCandidate: Equatable {
+struct InputCandidate: Equatable, Codable {
     let id: Int
     let text: String
 }
 
-struct InputSnapshot: Equatable {
+struct InputSnapshot: Equatable, Codable {
     let committedText: String
     let composingText: String
     let candidates: [InputCandidate]
@@ -57,5 +57,17 @@ final class InputSession {
             candidates: []
         )
         return snapshot
+    }
+
+    func restore(_ snapshot: InputSnapshot) {
+        self.snapshot = snapshot
+    }
+
+    func serializedSnapshot() throws -> Data {
+        try JSONEncoder().encode(snapshot)
+    }
+
+    func restore(serialized data: Data) throws {
+        restore(try JSONDecoder().decode(InputSnapshot.self, from: data))
     }
 }

@@ -23,6 +23,10 @@ final class CandidateStore {
         return true
     }
 
+    func reset() {
+        current = nil
+    }
+
     func candidate(withID id: Int) -> InputCandidate? {
         current?.candidates.first { $0.id == id }
     }
