@@ -23,6 +23,13 @@ final class CandidateStoreTests: XCTestCase {
         XCTAssertTrue(store.apply(CandidateUpdate(version: 4, requestID: 3, candidates: [])))
     }
 
+    func testDuplicateRequestIDIsRejected() {
+        let store = CandidateStore()
+        _ = store.apply(CandidateUpdate(version: 1, requestID: 1, candidates: [InputCandidate(id: 0, text: "新")]))
+        XCTAssertFalse(store.apply(CandidateUpdate(version: 1, requestID: 1, candidates: [InputCandidate(id: 0, text: "重复")])))
+        XCTAssertEqual(store.candidate(withID: 0)?.text, "新")
+    }
+
     func testResetDropsAllCandidateState() {
         let store = CandidateStore()
         _ = store.apply(CandidateUpdate(version: 1, requestID: 1, candidates: [InputCandidate(id: 1, text: "你")]))

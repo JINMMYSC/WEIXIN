@@ -16,7 +16,7 @@ final class CandidateStore {
             return true
         }
         guard update.version > current.version ||
-            (update.version == current.version && update.requestID >= current.requestID) else {
+            (update.version == current.version && update.requestID > current.requestID) else {
             return false
         }
         self.current = update
