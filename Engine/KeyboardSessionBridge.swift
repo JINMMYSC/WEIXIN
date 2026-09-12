@@ -8,13 +8,19 @@ struct KeyboardOutput: Equatable {
 final class KeyboardSessionBridge {
     private let session: InputSession
     private let engine: PinyinEngine
+    private let learning: CandidateLearningStore
     private let candidateStore = CandidateStore()
     private var nextRequestID = 0
     private var version = 0
 
-    init(session: InputSession = InputSession(), engine: PinyinEngine = EmptyPinyinEngine()) {
+    init(
+        session: InputSession = InputSession(),
+        engine: PinyinEngine = EmptyPinyinEngine(),
+        learning: CandidateLearningStore = InMemoryCandidateLearningStore()
+    ) {
         self.session = session
         self.engine = engine
+        self.learning = learning
     }
 
     @discardableResult
@@ -32,6 +38,7 @@ final class KeyboardSessionBridge {
 
     @discardableResult
     func selectCandidate(_ candidate: InputCandidate) -> KeyboardOutput {
+        learning.recordSelection(candidate)
         let snapshot = session.commitCandidate(candidate.text)
         candidateStore.reset()
         return KeyboardOutput(snapshot: snapshot, committedText: candidate.text)

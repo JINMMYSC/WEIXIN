@@ -27,4 +27,12 @@ final class KeyboardSessionBridgeTests: XCTestCase {
         let output = bridge.handle(.insert("NI"))
         XCTAssertEqual(output.snapshot.candidates.map(\.text), ["你", "尼"])
     }
+
+    func testCandidateSelectionRecordsLearningEvent() {
+        let learning = InMemoryCandidateLearningStore()
+        let candidate = InputCandidate(id: 0, text: "你")
+        let bridge = KeyboardSessionBridge(learning: learning)
+        _ = bridge.selectCandidate(candidate)
+        XCTAssertEqual(learning.selectionCount(for: "你"), 1)
+    }
 }
