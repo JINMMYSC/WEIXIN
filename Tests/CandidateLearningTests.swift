@@ -35,4 +35,14 @@ final class CandidateLearningTests: XCTestCase {
         let invalid = CandidateLearningSnapshot(counts: ["你": -1])
         XCTAssertFalse(restored.restore(invalid))
     }
+
+    func testEqualLearningCountsKeepBaseOrder() {
+        let store = InMemoryCandidateLearningStore()
+        let base = WeightedPinyinEngine(table: ["x": [
+            ScoredCandidate(candidate: InputCandidate(id: 20, text: "甲"), score: 1),
+            ScoredCandidate(candidate: InputCandidate(id: 10, text: "乙"), score: 2)
+        ]])
+        let engine = LearningAwarePinyinEngine(base: base, learning: store)
+        XCTAssertEqual(engine.candidates(for: "x").map(\.text), ["乙", "甲"])
+    }
 }

@@ -58,10 +58,11 @@ struct LearningAwarePinyinEngine: PinyinEngine {
 
     func candidates(for composingText: String) -> [InputCandidate] {
         let baseCandidates = base.candidates(for: composingText)
-        return baseCandidates.sorted {
-            let left = learning.selectionCount(for: $0.text)
-            let right = learning.selectionCount(for: $1.text)
-            return left == right ? $0.id < $1.id : left > right
-        }
+        return baseCandidates.enumerated().sorted { left, right in
+            let leftCount = learning.selectionCount(for: left.element.text)
+            let rightCount = learning.selectionCount(for: right.element.text)
+            if leftCount != rightCount { return leftCount > rightCount }
+            return left.offset < right.offset
+        }.map(\.element)
     }
 }
