@@ -13,4 +13,14 @@ final class PinyinEngineTests: XCTestCase {
     func testUnknownInputHasNoCandidates() {
         XCTAssertTrue(TablePinyinEngine(table: ["ni": ["你"]]).candidates(for: "hao").isEmpty)
     }
+
+    func testWeightedEngineNormalizesAndRanksCandidates() {
+        let engine = WeightedPinyinEngine(table: [
+            "ni": [
+                ScoredCandidate(candidate: InputCandidate(id: 1, text: "你"), score: 1),
+                ScoredCandidate(candidate: InputCandidate(id: 2, text: "尼"), score: 4)
+            ]
+        ])
+        XCTAssertEqual(engine.candidates(for: "N-I").map(\.text), ["尼", "你"])
+    }
 }

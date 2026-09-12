@@ -25,3 +25,20 @@ struct TablePinyinEngine: PinyinEngine {
         }
     }
 }
+
+/// Adapter used to validate the full score-to-candidate path before the
+/// recovered language model is wired in.
+struct WeightedPinyinEngine: PinyinEngine {
+    private let table: [String: [ScoredCandidate]]
+    private let ranker: CandidateRanker
+
+    init(table: [String: [ScoredCandidate]], ranker: CandidateRanker = CandidateRanker()) {
+        self.table = table
+        self.ranker = ranker
+    }
+
+    func candidates(for composingText: String) -> [InputCandidate] {
+        let key = PinyinNormalizer().normalize(composingText)
+        return ranker.rank(table[key] ?? [])
+    }
+}
