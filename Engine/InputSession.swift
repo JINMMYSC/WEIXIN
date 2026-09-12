@@ -1,10 +1,38 @@
 import Foundation
 
-enum InputEvent: Equatable {
+enum InputEvent: Equatable, Codable {
     case insert(String)
     case deleteBackward
     case commitPending
     case reset
+}
+
+private enum InputEventCodingKey: String, CodingKey { case type, text }
+private enum InputEventType: String, Codable { case insert, deleteBackward, commitPending, reset }
+
+extension InputEvent {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: InputEventCodingKey.self)
+        let type = try container.decode(InputEventType.self, forKey: .type)
+        switch type {
+        case .insert: self = .insert(try container.decode(String.self, forKey: .text))
+        case .deleteBackward: self = .deleteBackward
+        case .commitPending: self = .commitPending
+        case .reset: self = .reset
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: InputEventCodingKey.self)
+        switch self {
+        case let .insert(text):
+            try container.encode(InputEventType.insert, forKey: .type)
+            try container.encode(text, forKey: .text)
+        case .deleteBackward: try container.encode(InputEventType.deleteBackward, forKey: .type)
+        case .commitPending: try container.encode(InputEventType.commitPending, forKey: .type)
+        case .reset: try container.encode(InputEventType.reset, forKey: .type)
+        }
+    }
 }
 
 struct InputCandidate: Equatable, Codable {

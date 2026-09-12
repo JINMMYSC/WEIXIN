@@ -77,4 +77,10 @@ final class InputSessionTests: XCTestCase {
         XCTAssertEqual(first[2].composingText, "niha")
         XCTAssertEqual(first[3].committedText, "niha")
     }
+
+    func testInputReplayEventsRoundTripAsJSON() throws {
+        let events: [InputEvent] = [.insert("ni"), .deleteBackward, .commitPending, .reset]
+        let data = try JSONEncoder().encode(events)
+        XCTAssertEqual(try JSONDecoder().decode([InputEvent].self, from: data), events)
+    }
 }
