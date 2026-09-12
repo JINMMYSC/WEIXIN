@@ -21,4 +21,10 @@ final class KeyboardSessionBridgeTests: XCTestCase {
         XCTAssertEqual(output.committedText, "你")
         XCTAssertEqual(output.snapshot.composingText, "")
     }
+
+    func testEngineCandidatesArePublishedAfterInput() {
+        let bridge = KeyboardSessionBridge(engine: TablePinyinEngine(table: ["ni": ["你", "尼"]]))
+        let output = bridge.handle(.insert("NI"))
+        XCTAssertEqual(output.snapshot.candidates.map(\.text), ["你", "尼"])
+    }
 }

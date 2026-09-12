@@ -59,6 +59,16 @@ final class InputSession {
         return snapshot
     }
 
+    @discardableResult
+    func replaceCandidates(_ candidates: [InputCandidate]) -> InputSnapshot {
+        snapshot = InputSnapshot(
+            committedText: snapshot.committedText,
+            composingText: snapshot.composingText,
+            candidates: candidates
+        )
+        return snapshot
+    }
+
     func restore(_ snapshot: InputSnapshot) {
         self.snapshot = snapshot
     }
