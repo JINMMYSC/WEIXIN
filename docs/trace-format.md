@@ -4,6 +4,7 @@
 
 - `replay.events`：按顺序执行的 `InputEvent`。插入事件使用 `{ "type": "insert", "text": "ni" }`；退格、提交和重置分别使用 `deleteBackward`、`commitPending`、`reset`。
 - `expectedSnapshots`：每一步执行后的基准快照，包含 `committedText`、`composingText` 和候选数组。候选包含稳定的 `id` 与 `text`。
+- `metadata`：可选的原版版本、设备型号、系统版本、设置指纹和学习状态。缺少这些元数据的轨迹只能作为非冻结样本。
 
 示例：
 
