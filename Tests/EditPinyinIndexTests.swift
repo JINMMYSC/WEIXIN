@@ -7,12 +7,15 @@ final class EditPinyinIndexTests: XCTestCase {
         data.append(contentsOf: [2, 0, 0, 0])
         data.append(contentsOf: [1, 0, 0, 0, 2, 0, 0, 0])
         data.append(contentsOf: [2, 0, 5, 0])
-        data.append(contentsOf: Array("你好abc".utf8))
+        data.append(contentsOf: Array("ABCDE".utf8))
         let index = try EditPinyinIndex(data: data)
         XCTAssertEqual(index.records.count, 1)
         XCTAssertEqual(index.records[0].keys, [1, 2])
         XCTAssertEqual(index.records[0].endOffsets, [2, 5])
-        XCTAssertEqual(String(data: index.records[0].payload, encoding: .utf8), "你好abc")
+        XCTAssertEqual(String(data: index.records[0].payload, encoding: .utf8), "ABCDE")
+        XCTAssertEqual(String(data: index.records[0].payload(for: 0)!, encoding: .utf8), "AB")
+        XCTAssertEqual(String(data: index.records[0].payload(for: 1)!, encoding: .utf8), "CDE")
+        XCTAssertNil(index.records[0].payload(for: 2))
     }
 
     func testRejectsNonMonotonicOffsets() {

@@ -6,6 +6,14 @@ struct EditPinyinRecord {
     let keys: [UInt32]
     let endOffsets: [UInt16]
     let payload: Data
+
+    func payload(for index: Int) -> Data? {
+        guard index >= 0, index < endOffsets.count else { return nil }
+        let start = index == 0 ? 0 : Int(endOffsets[index - 1])
+        let end = Int(endOffsets[index])
+        guard start <= end, end <= payload.count else { return nil }
+        return payload.subdata(in: start..<end)
+    }
 }
 
 struct EditPinyinIndex {
