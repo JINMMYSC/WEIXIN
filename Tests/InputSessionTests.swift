@@ -82,5 +82,8 @@ final class InputSessionTests: XCTestCase {
         let events: [InputEvent] = [.insert("ni"), .deleteBackward, .commitPending, .reset]
         let data = try JSONEncoder().encode(events)
         XCTAssertEqual(try JSONDecoder().decode([InputEvent].self, from: data), events)
+
+        let replay = InputReplay(events)
+        XCTAssertEqual(try InputReplay(data: replay.encoded()), replay)
     }
 }
