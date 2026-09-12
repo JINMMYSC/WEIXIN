@@ -54,8 +54,33 @@ jobs:
           mkdir -p build/ipa/Payload
           cp -R build/Device/Build/Products/Release-iphoneos/WeixinRebuild.app build/ipa/Payload/
           ditto -c -k --keepParent build/ipa/Payload build/WeixinRebuild-unsigned.ipa
-          unzip -Z1 build/WeixinRebuild-unsigned.ipa | grep -Fx 'Payload/WeixinRebuild.app/Info.plist'
-          unzip -Z1 build/WeixinRebuild-unsigned.ipa | grep -Fx 'Payload/WeixinRebuild.app/PlugIns/RebuildKeyboard.appex/Info.plist'
+          python3 - <<'PY'
+          import plistlib
+          import zipfile
+
+          ipa = 'build/WeixinRebuild-unsigned.ipa'
+          required = {
+              'Payload/WeixinRebuild.app/Info.plist',
+              'Payload/WeixinRebuild.app/PlugIns/RebuildKeyboard.appex/Info.plist',
+              'Payload/WeixinRebuild.app/PlugIns/RebuildKeyboard.appex/RebuildKeyboard',
+          }
+          with zipfile.ZipFile(ipa) as archive:
+              names = set(archive.namelist())
+              missing = sorted(required - names)
+              if missing:
+                  raise SystemExit(f'IPA is missing required entries: {missing}')
+              if any(name.startswith('Payload/Payload/') for name in names):
+                  raise SystemExit('IPA contains a nested Payload directory')
+              app_info = plistlib.loads(archive.read('Payload/WeixinRebuild.app/Info.plist'))
+              extension_info = plistlib.loads(archive.read('Payload/WeixinRebuild.app/PlugIns/RebuildKeyboard.appex/Info.plist'))
+              if app_info.get('CFBundleIdentifier') != 'com.jinmmysc.weixinrebuild':
+                  raise SystemExit('Unexpected application bundle identifier')
+              if extension_info.get('CFBundleIdentifier') != 'com.jinmmysc.weixinrebuild.keyboard':
+                  raise SystemExit('Unexpected keyboard bundle identifier')
+              if extension_info.get('NSExtension', {}).get('NSExtensionPointIdentifier') != 'com.apple.keyboard-service':
+                  raise SystemExit('Keyboard extension point identifier is incorrect')
+          print('IPA structure and bundle identifiers are valid')
+          PY
       - name: Upload build reports
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
