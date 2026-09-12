@@ -18,4 +18,10 @@ final class KeyboardSessionBridge {
         let snapshot = session.process(event)
         return KeyboardOutput(snapshot: snapshot, committedText: pending?.isEmpty == false ? pending : nil)
     }
+
+    @discardableResult
+    func selectCandidate(_ candidate: InputCandidate) -> KeyboardOutput {
+        let snapshot = session.commitCandidate(candidate.text)
+        return KeyboardOutput(snapshot: snapshot, committedText: candidate.text)
+    }
 }

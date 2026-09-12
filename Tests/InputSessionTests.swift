@@ -20,4 +20,11 @@ final class InputSessionTests: XCTestCase {
         _ = session.process(.commitPending)
         XCTAssertEqual(session.process(.deleteBackward).committedText, "a")
     }
+
+    func testSelectingCandidateCommitsCandidateAndClearsComposition() {
+        let session = InputSession()
+        _ = session.process(.insert("ni"))
+        let snapshot = session.commitCandidate("你")
+        XCTAssertEqual(snapshot, InputSnapshot(committedText: "你", composingText: "", candidates: []))
+    }
 }

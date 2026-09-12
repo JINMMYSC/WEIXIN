@@ -3,15 +3,22 @@ import UIKit
 final class KeyboardViewController: UIInputViewController {
     private let sessionBridge = KeyboardSessionBridge()
     private let compositionLabel = UILabel()
+    private let candidateStack = UIStackView()
+    private let theme = KeyboardTheme.system
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = theme.backgroundColor
 
         compositionLabel.text = ""
         compositionLabel.font = .monospacedSystemFont(ofSize: 20, weight: .medium)
         compositionLabel.textAlignment = .center
         compositionLabel.accessibilityIdentifier = "composition-text"
+
+        candidateStack.axis = .horizontal
+        candidateStack.spacing = 12
+        candidateStack.distribution = .fillEqually
+        candidateStack.accessibilityIdentifier = "candidate-bar"
 
         let next = UIButton(type: .system)
         next.setTitle("切换键盘", for: .normal)
@@ -27,7 +34,7 @@ final class KeyboardViewController: UIInputViewController {
         commit.addTarget(self, action: #selector(commitPending), for: .touchUpInside)
         let controls = UIStackView(arrangedSubviews: [delete, commit, next])
         controls.distribution = .fillEqually
-        var arranged: [UIView] = [compositionLabel]
+        var arranged: [UIView] = [compositionLabel, candidateStack]
         arranged.append(contentsOf: rows)
         arranged.append(controls)
         let stack = UIStackView(arrangedSubviews: arranged)
@@ -49,6 +56,8 @@ final class KeyboardViewController: UIInputViewController {
         let buttons = letters.map { letter -> UIButton in
             let button = UIButton(type: .system)
             button.setTitle(String(letter), for: .normal)
+            button.backgroundColor = theme.keyColor
+            button.setTitleColor(theme.keyTextColor, for: .normal)
             button.titleLabel?.font = .systemFont(ofSize: 19)
             button.addAction(UIAction { [weak self] _ in
                 self?.handleInputEvent(.insert(String(letter)))
@@ -83,5 +92,31 @@ final class KeyboardViewController: UIInputViewController {
             selectedRange: NSRange(location: output.snapshot.composingText.utf16.count, length: 0)
         )
         compositionLabel.text = output.snapshot.composingText
+        updateCandidates(output.snapshot.candidates)
+    }
+
+    func showCandidates(_ candidates: [InputCandidate]) {
+        updateCandidates(candidates)
+    }
+
+    private func updateCandidates(_ candidates: [InputCandidate]) {
+        candidateStack.arrangedSubviews.forEach { candidateStack.removeArrangedSubview($0); $0.removeFromSuperview() }
+        for candidate in candidates.prefix(5) {
+            let button = UIButton(type: .system)
+            button.setTitle(candidate.text, for: .normal)
+            button.setTitleColor(theme.candidateTextColor, for: .normal)
+            button.addAction(UIAction { [weak self] _ in
+                self?.selectCandidate(candidate)
+            }, for: .touchUpInside)
+            candidateStack.addArrangedSubview(button)
+        }
+    }
+
+    private func selectCandidate(_ candidate: InputCandidate) {
+        let output = sessionBridge.selectCandidate(candidate)
+        textDocumentProxy.insertText(output.committedText ?? candidate.text)
+        textDocumentProxy.setMarkedText("", selectedRange: NSRange(location: 0, length: 0))
+        compositionLabel.text = output.snapshot.composingText
+        updateCandidates(output.snapshot.candidates)
     }
 }

@@ -48,4 +48,14 @@ final class InputSession {
         }
         return snapshot
     }
+
+    @discardableResult
+    func commitCandidate(_ text: String) -> InputSnapshot {
+        snapshot = InputSnapshot(
+            committedText: snapshot.committedText + text,
+            composingText: "",
+            candidates: []
+        )
+        return snapshot
+    }
 }
