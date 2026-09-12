@@ -15,7 +15,7 @@ xcodegen generate
 xcodebuild -list -project WeixinRebuild.xcodeproj
 ```
 
-在 Actions 中查看实际运行结果；提交工作流不代表构建通过。成功产物中的 `unsigned-device-app.zip` 不能直接安装到 iPhone。实机 IPA 需另接入主 App 和扩展对应的证书、描述文件及安装方式。签名材料不得提交到仓库。
+在 Actions 中查看实际运行结果；提交工作流不代表构建通过。成功产物中的 `WeixinRebuild-unsigned.ipa` 是未签名包，可以下载后交给手机签名软件处理；它不能直接安装到 iPhone。实机 IPA 仍需主 App 和扩展对应的证书、描述文件及安装方式。签名材料不得提交到仓库。
 
 ## 研究与验收
 

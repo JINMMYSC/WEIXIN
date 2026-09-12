@@ -51,6 +51,9 @@ jobs:
           set -o pipefail
           xcodebuild build -project WeixinRebuild.xcodeproj -scheme WeixinRebuild -configuration Release -destination 'generic/platform=iOS' -derivedDataPath build/Device CODE_SIGNING_ALLOWED=NO | tee build/device-build.log
           ditto -c -k --keepParent build/Device/Build/Products/Release-iphoneos/WeixinRebuild.app build/unsigned-device-app.zip
+          mkdir -p build/ipa/Payload
+          cp -R build/Device/Build/Products/Release-iphoneos/WeixinRebuild.app build/ipa/Payload/
+          ditto -c -k --keepParent build/ipa/Payload build/WeixinRebuild-unsigned.ipa
       - name: Upload build reports
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -62,5 +65,5 @@ jobs:
             build/*.json
             build/*.log
             build/*.zip
+            build/*.ipa
             build/*.xcresult
-
