@@ -6,6 +6,8 @@ final class KeyboardViewController: UIInputViewController {
     private let candidateStack = UIStackView()
     private let theme = KeyboardTheme.system
     private var candidatePager = CandidatePager()
+    private let previousCandidatesButton = UIButton(type: .system)
+    private let nextCandidatesButton = UIButton(type: .system)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,22 +23,22 @@ final class KeyboardViewController: UIInputViewController {
         candidateStack.distribution = .fillEqually
         candidateStack.accessibilityIdentifier = "candidate-bar"
 
-        let previousCandidates = UIButton(type: .system)
-        previousCandidates.setTitle("‹", for: .normal)
-        previousCandidates.accessibilityIdentifier = "previous-candidates"
-        previousCandidates.addTarget(self, action: #selector(previousCandidatePage), for: .touchUpInside)
-        let nextCandidates = UIButton(type: .system)
-        nextCandidates.setTitle("›", for: .normal)
-        nextCandidates.accessibilityIdentifier = "next-candidates"
-        nextCandidates.addTarget(self, action: #selector(nextCandidatePage), for: .touchUpInside)
-        let candidateRow = UIStackView(arrangedSubviews: [previousCandidates, candidateStack, nextCandidates])
+        previousCandidatesButton.setTitle("‹", for: .normal)
+        previousCandidatesButton.accessibilityIdentifier = "previous-candidates"
+        previousCandidatesButton.accessibilityLabel = "上一页候选"
+        previousCandidatesButton.addTarget(self, action: #selector(previousCandidatePage), for: .touchUpInside)
+        nextCandidatesButton.setTitle("›", for: .normal)
+        nextCandidatesButton.accessibilityIdentifier = "next-candidates"
+        nextCandidatesButton.accessibilityLabel = "下一页候选"
+        nextCandidatesButton.addTarget(self, action: #selector(nextCandidatePage), for: .touchUpInside)
+        let candidateRow = UIStackView(arrangedSubviews: [previousCandidatesButton, candidateStack, nextCandidatesButton])
         candidateRow.axis = .horizontal
         candidateRow.spacing = 4
         candidateRow.alignment = .fill
         candidateRow.distribution = .fill
         candidateStack.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        previousCandidates.setContentHuggingPriority(.required, for: .horizontal)
-        nextCandidates.setContentHuggingPriority(.required, for: .horizontal)
+        previousCandidatesButton.setContentHuggingPriority(.required, for: .horizontal)
+        nextCandidatesButton.setContentHuggingPriority(.required, for: .horizontal)
 
         let next = UIButton(type: .system)
         next.setTitle("切换键盘", for: .normal)
@@ -71,6 +73,7 @@ final class KeyboardViewController: UIInputViewController {
             stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
+        updateCandidates()
         let height = view.heightAnchor.constraint(equalToConstant: 216)
         height.priority = .defaultHigh
         height.isActive = true
@@ -145,6 +148,8 @@ final class KeyboardViewController: UIInputViewController {
             }, for: .touchUpInside)
             candidateStack.addArrangedSubview(button)
         }
+        previousCandidatesButton.isEnabled = candidatePager.hasPreviousPage
+        nextCandidatesButton.isEnabled = candidatePager.hasNextPage
     }
 
     @objc private func previousCandidatePage() {
