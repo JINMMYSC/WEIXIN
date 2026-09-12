@@ -23,7 +23,7 @@ final class KeyboardSessionBridge {
         _ = session.process(event)
         switch event {
         case .insert, .deleteBackward:
-            refreshCandidates(for: snapshot.composingText)
+            refreshCandidates(for: session.snapshot.composingText)
         case .commitPending, .reset:
             candidateStore.reset()
         }
