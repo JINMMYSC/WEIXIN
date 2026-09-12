@@ -30,6 +30,14 @@ final class CandidateStoreTests: XCTestCase {
         XCTAssertEqual(store.candidate(withID: 0)?.text, "新")
     }
 
+    func testCandidateUpdateRoundTripsAsJSON() throws {
+        let update = CandidateUpdate(version: 2, requestID: 7, candidates: [
+            InputCandidate(id: 3, text: "你好")
+        ])
+        let data = try JSONEncoder().encode(update)
+        XCTAssertEqual(try JSONDecoder().decode(CandidateUpdate.self, from: data), update)
+    }
+
     func testResetDropsAllCandidateState() {
         let store = CandidateStore()
         _ = store.apply(CandidateUpdate(version: 1, requestID: 1, candidates: [InputCandidate(id: 1, text: "你")]))

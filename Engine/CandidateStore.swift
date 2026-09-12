@@ -1,6 +1,6 @@
 import Foundation
 
-struct CandidateUpdate: Equatable {
+struct CandidateUpdate: Equatable, Codable {
     let version: Int
     let requestID: Int
     let candidates: [InputCandidate]
