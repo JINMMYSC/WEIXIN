@@ -1,0 +1,54 @@
+name: iOS Unsigned CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-unsigned-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Core tests, five targets, unsigned IPA
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Expand V14 source
+        run: |
+          mkdir project
+          ditto -x -k WeTypeReplicaOverlay_v14-runtime.zip project
+      - name: Install XcodeGen
+        run: |
+          if ! command -v xcodegen >/dev/null 2>&1; then
+            brew install xcodegen
+          fi
+      - name: Build and package without signing
+        working-directory: project
+        run: |
+          chmod +x XcodeIntegration/ci_unsigned_build.sh
+          XcodeIntegration/ci_unsigned_build.sh
+      - name: Upload complete CI logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: WeTypeReplica-V14-CI-logs-${{ github.run_attempt }}
+          path: project/artifacts/logs/
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Upload unsigned IPA and app bundle
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: WeTypeReplica-V14-unsigned-${{ github.run_attempt }}
+          path: |
+            project/artifacts/WeTypeReplicaApp-unsigned.ipa
+            project/artifacts/unsigned/Payload/WeTypeReplicaApp.app
+          if-no-files-found: error
+          retention-days: 30
