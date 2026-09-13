@@ -12,6 +12,7 @@ settings:
     SWIFT_VERSION: 5.9
     IPHONEOS_DEPLOYMENT_TARGET: 15.1
     WT_APP_GROUP_ID: group.7518554
+    GENERATE_INFOPLIST_FILE: NO
 targets:
   WeTypeReplicaApp:
     type: application
@@ -26,13 +27,12 @@ targets:
     dependencies:
       - target: WeTypeReplicaKeyboard
         embed: true
-    info:
-      path: Plists/App-Info.plist
     entitlements:
       path: Entitlements/App.entitlements
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: $(WT_HOST_BUNDLE_ID)
+        INFOPLIST_FILE: Plists/App-Info.plist
   WeTypeReplicaKeyboard:
     type: app-extension
     platform: iOS
@@ -45,13 +45,12 @@ targets:
         excludes:
           - WTHostSpeechRecognitionService.swift
       - path: ../iOSExtensions/WTKeyboardInputViewController.swift
-    info:
-      path: Plists/Keyboard-Info.plist
     entitlements:
       path: Entitlements/Keyboard.entitlements
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: $(WT_KEYBOARD_BUNDLE_ID)
+        INFOPLIST_FILE: Plists/Keyboard-Info.plist
         APPLICATION_EXTENSION_API_ONLY: YES
   WeTypeReplicaShare:
     type: app-extension
@@ -63,13 +62,12 @@ targets:
       - path: ../iOSExtensions/WTQuickSendShareView.swift
       - path: ../iOSExtensions/WTQuickSendShareViewController.swift
       - path: ../iOSServices/WTBonjourTransferService.swift
-    info:
-      path: Plists/Share-Info.plist
     entitlements:
       path: Entitlements/Share.entitlements
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: $(WT_SHARE_BUNDLE_ID)
+        INFOPLIST_FILE: Plists/Share-Info.plist
         APPLICATION_EXTENSION_API_ONLY: YES
   WeTypeReplicaWidget:
     type: app-extension
@@ -79,13 +77,12 @@ targets:
       - path: ../iOSShared
       - path: ../iOSExtensions/WTVoiceWidgetView.swift
       - path: ../iOSExtensions/WTWidgetBundle.swift
-    info:
-      path: Plists/Widget-Info.plist
     entitlements:
       path: Entitlements/Widget.entitlements
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: $(WT_WIDGET_BUNDLE_ID)
+        INFOPLIST_FILE: Plists/Widget-Info.plist
         APPLICATION_EXTENSION_API_ONLY: YES
 
   WeTypeReplicaVoiceActivity:
@@ -96,11 +93,10 @@ targets:
       - path: ../Sources/WeTypeReplicaCore
       - path: ../iOSShared
       - path: ../iOSExtensions/WTVoiceLiveActivityWidget.swift
-    info:
-      path: Plists/VoiceActivity-Info.plist
     entitlements:
       path: Entitlements/VoiceActivity.entitlements
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: $(WT_VOICE_ACTIVITY_BUNDLE_ID)
+        INFOPLIST_FILE: Plists/VoiceActivity-Info.plist
         APPLICATION_EXTENSION_API_ONLY: YES

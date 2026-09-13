@@ -5,6 +5,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github" / "workflows" / "ios-signed-device-ci.yml"
 SCRIPT = ROOT / "XcodeIntegration" / "ci_signed_device_package.sh"
+UNSIGNED_SCRIPT = ROOT / "XcodeIntegration" / "ci_unsigned_build.sh"
+PROJECT_SPEC = ROOT / "XcodeIntegration" / "project.yml"
 
 
 def require(condition: bool, message: str) -> None:
@@ -15,9 +17,13 @@ def require(condition: bool, message: str) -> None:
 def main() -> int:
     require(WORKFLOW.is_file(), f"missing signed-device workflow: {WORKFLOW.relative_to(ROOT)}")
     require(SCRIPT.is_file(), f"missing signed-device signing script: {SCRIPT.relative_to(ROOT)}")
+    require(UNSIGNED_SCRIPT.is_file(), f"missing unsigned build script: {UNSIGNED_SCRIPT.relative_to(ROOT)}")
+    require(PROJECT_SPEC.is_file(), f"missing XcodeGen project spec: {PROJECT_SPEC.relative_to(ROOT)}")
 
     workflow = WORKFLOW.read_text(encoding="utf-8")
     script = SCRIPT.read_text(encoding="utf-8")
+    unsigned_script = UNSIGNED_SCRIPT.read_text(encoding="utf-8")
+    project_spec = PROJECT_SPEC.read_text(encoding="utf-8")
 
     require("push:" in workflow, "signed workflow must trigger from pushes to the diagnostic branch")
     require("work/v14-signed-device" in workflow, "signed workflow must stay isolated to work/v14-signed-device")
@@ -61,6 +67,12 @@ def main() -> int:
     require("require_minimal_signed_entitlements" in script, "post-sign minimal-entitlement gate missing")
     require("embedded.mobileprovision" in script, "profiles must be embedded in both signed bundles")
     require("WeTypeReplicaApp-sideload-diagnostic-signed.ipa" in script, "signed IPA output path missing")
+
+    require("INFOPLIST_FILE: Plists/Keyboard-Info.plist" in project_spec, "Keyboard must use the checked-in Info.plist directly")
+    require("GENERATE_INFOPLIST_FILE: NO" in project_spec, "XcodeGen targets must not synthesize replacement Info.plists")
+    require("com.apple.keyboard-service" in unsigned_script, "unsigned packaging must verify the built keyboard extension point")
+    require("NSExtensionPrincipalClass" in unsigned_script, "unsigned packaging must verify the built keyboard principal class")
+    require("RequestsOpenAccess" in unsigned_script, "unsigned packaging must verify the built keyboard open-access declaration")
 
     print("Signed-device CI configuration verifier passed")
     return 0
