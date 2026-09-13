@@ -6,15 +6,12 @@ on:
       - work/v14-ci
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   materialize:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@v4
         with:
           ref: work/v14-ci
       - name: Expand the approved V14 snapshot
