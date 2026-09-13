@@ -1,0 +1,132 @@
+name: iOS Signed Device CI
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-signed-device-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sign:
+    name: Build, dual-profile sign, validate IPA
+    runs-on: macos-15
+    timeout-minutes: 60
+    env:
+      WT_SIGNING_P12_BASE64: ${{ secrets.WT_SIGNING_P12_BASE64 }}
+      WT_SIGNING_P12_PASSWORD: ${{ secrets.WT_SIGNING_P12_PASSWORD }}
+      WT_HOST_PROFILE_BASE64: ${{ secrets.WT_HOST_PROFILE_BASE64 }}
+      WT_KEYBOARD_PROFILE_BASE64: ${{ secrets.WT_KEYBOARD_PROFILE_BASE64 }}
+
+    steps:
+      - name: Check out signed-device branch
+        uses: actions/checkout@v4
+
+      - name: Validate signing secret presence
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          [[ -n "$WT_SIGNING_P12_BASE64" ]] || { echo "Missing required secret: WT_SIGNING_P12_BASE64" >&2; exit 1; }
+          [[ -n "$WT_SIGNING_P12_PASSWORD" ]] || { echo "Missing required secret: WT_SIGNING_P12_PASSWORD" >&2; exit 1; }
+          [[ -n "$WT_HOST_PROFILE_BASE64" ]] || { echo "Missing required secret: WT_HOST_PROFILE_BASE64" >&2; exit 1; }
+          [[ -n "$WT_KEYBOARD_PROFILE_BASE64" ]] || { echo "Missing required secret: WT_KEYBOARD_PROFILE_BASE64" >&2; exit 1; }
+
+      - name: Install XcodeGen
+        run: |
+          if ! command -v xcodegen >/dev/null 2>&1; then
+            brew install xcodegen
+          fi
+
+      - name: Verify signed-device CI contract
+        run: python3 tools/verify_signed_device_ci.py
+
+      - name: Build unsigned diagnostic package
+        run: |
+          chmod +x XcodeIntegration/ci_unsigned_build.sh
+          XcodeIntegration/ci_unsigned_build.sh
+
+      - name: Prepare ephemeral signing identity and profiles
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          SIGNING_DIR="$RUNNER_TEMP/wetype-signing"
+          KEYCHAIN_PATH="$RUNNER_TEMP/wetype-signing.keychain-db"
+          KEYCHAIN_PASSWORD="$(openssl rand -hex 24)"
+
+          rm -rf "$SIGNING_DIR" "$KEYCHAIN_PATH"
+          mkdir -p "$SIGNING_DIR"
+          chmod 700 "$SIGNING_DIR"
+
+          printf '%s' "$WT_SIGNING_P12_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/signing.p12"
+          printf '%s' "$WT_HOST_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/host.mobileprovision"
+          printf '%s' "$WT_KEYBOARD_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/keyboard.mobileprovision"
+          chmod 600 "$SIGNING_DIR/signing.p12" "$SIGNING_DIR/host.mobileprovision" "$SIGNING_DIR/keyboard.mobileprovision"
+
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security import "$SIGNING_DIR/signing.p12" \
+            -k "$KEYCHAIN_PATH" \
+            -P "$WT_SIGNING_P12_PASSWORD" \
+            -T /usr/bin/codesign \
+            -T /usr/bin/security
+          security set-key-partition-list \
+            -S apple-tool:,apple:,codesign: \
+            -s \
+            -k "$KEYCHAIN_PASSWORD" \
+            "$KEYCHAIN_PATH" >/dev/null
+          security list-keychains -d user -s "$KEYCHAIN_PATH"
+
+          SIGNING_IDENTITY="$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" | awk '/[0-9A-Fa-f]{40}/ {print $2; exit}')"
+          if [[ -z "$SIGNING_IDENTITY" ]]; then
+            echo "No usable codesigning identity was imported from WT_SIGNING_P12_BASE64" >&2
+            exit 1
+          fi
+
+          echo "WT_SIGNING_IDENTITY=$SIGNING_IDENTITY" >> "$GITHUB_ENV"
+          echo "WT_SIGNING_DIR=$SIGNING_DIR" >> "$GITHUB_ENV"
+          echo "WT_KEYCHAIN_PATH=$KEYCHAIN_PATH" >> "$GITHUB_ENV"
+
+      - name: Sign and validate Host plus Keyboard
+        shell: bash
+        run: |
+          chmod +x XcodeIntegration/ci_signed_device_package.sh
+          WT_HOST_PROFILE_PATH="$WT_SIGNING_DIR/host.mobileprovision" \
+          WT_KEYBOARD_PROFILE_PATH="$WT_SIGNING_DIR/keyboard.mobileprovision" \
+          XcodeIntegration/ci_signed_device_package.sh
+
+      - name: Upload complete CI logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: WeTypeReplica-V14-signed-device-logs-${{ github.run_attempt }}
+          path: artifacts/logs/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Upload signed diagnostic IPA
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: WeTypeReplica-V14-signed-device-${{ github.run_attempt }}
+          path: artifacts/WeTypeReplicaApp-sideload-diagnostic-signed.ipa
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Destroy ephemeral signing material
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          if [[ -n "${WT_KEYCHAIN_PATH:-}" ]]; then
+            security delete-keychain "$WT_KEYCHAIN_PATH" 2>/dev/null || true
+          fi
+          if [[ -n "${WT_SIGNING_DIR:-}" ]]; then
+            rm -rf "$WT_SIGNING_DIR"
+          else
+            rm -rf "$RUNNER_TEMP/wetype-signing"
+          fi
+          rm -f "$RUNNER_TEMP/wetype-signing.keychain-db"

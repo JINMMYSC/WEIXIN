@@ -28,3 +28,12 @@
 - Error: `WTQuickSendShareViewController.swift:137:15: call to main actor-isolated instance method 'stop()' in a synchronous nonisolated context`.
 - Root cause: Swift treats `deinit` as nonisolated, while `WTQuickSendShareModel` and its `stop()` method are isolated to the main actor.
 - Fix: stop discovery and hosting from `viewDidDisappear(_:)`, which inherits the controller's main actor isolation; keep `deinit` limited to synchronous temporary-file cleanup.
+
+## Signed-device dual-profile repair
+
+- Verified unsigned baseline remains `work/v14-ci` at `00e3cc3a09b83946e728d7431b310d5ae5c2afd6` with successful run `34753946196`.
+- Verified Host+Keyboard diagnostic baseline remains `work/v14-signed-device` at `fec044bdec7d37b0e3f33647481b52baf146a9cc` with successful run `34757975913`.
+- Device-install blocker reproduced from the phone-signed IPA: the outer Host bundle kept `CFBundleIdentifier=app.lgm.7517`, but its embedded provisioning profile and actual signing entitlements were replaced with the Keyboard identity `X5G6AN3DYX.app.lgm.7517.123`.
+- Root cause: the phone-side signer applied one provisioning profile to both independently signed bundles, overwriting the Host profile during final resigning.
+- CI repair: add an isolated manual-dispatch signed-device workflow, import the signing identity into an ephemeral keychain, apply the Keyboard profile to `WeTypeReplicaKeyboard.appex`, sign the Keyboard first, apply the Host profile to `WeTypeReplicaApp.app`, sign the Host last, and fail before upload unless both profile and codesign entitlements match their exact application identifiers and `group.7518554`.
+- Signing certificate, P12 password, and raw provisioning files remain outside git and are supplied only through GitHub Actions Secrets.
