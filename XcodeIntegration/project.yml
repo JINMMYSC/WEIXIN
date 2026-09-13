@@ -38,7 +38,7 @@ targets:
       path: Entitlements/App.entitlements
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: $(WT_BASE_BUNDLE_ID)
+        PRODUCT_BUNDLE_IDENTIFIER: $(WT_HOST_BUNDLE_ID)
   WeTypeReplicaKeyboard:
     type: app-extension
     platform: iOS
@@ -57,7 +57,7 @@ targets:
       path: Entitlements/Keyboard.entitlements
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: $(WT_BASE_BUNDLE_ID).keyboard
+        PRODUCT_BUNDLE_IDENTIFIER: $(WT_KEYBOARD_BUNDLE_ID)
         APPLICATION_EXTENSION_API_ONLY: YES
   WeTypeReplicaShare:
     type: app-extension
@@ -75,7 +75,7 @@ targets:
       path: Entitlements/Share.entitlements
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: $(WT_BASE_BUNDLE_ID).share
+        PRODUCT_BUNDLE_IDENTIFIER: $(WT_SHARE_BUNDLE_ID)
         APPLICATION_EXTENSION_API_ONLY: YES
   WeTypeReplicaWidget:
     type: app-extension
@@ -91,7 +91,7 @@ targets:
       path: Entitlements/Widget.entitlements
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: $(WT_BASE_BUNDLE_ID).widget
+        PRODUCT_BUNDLE_IDENTIFIER: $(WT_WIDGET_BUNDLE_ID)
         APPLICATION_EXTENSION_API_ONLY: YES
 
   WeTypeReplicaVoiceActivity:
@@ -108,5 +108,5 @@ targets:
       path: Entitlements/VoiceActivity.entitlements
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: $(WT_BASE_BUNDLE_ID).voiceactivity
+        PRODUCT_BUNDLE_IDENTIFIER: $(WT_VOICE_ACTIVITY_BUNDLE_ID)
         APPLICATION_EXTENSION_API_ONLY: YES
