@@ -19,8 +19,9 @@ def main() -> int:
     workflow = WORKFLOW.read_text(encoding="utf-8")
     script = SCRIPT.read_text(encoding="utf-8")
 
-    require("workflow_dispatch:" in workflow, "signed workflow must support manual dispatch")
-    require("push:" not in workflow, "signed workflow must stay isolated from ordinary pushes")
+    require("push:" in workflow, "signed workflow must trigger from pushes to the diagnostic branch")
+    require("work/v14-signed-device" in workflow, "signed workflow must stay isolated to work/v14-signed-device")
+    require("- main" not in workflow, "signed workflow must not run from main")
     require("macos-15" in workflow, "signed workflow must use the macOS runner")
     require("ci_unsigned_build.sh" in workflow, "signed workflow must reuse the unsigned build gate")
     require("ci_signed_device_package.sh" in workflow, "signed workflow must invoke the signing script")

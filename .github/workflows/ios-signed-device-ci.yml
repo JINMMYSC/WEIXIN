@@ -1,7 +1,9 @@
 name: iOS Signed Device CI
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - work/v14-signed-device
 
 permissions:
   contents: read

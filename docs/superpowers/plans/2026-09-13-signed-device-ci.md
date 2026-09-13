@@ -4,7 +4,7 @@
 
 **Goal:** Produce a GitHub Actions artifact containing a correctly signed Host + Keyboard diagnostic IPA with separate provisioning profiles and hard post-signing validation gates.
 
-**Architecture:** Keep the verified unsigned workflow unchanged. Add one signing-focused shell script that consumes the unsigned Host + Keyboard app bundle, signs the Keyboard first and Host last, validates identifiers/profiles/App Group/codesign output, and packages a signed IPA. Add a separate manual-dispatch GitHub Actions workflow that reconstructs signing materials from repository secrets in an ephemeral keychain, runs the existing unsigned build, invokes the signing script, uploads only redacted logs and the signed IPA, and always destroys temporary signing material.
+**Architecture:** Keep the verified unsigned workflow unchanged. Add one signing-focused shell script that consumes the unsigned Host + Keyboard app bundle, signs the Keyboard first and Host last, validates identifiers/profiles/App Group/codesign output, and packages a signed IPA. Add a separate GitHub Actions workflow triggered only by pushes to `work/v14-signed-device`; this branch-local trigger is required because GitHub does not register a new `workflow_dispatch` workflow that exists only outside the default branch. The workflow reconstructs signing materials from repository secrets in an ephemeral keychain, runs the existing unsigned build, invokes the signing script, uploads only redacted logs and the signed IPA, and always destroys temporary signing material.
 
 **Tech Stack:** GitHub Actions (`macos-15`), Xcode 16.4 toolchain, XcodeGen, Bash, `security`, `codesign`, `plutil`, `ditto`, GitHub CLI.
 
@@ -226,9 +226,9 @@ Document the observed device-install blocker: the phone-side signer replaced the
 - Consumes repository secrets `WT_SIGNING_P12_BASE64`, `WT_SIGNING_P12_PASSWORD`, `WT_HOST_PROFILE_BASE64`, `WT_KEYBOARD_PROFILE_BASE64`.
 - Produces the signed IPA artifact and redacted validation/build logs; never uploads standalone P12 or provisioning files.
 
-- [ ] **Step 1: Add a manual-dispatch-only workflow**
+- [ ] **Step 1: Add a branch-isolated push workflow**
 
-Use `workflow_dispatch` only so ordinary branch pushes keep the verified unsigned CI behavior separate. The job runs on `macos-15`, checks out the branch, installs XcodeGen, and reconstructs secret files under `$RUNNER_TEMP/wetype-signing` with restrictive permissions.
+Use a `push` trigger restricted exactly to `work/v14-signed-device`. This avoids modifying `main` while working around GitHub's requirement that manually dispatched workflows be registered on the default branch. The job runs on `macos-15`, checks out the branch, installs XcodeGen, and reconstructs secret files under `$RUNNER_TEMP/wetype-signing` with restrictive permissions.
 
 - [ ] **Step 2: Create and configure an ephemeral keychain without printing passwords**
 
@@ -336,15 +336,16 @@ base64 -w 0 /secure/path/7517ext.mobileprovision | gh secret set WT_KEYBOARD_PRO
 
 Set `WT_SIGNING_P12_PASSWORD` only from a legitimate known source, using stdin so it is not shown in command output or shell history. Never guess or brute-force the password.
 
-- [ ] **Step 3: Dispatch and watch the signed workflow**
+- [ ] **Step 3: Watch the push-triggered signed workflow**
 
-Run:
+After pushing the implementation/fix commit, run:
 
 ```bash
-gh workflow run ios-signed-device-ci.yml --repo JINMMYSC/WEIXIN --ref work/v14-signed-device
 gh run list --repo JINMMYSC/WEIXIN --branch work/v14-signed-device --workflow ios-signed-device-ci.yml --limit 1
 gh run watch RUN_ID --repo JINMMYSC/WEIXIN --exit-status
 ```
+
+After signing Secrets are configured, a previously failed run may be retried on the same commit with `gh run rerun RUN_ID --repo JINMMYSC/WEIXIN`.
 
 - [ ] **Step 4: Repair only the first causal failure on each red run**
 
@@ -354,7 +355,7 @@ For each failure, use:
 gh run view RUN_ID --repo JINMMYSC/WEIXIN --log-failed
 ```
 
-Make the smallest behavior-preserving fix, update `CI_FIX_LOG.md` with the run ID/root cause/fix/result, commit, push, redispatch, and repeat.
+Make the smallest behavior-preserving fix, update `CI_FIX_LOG.md` with the run ID/root cause/fix/result, commit, push, and watch the automatically triggered replacement run. When only Secret configuration changed, rerun the same failed run instead of creating a source-only commit.
 
 - [ ] **Step 5: Verify the successful artifact**
 
