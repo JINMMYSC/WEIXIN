@@ -1,0 +1,167 @@
+{
+  "source": "t9_stroke.ini",
+  "sections": [
+    {
+      "name": "PANEL",
+      "values": {
+        "INHERIT": "t9_pinyin"
+      }
+    },
+    {
+      "name": "KEY_1",
+      "values": {
+        "INPUT": "(b)",
+        "TITLE": "一",
+        "STY": "STYLE_T9_ABC",
+        "FLOATLIST": "",
+        "FONT": "22"
+      }
+    },
+    {
+      "name": "KEY_2",
+      "values": {
+        "INPUT": "(c)",
+        "TITLE": "丨",
+        "STY": "STYLE_T9_ABC",
+        "FLOATLIST": "",
+        "FONT": "22"
+      }
+    },
+    {
+      "name": "KEY_3",
+      "values": {
+        "INPUT": "(d)",
+        "TITLE": "丿",
+        "STY": "STYLE_T9_ABC",
+        "FLOATLIST": "",
+        "FONT": "22"
+      }
+    },
+    {
+      "name": "KEY_4",
+      "values": {
+        "INPUT": "(e)",
+        "TITLE": "丶",
+        "STY": "STYLE_T9_ABC",
+        "FLOATLIST": "",
+        "FONT": "22"
+      }
+    },
+    {
+      "name": "KEY_5",
+      "values": {
+        "INPUT": "(f)",
+        "TITLE": "ㄥ",
+        "STY": "STYLE_T9_ABC",
+        "FLOATLIST": "",
+        "FONT": "22"
+      }
+    },
+    {
+      "name": "KEY_6",
+      "values": {
+        "INPUT": "(*)",
+        "TITLE": "*",
+        "STY": "STYLE_T9_ABC",
+        "FLOATLIST": "",
+        "FONT": "20"
+      }
+    },
+    {
+      "name": "KEY_7",
+      "values": {
+        "STY": "STYLE_T9_NUM0",
+        "FLOATLIST": "/-_@#.,3,3"
+      }
+    },
+    {
+      "name": "KEY_8",
+      "values": {
+        "INPUT": "，",
+        "TITLE": "，",
+        "STY": "STYLE_T9_ABC",
+        "FLOATLIST": "",
+        "FONT": "20"
+      }
+    },
+    {
+      "name": "KEY_9",
+      "values": {
+        "STY": "STYLE_ENKB",
+        "FLOATLIST": "",
+        "INPUT": "null",
+        "FONT": "16"
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "KEY_1",
+      "INPUT": "(b)",
+      "TITLE": "一",
+      "STY": "STYLE_T9_ABC",
+      "FLOATLIST": "",
+      "FONT": "22"
+    },
+    {
+      "id": "KEY_2",
+      "INPUT": "(c)",
+      "TITLE": "丨",
+      "STY": "STYLE_T9_ABC",
+      "FLOATLIST": "",
+      "FONT": "22"
+    },
+    {
+      "id": "KEY_3",
+      "INPUT": "(d)",
+      "TITLE": "丿",
+      "STY": "STYLE_T9_ABC",
+      "FLOATLIST": "",
+      "FONT": "22"
+    },
+    {
+      "id": "KEY_4",
+      "INPUT": "(e)",
+      "TITLE": "丶",
+      "STY": "STYLE_T9_ABC",
+      "FLOATLIST": "",
+      "FONT": "22"
+    },
+    {
+      "id": "KEY_5",
+      "INPUT": "(f)",
+      "TITLE": "ㄥ",
+      "STY": "STYLE_T9_ABC",
+      "FLOATLIST": "",
+      "FONT": "22"
+    },
+    {
+      "id": "KEY_6",
+      "INPUT": "(*)",
+      "TITLE": "*",
+      "STY": "STYLE_T9_ABC",
+      "FLOATLIST": "",
+      "FONT": "20"
+    },
+    {
+      "id": "KEY_7",
+      "STY": "STYLE_T9_NUM0",
+      "FLOATLIST": "/-_@#.,3,3"
+    },
+    {
+      "id": "KEY_8",
+      "INPUT": "，",
+      "TITLE": "，",
+      "STY": "STYLE_T9_ABC",
+      "FLOATLIST": "",
+      "FONT": "20"
+    },
+    {
+      "id": "KEY_9",
+      "STY": "STYLE_ENKB",
+      "FLOATLIST": "",
+      "INPUT": "null",
+      "FONT": "16"
+    }
+  ]
+}

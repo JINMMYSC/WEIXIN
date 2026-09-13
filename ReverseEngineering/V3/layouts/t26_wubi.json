@@ -1,0 +1,771 @@
+{
+  "name": "t26_wubi",
+  "baseSize": [
+    414.0,
+    224.0
+  ],
+  "sections": {
+    "PANEL": {
+      "BASESIZE": "414,224"
+    },
+    "KEY_Q": {
+      "RECT": "5,5,35,46",
+      "INPUT": "q",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "1",
+      "FLOATLIST": "Qq,0,0"
+    },
+    "KEY_W": {
+      "RECT": "46,5,35,46",
+      "INPUT": "w",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "2",
+      "FLOATLIST": "Ww,0,1"
+    },
+    "KEY_E": {
+      "RECT": "87,5,35,46",
+      "INPUT": "e",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "3",
+      "FLOATLIST": "Eeēéěè,0,1"
+    },
+    "KEY_R": {
+      "RECT": "128,5,35,46",
+      "INPUT": "r",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "4",
+      "FLOATLIST": "Rr,0,1"
+    },
+    "KEY_T": {
+      "RECT": "169,5,35,46",
+      "INPUT": "t",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "5",
+      "FLOATLIST": "Tt,0,1"
+    },
+    "KEY_Y": {
+      "RECT": "210,5,35,46",
+      "INPUT": "y",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "6",
+      "FLOATLIST": "Yy,0,1"
+    },
+    "KEY_U": {
+      "RECT": "251,5,35,46",
+      "INPUT": "u",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "7",
+      "FLOATLIST": "ūúǔùUu,4,5"
+    },
+    "KEY_I": {
+      "RECT": "292,5,35,46",
+      "INPUT": "i",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "8",
+      "FLOATLIST": "īíǐìIi,4,5"
+    },
+    "KEY_O": {
+      "RECT": "332,5,35,46",
+      "INPUT": "o",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "9",
+      "FLOATLIST": "ōóǒòOo,4,5"
+    },
+    "KEY_P": {
+      "RECT": "374,5,35,46",
+      "INPUT": "p",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "0",
+      "FLOATLIST": "pP,1,2"
+    },
+    "KEY_A": {
+      "RECT": "20,61,35,46",
+      "INPUT": "a",
+      "STY": "STYLE_T26_LETTER",
+      "FLOATLIST": "Aaāáǎà,0,0",
+      "UPINPUT": "-"
+    },
+    "KEY_S": {
+      "RECT": "66,61,35,46",
+      "INPUT": "s",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "/",
+      "FLOATLIST": "Ss,0,1"
+    },
+    "KEY_D": {
+      "RECT": "107,61,35,46",
+      "INPUT": "d",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "：",
+      "FLOATLIST": "Dd,0,1"
+    },
+    "KEY_F": {
+      "RECT": "148,61,35,46",
+      "INPUT": "f",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "；",
+      "FLOATLIST": "Ff,0,1"
+    },
+    "KEY_G": {
+      "RECT": "189,61,35,46",
+      "INPUT": "g",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "（",
+      "FLOATLIST": "Gg,0,1"
+    },
+    "KEY_H": {
+      "RECT": "230,61,35,46",
+      "INPUT": "h",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "）",
+      "FLOATLIST": "Hh,0,1"
+    },
+    "KEY_J": {
+      "RECT": "271,61,35,46",
+      "INPUT": "j",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "～",
+      "FLOATLIST": "Jj,0,1"
+    },
+    "KEY_K": {
+      "RECT": "312,61,35,46",
+      "INPUT": "k",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "“",
+      "FLOATLIST": "Kk,0,1"
+    },
+    "KEY_L": {
+      "RECT": "353,61,35,46",
+      "INPUT": "l",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "”",
+      "FLOATLIST": "lL,1,2"
+    },
+    "KEY_Z": {
+      "RECT": "66,117,35,46",
+      "INPUT": "z",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "@",
+      "FLOATLIST": "Zz,0,1"
+    },
+    "KEY_X": {
+      "RECT": "107,117,35,46",
+      "INPUT": "x",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": ".",
+      "FLOATLIST": "Xx,0,1"
+    },
+    "KEY_C": {
+      "RECT": "148,117,35,46",
+      "INPUT": "c",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "#",
+      "FLOATLIST": "Cc,0,1"
+    },
+    "KEY_V": {
+      "RECT": "189,117,35,46",
+      "INPUT": "v",
+      "STY": "STYLE_T26_LETTER",
+      "FLOATLIST": "Vvüǖǘǚǜ,0,1",
+      "UPINPUT": "、"
+    },
+    "KEY_B": {
+      "RECT": "230,117,35,46",
+      "INPUT": "b",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "？",
+      "FLOATLIST": "Bb,0,1"
+    },
+    "KEY_N": {
+      "RECT": "271,117,35,46",
+      "INPUT": "n",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "！",
+      "FLOATLIST": "Nn,0,1"
+    },
+    "KEY_M": {
+      "RECT": "312,117,35,46",
+      "INPUT": "m",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "…",
+      "FLOATLIST": "Mm,0,1"
+    },
+    "KEY_SHIFT": {
+      "RECT": "5,117,46,46",
+      "STY": "STYLE_SHIFT_WUBI",
+      "FUNC": "shiftWubi",
+      "IMG": "",
+      "HLIMG": "",
+      "INPUT": ""
+    },
+    "KEY_123": {
+      "RECT": "5,173,46,46",
+      "STY": "STYLE_123",
+      "FUNC": "123",
+      "FLOATSTY": "2"
+    },
+    "KEY_EMOTION": {
+      "RECT": "57,173,46,46",
+      "STY": "STYLE_GRAY",
+      "FUNC": "emoji",
+      "IMG": "icon_keys_emoji"
+    },
+    "KEY_SWITCH": {
+      "RECT": "109,173,46,46",
+      "STY": "STYLE_GRAY",
+      "IMG": "icon_keys_globe",
+      "FUNC": "🌐"
+    },
+    "KEY_,": {
+      "RECT": "161,173,46,46",
+      "INPUT": "['，','.']",
+      "FONT": "['23','23']",
+      "UPINPUT": "['。',]",
+      "FLOATSTY": "1",
+      "FLOATLIST": "。？！@…,0,0",
+      "SUBTITLEPOS": "1",
+      "UPFONT": "['16','16']",
+      "RULE": "9",
+      "FUNC": "funcQuote",
+      "STY": "STYLE_T26_LETTER"
+    },
+    "KEY_At": {
+      "RECT": "213,173,36,46",
+      "FUNC": "funcAt",
+      "INPUT": "@",
+      "FONT": "22",
+      "FLOATSTY": "1",
+      "STY": "STYLE_T26_LETTER"
+    },
+    "KEY_SPACE": {
+      "RECT": "255,173,20,46",
+      "STY": "STYLE_SPACE,STYLE_SPACE_VOICEINPUT",
+      "FUNC": "space",
+      "DINPUT": "。",
+      "FLOATSTY": "0",
+      "HAT": "NO"
+    },
+    "KEY_CHANGE": {
+      "STY": "STYLE_LANGSWITCH,STYLE_NORMAL",
+      "RECT": "281,173,36,46",
+      "FLOATSTY": "2"
+    },
+    "KEY_DEL": {
+      "RECT": "363,117,46,46",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL"
+    },
+    "KEY_RETURN": {
+      "RECT": "323,173,86,46",
+      "STY": "STYLE_RETURN",
+      "FUNC": "return"
+    }
+  },
+  "items": [
+    {
+      "id": "KEY_Q",
+      "RECT": "5,5,35,46",
+      "INPUT": "q",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "1",
+      "FLOATLIST": "Qq,0,0",
+      "rect": [
+        5.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_W",
+      "RECT": "46,5,35,46",
+      "INPUT": "w",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "2",
+      "FLOATLIST": "Ww,0,1",
+      "rect": [
+        46.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_E",
+      "RECT": "87,5,35,46",
+      "INPUT": "e",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "3",
+      "FLOATLIST": "Eeēéěè,0,1",
+      "rect": [
+        87.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_R",
+      "RECT": "128,5,35,46",
+      "INPUT": "r",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "4",
+      "FLOATLIST": "Rr,0,1",
+      "rect": [
+        128.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_T",
+      "RECT": "169,5,35,46",
+      "INPUT": "t",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "5",
+      "FLOATLIST": "Tt,0,1",
+      "rect": [
+        169.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_Y",
+      "RECT": "210,5,35,46",
+      "INPUT": "y",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "6",
+      "FLOATLIST": "Yy,0,1",
+      "rect": [
+        210.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_U",
+      "RECT": "251,5,35,46",
+      "INPUT": "u",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "7",
+      "FLOATLIST": "ūúǔùUu,4,5",
+      "rect": [
+        251.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_I",
+      "RECT": "292,5,35,46",
+      "INPUT": "i",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "8",
+      "FLOATLIST": "īíǐìIi,4,5",
+      "rect": [
+        292.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_O",
+      "RECT": "332,5,35,46",
+      "INPUT": "o",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "9",
+      "FLOATLIST": "ōóǒòOo,4,5",
+      "rect": [
+        332.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_P",
+      "RECT": "374,5,35,46",
+      "INPUT": "p",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "0",
+      "FLOATLIST": "pP,1,2",
+      "rect": [
+        374.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_A",
+      "RECT": "20,61,35,46",
+      "INPUT": "a",
+      "STY": "STYLE_T26_LETTER",
+      "FLOATLIST": "Aaāáǎà,0,0",
+      "UPINPUT": "-",
+      "rect": [
+        20.0,
+        61.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_S",
+      "RECT": "66,61,35,46",
+      "INPUT": "s",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "/",
+      "FLOATLIST": "Ss,0,1",
+      "rect": [
+        66.0,
+        61.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_D",
+      "RECT": "107,61,35,46",
+      "INPUT": "d",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "：",
+      "FLOATLIST": "Dd,0,1",
+      "rect": [
+        107.0,
+        61.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_F",
+      "RECT": "148,61,35,46",
+      "INPUT": "f",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "；",
+      "FLOATLIST": "Ff,0,1",
+      "rect": [
+        148.0,
+        61.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_G",
+      "RECT": "189,61,35,46",
+      "INPUT": "g",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "（",
+      "FLOATLIST": "Gg,0,1",
+      "rect": [
+        189.0,
+        61.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_H",
+      "RECT": "230,61,35,46",
+      "INPUT": "h",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "）",
+      "FLOATLIST": "Hh,0,1",
+      "rect": [
+        230.0,
+        61.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_J",
+      "RECT": "271,61,35,46",
+      "INPUT": "j",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "～",
+      "FLOATLIST": "Jj,0,1",
+      "rect": [
+        271.0,
+        61.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_K",
+      "RECT": "312,61,35,46",
+      "INPUT": "k",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "“",
+      "FLOATLIST": "Kk,0,1",
+      "rect": [
+        312.0,
+        61.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_L",
+      "RECT": "353,61,35,46",
+      "INPUT": "l",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "”",
+      "FLOATLIST": "lL,1,2",
+      "rect": [
+        353.0,
+        61.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_Z",
+      "RECT": "66,117,35,46",
+      "INPUT": "z",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "@",
+      "FLOATLIST": "Zz,0,1",
+      "rect": [
+        66.0,
+        117.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_X",
+      "RECT": "107,117,35,46",
+      "INPUT": "x",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": ".",
+      "FLOATLIST": "Xx,0,1",
+      "rect": [
+        107.0,
+        117.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_C",
+      "RECT": "148,117,35,46",
+      "INPUT": "c",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "#",
+      "FLOATLIST": "Cc,0,1",
+      "rect": [
+        148.0,
+        117.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_V",
+      "RECT": "189,117,35,46",
+      "INPUT": "v",
+      "STY": "STYLE_T26_LETTER",
+      "FLOATLIST": "Vvüǖǘǚǜ,0,1",
+      "UPINPUT": "、",
+      "rect": [
+        189.0,
+        117.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_B",
+      "RECT": "230,117,35,46",
+      "INPUT": "b",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "？",
+      "FLOATLIST": "Bb,0,1",
+      "rect": [
+        230.0,
+        117.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_N",
+      "RECT": "271,117,35,46",
+      "INPUT": "n",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "！",
+      "FLOATLIST": "Nn,0,1",
+      "rect": [
+        271.0,
+        117.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_M",
+      "RECT": "312,117,35,46",
+      "INPUT": "m",
+      "STY": "STYLE_T26_LETTER",
+      "UPINPUT": "…",
+      "FLOATLIST": "Mm,0,1",
+      "rect": [
+        312.0,
+        117.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_SHIFT",
+      "RECT": "5,117,46,46",
+      "STY": "STYLE_SHIFT_WUBI",
+      "FUNC": "shiftWubi",
+      "IMG": "",
+      "HLIMG": "",
+      "INPUT": "",
+      "rect": [
+        5.0,
+        117.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_123",
+      "RECT": "5,173,46,46",
+      "STY": "STYLE_123",
+      "FUNC": "123",
+      "FLOATSTY": "2",
+      "rect": [
+        5.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_EMOTION",
+      "RECT": "57,173,46,46",
+      "STY": "STYLE_GRAY",
+      "FUNC": "emoji",
+      "IMG": "icon_keys_emoji",
+      "rect": [
+        57.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_SWITCH",
+      "RECT": "109,173,46,46",
+      "STY": "STYLE_GRAY",
+      "IMG": "icon_keys_globe",
+      "FUNC": "🌐",
+      "rect": [
+        109.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_,",
+      "RECT": "161,173,46,46",
+      "INPUT": "['，','.']",
+      "FONT": "['23','23']",
+      "UPINPUT": "['。',]",
+      "FLOATSTY": "1",
+      "FLOATLIST": "。？！@…,0,0",
+      "SUBTITLEPOS": "1",
+      "UPFONT": "['16','16']",
+      "RULE": "9",
+      "FUNC": "funcQuote",
+      "STY": "STYLE_T26_LETTER",
+      "rect": [
+        161.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_At",
+      "RECT": "213,173,36,46",
+      "FUNC": "funcAt",
+      "INPUT": "@",
+      "FONT": "22",
+      "FLOATSTY": "1",
+      "STY": "STYLE_T26_LETTER",
+      "rect": [
+        213.0,
+        173.0,
+        36.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_SPACE",
+      "RECT": "255,173,20,46",
+      "STY": "STYLE_SPACE,STYLE_SPACE_VOICEINPUT",
+      "FUNC": "space",
+      "DINPUT": "。",
+      "FLOATSTY": "0",
+      "HAT": "NO",
+      "rect": [
+        255.0,
+        173.0,
+        20.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_CHANGE",
+      "STY": "STYLE_LANGSWITCH,STYLE_NORMAL",
+      "RECT": "281,173,36,46",
+      "FLOATSTY": "2",
+      "rect": [
+        281.0,
+        173.0,
+        36.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_DEL",
+      "RECT": "363,117,46,46",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL",
+      "rect": [
+        363.0,
+        117.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_RETURN",
+      "RECT": "323,173,86,46",
+      "STY": "STYLE_RETURN",
+      "FUNC": "return",
+      "rect": [
+        323.0,
+        173.0,
+        86.0,
+        46.0
+      ]
+    }
+  ],
+  "inherits": "t26_pinyin"
+}

@@ -1,0 +1,390 @@
+{
+  "name": "t9_pinyin",
+  "baseSize": [
+    414.0,
+    224.0
+  ],
+  "sections": {
+    "PANEL": {
+      "BASESIZE": "414,224"
+    },
+    "VIEW_LIST": {
+      "RECT": "5,3,69,162",
+      "STY": "STYLE_GRAY",
+      "FUNC": "symbols"
+    },
+    "KEY_1": {
+      "RECT": "79,3,81,50",
+      "STY": "STYLE_T9_NUM0",
+      "UPINPUT": "1",
+      "FLOATLIST": "/-_@#.,3,3"
+    },
+    "KEY_2": {
+      "RECT": "166,3,81,50",
+      "INPUT": "ABC",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "2",
+      "FLOATLIST": "abcABC,3,3"
+    },
+    "KEY_3": {
+      "RECT": "253,3,81,50",
+      "INPUT": "DEF",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "3",
+      "FLOATLIST": "defDEF,3,3"
+    },
+    "KEY_4": {
+      "RECT": "79,59,81,50",
+      "INPUT": "GHI",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "4",
+      "FLOATLIST": "ghiGHI,3,3"
+    },
+    "KEY_5": {
+      "RECT": "166,59,81,50",
+      "INPUT": "JKL",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "5",
+      "FLOATLIST": "jklJKL,3,3"
+    },
+    "KEY_6": {
+      "RECT": "253,59,81,50",
+      "INPUT": "MNO",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "6",
+      "FLOATLIST": "mnoMNO,3,3"
+    },
+    "KEY_7": {
+      "RECT": "79,115,81,50",
+      "INPUT": "PQRS",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "7",
+      "FLOATLIST": "pqrsPQRS,4,4"
+    },
+    "KEY_8": {
+      "RECT": "166,115,81,50",
+      "INPUT": "TUV",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "8",
+      "FLOATLIST": "tuvTUV,3,3"
+    },
+    "KEY_9": {
+      "RECT": "253,115,81,50",
+      "INPUT": "WXYZ",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "9",
+      "FLOATLIST": "wxyzWXYZ,4,4"
+    },
+    "KEY_SYMB": {
+      "RECT": "5,171,48,50",
+      "STY": "STYLE_SYM",
+      "TITLE": "符号",
+      "FUNC": "fullSymbol"
+    },
+    "KEY_SWITCH": {
+      "RECT": "59,171,48,50",
+      "STY": "STYLE_GRAY",
+      "IMG": "icon_keys_globe",
+      "FUNC": "🌐"
+    },
+    "KEY_EMOTION": {
+      "RECT": "341,115,69,50",
+      "STY": "STYLE_GRAY",
+      "FUNC": "emoji",
+      "IMG": "icon_keys_emoji"
+    },
+    "KEY_123": {
+      "RECT": "166,171,47,50",
+      "STY": "STYLE_123_T9",
+      "FUNC": "123"
+    },
+    "KEY_SPACE": {
+      "RECT": "219,171,59,50",
+      "FUNC": "space",
+      "STY": "STYLE_SPACE,STYLE_SPACE_VOICEINPUT",
+      "UPINPUT": "0",
+      "FLOATSTY": "2",
+      "SUBTITLEPOS": "3",
+      "UPFONT": "9",
+      "DINPUT": "。"
+    },
+    "KEY_ABC": {
+      "RECT": "284,171,50,50",
+      "STY": "STYLE_LANGSWITCH,STYLE_NORMAL",
+      "FLOATSTY": "2"
+    },
+    "KEY_RETURN": {
+      "RECT": "341,171,69,50",
+      "STY": "STYLE_RETURN",
+      "FUNC": "return"
+    },
+    "KEY_DEL": {
+      "RECT": "340,3,69,50",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL"
+    },
+    "KEY_ENTER": {
+      "RECT": "340,59,69,50",
+      "TITLE": "['换行','重输']",
+      "STY": "STYLE_RETYPE",
+      "FUNC": "newline"
+    }
+  },
+  "items": [
+    {
+      "id": "VIEW_LIST",
+      "RECT": "5,3,69,162",
+      "STY": "STYLE_GRAY",
+      "FUNC": "symbols",
+      "rect": [
+        5.0,
+        3.0,
+        69.0,
+        162.0
+      ]
+    },
+    {
+      "id": "KEY_1",
+      "RECT": "79,3,81,50",
+      "STY": "STYLE_T9_NUM0",
+      "UPINPUT": "1",
+      "FLOATLIST": "/-_@#.,3,3",
+      "rect": [
+        79.0,
+        3.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_2",
+      "RECT": "166,3,81,50",
+      "INPUT": "ABC",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "2",
+      "FLOATLIST": "abcABC,3,3",
+      "rect": [
+        166.0,
+        3.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_3",
+      "RECT": "253,3,81,50",
+      "INPUT": "DEF",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "3",
+      "FLOATLIST": "defDEF,3,3",
+      "rect": [
+        253.0,
+        3.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_4",
+      "RECT": "79,59,81,50",
+      "INPUT": "GHI",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "4",
+      "FLOATLIST": "ghiGHI,3,3",
+      "rect": [
+        79.0,
+        59.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_5",
+      "RECT": "166,59,81,50",
+      "INPUT": "JKL",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "5",
+      "FLOATLIST": "jklJKL,3,3",
+      "rect": [
+        166.0,
+        59.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_6",
+      "RECT": "253,59,81,50",
+      "INPUT": "MNO",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "6",
+      "FLOATLIST": "mnoMNO,3,3",
+      "rect": [
+        253.0,
+        59.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_7",
+      "RECT": "79,115,81,50",
+      "INPUT": "PQRS",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "7",
+      "FLOATLIST": "pqrsPQRS,4,4",
+      "rect": [
+        79.0,
+        115.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_8",
+      "RECT": "166,115,81,50",
+      "INPUT": "TUV",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "8",
+      "FLOATLIST": "tuvTUV,3,3",
+      "rect": [
+        166.0,
+        115.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_9",
+      "RECT": "253,115,81,50",
+      "INPUT": "WXYZ",
+      "STY": "STYLE_T9_ABC",
+      "UPINPUT": "9",
+      "FLOATLIST": "wxyzWXYZ,4,4",
+      "rect": [
+        253.0,
+        115.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_SYMB",
+      "RECT": "5,171,48,50",
+      "STY": "STYLE_SYM",
+      "TITLE": "符号",
+      "FUNC": "fullSymbol",
+      "rect": [
+        5.0,
+        171.0,
+        48.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_SWITCH",
+      "RECT": "59,171,48,50",
+      "STY": "STYLE_GRAY",
+      "IMG": "icon_keys_globe",
+      "FUNC": "🌐",
+      "rect": [
+        59.0,
+        171.0,
+        48.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_EMOTION",
+      "RECT": "341,115,69,50",
+      "STY": "STYLE_GRAY",
+      "FUNC": "emoji",
+      "IMG": "icon_keys_emoji",
+      "rect": [
+        341.0,
+        115.0,
+        69.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_123",
+      "RECT": "166,171,47,50",
+      "STY": "STYLE_123_T9",
+      "FUNC": "123",
+      "rect": [
+        166.0,
+        171.0,
+        47.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_SPACE",
+      "RECT": "219,171,59,50",
+      "FUNC": "space",
+      "STY": "STYLE_SPACE,STYLE_SPACE_VOICEINPUT",
+      "UPINPUT": "0",
+      "FLOATSTY": "2",
+      "SUBTITLEPOS": "3",
+      "UPFONT": "9",
+      "DINPUT": "。",
+      "rect": [
+        219.0,
+        171.0,
+        59.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_ABC",
+      "RECT": "284,171,50,50",
+      "STY": "STYLE_LANGSWITCH,STYLE_NORMAL",
+      "FLOATSTY": "2",
+      "rect": [
+        284.0,
+        171.0,
+        50.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_RETURN",
+      "RECT": "341,171,69,50",
+      "STY": "STYLE_RETURN",
+      "FUNC": "return",
+      "rect": [
+        341.0,
+        171.0,
+        69.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_DEL",
+      "RECT": "340,3,69,50",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL",
+      "rect": [
+        340.0,
+        3.0,
+        69.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_ENTER",
+      "RECT": "340,59,69,50",
+      "TITLE": "['换行','重输']",
+      "STY": "STYLE_RETYPE",
+      "FUNC": "newline",
+      "rect": [
+        340.0,
+        59.0,
+        69.0,
+        50.0
+      ]
+    }
+  ],
+  "inherits": null
+}

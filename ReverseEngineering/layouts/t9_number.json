@@ -1,0 +1,389 @@
+{
+  "source": "t9_number.ini",
+  "sections": [
+    {
+      "name": "PANEL",
+      "values": {
+        "BASESIZE": "414,224"
+      }
+    },
+    {
+      "name": "VIEW_LIST",
+      "values": {
+        "RECT": "5,3,69,162",
+        "STY": "STYLE_GRAY",
+        "FUNC": "symbols"
+      }
+    },
+    {
+      "name": "KEY_1",
+      "values": {
+        "RECT": "79,3,81,50",
+        "INPUT": "1",
+        "STY": "STYLE_T9_1"
+      }
+    },
+    {
+      "name": "KEY_BACK",
+      "values": {
+        "RECT": "79,171,81,50",
+        "STY": "STYLE_BACK_WHITE",
+        "TITLE": "返回",
+        "FUNC": "backToInput"
+      }
+    },
+    {
+      "name": "KEY_2",
+      "values": {
+        "RECT": "166,3,81,50",
+        "INPUT": "2",
+        "STY": "STYLE_T9_1"
+      }
+    },
+    {
+      "name": "KEY_3",
+      "values": {
+        "RECT": "253,3,81,50",
+        "INPUT": "3",
+        "STY": "STYLE_T9_1"
+      }
+    },
+    {
+      "name": "KEY_4",
+      "values": {
+        "RECT": "79,59,81,50",
+        "INPUT": "4",
+        "STY": "STYLE_T9_1"
+      }
+    },
+    {
+      "name": "KEY_5",
+      "values": {
+        "RECT": "166,59,81,50",
+        "INPUT": "5",
+        "STY": "STYLE_T9_1"
+      }
+    },
+    {
+      "name": "KEY_6",
+      "values": {
+        "RECT": "253,59,81,50",
+        "INPUT": "6",
+        "STY": "STYLE_T9_1"
+      }
+    },
+    {
+      "name": "KEY_7",
+      "values": {
+        "RECT": "79,115,81,50",
+        "INPUT": "7",
+        "STY": "STYLE_T9_1"
+      }
+    },
+    {
+      "name": "KEY_8",
+      "values": {
+        "RECT": "166,115,81,50",
+        "INPUT": "8",
+        "STY": "STYLE_T9_1"
+      }
+    },
+    {
+      "name": "KEY_9",
+      "values": {
+        "RECT": "253,115,81,50",
+        "INPUT": "9",
+        "STY": "STYLE_T9_1"
+      }
+    },
+    {
+      "name": "KEY_0",
+      "values": {
+        "RECT": "166,171,81,50",
+        "INPUT": "0",
+        "STY": "STYLE_T9_1"
+      }
+    },
+    {
+      "name": "KEY_EMOTION",
+      "values": {
+        "RECT": "341,115,69,50",
+        "STY": "STYLE_GRAY",
+        "FUNC": "emoji",
+        "IMG": "icon_keys_emoji"
+      }
+    },
+    {
+      "name": "KEY_RETURN",
+      "values": {
+        "RECT": "341,171,69,50",
+        "STY": "STYLE_RETURN",
+        "FUNC": "return"
+      }
+    },
+    {
+      "name": "KEY_DEL",
+      "values": {
+        "RECT": "340,3,69,50",
+        "FUNC": "delete",
+        "STY": "STYLE_DEL"
+      }
+    },
+    {
+      "name": "KEY_SYMB",
+      "values": {
+        "RECT": "5,171,69,50",
+        "STY": "STYLE_SYM",
+        "TITLE": "符号",
+        "FUNC": "fullSymbol"
+      }
+    },
+    {
+      "name": "KEY_SPACE",
+      "values": {
+        "RECT": "340,59,69,50",
+        "STY": "STYLE_GRAY",
+        "FUNC": "space",
+        "TITLE": "空格",
+        "INPUT": "' '"
+      }
+    },
+    {
+      "name": "KEY_.",
+      "values": {
+        "STY": "STYLE_NORMAL",
+        "RECT": "253,171,81,50",
+        "FONT": "19",
+        "INPUT": "."
+      }
+    }
+  ],
+  "baseSize": [
+    414.0,
+    224.0
+  ],
+  "items": [
+    {
+      "id": "VIEW_LIST",
+      "RECT": "5,3,69,162",
+      "STY": "STYLE_GRAY",
+      "FUNC": "symbols",
+      "rect": [
+        5.0,
+        3.0,
+        69.0,
+        162.0
+      ]
+    },
+    {
+      "id": "KEY_1",
+      "RECT": "79,3,81,50",
+      "INPUT": "1",
+      "STY": "STYLE_T9_1",
+      "rect": [
+        79.0,
+        3.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_BACK",
+      "RECT": "79,171,81,50",
+      "STY": "STYLE_BACK_WHITE",
+      "TITLE": "返回",
+      "FUNC": "backToInput",
+      "rect": [
+        79.0,
+        171.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_2",
+      "RECT": "166,3,81,50",
+      "INPUT": "2",
+      "STY": "STYLE_T9_1",
+      "rect": [
+        166.0,
+        3.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_3",
+      "RECT": "253,3,81,50",
+      "INPUT": "3",
+      "STY": "STYLE_T9_1",
+      "rect": [
+        253.0,
+        3.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_4",
+      "RECT": "79,59,81,50",
+      "INPUT": "4",
+      "STY": "STYLE_T9_1",
+      "rect": [
+        79.0,
+        59.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_5",
+      "RECT": "166,59,81,50",
+      "INPUT": "5",
+      "STY": "STYLE_T9_1",
+      "rect": [
+        166.0,
+        59.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_6",
+      "RECT": "253,59,81,50",
+      "INPUT": "6",
+      "STY": "STYLE_T9_1",
+      "rect": [
+        253.0,
+        59.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_7",
+      "RECT": "79,115,81,50",
+      "INPUT": "7",
+      "STY": "STYLE_T9_1",
+      "rect": [
+        79.0,
+        115.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_8",
+      "RECT": "166,115,81,50",
+      "INPUT": "8",
+      "STY": "STYLE_T9_1",
+      "rect": [
+        166.0,
+        115.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_9",
+      "RECT": "253,115,81,50",
+      "INPUT": "9",
+      "STY": "STYLE_T9_1",
+      "rect": [
+        253.0,
+        115.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_0",
+      "RECT": "166,171,81,50",
+      "INPUT": "0",
+      "STY": "STYLE_T9_1",
+      "rect": [
+        166.0,
+        171.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_EMOTION",
+      "RECT": "341,115,69,50",
+      "STY": "STYLE_GRAY",
+      "FUNC": "emoji",
+      "IMG": "icon_keys_emoji",
+      "rect": [
+        341.0,
+        115.0,
+        69.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_RETURN",
+      "RECT": "341,171,69,50",
+      "STY": "STYLE_RETURN",
+      "FUNC": "return",
+      "rect": [
+        341.0,
+        171.0,
+        69.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_DEL",
+      "RECT": "340,3,69,50",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL",
+      "rect": [
+        340.0,
+        3.0,
+        69.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_SYMB",
+      "RECT": "5,171,69,50",
+      "STY": "STYLE_SYM",
+      "TITLE": "符号",
+      "FUNC": "fullSymbol",
+      "rect": [
+        5.0,
+        171.0,
+        69.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_SPACE",
+      "RECT": "340,59,69,50",
+      "STY": "STYLE_GRAY",
+      "FUNC": "space",
+      "TITLE": "空格",
+      "INPUT": "' '",
+      "rect": [
+        340.0,
+        59.0,
+        69.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_.",
+      "STY": "STYLE_NORMAL",
+      "RECT": "253,171,81,50",
+      "FONT": "19",
+      "INPUT": ".",
+      "rect": [
+        253.0,
+        171.0,
+        81.0,
+        50.0
+      ]
+    }
+  ]
+}

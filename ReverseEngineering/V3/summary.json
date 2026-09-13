@@ -1,0 +1,126 @@
+{
+  "layoutCount": 15,
+  "styleCount": 26,
+  "layouts": {
+    "t26_pinyin": {
+      "itemCount": 36,
+      "baseSize": [
+        414.0,
+        224.0
+      ],
+      "inherits": null
+    },
+    "t26_en": {
+      "itemCount": 36,
+      "baseSize": [
+        414.0,
+        224.0
+      ],
+      "inherits": "t26_pinyin"
+    },
+    "t26_wubi": {
+      "itemCount": 36,
+      "baseSize": [
+        414.0,
+        224.0
+      ],
+      "inherits": "t26_pinyin"
+    },
+    "t26_inner_hw": {
+      "itemCount": 36,
+      "baseSize": [
+        414.0,
+        224.0
+      ],
+      "inherits": "t26_pinyin"
+    },
+    "t9_pinyin": {
+      "itemCount": 19,
+      "baseSize": [
+        414.0,
+        224.0
+      ],
+      "inherits": null
+    },
+    "t9_stroke": {
+      "itemCount": 19,
+      "baseSize": [
+        414.0,
+        224.0
+      ],
+      "inherits": "t9_pinyin"
+    },
+    "t9_number": {
+      "itemCount": 18,
+      "baseSize": [
+        414.0,
+        224.0
+      ],
+      "inherits": null
+    },
+    "t9_number_26": {
+      "itemCount": 18,
+      "baseSize": [
+        414.0,
+        224.0
+      ],
+      "inherits": "t9_number"
+    },
+    "t9_inner_hw": {
+      "itemCount": 19,
+      "baseSize": [
+        414.0,
+        224.0
+      ],
+      "inherits": "t9_pinyin"
+    },
+    "t26_cn_symbol": {
+      "itemCount": 34,
+      "baseSize": [
+        414.0,
+        224.0
+      ],
+      "inherits": null
+    },
+    "t26_en_symbol": {
+      "itemCount": 34,
+      "baseSize": [
+        414.0,
+        224.0
+      ],
+      "inherits": "t26_cn_symbol"
+    },
+    "full_symbol": {
+      "itemCount": 2,
+      "baseSize": [
+        375.0,
+        224.0
+      ],
+      "inherits": null
+    },
+    "full_symbol2": {
+      "itemCount": 32,
+      "baseSize": [
+        414.0,
+        224.0
+      ],
+      "inherits": null
+    },
+    "handwriting": {
+      "itemCount": 10,
+      "baseSize": [
+        375.0,
+        204.0
+      ],
+      "inherits": null
+    },
+    "numpad": {
+      "itemCount": 12,
+      "baseSize": [
+        375.0,
+        214.0
+      ],
+      "inherits": null
+    }
+  }
+}

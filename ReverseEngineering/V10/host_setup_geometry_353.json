@@ -1,0 +1,6220 @@
+{
+  "source": "WeType 3.5.3 IPA host-app Setup asset measurements; no proprietary pixels copied",
+  "recordCount": 310,
+  "screens": {
+    "SetupAuxiliaryInput": 18,
+    "SetupClipboard": 9,
+    "SetupDesktop": 12,
+    "SetupDisplaySetting": 102,
+    "SetupFuzzyPinyin": 6,
+    "SetupKeyboardSelect": 15,
+    "SetupKeystrokeEffect": 6,
+    "SetupMain": 72,
+    "SetupMigrationAssistant": 8,
+    "SetupPlus": 36,
+    "SetupSp": 20,
+    "SetupWb": 6
+  },
+  "assets": [
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/blur_pinyin_left_dark.png",
+      "family": "blur_pinyin_left_dark",
+      "scale": 1,
+      "pixelSize": [
+        136,
+        56
+      ],
+      "logicalSize": [
+        136.0,
+        56.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        136.0,
+        56.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/blur_pinyin_left_dark@2x.png",
+      "family": "blur_pinyin_left_dark",
+      "scale": 2,
+      "pixelSize": [
+        272,
+        112
+      ],
+      "logicalSize": [
+        136.0,
+        56.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        136.0,
+        56.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/blur_pinyin_left_dark@3x.png",
+      "family": "blur_pinyin_left_dark",
+      "scale": 3,
+      "pixelSize": [
+        408,
+        168
+      ],
+      "logicalSize": [
+        136.0,
+        56.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        136.0,
+        56.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/blur_pinyin_left_light.png",
+      "family": "blur_pinyin_left_light",
+      "scale": 1,
+      "pixelSize": [
+        136,
+        56
+      ],
+      "logicalSize": [
+        136.0,
+        56.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        136.0,
+        56.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/blur_pinyin_left_light@2x.png",
+      "family": "blur_pinyin_left_light",
+      "scale": 2,
+      "pixelSize": [
+        272,
+        112
+      ],
+      "logicalSize": [
+        136.0,
+        56.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        136.0,
+        56.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/blur_pinyin_left_light@3x.png",
+      "family": "blur_pinyin_left_light",
+      "scale": 3,
+      "pixelSize": [
+        408,
+        168
+      ],
+      "logicalSize": [
+        136.0,
+        56.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        136.0,
+        56.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/blur_pinyin_right_dark.png",
+      "family": "blur_pinyin_right_dark",
+      "scale": 1,
+      "pixelSize": [
+        136,
+        56
+      ],
+      "logicalSize": [
+        136.0,
+        56.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        136.0,
+        56.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/blur_pinyin_right_dark@2x.png",
+      "family": "blur_pinyin_right_dark",
+      "scale": 2,
+      "pixelSize": [
+        272,
+        112
+      ],
+      "logicalSize": [
+        136.0,
+        56.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        136.0,
+        56.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/blur_pinyin_right_dark@3x.png",
+      "family": "blur_pinyin_right_dark",
+      "scale": 3,
+      "pixelSize": [
+        408,
+        168
+      ],
+      "logicalSize": [
+        136.0,
+        56.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        136.0,
+        56.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/blur_pinyin_right_light.png",
+      "family": "blur_pinyin_right_light",
+      "scale": 1,
+      "pixelSize": [
+        136,
+        56
+      ],
+      "logicalSize": [
+        136.0,
+        56.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        136.0,
+        56.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/blur_pinyin_right_light@2x.png",
+      "family": "blur_pinyin_right_light",
+      "scale": 2,
+      "pixelSize": [
+        272,
+        112
+      ],
+      "logicalSize": [
+        136.0,
+        56.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        136.0,
+        56.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/blur_pinyin_right_light@3x.png",
+      "family": "blur_pinyin_right_light",
+      "scale": 3,
+      "pixelSize": [
+        408,
+        168
+      ],
+      "logicalSize": [
+        136.0,
+        56.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        136.0,
+        56.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/icon_etc_dark.png",
+      "family": "icon_etc_dark",
+      "scale": 1,
+      "pixelSize": [
+        16,
+        16
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.0,
+        10.0,
+        6.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/icon_etc_dark@2x.png",
+      "family": "icon_etc_dark",
+      "scale": 2,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.0,
+        10.0,
+        6.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/icon_etc_dark@3x.png",
+      "family": "icon_etc_dark",
+      "scale": 3,
+      "pixelSize": [
+        48,
+        48
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.0,
+        10.0,
+        6.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/icon_etc_light.png",
+      "family": "icon_etc_light",
+      "scale": 1,
+      "pixelSize": [
+        16,
+        16
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.0,
+        10.0,
+        6.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/icon_etc_light@2x.png",
+      "family": "icon_etc_light",
+      "scale": 2,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.0,
+        10.0,
+        6.0
+      ]
+    },
+    {
+      "screen": "SetupAuxiliaryInput",
+      "path": "SetupAuxiliaryInput/images/icon_etc_light@3x.png",
+      "family": "icon_etc_light",
+      "scale": 3,
+      "pixelSize": [
+        48,
+        48
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.0,
+        10.0,
+        6.0
+      ]
+    },
+    {
+      "screen": "SetupClipboard",
+      "path": "SetupClipboard/images/icon_table_arrow.png",
+      "family": "icon_table_arrow",
+      "scale": 1,
+      "pixelSize": [
+        12,
+        20
+      ],
+      "logicalSize": [
+        12.0,
+        20.0
+      ],
+      "alphaBounds": [
+        4.0,
+        4.0,
+        7.0,
+        13.0
+      ]
+    },
+    {
+      "screen": "SetupClipboard",
+      "path": "SetupClipboard/images/icon_table_arrow@2x.png",
+      "family": "icon_table_arrow",
+      "scale": 2,
+      "pixelSize": [
+        24,
+        40
+      ],
+      "logicalSize": [
+        12.0,
+        20.0
+      ],
+      "alphaBounds": [
+        4.0,
+        4.5,
+        7.0,
+        12.0
+      ]
+    },
+    {
+      "screen": "SetupClipboard",
+      "path": "SetupClipboard/images/icon_table_arrow@3x.png",
+      "family": "icon_table_arrow",
+      "scale": 3,
+      "pixelSize": [
+        36,
+        60
+      ],
+      "logicalSize": [
+        12.0,
+        20.0
+      ],
+      "alphaBounds": [
+        4.333,
+        4.333,
+        6.667,
+        12.0
+      ]
+    },
+    {
+      "screen": "SetupClipboard",
+      "path": "SetupClipboard/images/img_clipboard_dark.png",
+      "family": "img_clipboard_dark",
+      "scale": 1,
+      "pixelSize": [
+        295,
+        126
+      ],
+      "logicalSize": [
+        295.0,
+        126.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        295.0,
+        126.0
+      ]
+    },
+    {
+      "screen": "SetupClipboard",
+      "path": "SetupClipboard/images/img_clipboard_dark@2x.png",
+      "family": "img_clipboard_dark",
+      "scale": 2,
+      "pixelSize": [
+        590,
+        252
+      ],
+      "logicalSize": [
+        295.0,
+        126.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        295.0,
+        126.0
+      ]
+    },
+    {
+      "screen": "SetupClipboard",
+      "path": "SetupClipboard/images/img_clipboard_dark@3x.png",
+      "family": "img_clipboard_dark",
+      "scale": 3,
+      "pixelSize": [
+        885,
+        378
+      ],
+      "logicalSize": [
+        295.0,
+        126.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        295.0,
+        126.0
+      ]
+    },
+    {
+      "screen": "SetupClipboard",
+      "path": "SetupClipboard/images/img_clipboard_light.png",
+      "family": "img_clipboard_light",
+      "scale": 1,
+      "pixelSize": [
+        295,
+        126
+      ],
+      "logicalSize": [
+        295.0,
+        126.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        295.0,
+        126.0
+      ]
+    },
+    {
+      "screen": "SetupClipboard",
+      "path": "SetupClipboard/images/img_clipboard_light@2x.png",
+      "family": "img_clipboard_light",
+      "scale": 2,
+      "pixelSize": [
+        590,
+        252
+      ],
+      "logicalSize": [
+        295.0,
+        126.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        295.0,
+        126.0
+      ]
+    },
+    {
+      "screen": "SetupClipboard",
+      "path": "SetupClipboard/images/img_clipboard_light@3x.png",
+      "family": "img_clipboard_light",
+      "scale": 3,
+      "pixelSize": [
+        885,
+        378
+      ],
+      "logicalSize": [
+        295.0,
+        126.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        295.0,
+        126.0
+      ]
+    },
+    {
+      "screen": "SetupDesktop",
+      "path": "SetupDesktop/images/icon_computer.png",
+      "family": "icon_computer",
+      "scale": 1,
+      "pixelSize": [
+        160,
+        122
+      ],
+      "logicalSize": [
+        160.0,
+        122.0
+      ],
+      "alphaBounds": [
+        1.0,
+        0.0,
+        158.0,
+        122.0
+      ]
+    },
+    {
+      "screen": "SetupDesktop",
+      "path": "SetupDesktop/images/icon_computer@2x.png",
+      "family": "icon_computer",
+      "scale": 2,
+      "pixelSize": [
+        320,
+        244
+      ],
+      "logicalSize": [
+        160.0,
+        122.0
+      ],
+      "alphaBounds": [
+        1.0,
+        0.0,
+        158.0,
+        122.0
+      ]
+    },
+    {
+      "screen": "SetupDesktop",
+      "path": "SetupDesktop/images/icon_computer@3x.png",
+      "family": "icon_computer",
+      "scale": 3,
+      "pixelSize": [
+        480,
+        366
+      ],
+      "logicalSize": [
+        160.0,
+        122.0
+      ],
+      "alphaBounds": [
+        1.0,
+        0.0,
+        158.0,
+        122.0
+      ]
+    },
+    {
+      "screen": "SetupDesktop",
+      "path": "SetupDesktop/images/icon_computer_dark.png",
+      "family": "icon_computer_dark",
+      "scale": 1,
+      "pixelSize": [
+        160,
+        122
+      ],
+      "logicalSize": [
+        160.0,
+        122.0
+      ],
+      "alphaBounds": [
+        1.0,
+        0.0,
+        158.0,
+        122.0
+      ]
+    },
+    {
+      "screen": "SetupDesktop",
+      "path": "SetupDesktop/images/icon_computer_dark@2x.png",
+      "family": "icon_computer_dark",
+      "scale": 2,
+      "pixelSize": [
+        320,
+        244
+      ],
+      "logicalSize": [
+        160.0,
+        122.0
+      ],
+      "alphaBounds": [
+        1.0,
+        0.0,
+        158.0,
+        122.0
+      ]
+    },
+    {
+      "screen": "SetupDesktop",
+      "path": "SetupDesktop/images/icon_computer_dark@3x.png",
+      "family": "icon_computer_dark",
+      "scale": 3,
+      "pixelSize": [
+        480,
+        366
+      ],
+      "logicalSize": [
+        160.0,
+        122.0
+      ],
+      "alphaBounds": [
+        1.0,
+        0.0,
+        158.0,
+        122.0
+      ]
+    },
+    {
+      "screen": "SetupDesktop",
+      "path": "SetupDesktop/images/icon_ios.png",
+      "family": "icon_ios",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        7.0,
+        4.0,
+        18.0,
+        22.0
+      ]
+    },
+    {
+      "screen": "SetupDesktop",
+      "path": "SetupDesktop/images/icon_ios@2x.png",
+      "family": "icon_ios",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        7.0,
+        4.0,
+        18.0,
+        22.0
+      ]
+    },
+    {
+      "screen": "SetupDesktop",
+      "path": "SetupDesktop/images/icon_ios@3x.png",
+      "family": "icon_ios",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        7.333,
+        4.0,
+        17.667,
+        21.667
+      ]
+    },
+    {
+      "screen": "SetupDesktop",
+      "path": "SetupDesktop/images/icon_windows.png",
+      "family": "icon_windows",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.0,
+        6.0,
+        20.0,
+        20.0
+      ]
+    },
+    {
+      "screen": "SetupDesktop",
+      "path": "SetupDesktop/images/icon_windows@2x.png",
+      "family": "icon_windows",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.5,
+        6.5,
+        19.0,
+        19.0
+      ]
+    },
+    {
+      "screen": "SetupDesktop",
+      "path": "SetupDesktop/images/icon_windows@3x.png",
+      "family": "icon_windows",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.667,
+        6.667,
+        18.667,
+        18.667
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/icon_font_big.png",
+      "family": "icon_font_big",
+      "scale": 1,
+      "pixelSize": [
+        17,
+        17
+      ],
+      "logicalSize": [
+        17.0,
+        17.0
+      ],
+      "alphaBounds": [
+        2.0,
+        1.0,
+        12.0,
+        15.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/icon_font_big@2x.png",
+      "family": "icon_font_big",
+      "scale": 2,
+      "pixelSize": [
+        34,
+        34
+      ],
+      "logicalSize": [
+        17.0,
+        17.0
+      ],
+      "alphaBounds": [
+        2.5,
+        1.5,
+        12.0,
+        14.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/icon_font_big@3x.png",
+      "family": "icon_font_big",
+      "scale": 3,
+      "pixelSize": [
+        51,
+        51
+      ],
+      "logicalSize": [
+        17.0,
+        17.0
+      ],
+      "alphaBounds": [
+        2.667,
+        1.667,
+        11.667,
+        13.667
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/icon_font_small.png",
+      "family": "icon_font_small",
+      "scale": 1,
+      "pixelSize": [
+        17,
+        17
+      ],
+      "logicalSize": [
+        17.0,
+        17.0
+      ],
+      "alphaBounds": [
+        2.0,
+        2.0,
+        11.0,
+        13.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/icon_font_small@2x.png",
+      "family": "icon_font_small",
+      "scale": 2,
+      "pixelSize": [
+        34,
+        34
+      ],
+      "logicalSize": [
+        17.0,
+        17.0
+      ],
+      "alphaBounds": [
+        2.5,
+        2.5,
+        10.0,
+        12.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/icon_font_small@3x.png",
+      "family": "icon_font_small",
+      "scale": 3,
+      "pixelSize": [
+        51,
+        51
+      ],
+      "logicalSize": [
+        17.0,
+        17.0
+      ],
+      "alphaBounds": [
+        2.333,
+        2.667,
+        10.333,
+        11.667
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_black_drak.png",
+      "family": "img_black_drak",
+      "scale": 1,
+      "pixelSize": [
+        89,
+        50
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_black_drak@2x.png",
+      "family": "img_black_drak",
+      "scale": 2,
+      "pixelSize": [
+        178,
+        100
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_black_drak@3x.png",
+      "family": "img_black_drak",
+      "scale": 3,
+      "pixelSize": [
+        267,
+        150
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_black_light.png",
+      "family": "img_black_light",
+      "scale": 1,
+      "pixelSize": [
+        89,
+        50
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_black_light@2x.png",
+      "family": "img_black_light",
+      "scale": 2,
+      "pixelSize": [
+        178,
+        100
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_black_light@3x.png",
+      "family": "img_black_light",
+      "scale": 3,
+      "pixelSize": [
+        267,
+        150
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_black_t9_dark.png",
+      "family": "img_black_t9_dark",
+      "scale": 1,
+      "pixelSize": [
+        89,
+        50
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_black_t9_dark@2x.png",
+      "family": "img_black_t9_dark",
+      "scale": 2,
+      "pixelSize": [
+        178,
+        100
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_black_t9_dark@3x.png",
+      "family": "img_black_t9_dark",
+      "scale": 3,
+      "pixelSize": [
+        267,
+        150
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_black_t9_light.png",
+      "family": "img_black_t9_light",
+      "scale": 1,
+      "pixelSize": [
+        89,
+        50
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_black_t9_light@2x.png",
+      "family": "img_black_t9_light",
+      "scale": 2,
+      "pixelSize": [
+        178,
+        100
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_black_t9_light@3x.png",
+      "family": "img_black_t9_light",
+      "scale": 3,
+      "pixelSize": [
+        267,
+        150
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_keyboard_height.png",
+      "family": "img_keyboard_height",
+      "scale": 1,
+      "pixelSize": [
+        299,
+        128
+      ],
+      "logicalSize": [
+        299.0,
+        128.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        299.0,
+        128.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_keyboard_height@2x.png",
+      "family": "img_keyboard_height",
+      "scale": 2,
+      "pixelSize": [
+        598,
+        256
+      ],
+      "logicalSize": [
+        299.0,
+        128.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        299.0,
+        128.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_keyboard_height@3x.png",
+      "family": "img_keyboard_height",
+      "scale": 3,
+      "pixelSize": [
+        897,
+        384
+      ],
+      "logicalSize": [
+        299.0,
+        128.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        299.0,
+        128.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_keyboard_height_dark.png",
+      "family": "img_keyboard_height_dark",
+      "scale": 1,
+      "pixelSize": [
+        299,
+        128
+      ],
+      "logicalSize": [
+        299.0,
+        128.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        299.0,
+        128.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_keyboard_height_dark@2x.png",
+      "family": "img_keyboard_height_dark",
+      "scale": 2,
+      "pixelSize": [
+        598,
+        256
+      ],
+      "logicalSize": [
+        299.0,
+        128.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        299.0,
+        128.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_keyboard_height_dark@3x.png",
+      "family": "img_keyboard_height_dark",
+      "scale": 3,
+      "pixelSize": [
+        897,
+        384
+      ],
+      "logicalSize": [
+        299.0,
+        128.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        299.0,
+        128.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_number_26.png",
+      "family": "img_number_26",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_number_26@2x.png",
+      "family": "img_number_26",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_number_26@3x.png",
+      "family": "img_number_26",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_number_26_dark.png",
+      "family": "img_number_26_dark",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_number_26_dark@2x.png",
+      "family": "img_number_26_dark",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_number_26_dark@3x.png",
+      "family": "img_number_26_dark",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_number_9.png",
+      "family": "img_number_9",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_number_9@2x.png",
+      "family": "img_number_9",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_number_9@3x.png",
+      "family": "img_number_9",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_number_9_dark.png",
+      "family": "img_number_9_dark",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_number_9_dark@2x.png",
+      "family": "img_number_9_dark",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_number_9_dark@3x.png",
+      "family": "img_number_9_dark",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_participle.png",
+      "family": "img_participle",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_participle@2x.png",
+      "family": "img_participle",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_participle@3x.png",
+      "family": "img_participle",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_participle_dark.png",
+      "family": "img_participle_dark",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_participle_dark@2x.png",
+      "family": "img_participle_dark",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_participle_dark@3x.png",
+      "family": "img_participle_dark",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_sidebar_number.png",
+      "family": "img_sidebar_number",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_sidebar_number@2x.png",
+      "family": "img_sidebar_number",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_sidebar_number@3x.png",
+      "family": "img_sidebar_number",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_sidebar_number_dark.png",
+      "family": "img_sidebar_number_dark",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_sidebar_number_dark@2x.png",
+      "family": "img_sidebar_number_dark",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_sidebar_number_dark@3x.png",
+      "family": "img_sidebar_number_dark",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_sidebar_pinyin.png",
+      "family": "img_sidebar_pinyin",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_sidebar_pinyin@2x.png",
+      "family": "img_sidebar_pinyin",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_sidebar_pinyin@3x.png",
+      "family": "img_sidebar_pinyin",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_sidebar_pinyin_dark.png",
+      "family": "img_sidebar_pinyin_dark",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_sidebar_pinyin_dark@2x.png",
+      "family": "img_sidebar_pinyin_dark",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_sidebar_pinyin_dark@3x.png",
+      "family": "img_sidebar_pinyin_dark",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_system_dark.png",
+      "family": "img_system_dark",
+      "scale": 1,
+      "pixelSize": [
+        89,
+        50
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_system_dark@2x.png",
+      "family": "img_system_dark",
+      "scale": 2,
+      "pixelSize": [
+        178,
+        100
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_system_dark@3x.png",
+      "family": "img_system_dark",
+      "scale": 3,
+      "pixelSize": [
+        267,
+        150
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_system_light.png",
+      "family": "img_system_light",
+      "scale": 1,
+      "pixelSize": [
+        89,
+        50
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_system_light@2x.png",
+      "family": "img_system_light",
+      "scale": 2,
+      "pixelSize": [
+        178,
+        100
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_system_light@3x.png",
+      "family": "img_system_light",
+      "scale": 3,
+      "pixelSize": [
+        267,
+        150
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_system_t9_dark.png",
+      "family": "img_system_t9_dark",
+      "scale": 1,
+      "pixelSize": [
+        89,
+        50
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_system_t9_dark@2x.png",
+      "family": "img_system_t9_dark",
+      "scale": 2,
+      "pixelSize": [
+        178,
+        100
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_system_t9_dark@3x.png",
+      "family": "img_system_t9_dark",
+      "scale": 3,
+      "pixelSize": [
+        267,
+        150
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_system_t9_light.png",
+      "family": "img_system_t9_light",
+      "scale": 1,
+      "pixelSize": [
+        89,
+        50
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_system_t9_light@2x.png",
+      "family": "img_system_t9_light",
+      "scale": 2,
+      "pixelSize": [
+        178,
+        100
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_system_t9_light@3x.png",
+      "family": "img_system_t9_light",
+      "scale": 3,
+      "pixelSize": [
+        267,
+        150
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_t9_height_dark.png",
+      "family": "img_t9_height_dark",
+      "scale": 1,
+      "pixelSize": [
+        299,
+        128
+      ],
+      "logicalSize": [
+        299.0,
+        128.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        299.0,
+        128.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_t9_height_dark@2x.png",
+      "family": "img_t9_height_dark",
+      "scale": 2,
+      "pixelSize": [
+        598,
+        256
+      ],
+      "logicalSize": [
+        299.0,
+        128.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        299.0,
+        128.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_t9_height_dark@3x.png",
+      "family": "img_t9_height_dark",
+      "scale": 3,
+      "pixelSize": [
+        897,
+        384
+      ],
+      "logicalSize": [
+        299.0,
+        128.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        299.0,
+        128.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_t9_height_light.png",
+      "family": "img_t9_height_light",
+      "scale": 1,
+      "pixelSize": [
+        299,
+        128
+      ],
+      "logicalSize": [
+        299.0,
+        128.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        299.0,
+        128.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_t9_height_light@2x.png",
+      "family": "img_t9_height_light",
+      "scale": 2,
+      "pixelSize": [
+        598,
+        256
+      ],
+      "logicalSize": [
+        299.0,
+        128.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        299.0,
+        128.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_t9_height_light@3x.png",
+      "family": "img_t9_height_light",
+      "scale": 3,
+      "pixelSize": [
+        897,
+        384
+      ],
+      "logicalSize": [
+        299.0,
+        128.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        299.0,
+        128.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_uppercase.png",
+      "family": "img_uppercase",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_uppercase@2x.png",
+      "family": "img_uppercase",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_uppercase@3x.png",
+      "family": "img_uppercase",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_uppercase_dark.png",
+      "family": "img_uppercase_dark",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_uppercase_dark@2x.png",
+      "family": "img_uppercase_dark",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_uppercase_dark@3x.png",
+      "family": "img_uppercase_dark",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_white_dark.png",
+      "family": "img_white_dark",
+      "scale": 1,
+      "pixelSize": [
+        89,
+        50
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_white_dark@2x.png",
+      "family": "img_white_dark",
+      "scale": 2,
+      "pixelSize": [
+        178,
+        100
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_white_dark@3x.png",
+      "family": "img_white_dark",
+      "scale": 3,
+      "pixelSize": [
+        267,
+        150
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_white_light.png",
+      "family": "img_white_light",
+      "scale": 1,
+      "pixelSize": [
+        89,
+        50
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_white_light@2x.png",
+      "family": "img_white_light",
+      "scale": 2,
+      "pixelSize": [
+        178,
+        100
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_white_light@3x.png",
+      "family": "img_white_light",
+      "scale": 3,
+      "pixelSize": [
+        267,
+        150
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_white_t9_dark.png",
+      "family": "img_white_t9_dark",
+      "scale": 1,
+      "pixelSize": [
+        89,
+        50
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_white_t9_dark@2x.png",
+      "family": "img_white_t9_dark",
+      "scale": 2,
+      "pixelSize": [
+        178,
+        100
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_white_t9_dark@3x.png",
+      "family": "img_white_t9_dark",
+      "scale": 3,
+      "pixelSize": [
+        267,
+        150
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_white_t9_light.png",
+      "family": "img_white_t9_light",
+      "scale": 1,
+      "pixelSize": [
+        89,
+        50
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_white_t9_light@2x.png",
+      "family": "img_white_t9_light",
+      "scale": 2,
+      "pixelSize": [
+        178,
+        100
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/img_white_t9_light@3x.png",
+      "family": "img_white_t9_light",
+      "scale": 3,
+      "pixelSize": [
+        267,
+        150
+      ],
+      "logicalSize": [
+        89.0,
+        50.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        89.0,
+        50.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/pinyin_display_lower.png",
+      "family": "pinyin_display_lower",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/pinyin_display_lower@2x.png",
+      "family": "pinyin_display_lower",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/pinyin_display_lower@3x.png",
+      "family": "pinyin_display_lower",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/pinyin_display_lower_dark.png",
+      "family": "pinyin_display_lower_dark",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/pinyin_display_lower_dark@2x.png",
+      "family": "pinyin_display_lower_dark",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/pinyin_display_lower_dark@3x.png",
+      "family": "pinyin_display_lower_dark",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/pinyin_display_upper.png",
+      "family": "pinyin_display_upper",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/pinyin_display_upper@2x.png",
+      "family": "pinyin_display_upper",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/pinyin_display_upper@3x.png",
+      "family": "pinyin_display_upper",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/pinyin_display_upper_dark.png",
+      "family": "pinyin_display_upper_dark",
+      "scale": 1,
+      "pixelSize": [
+        142,
+        80
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/pinyin_display_upper_dark@2x.png",
+      "family": "pinyin_display_upper_dark",
+      "scale": 2,
+      "pixelSize": [
+        284,
+        160
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupDisplaySetting",
+      "path": "SetupDisplaySetting/images/pinyin_display_upper_dark@3x.png",
+      "family": "pinyin_display_upper_dark",
+      "scale": 3,
+      "pixelSize": [
+        426,
+        240
+      ],
+      "logicalSize": [
+        142.0,
+        80.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        142.0,
+        80.0
+      ]
+    },
+    {
+      "screen": "SetupFuzzyPinyin",
+      "path": "SetupFuzzyPinyin/images/icon_etc_dark.png",
+      "family": "icon_etc_dark",
+      "scale": 1,
+      "pixelSize": [
+        16,
+        16
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.0,
+        10.0,
+        6.0
+      ]
+    },
+    {
+      "screen": "SetupFuzzyPinyin",
+      "path": "SetupFuzzyPinyin/images/icon_etc_dark@2x.png",
+      "family": "icon_etc_dark",
+      "scale": 2,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.0,
+        10.0,
+        6.0
+      ]
+    },
+    {
+      "screen": "SetupFuzzyPinyin",
+      "path": "SetupFuzzyPinyin/images/icon_etc_dark@3x.png",
+      "family": "icon_etc_dark",
+      "scale": 3,
+      "pixelSize": [
+        48,
+        48
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.0,
+        10.0,
+        6.0
+      ]
+    },
+    {
+      "screen": "SetupFuzzyPinyin",
+      "path": "SetupFuzzyPinyin/images/icon_etc_light.png",
+      "family": "icon_etc_light",
+      "scale": 1,
+      "pixelSize": [
+        16,
+        16
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.0,
+        10.0,
+        6.0
+      ]
+    },
+    {
+      "screen": "SetupFuzzyPinyin",
+      "path": "SetupFuzzyPinyin/images/icon_etc_light@2x.png",
+      "family": "icon_etc_light",
+      "scale": 2,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.0,
+        10.0,
+        6.0
+      ]
+    },
+    {
+      "screen": "SetupFuzzyPinyin",
+      "path": "SetupFuzzyPinyin/images/icon_etc_light@3x.png",
+      "family": "icon_etc_light",
+      "scale": 3,
+      "pixelSize": [
+        48,
+        48
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.0,
+        10.0,
+        6.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_add_dark.png",
+      "family": "icon_add_dark",
+      "scale": 1,
+      "pixelSize": [
+        16,
+        16
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_add_dark@2x.png",
+      "family": "icon_add_dark",
+      "scale": 2,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_add_dark@3x.png",
+      "family": "icon_add_dark",
+      "scale": 3,
+      "pixelSize": [
+        48,
+        48
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_add_light.png",
+      "family": "icon_add_light",
+      "scale": 1,
+      "pixelSize": [
+        16,
+        16
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_add_light@2x.png",
+      "family": "icon_add_light",
+      "scale": 2,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_add_light@3x.png",
+      "family": "icon_add_light",
+      "scale": 3,
+      "pixelSize": [
+        48,
+        48
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_delete_dark.png",
+      "family": "icon_delete_dark",
+      "scale": 1,
+      "pixelSize": [
+        16,
+        16
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_delete_dark@2x.png",
+      "family": "icon_delete_dark",
+      "scale": 2,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_delete_dark@3x.png",
+      "family": "icon_delete_dark",
+      "scale": 3,
+      "pixelSize": [
+        48,
+        48
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_delete_light.png",
+      "family": "icon_delete_light",
+      "scale": 1,
+      "pixelSize": [
+        16,
+        16
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_delete_light@2x.png",
+      "family": "icon_delete_light",
+      "scale": 2,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_delete_light@3x.png",
+      "family": "icon_delete_light",
+      "scale": 3,
+      "pixelSize": [
+        48,
+        48
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_table_arrow.png",
+      "family": "icon_table_arrow",
+      "scale": 1,
+      "pixelSize": [
+        12,
+        20
+      ],
+      "logicalSize": [
+        12.0,
+        20.0
+      ],
+      "alphaBounds": [
+        4.0,
+        4.0,
+        7.0,
+        13.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_table_arrow@2x.png",
+      "family": "icon_table_arrow",
+      "scale": 2,
+      "pixelSize": [
+        24,
+        40
+      ],
+      "logicalSize": [
+        12.0,
+        20.0
+      ],
+      "alphaBounds": [
+        4.0,
+        4.5,
+        7.0,
+        12.0
+      ]
+    },
+    {
+      "screen": "SetupKeyboardSelect",
+      "path": "SetupKeyboardSelect/images/icon_table_arrow@3x.png",
+      "family": "icon_table_arrow",
+      "scale": 3,
+      "pixelSize": [
+        36,
+        60
+      ],
+      "logicalSize": [
+        12.0,
+        20.0
+      ],
+      "alphaBounds": [
+        4.333,
+        4.333,
+        6.667,
+        12.0
+      ]
+    },
+    {
+      "screen": "SetupKeystrokeEffect",
+      "path": "SetupKeystrokeEffect/images/icon_voice_big.png",
+      "family": "icon_voice_big",
+      "scale": 1,
+      "pixelSize": [
+        17,
+        18
+      ],
+      "logicalSize": [
+        17.0,
+        18.0
+      ],
+      "alphaBounds": [
+        0.0,
+        3.0,
+        17.0,
+        13.0
+      ]
+    },
+    {
+      "screen": "SetupKeystrokeEffect",
+      "path": "SetupKeystrokeEffect/images/icon_voice_big@2x.png",
+      "family": "icon_voice_big",
+      "scale": 2,
+      "pixelSize": [
+        34,
+        35
+      ],
+      "logicalSize": [
+        17.0,
+        17.5
+      ],
+      "alphaBounds": [
+        0.5,
+        2.5,
+        16.0,
+        13.0
+      ]
+    },
+    {
+      "screen": "SetupKeystrokeEffect",
+      "path": "SetupKeystrokeEffect/images/icon_voice_big@3x.png",
+      "family": "icon_voice_big",
+      "scale": 3,
+      "pixelSize": [
+        51,
+        52
+      ],
+      "logicalSize": [
+        17.0,
+        17.333
+      ],
+      "alphaBounds": [
+        0.667,
+        2.667,
+        15.667,
+        12.667
+      ]
+    },
+    {
+      "screen": "SetupKeystrokeEffect",
+      "path": "SetupKeystrokeEffect/images/icon_voice_small.png",
+      "family": "icon_voice_small",
+      "scale": 1,
+      "pixelSize": [
+        17,
+        18
+      ],
+      "logicalSize": [
+        17.0,
+        18.0
+      ],
+      "alphaBounds": [
+        2.0,
+        3.0,
+        8.0,
+        12.0
+      ]
+    },
+    {
+      "screen": "SetupKeystrokeEffect",
+      "path": "SetupKeystrokeEffect/images/icon_voice_small@2x.png",
+      "family": "icon_voice_small",
+      "scale": 2,
+      "pixelSize": [
+        34,
+        35
+      ],
+      "logicalSize": [
+        17.0,
+        17.5
+      ],
+      "alphaBounds": [
+        2.5,
+        3.0,
+        7.5,
+        12.0
+      ]
+    },
+    {
+      "screen": "SetupKeystrokeEffect",
+      "path": "SetupKeystrokeEffect/images/icon_voice_small@3x.png",
+      "family": "icon_voice_small",
+      "scale": 3,
+      "pixelSize": [
+        51,
+        52
+      ],
+      "logicalSize": [
+        17.0,
+        17.333
+      ],
+      "alphaBounds": [
+        2.667,
+        3.0,
+        7.333,
+        12.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_about.png",
+      "family": "icon_app_setup_about",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.0,
+        5.0,
+        22.0,
+        22.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_about@2x.png",
+      "family": "icon_app_setup_about",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.5,
+        5.5,
+        21.0,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_about@3x.png",
+      "family": "icon_app_setup_about",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.333,
+        5.333,
+        21.333,
+        21.333
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_air.png",
+      "family": "icon_app_setup_air",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.0,
+        4.0,
+        25.0,
+        24.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_air@2x.png",
+      "family": "icon_app_setup_air",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.0,
+        4.0,
+        24.5,
+        23.5
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_air@3x.png",
+      "family": "icon_app_setup_air",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.0,
+        4.0,
+        24.333,
+        23.333
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_computer.png",
+      "family": "icon_app_setup_computer",
+      "scale": 1,
+      "pixelSize": [
+        33,
+        32
+      ],
+      "logicalSize": [
+        33.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.0,
+        6.0,
+        22.0,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_computer@2x.png",
+      "family": "icon_app_setup_computer",
+      "scale": 2,
+      "pixelSize": [
+        65,
+        64
+      ],
+      "logicalSize": [
+        32.5,
+        32.0
+      ],
+      "alphaBounds": [
+        5.0,
+        6.5,
+        22.0,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_computer@3x.png",
+      "family": "icon_app_setup_computer",
+      "scale": 3,
+      "pixelSize": [
+        97,
+        96
+      ],
+      "logicalSize": [
+        32.333,
+        32.0
+      ],
+      "alphaBounds": [
+        5.0,
+        6.333,
+        22.0,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_customize_toolbar.png",
+      "family": "icon_app_setup_customize_toolbar",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.0,
+        5.0,
+        24.0,
+        22.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_customize_toolbar@2x.png",
+      "family": "icon_app_setup_customize_toolbar",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.5,
+        5.5,
+        23.0,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_customize_toolbar@3x.png",
+      "family": "icon_app_setup_customize_toolbar",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.667,
+        5.667,
+        22.667,
+        20.667
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_help.png",
+      "family": "icon_app_setup_help",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.0,
+        5.0,
+        22.0,
+        22.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_help@2x.png",
+      "family": "icon_app_setup_help",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.5,
+        5.5,
+        21.0,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_help@3x.png",
+      "family": "icon_app_setup_help",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.333,
+        5.333,
+        21.333,
+        21.333
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_keyboard.png",
+      "family": "icon_app_setup_keyboard",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.0,
+        5.0,
+        24.0,
+        22.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_keyboard@2x.png",
+      "family": "icon_app_setup_keyboard",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.5,
+        5.5,
+        23.0,
+        21.5
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_keyboard@3x.png",
+      "family": "icon_app_setup_keyboard",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.333,
+        5.333,
+        23.333,
+        21.667
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_multiple_devices.png",
+      "family": "icon_app_setup_multiple_devices",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.0,
+        6.0,
+        24.0,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_multiple_devices@2x.png",
+      "family": "icon_app_setup_multiple_devices",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.5,
+        6.0,
+        23.0,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_multiple_devices@3x.png",
+      "family": "icon_app_setup_multiple_devices",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.333,
+        6.0,
+        23.333,
+        20.667
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_pluslogo.png",
+      "family": "icon_app_setup_pluslogo",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.0,
+        4.0,
+        24.0,
+        24.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_pluslogo@2x.png",
+      "family": "icon_app_setup_pluslogo",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.5,
+        4.5,
+        23.0,
+        23.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_pluslogo@3x.png",
+      "family": "icon_app_setup_pluslogo",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.333,
+        4.333,
+        23.333,
+        23.333
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_privacy.png",
+      "family": "icon_app_setup_privacy",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.0,
+        4.0,
+        20.0,
+        23.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_privacy@2x.png",
+      "family": "icon_app_setup_privacy",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.5,
+        4.5,
+        19.0,
+        22.5
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_privacy@3x.png",
+      "family": "icon_app_setup_privacy",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.333,
+        4.333,
+        19.333,
+        22.667
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_vibration.png",
+      "family": "icon_app_setup_vibration",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        3.0,
+        7.0,
+        26.0,
+        18.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_vibration@2x.png",
+      "family": "icon_app_setup_vibration",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        3.5,
+        7.0,
+        25.0,
+        17.5
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_vibration@3x.png",
+      "family": "icon_app_setup_vibration",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        3.667,
+        7.0,
+        24.667,
+        17.667
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_voice.png",
+      "family": "icon_app_setup_voice",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.0,
+        5.0,
+        21.0,
+        22.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_voice@2x.png",
+      "family": "icon_app_setup_voice",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.5,
+        5.5,
+        20.0,
+        21.5
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_app_setup_voice@3x.png",
+      "family": "icon_app_setup_voice",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.333,
+        5.333,
+        20.333,
+        21.667
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/header/icon_app_title_large.png",
+      "family": "icon_app_title_large",
+      "scale": 1,
+      "pixelSize": [
+        111,
+        21
+      ],
+      "logicalSize": [
+        111.0,
+        21.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        111.0,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/header/icon_app_title_large@2x.png",
+      "family": "icon_app_title_large",
+      "scale": 2,
+      "pixelSize": [
+        222,
+        42
+      ],
+      "logicalSize": [
+        111.0,
+        21.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        110.5,
+        20.5
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/header/icon_app_title_large@3x.png",
+      "family": "icon_app_title_large",
+      "scale": 3,
+      "pixelSize": [
+        333,
+        63
+      ],
+      "logicalSize": [
+        111.0,
+        21.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        110.333,
+        20.667
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/migration/icon_arrow.png",
+      "family": "icon_arrow",
+      "scale": 1,
+      "pixelSize": [
+        8,
+        12
+      ],
+      "logicalSize": [
+        8.0,
+        12.0
+      ],
+      "alphaBounds": [
+        1.0,
+        1.0,
+        6.0,
+        10.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/migration/icon_arrow@2x.png",
+      "family": "icon_arrow",
+      "scale": 2,
+      "pixelSize": [
+        16,
+        24
+      ],
+      "logicalSize": [
+        8.0,
+        12.0
+      ],
+      "alphaBounds": [
+        1.0,
+        0.5,
+        6.0,
+        11.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/migration/icon_arrow@3x.png",
+      "family": "icon_arrow",
+      "scale": 3,
+      "pixelSize": [
+        24,
+        36
+      ],
+      "logicalSize": [
+        8.0,
+        12.0
+      ],
+      "alphaBounds": [
+        1.0,
+        0.667,
+        6.333,
+        10.667
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/general/icon_button_finish.png",
+      "family": "icon_button_finish",
+      "scale": 1,
+      "pixelSize": [
+        16,
+        16
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        2.0,
+        3.0,
+        13.0,
+        9.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/general/icon_button_finish@2x.png",
+      "family": "icon_button_finish",
+      "scale": 2,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        2.5,
+        3.5,
+        12.0,
+        8.5
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/general/icon_button_finish@3x.png",
+      "family": "icon_button_finish",
+      "scale": 3,
+      "pixelSize": [
+        48,
+        48
+      ],
+      "logicalSize": [
+        16.0,
+        16.0
+      ],
+      "alphaBounds": [
+        2.333,
+        3.333,
+        12.333,
+        8.667
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_clipboard.png",
+      "family": "icon_clipboard",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        7.0,
+        5.0,
+        18.0,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_clipboard@2x.png",
+      "family": "icon_clipboard",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        7.0,
+        5.0,
+        18.0,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_clipboard@3x.png",
+      "family": "icon_clipboard",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        7.0,
+        5.0,
+        18.0,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/footer/icon_globe.png",
+      "family": "icon_globe",
+      "scale": 1,
+      "pixelSize": [
+        24,
+        24
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        2.0,
+        2.0,
+        20.0,
+        20.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/footer/icon_globe@2x.png",
+      "family": "icon_globe",
+      "scale": 2,
+      "pixelSize": [
+        48,
+        48
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        2.0,
+        2.0,
+        20.0,
+        20.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/footer/icon_globe@3x.png",
+      "family": "icon_globe",
+      "scale": 3,
+      "pixelSize": [
+        72,
+        72
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        2.0,
+        2.0,
+        20.0,
+        20.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/footer/icon_home_askai.png",
+      "family": "icon_home_askai",
+      "scale": 1,
+      "pixelSize": [
+        37,
+        24
+      ],
+      "logicalSize": [
+        37.0,
+        24.0
+      ],
+      "alphaBounds": [
+        1.0,
+        3.0,
+        35.0,
+        18.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/footer/icon_home_askai@2x.png",
+      "family": "icon_home_askai",
+      "scale": 2,
+      "pixelSize": [
+        74,
+        48
+      ],
+      "logicalSize": [
+        37.0,
+        24.0
+      ],
+      "alphaBounds": [
+        0.5,
+        3.5,
+        35.5,
+        17.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/footer/icon_home_askai@3x.png",
+      "family": "icon_home_askai",
+      "scale": 3,
+      "pixelSize": [
+        111,
+        72
+      ],
+      "logicalSize": [
+        37.0,
+        24.0
+      ],
+      "alphaBounds": [
+        0.667,
+        3.667,
+        35.333,
+        16.667
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/header/icon_homepage_logo.png",
+      "family": "icon_homepage_logo",
+      "scale": 1,
+      "pixelSize": [
+        60,
+        60
+      ],
+      "logicalSize": [
+        60.0,
+        60.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        60.0,
+        60.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/header/icon_homepage_logo@2x.png",
+      "family": "icon_homepage_logo",
+      "scale": 2,
+      "pixelSize": [
+        120,
+        120
+      ],
+      "logicalSize": [
+        60.0,
+        60.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        60.0,
+        60.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/header/icon_homepage_logo@3x.png",
+      "family": "icon_homepage_logo",
+      "scale": 3,
+      "pixelSize": [
+        180,
+        180
+      ],
+      "logicalSize": [
+        60.0,
+        60.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        60.0,
+        60.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/footer/icon_keybar_close.png",
+      "family": "icon_keybar_close",
+      "scale": 1,
+      "pixelSize": [
+        24,
+        24
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        7.0,
+        7.0,
+        10.0,
+        10.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/footer/icon_keybar_close@2x.png",
+      "family": "icon_keybar_close",
+      "scale": 2,
+      "pixelSize": [
+        48,
+        48
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        7.0,
+        7.0,
+        10.0,
+        10.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/footer/icon_keybar_close@3x.png",
+      "family": "icon_keybar_close",
+      "scale": 3,
+      "pixelSize": [
+        72,
+        72
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        7.0,
+        7.0,
+        10.0,
+        10.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_layout.png",
+      "family": "icon_layout",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.0,
+        5.0,
+        23.0,
+        22.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_layout@2x.png",
+      "family": "icon_layout",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.5,
+        5.5,
+        22.5,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_layout@3x.png",
+      "family": "icon_layout",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        4.333,
+        5.333,
+        23.0,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/migration/icon_migration.png",
+      "family": "icon_migration",
+      "scale": 1,
+      "pixelSize": [
+        20,
+        20
+      ],
+      "logicalSize": [
+        20.0,
+        20.0
+      ],
+      "alphaBounds": [
+        4.0,
+        3.0,
+        12.0,
+        14.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/migration/icon_migration@2x.png",
+      "family": "icon_migration",
+      "scale": 2,
+      "pixelSize": [
+        40,
+        40
+      ],
+      "logicalSize": [
+        20.0,
+        20.0
+      ],
+      "alphaBounds": [
+        4.0,
+        3.0,
+        12.0,
+        14.5
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/migration/icon_migration@3x.png",
+      "family": "icon_migration",
+      "scale": 3,
+      "pixelSize": [
+        60,
+        60
+      ],
+      "logicalSize": [
+        20.0,
+        20.0
+      ],
+      "alphaBounds": [
+        4.0,
+        2.667,
+        12.0,
+        14.667
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_setup_migration.png",
+      "family": "icon_setup_migration",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.0,
+        4.0,
+        20.0,
+        24.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_setup_migration@2x.png",
+      "family": "icon_setup_migration",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.5,
+        4.5,
+        19.0,
+        23.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/setup/icon_setup_migration@3x.png",
+      "family": "icon_setup_migration",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.333,
+        4.667,
+        19.333,
+        22.667
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/footer/icon_stars.png",
+      "family": "icon_stars",
+      "scale": 1,
+      "pixelSize": [
+        24,
+        24
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        24.0,
+        24.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/footer/icon_stars@2x.png",
+      "family": "icon_stars",
+      "scale": 2,
+      "pixelSize": [
+        48,
+        48
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.5,
+        24.0,
+        23.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/footer/icon_stars@3x.png",
+      "family": "icon_stars",
+      "scale": 3,
+      "pixelSize": [
+        72,
+        72
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.667,
+        24.0,
+        22.667
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/general/icon_table_arrow.png",
+      "family": "icon_table_arrow",
+      "scale": 1,
+      "pixelSize": [
+        10,
+        17
+      ],
+      "logicalSize": [
+        10.0,
+        17.0
+      ],
+      "alphaBounds": [
+        3.0,
+        3.0,
+        7.0,
+        11.0
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/general/icon_table_arrow@2x.png",
+      "family": "icon_table_arrow",
+      "scale": 2,
+      "pixelSize": [
+        20,
+        34
+      ],
+      "logicalSize": [
+        10.0,
+        17.0
+      ],
+      "alphaBounds": [
+        3.5,
+        3.5,
+        6.0,
+        10.5
+      ]
+    },
+    {
+      "screen": "SetupMain",
+      "path": "SetupMain/images/general/icon_table_arrow@3x.png",
+      "family": "icon_table_arrow",
+      "scale": 3,
+      "pixelSize": [
+        30,
+        50
+      ],
+      "logicalSize": [
+        10.0,
+        16.667
+      ],
+      "alphaBounds": [
+        3.333,
+        3.667,
+        6.333,
+        10.0
+      ]
+    },
+    {
+      "screen": "SetupMigrationAssistant",
+      "path": "SetupMigrationAssistant/images/icon_scan.png",
+      "family": "icon_scan",
+      "scale": 1,
+      "pixelSize": [
+        26,
+        26
+      ],
+      "logicalSize": [
+        26.0,
+        26.0
+      ],
+      "alphaBounds": [
+        5.0,
+        5.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupMigrationAssistant",
+      "path": "SetupMigrationAssistant/images/icon_scan@2x.png",
+      "family": "icon_scan",
+      "scale": 2,
+      "pixelSize": [
+        52,
+        52
+      ],
+      "logicalSize": [
+        26.0,
+        26.0
+      ],
+      "alphaBounds": [
+        5.0,
+        5.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupMigrationAssistant",
+      "path": "SetupMigrationAssistant/images/icon_scan@3x.png",
+      "family": "icon_scan",
+      "scale": 3,
+      "pixelSize": [
+        78,
+        78
+      ],
+      "logicalSize": [
+        26.0,
+        26.0
+      ],
+      "alphaBounds": [
+        5.0,
+        5.0,
+        16.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupMigrationAssistant",
+      "path": "SetupMigrationAssistant/images/icon_tips_loading.png",
+      "family": "icon_tips_loading",
+      "scale": 1,
+      "pixelSize": [
+        42,
+        42
+      ],
+      "logicalSize": [
+        42.0,
+        42.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        42.0,
+        42.0
+      ]
+    },
+    {
+      "screen": "SetupMigrationAssistant",
+      "path": "SetupMigrationAssistant/images/icon_tips_loading_dark.png",
+      "family": "icon_tips_loading_dark",
+      "scale": 1,
+      "pixelSize": [
+        42,
+        42
+      ],
+      "logicalSize": [
+        42.0,
+        42.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        42.0,
+        42.0
+      ]
+    },
+    {
+      "screen": "SetupMigrationAssistant",
+      "path": "SetupMigrationAssistant/images/icon_update.png",
+      "family": "icon_update",
+      "scale": 1,
+      "pixelSize": [
+        15,
+        14
+      ],
+      "logicalSize": [
+        15.0,
+        14.0
+      ],
+      "alphaBounds": [
+        1.0,
+        1.0,
+        13.0,
+        12.0
+      ]
+    },
+    {
+      "screen": "SetupMigrationAssistant",
+      "path": "SetupMigrationAssistant/images/icon_update@2x.png",
+      "family": "icon_update",
+      "scale": 2,
+      "pixelSize": [
+        29,
+        28
+      ],
+      "logicalSize": [
+        14.5,
+        14.0
+      ],
+      "alphaBounds": [
+        1.5,
+        1.0,
+        12.5,
+        12.5
+      ]
+    },
+    {
+      "screen": "SetupMigrationAssistant",
+      "path": "SetupMigrationAssistant/images/icon_update@3x.png",
+      "family": "icon_update",
+      "scale": 3,
+      "pixelSize": [
+        43,
+        42
+      ],
+      "logicalSize": [
+        14.333,
+        14.0
+      ],
+      "alphaBounds": [
+        1.667,
+        1.0,
+        12.0,
+        12.333
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_kaomoji.png",
+      "family": "icon_app_kaomoji",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        7.0,
+        9.0,
+        18.0,
+        17.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_kaomoji@2x.png",
+      "family": "icon_app_kaomoji",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.5,
+        9.0,
+        18.5,
+        16.5
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_kaomoji@3x.png",
+      "family": "icon_app_kaomoji",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.667,
+        9.333,
+        18.333,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_ci.png",
+      "family": "icon_app_pinxieplus_ci",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        7.0,
+        7.0,
+        18.0,
+        19.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_ci@2x.png",
+      "family": "icon_app_pinxieplus_ci",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.5,
+        7.0,
+        18.5,
+        19.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_ci@3x.png",
+      "family": "icon_app_pinxieplus_ci",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.667,
+        7.0,
+        18.333,
+        18.667
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_correction.png",
+      "family": "icon_app_pinxieplus_correction",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        9.0,
+        5.0,
+        17.0,
+        23.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_correction@2x.png",
+      "family": "icon_app_pinxieplus_correction",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        9.5,
+        5.0,
+        16.0,
+        22.5
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_correction@3x.png",
+      "family": "icon_app_pinxieplus_correction",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        9.333,
+        5.0,
+        16.0,
+        22.333
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_emoji.png",
+      "family": "icon_app_pinxieplus_emoji",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.0,
+        7.0,
+        20.0,
+        18.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_emoji@2x.png",
+      "family": "icon_app_pinxieplus_emoji",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.5,
+        7.0,
+        20.5,
+        18.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_emoji@3x.png",
+      "family": "icon_app_pinxieplus_emoji",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.667,
+        6.667,
+        20.333,
+        18.333
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_logo.png",
+      "family": "icon_app_pinxieplus_logo",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        32.0,
+        32.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_logo@2x.png",
+      "family": "icon_app_pinxieplus_logo",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        32.0,
+        32.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_logo@3x.png",
+      "family": "icon_app_pinxieplus_logo",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        32.0,
+        32.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_quicksend.png",
+      "family": "icon_app_pinxieplus_quicksend",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        7.0,
+        6.0,
+        18.0,
+        21.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_quicksend@2x.png",
+      "family": "icon_app_pinxieplus_quicksend",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        7.5,
+        6.0,
+        17.5,
+        20.5
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_quicksend@3x.png",
+      "family": "icon_app_pinxieplus_quicksend",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        7.667,
+        6.333,
+        17.333,
+        20.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_smallemoji.png",
+      "family": "icon_app_pinxieplus_smallemoji",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.0,
+        5.0,
+        22.0,
+        22.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_smallemoji@2x.png",
+      "family": "icon_app_pinxieplus_smallemoji",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.0,
+        5.0,
+        22.0,
+        22.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_smallemoji@3x.png",
+      "family": "icon_app_pinxieplus_smallemoji",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.0,
+        5.0,
+        22.0,
+        22.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_textimage.png",
+      "family": "icon_app_pinxieplus_textimage",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.0,
+        6.0,
+        21.0,
+        20.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_textimage@2x.png",
+      "family": "icon_app_pinxieplus_textimage",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.5,
+        6.0,
+        20.5,
+        19.5
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_pinxieplus_textimage@3x.png",
+      "family": "icon_app_pinxieplus_textimage",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.333,
+        6.0,
+        20.667,
+        19.333
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_retouching.png",
+      "family": "icon_app_retouching",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.0,
+        5.0,
+        20.0,
+        22.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_retouching@2x.png",
+      "family": "icon_app_retouching",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.0,
+        5.0,
+        20.0,
+        22.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_app_retouching@3x.png",
+      "family": "icon_app_retouching",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.333,
+        5.333,
+        19.667,
+        21.667
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_cell_info.png",
+      "family": "icon_cell_info",
+      "scale": 1,
+      "pixelSize": [
+        12,
+        12
+      ],
+      "logicalSize": [
+        12.0,
+        12.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        12.0,
+        12.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_cell_info@2x.png",
+      "family": "icon_cell_info",
+      "scale": 2,
+      "pixelSize": [
+        24,
+        24
+      ],
+      "logicalSize": [
+        12.0,
+        12.0
+      ],
+      "alphaBounds": [
+        0.5,
+        0.5,
+        11.0,
+        11.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_cell_info@3x.png",
+      "family": "icon_cell_info",
+      "scale": 3,
+      "pixelSize": [
+        36,
+        36
+      ],
+      "logicalSize": [
+        12.0,
+        12.0
+      ],
+      "alphaBounds": [
+        0.333,
+        0.333,
+        11.333,
+        11.333
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_pinxieplus_textpolish.png",
+      "family": "icon_pinxieplus_textpolish",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.0,
+        4.0,
+        22.0,
+        22.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_pinxieplus_textpolish@2x.png",
+      "family": "icon_pinxieplus_textpolish",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.5,
+        4.5,
+        21.5,
+        21.5
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_pinxieplus_textpolish@3x.png",
+      "family": "icon_pinxieplus_textpolish",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        5.333,
+        4.667,
+        21.667,
+        21.333
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_setup_ai.png",
+      "family": "icon_setup_ai",
+      "scale": 1,
+      "pixelSize": [
+        32,
+        32
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.0,
+        7.0,
+        20.0,
+        18.0
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_setup_ai@2x.png",
+      "family": "icon_setup_ai",
+      "scale": 2,
+      "pixelSize": [
+        64,
+        64
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.0,
+        7.0,
+        19.5,
+        17.5
+      ]
+    },
+    {
+      "screen": "SetupPlus",
+      "path": "SetupPlus/images/icon_setup_ai@3x.png",
+      "family": "icon_setup_ai",
+      "scale": 3,
+      "pixelSize": [
+        96,
+        96
+      ],
+      "logicalSize": [
+        32.0,
+        32.0
+      ],
+      "alphaBounds": [
+        6.0,
+        7.0,
+        19.667,
+        17.667
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/icon_arrow.png",
+      "family": "icon_arrow",
+      "scale": 1,
+      "pixelSize": [
+        24,
+        24
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        8.0,
+        4.0,
+        9.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/icon_arrow@2x.png",
+      "family": "icon_arrow",
+      "scale": 2,
+      "pixelSize": [
+        48,
+        48
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        7.5,
+        4.5,
+        9.0,
+        15.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/icon_arrow@3x.png",
+      "family": "icon_arrow",
+      "scale": 3,
+      "pixelSize": [
+        72,
+        72
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        7.667,
+        4.333,
+        8.667,
+        15.333
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/sp/icon_sp_pyjj_dark.png",
+      "family": "icon_sp_pyjj_dark",
+      "scale": 1,
+      "pixelSize": [
+        3540,
+        1530
+      ],
+      "logicalSize": [
+        3540.0,
+        1530.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        3540.0,
+        1530.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/sp/icon_sp_pyjj_light.png",
+      "family": "icon_sp_pyjj_light",
+      "scale": 1,
+      "pixelSize": [
+        3540,
+        1530
+      ],
+      "logicalSize": [
+        3540.0,
+        1530.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        3540.0,
+        1530.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/sp/icon_sp_sg_dark.png",
+      "family": "icon_sp_sg_dark",
+      "scale": 1,
+      "pixelSize": [
+        3540,
+        1530
+      ],
+      "logicalSize": [
+        3540.0,
+        1530.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        3540.0,
+        1530.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/sp/icon_sp_sg_light.png",
+      "family": "icon_sp_sg_light",
+      "scale": 1,
+      "pixelSize": [
+        3540,
+        1530
+      ],
+      "logicalSize": [
+        3540.0,
+        1530.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        3540.0,
+        1530.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/sp/icon_sp_wr_dark.png",
+      "family": "icon_sp_wr_dark",
+      "scale": 1,
+      "pixelSize": [
+        3540,
+        1530
+      ],
+      "logicalSize": [
+        3540.0,
+        1530.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        3540.0,
+        1530.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/sp/icon_sp_wr_light.png",
+      "family": "icon_sp_wr_light",
+      "scale": 1,
+      "pixelSize": [
+        3540,
+        1530
+      ],
+      "logicalSize": [
+        3540.0,
+        1530.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        3540.0,
+        1530.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/sp/icon_sp_xh_dark.png",
+      "family": "icon_sp_xh_dark",
+      "scale": 1,
+      "pixelSize": [
+        3540,
+        1530
+      ],
+      "logicalSize": [
+        3540.0,
+        1530.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        3540.0,
+        1530.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/sp/icon_sp_xh_light.png",
+      "family": "icon_sp_xh_light",
+      "scale": 1,
+      "pixelSize": [
+        3540,
+        1530
+      ],
+      "logicalSize": [
+        3540.0,
+        1530.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        3540.0,
+        1530.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/sp/icon_sp_zg_dark.png",
+      "family": "icon_sp_zg_dark",
+      "scale": 1,
+      "pixelSize": [
+        3540,
+        1530
+      ],
+      "logicalSize": [
+        3540.0,
+        1530.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        3540.0,
+        1530.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/sp/icon_sp_zg_light.png",
+      "family": "icon_sp_zg_light",
+      "scale": 1,
+      "pixelSize": [
+        3540,
+        1530
+      ],
+      "logicalSize": [
+        3540.0,
+        1530.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        3540.0,
+        1530.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/sp/icon_sp_znabc_dark.png",
+      "family": "icon_sp_znabc_dark",
+      "scale": 1,
+      "pixelSize": [
+        3540,
+        1530
+      ],
+      "logicalSize": [
+        3540.0,
+        1530.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        3540.0,
+        1530.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/sp/icon_sp_znabc_light.png",
+      "family": "icon_sp_znabc_light",
+      "scale": 1,
+      "pixelSize": [
+        3540,
+        1530
+      ],
+      "logicalSize": [
+        3540.0,
+        1530.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        3540.0,
+        1530.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/sp/icon_sp_zrm_dark.png",
+      "family": "icon_sp_zrm_dark",
+      "scale": 1,
+      "pixelSize": [
+        3540,
+        1530
+      ],
+      "logicalSize": [
+        3540.0,
+        1530.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        3540.0,
+        1530.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/sp/icon_sp_zrm_light.png",
+      "family": "icon_sp_zrm_light",
+      "scale": 1,
+      "pixelSize": [
+        3540,
+        1530
+      ],
+      "logicalSize": [
+        3540.0,
+        1530.0
+      ],
+      "alphaBounds": [
+        0.0,
+        0.0,
+        3540.0,
+        1530.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/icon_table_select.png",
+      "family": "icon_table_select",
+      "scale": 1,
+      "pixelSize": [
+        22,
+        22
+      ],
+      "logicalSize": [
+        22.0,
+        22.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.0,
+        16.0,
+        13.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/icon_table_select@2x.png",
+      "family": "icon_table_select",
+      "scale": 2,
+      "pixelSize": [
+        44,
+        44
+      ],
+      "logicalSize": [
+        22.0,
+        22.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.5,
+        16.5,
+        12.0
+      ]
+    },
+    {
+      "screen": "SetupSp",
+      "path": "SetupSp/images/icon_table_select@3x.png",
+      "family": "icon_table_select",
+      "scale": 3,
+      "pixelSize": [
+        66,
+        66
+      ],
+      "logicalSize": [
+        22.0,
+        22.0
+      ],
+      "alphaBounds": [
+        3.333,
+        5.333,
+        16.0,
+        12.0
+      ]
+    },
+    {
+      "screen": "SetupWb",
+      "path": "SetupWb/images/icon_arrow.png",
+      "family": "icon_arrow",
+      "scale": 1,
+      "pixelSize": [
+        24,
+        24
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        8.0,
+        4.0,
+        9.0,
+        16.0
+      ]
+    },
+    {
+      "screen": "SetupWb",
+      "path": "SetupWb/images/icon_arrow@2x.png",
+      "family": "icon_arrow",
+      "scale": 2,
+      "pixelSize": [
+        48,
+        48
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        7.5,
+        4.5,
+        9.0,
+        15.0
+      ]
+    },
+    {
+      "screen": "SetupWb",
+      "path": "SetupWb/images/icon_arrow@3x.png",
+      "family": "icon_arrow",
+      "scale": 3,
+      "pixelSize": [
+        72,
+        72
+      ],
+      "logicalSize": [
+        24.0,
+        24.0
+      ],
+      "alphaBounds": [
+        7.667,
+        4.333,
+        8.667,
+        15.333
+      ]
+    },
+    {
+      "screen": "SetupWb",
+      "path": "SetupWb/images/icon_table_select.png",
+      "family": "icon_table_select",
+      "scale": 1,
+      "pixelSize": [
+        22,
+        22
+      ],
+      "logicalSize": [
+        22.0,
+        22.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.0,
+        16.0,
+        13.0
+      ]
+    },
+    {
+      "screen": "SetupWb",
+      "path": "SetupWb/images/icon_table_select@2x.png",
+      "family": "icon_table_select",
+      "scale": 2,
+      "pixelSize": [
+        44,
+        44
+      ],
+      "logicalSize": [
+        22.0,
+        22.0
+      ],
+      "alphaBounds": [
+        3.0,
+        5.5,
+        16.5,
+        12.0
+      ]
+    },
+    {
+      "screen": "SetupWb",
+      "path": "SetupWb/images/icon_table_select@3x.png",
+      "family": "icon_table_select",
+      "scale": 3,
+      "pixelSize": [
+        66,
+        66
+      ],
+      "logicalSize": [
+        22.0,
+        22.0
+      ],
+      "alphaBounds": [
+        3.333,
+        5.333,
+        16.0,
+        12.0
+      ]
+    }
+  ]
+}

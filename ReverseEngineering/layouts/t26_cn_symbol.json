@@ -1,0 +1,815 @@
+{
+  "source": "t26_cn_symbol.ini",
+  "sections": [
+    {
+      "name": "PANEL",
+      "values": {
+        "BASESIZE": "414,224"
+      }
+    },
+    {
+      "name": "KEY_11",
+      "values": {
+        "RECT": "5,5,35,46",
+        "INPUT": "1",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "1①❶壹,0,0"
+      }
+    },
+    {
+      "name": "KEY_12",
+      "values": {
+        "RECT": "46,5,35,46",
+        "INPUT": "2",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "2②❷贰,0,0"
+      }
+    },
+    {
+      "name": "KEY_13",
+      "values": {
+        "RECT": "87,5,35,46",
+        "INPUT": "3",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "3③❸叁,0,0"
+      }
+    },
+    {
+      "name": "KEY_14",
+      "values": {
+        "RECT": "128,5,35,46",
+        "INPUT": "4",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "4④❹肆,0,0"
+      }
+    },
+    {
+      "name": "KEY_15",
+      "values": {
+        "RECT": "169,5,35,46",
+        "INPUT": "5",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "5⑤❺伍,0,0"
+      }
+    },
+    {
+      "name": "KEY_16",
+      "values": {
+        "RECT": "210,5,35,46",
+        "INPUT": "6",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "陆❻⑥6,3,3"
+      }
+    },
+    {
+      "name": "KEY_17",
+      "values": {
+        "RECT": "251,5,35,46",
+        "INPUT": "7",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "柒❼⑦7,3,3"
+      }
+    },
+    {
+      "name": "KEY_18",
+      "values": {
+        "RECT": "292,5,35,46",
+        "INPUT": "8",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "捌❽⑧8,3,3"
+      }
+    },
+    {
+      "name": "KEY_19",
+      "values": {
+        "RECT": "333,5,35,46",
+        "INPUT": "9",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "玖❾⑨9,3,3"
+      }
+    },
+    {
+      "name": "KEY_10",
+      "values": {
+        "RECT": "374,5,35,46",
+        "INPUT": "0",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "零⓿⓪0,3,3"
+      }
+    },
+    {
+      "name": "KEY_21",
+      "values": {
+        "RECT": "5,62,35,46",
+        "INPUT": "-",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "-_+×÷=,0,0"
+      }
+    },
+    {
+      "name": "KEY_22",
+      "values": {
+        "RECT": "46,62,35,46",
+        "INPUT": "/",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "/／|｜\\＼,0,0,／｜＼"
+      }
+    },
+    {
+      "name": "KEY_23",
+      "values": {
+        "RECT": "87,62,35,46",
+        "INPUT": "：",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "：:,0,0,:"
+      }
+    },
+    {
+      "name": "KEY_24",
+      "values": {
+        "RECT": "128,62,35,46",
+        "INPUT": "～",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "～~—,0,0,~"
+      }
+    },
+    {
+      "name": "KEY_25",
+      "values": {
+        "RECT": "169,62,35,46",
+        "INPUT": "（",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "<《【（([｛,3,3,("
+      }
+    },
+    {
+      "name": "KEY_26",
+      "values": {
+        "RECT": "210,62,35,46",
+        "INPUT": "）",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": ">》】）)]｝,3,3,)"
+      }
+    },
+    {
+      "name": "KEY_27",
+      "values": {
+        "RECT": "251,62,35,46",
+        "INPUT": "…",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "⋯…,1,1"
+      }
+    },
+    {
+      "name": "KEY_28",
+      "values": {
+        "RECT": "292,62,35,46",
+        "INPUT": "@",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": ""
+      }
+    },
+    {
+      "name": "KEY_29",
+      "values": {
+        "RECT": "333,62,35,46",
+        "INPUT": "“",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "『「'\"‘“,5,5"
+      }
+    },
+    {
+      "name": "KEY_20",
+      "values": {
+        "RECT": "374,62,35,46",
+        "INPUT": "”",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "』」'\"’”,5,5"
+      }
+    },
+    {
+      "name": "KEY_33",
+      "values": {
+        "RECT": "66,117,42,46",
+        "INPUT": "。",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "。°,0,0"
+      }
+    },
+    {
+      "name": "KEY_34",
+      "values": {
+        "RECT": "114,117,42,46",
+        "INPUT": "，",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "，,,0,0,,"
+      }
+    },
+    {
+      "name": "KEY_35",
+      "values": {
+        "RECT": "162,117,42,46",
+        "INPUT": "、",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "、`,0,0"
+      }
+    },
+    {
+      "name": "KEY_36",
+      "values": {
+        "RECT": "210,117,42,46",
+        "INPUT": "？",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "¿?？,2,2,?"
+      }
+    },
+    {
+      "name": "KEY_37",
+      "values": {
+        "RECT": "258,117,42,46",
+        "INPUT": "！",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "¡!！,2,2,!"
+      }
+    },
+    {
+      "name": "KEY_38",
+      "values": {
+        "RECT": "306,117,42,46",
+        "INPUT": ".",
+        "STY": "STYLE_NORMAL",
+        "FLOATSTY": "1",
+        "FLOATLIST": "·.,1,1"
+      }
+    },
+    {
+      "name": "KEY_SYMB",
+      "values": {
+        "RECT": "5,117,46,46",
+        "STY": "STYLE_SYM",
+        "TITLE": "符号",
+        "FUNC": "fullSymbol"
+      }
+    },
+    {
+      "name": "KEY_DEL",
+      "values": {
+        "RECT": "363,117,46,46",
+        "FUNC": "delete",
+        "STY": "STYLE_DEL"
+      }
+    },
+    {
+      "name": "KEY_BACK",
+      "values": {
+        "RECT": "5,173,46,46",
+        "STY": "STYLE_BACK_GREEN",
+        "FUNC": "backToInput",
+        "FLOATSTY": "2"
+      }
+    },
+    {
+      "name": "KEY_EMOTION",
+      "values": {
+        "RECT": "57,173,46,46",
+        "STY": "STYLE_GRAY",
+        "FUNC": "emoji",
+        "IMG": "icon_keys_emoji"
+      }
+    },
+    {
+      "name": "KEY_T9_123",
+      "values": {
+        "RECT": "109,173,46,46",
+        "STY": "STYLE_NORMAL",
+        "IMG": "icon_keys_number9",
+        "FUNC": "123"
+      }
+    },
+    {
+      "name": "KEY_SPACE",
+      "values": {
+        "RECT": "161,173,46,46",
+        "FUNC": "space",
+        "STY": "STYLE_NORMAL",
+        "INPUT": "' '"
+      }
+    },
+    {
+      "name": "KEY_NEWLINE",
+      "values": {
+        "RECT": "213,173,46,46",
+        "STY": "STYLE_NORMAL",
+        "TITLE": "换行",
+        "FONT": "14",
+        "FUNC": "newline"
+      }
+    },
+    {
+      "name": "KEY_ENTER",
+      "values": {
+        "RECT": "317,173,86,46",
+        "STY": "STYLE_RETURN",
+        "FUNC": "return"
+      }
+    }
+  ],
+  "baseSize": [
+    414.0,
+    224.0
+  ],
+  "items": [
+    {
+      "id": "KEY_11",
+      "RECT": "5,5,35,46",
+      "INPUT": "1",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "1①❶壹,0,0",
+      "rect": [
+        5.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_12",
+      "RECT": "46,5,35,46",
+      "INPUT": "2",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "2②❷贰,0,0",
+      "rect": [
+        46.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_13",
+      "RECT": "87,5,35,46",
+      "INPUT": "3",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "3③❸叁,0,0",
+      "rect": [
+        87.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_14",
+      "RECT": "128,5,35,46",
+      "INPUT": "4",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "4④❹肆,0,0",
+      "rect": [
+        128.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_15",
+      "RECT": "169,5,35,46",
+      "INPUT": "5",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "5⑤❺伍,0,0",
+      "rect": [
+        169.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_16",
+      "RECT": "210,5,35,46",
+      "INPUT": "6",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "陆❻⑥6,3,3",
+      "rect": [
+        210.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_17",
+      "RECT": "251,5,35,46",
+      "INPUT": "7",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "柒❼⑦7,3,3",
+      "rect": [
+        251.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_18",
+      "RECT": "292,5,35,46",
+      "INPUT": "8",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "捌❽⑧8,3,3",
+      "rect": [
+        292.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_19",
+      "RECT": "333,5,35,46",
+      "INPUT": "9",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "玖❾⑨9,3,3",
+      "rect": [
+        333.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_10",
+      "RECT": "374,5,35,46",
+      "INPUT": "0",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "零⓿⓪0,3,3",
+      "rect": [
+        374.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_21",
+      "RECT": "5,62,35,46",
+      "INPUT": "-",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "-_+×÷=,0,0",
+      "rect": [
+        5.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_22",
+      "RECT": "46,62,35,46",
+      "INPUT": "/",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "/／|｜\\＼,0,0,／｜＼",
+      "rect": [
+        46.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_23",
+      "RECT": "87,62,35,46",
+      "INPUT": "：",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "：:,0,0,:",
+      "rect": [
+        87.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_24",
+      "RECT": "128,62,35,46",
+      "INPUT": "～",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "～~—,0,0,~",
+      "rect": [
+        128.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_25",
+      "RECT": "169,62,35,46",
+      "INPUT": "（",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "<《【（([｛,3,3,(",
+      "rect": [
+        169.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_26",
+      "RECT": "210,62,35,46",
+      "INPUT": "）",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": ">》】）)]｝,3,3,)",
+      "rect": [
+        210.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_27",
+      "RECT": "251,62,35,46",
+      "INPUT": "…",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "⋯…,1,1",
+      "rect": [
+        251.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_28",
+      "RECT": "292,62,35,46",
+      "INPUT": "@",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "",
+      "rect": [
+        292.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_29",
+      "RECT": "333,62,35,46",
+      "INPUT": "“",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "『「'\"‘“,5,5",
+      "rect": [
+        333.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_20",
+      "RECT": "374,62,35,46",
+      "INPUT": "”",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "』」'\"’”,5,5",
+      "rect": [
+        374.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_33",
+      "RECT": "66,117,42,46",
+      "INPUT": "。",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "。°,0,0",
+      "rect": [
+        66.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_34",
+      "RECT": "114,117,42,46",
+      "INPUT": "，",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "，,,0,0,,",
+      "rect": [
+        114.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_35",
+      "RECT": "162,117,42,46",
+      "INPUT": "、",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "、`,0,0",
+      "rect": [
+        162.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_36",
+      "RECT": "210,117,42,46",
+      "INPUT": "？",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "¿?？,2,2,?",
+      "rect": [
+        210.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_37",
+      "RECT": "258,117,42,46",
+      "INPUT": "！",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "¡!！,2,2,!",
+      "rect": [
+        258.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_38",
+      "RECT": "306,117,42,46",
+      "INPUT": ".",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "·.,1,1",
+      "rect": [
+        306.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_SYMB",
+      "RECT": "5,117,46,46",
+      "STY": "STYLE_SYM",
+      "TITLE": "符号",
+      "FUNC": "fullSymbol",
+      "rect": [
+        5.0,
+        117.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_DEL",
+      "RECT": "363,117,46,46",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL",
+      "rect": [
+        363.0,
+        117.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_BACK",
+      "RECT": "5,173,46,46",
+      "STY": "STYLE_BACK_GREEN",
+      "FUNC": "backToInput",
+      "FLOATSTY": "2",
+      "rect": [
+        5.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_EMOTION",
+      "RECT": "57,173,46,46",
+      "STY": "STYLE_GRAY",
+      "FUNC": "emoji",
+      "IMG": "icon_keys_emoji",
+      "rect": [
+        57.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_T9_123",
+      "RECT": "109,173,46,46",
+      "STY": "STYLE_NORMAL",
+      "IMG": "icon_keys_number9",
+      "FUNC": "123",
+      "rect": [
+        109.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_SPACE",
+      "RECT": "161,173,46,46",
+      "FUNC": "space",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "' '",
+      "rect": [
+        161.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_NEWLINE",
+      "RECT": "213,173,46,46",
+      "STY": "STYLE_NORMAL",
+      "TITLE": "换行",
+      "FONT": "14",
+      "FUNC": "newline",
+      "rect": [
+        213.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_ENTER",
+      "RECT": "317,173,86,46",
+      "STY": "STYLE_RETURN",
+      "FUNC": "return",
+      "rect": [
+        317.0,
+        173.0,
+        86.0,
+        46.0
+      ]
+    }
+  ]
+}

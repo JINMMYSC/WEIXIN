@@ -1,0 +1,59 @@
+{
+  "source": "full_symbol.ini",
+  "sections": [
+    {
+      "name": "PANEL",
+      "values": {
+        "BASESIZE": "375,224"
+      }
+    },
+    {
+      "name": "KEY_BACK",
+      "values": {
+        "RECT": "3,174,50,44",
+        "STY": "STYLE_BACK",
+        "TITLE": "返回",
+        "FUNC": "back"
+      }
+    },
+    {
+      "name": "KEY_DEL",
+      "values": {
+        "RECT": "322,174,50,44",
+        "FUNC": "delete",
+        "STY": "STYLE_DEL"
+      }
+    }
+  ],
+  "baseSize": [
+    375.0,
+    224.0
+  ],
+  "items": [
+    {
+      "id": "KEY_BACK",
+      "RECT": "3,174,50,44",
+      "STY": "STYLE_BACK",
+      "TITLE": "返回",
+      "FUNC": "back",
+      "rect": [
+        3.0,
+        174.0,
+        50.0,
+        44.0
+      ]
+    },
+    {
+      "id": "KEY_DEL",
+      "RECT": "322,174,50,44",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL",
+      "rect": [
+        322.0,
+        174.0,
+        50.0,
+        44.0
+      ]
+    }
+  ]
+}

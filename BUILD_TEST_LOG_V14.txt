@@ -1,0 +1,299 @@
+WeTypeReplica V14 pre-CI validation
+Sun Sep 13 06:28:48 UTC 2026
+--- swift test ---
+[0/1] Planning build
+Building for debugging...
+[0/3] Write sources
+[1/3] Write swift-version--1BA0962812E73E12.txt
+[3/5] Emitting module WeTypeReplicaCore
+[4/5] Compiling WeTypeReplicaCore TransferBatch.swift
+[5/13] Wrapping AST for WeTypeReplicaCore for debugging
+[7/15] Emitting module WeTypeReplicaCoreTests
+[8/15] Compiling WeTypeReplicaCoreTests TransferBatchTests.swift
+[9/15] /mnt/data/v14work/WeTypeReplicaOverlay/.build/x86_64-unknown-linux-gnu/debug/WeTypeReplicaOverlayPackageDiscoveredTests.derived/all-discovered-tests.swift
+[10/16] Write sources
+[12/19] Compiling WeTypeReplicaOverlayPackageDiscoveredTests WeTypeReplicaCoreTests.swift
+[13/19] Compiling WeTypeReplicaOverlayPackageDiscoveredTests all-discovered-tests.swift
+[14/19] Emitting module WeTypeReplicaOverlayPackageDiscoveredTests
+[15/17] Write Objects.LinkFileList
+[16/17] Linking WeTypeReplicaOverlayPackageTests.xctest
+Build complete! (2.63s)
+Test Suite 'All tests' started at 2026-09-13 06:28:51.464
+Test Suite 'debug.xctest' started at 2026-09-13 06:28:51.465
+Test Suite 'CandidatePreferenceTests' started at 2026-09-13 06:28:51.465
+Test Case 'CandidatePreferenceTests.testHiddenCandidateIsFiltered' started at 2026-09-13 06:28:51.465
+Test Case 'CandidatePreferenceTests.testHiddenCandidateIsFiltered' passed (0.002 seconds)
+Test Case 'CandidatePreferenceTests.testPinnedCandidateMovesToFront' started at 2026-09-13 06:28:51.467
+Test Case 'CandidatePreferenceTests.testPinnedCandidateMovesToFront' passed (0.101 seconds)
+Test Case 'CandidatePreferenceTests.testPreferencesPreserveCompatibilitySourceIndexes' started at 2026-09-13 06:28:51.568
+Test Case 'CandidatePreferenceTests.testPreferencesPreserveCompatibilitySourceIndexes' passed (0.0 seconds)
+Test Suite 'CandidatePreferenceTests' passed at 2026-09-13 06:28:51.569
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.104 (0.104) seconds
+Test Suite 'CoordinatorTests' started at 2026-09-13 06:28:51.569
+Test Case 'CoordinatorTests.testCandidatePagingMovesBackendWithoutDestroyingComposition' started at 2026-09-13 06:28:51.569
+Test Case 'CoordinatorTests.testCandidatePagingMovesBackendWithoutDestroyingComposition' passed (0.001 seconds)
+Test Case 'CoordinatorTests.testCandidatePagingRejectsUnavailableDirection' started at 2026-09-13 06:28:51.569
+Test Case 'CoordinatorTests.testCandidatePagingRejectsUnavailableDirection' passed (0.0 seconds)
+Test Case 'CoordinatorTests.testCompositionGoesToEngineAndCandidateCommitsToDocument' started at 2026-09-13 06:28:51.570
+Test Case 'CoordinatorTests.testCompositionGoesToEngineAndCandidateCommitsToDocument' passed (0.0 seconds)
+Test Case 'CoordinatorTests.testDeletePrefersCompositionBeforeHostDocument' started at 2026-09-13 06:28:51.570
+Test Case 'CoordinatorTests.testDeletePrefersCompositionBeforeHostDocument' passed (0.0 seconds)
+Test Case 'CoordinatorTests.testDirectSymbolCommitsCompositionBeforeSymbol' started at 2026-09-13 06:28:51.570
+Test Case 'CoordinatorTests.testDirectSymbolCommitsCompositionBeforeSymbol' passed (0.0 seconds)
+Test Case 'CoordinatorTests.testProcessDrainsEngineCommitIntoDocument' started at 2026-09-13 06:28:51.570
+Test Case 'CoordinatorTests.testProcessDrainsEngineCommitIntoDocument' passed (0.0 seconds)
+Test Case 'CoordinatorTests.testSpaceAcceptsFirstCandidateWithoutAddingLiteralSpace' started at 2026-09-13 06:28:51.570
+Test Case 'CoordinatorTests.testSpaceAcceptsFirstCandidateWithoutAddingLiteralSpace' passed (0.0 seconds)
+Test Case 'CoordinatorTests.testSpaceDrainsBackendCommitWhenRimeConsumesSpace' started at 2026-09-13 06:28:51.571
+Test Case 'CoordinatorTests.testSpaceDrainsBackendCommitWhenRimeConsumesSpace' passed (0.0 seconds)
+Test Case 'CoordinatorTests.testSwitchModePropagatesToBackend' started at 2026-09-13 06:28:51.571
+Test Case 'CoordinatorTests.testSwitchModePropagatesToBackend' passed (0.0 seconds)
+Test Suite 'CoordinatorTests' passed at 2026-09-13 06:28:51.571
+	 Executed 9 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'FeatureModelTests' started at 2026-09-13 06:28:51.571
+Test Case 'FeatureModelTests.testBookVideoModelsAndFormerUnknownSurfacesAreClassified' started at 2026-09-13 06:28:51.571
+Test Case 'FeatureModelTests.testBookVideoModelsAndFormerUnknownSurfacesAreClassified' passed (0.001 seconds)
+Test Case 'FeatureModelTests.testClipboardItemPinStateRoundTrip' started at 2026-09-13 06:28:51.572
+Test Case 'FeatureModelTests.testClipboardItemPinStateRoundTrip' passed (0.0 seconds)
+Test Case 'FeatureModelTests.testSurfaceCatalogCoversV5EvidenceClasses' started at 2026-09-13 06:28:51.572
+Test Case 'FeatureModelTests.testSurfaceCatalogCoversV5EvidenceClasses' passed (0.0 seconds)
+Test Case 'FeatureModelTests.testTransferProgressCarriesPeerAndFraction' started at 2026-09-13 06:28:51.572
+Test Case 'FeatureModelTests.testTransferProgressCarriesPeerAndFraction' passed (0.0 seconds)
+Test Suite 'FeatureModelTests' passed at 2026-09-13 06:28:51.572
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'HostAppSurfaceTests' started at 2026-09-13 06:28:51.572
+Test Case 'HostAppSurfaceTests.testAllDiscoveredSetupAssetFoldersAreCatalogued' started at 2026-09-13 06:28:51.572
+Test Case 'HostAppSurfaceTests.testAllDiscoveredSetupAssetFoldersAreCatalogued' passed (0.0 seconds)
+Test Case 'HostAppSurfaceTests.testAllSetupMainFeatureIconFamiliesHaveDestinations' started at 2026-09-13 06:28:51.573
+Test Case 'HostAppSurfaceTests.testAllSetupMainFeatureIconFamiliesHaveDestinations' passed (0.0 seconds)
+Test Case 'HostAppSurfaceTests.testRNBundleVersionsMatchShippedMetadata' started at 2026-09-13 06:28:51.573
+Test Case 'HostAppSurfaceTests.testRNBundleVersionsMatchShippedMetadata' passed (0.0 seconds)
+Test Case 'HostAppSurfaceTests.testSetupDisplaySettingHasMeasuredFamilies' started at 2026-09-13 06:28:51.573
+Test Case 'HostAppSurfaceTests.testSetupDisplaySettingHasMeasuredFamilies' passed (0.0 seconds)
+Test Case 'HostAppSurfaceTests.testSetupMainEvidenceLinksToExpectedDestinations' started at 2026-09-13 06:28:51.573
+Test Case 'HostAppSurfaceTests.testSetupMainEvidenceLinksToExpectedDestinations' passed (0.0 seconds)
+Test Suite 'HostAppSurfaceTests' passed at 2026-09-13 06:28:51.573
+	 Executed 5 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'IMEBehaviorParityTests' started at 2026-09-13 06:28:51.573
+Test Case 'IMEBehaviorParityTests.testAdvancedCorpusCarriesModeAndLearningMetadata' started at 2026-09-13 06:28:51.573
+Test Case 'IMEBehaviorParityTests.testAdvancedCorpusCarriesModeAndLearningMetadata' passed (0.0 seconds)
+Test Case 'IMEBehaviorParityTests.testCandidateOrderMismatchIsReportedAtFirstDifference' started at 2026-09-13 06:28:51.574
+Test Case 'IMEBehaviorParityTests.testCandidateOrderMismatchIsReportedAtFirstDifference' passed (0.0 seconds)
+Test Case 'IMEBehaviorParityTests.testExactCaptureProducesPerfectReport' started at 2026-09-13 06:28:51.574
+Test Case 'IMEBehaviorParityTests.testExactCaptureProducesPerfectReport' passed (0.0 seconds)
+Test Case 'IMEBehaviorParityTests.testMissingProbeIDsAreSeparatedBySide' started at 2026-09-13 06:28:51.574
+Test Case 'IMEBehaviorParityTests.testMissingProbeIDsAreSeparatedBySide' passed (0.0 seconds)
+Test Case 'IMEBehaviorParityTests.testStarterCorpusHasBroadCoverage' started at 2026-09-13 06:28:51.574
+Test Case 'IMEBehaviorParityTests.testStarterCorpusHasBroadCoverage' passed (0.0 seconds)
+Test Suite 'IMEBehaviorParityTests' passed at 2026-09-13 06:28:51.575
+	 Executed 5 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'IMECompatibilityProfileTests' started at 2026-09-13 06:28:51.575
+Test Case 'IMECompatibilityProfileTests.testBuilderCreatesRuleOnlyFromSharedVisibleCandidates' started at 2026-09-13 06:28:51.575
+Test Case 'IMECompatibilityProfileTests.testBuilderCreatesRuleOnlyFromSharedVisibleCandidates' passed (0.0 seconds)
+Test Case 'IMECompatibilityProfileTests.testRuleNeverInventsReferenceOnlyCandidate' started at 2026-09-13 06:28:51.575
+Test Case 'IMECompatibilityProfileTests.testRuleNeverInventsReferenceOnlyCandidate' passed (0.0 seconds)
+Test Case 'IMECompatibilityProfileTests.testRuleReordersWithoutLosingSourceIndexes' started at 2026-09-13 06:28:51.575
+Test Case 'IMECompatibilityProfileTests.testRuleReordersWithoutLosingSourceIndexes' passed (0.0 seconds)
+Test Suite 'IMECompatibilityProfileTests' passed at 2026-09-13 06:28:51.575
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'IconGeometryTests' started at 2026-09-13 06:28:51.575
+Test Case 'IconGeometryTests.testControlCenterUses44PointCanvas' started at 2026-09-13 06:28:51.575
+Test Case 'IconGeometryTests.testControlCenterUses44PointCanvas' passed (0.0 seconds)
+Test Case 'IconGeometryTests.testMeasuredToolbarGeometryExists' started at 2026-09-13 06:28:51.575
+Test Case 'IconGeometryTests.testMeasuredToolbarGeometryExists' passed (0.0 seconds)
+Test Suite 'IconGeometryTests' passed at 2026-09-13 06:28:51.575
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'InputModeBackendProfileTests' started at 2026-09-13 06:28:51.575
+Test Case 'InputModeBackendProfileTests.testOverrideCanBindConcreteSchemaWithoutChangingOtherModes' started at 2026-09-13 06:28:51.575
+Test Case 'InputModeBackendProfileTests.testOverrideCanBindConcreteSchemaWithoutChangingOtherModes' passed (0.0 seconds)
+Test Case 'InputModeBackendProfileTests.testProfileRoundTripsJSON' started at 2026-09-13 06:28:51.576
+Test Case 'InputModeBackendProfileTests.testProfileRoundTripsJSON' passed (0.001 seconds)
+Test Case 'InputModeBackendProfileTests.testSafeProfileOnlyForcesAsciiSemantic' started at 2026-09-13 06:28:51.576
+Test Case 'InputModeBackendProfileTests.testSafeProfileOnlyForcesAsciiSemantic' passed (0.0 seconds)
+Test Suite 'InputModeBackendProfileTests' passed at 2026-09-13 06:28:51.576
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'InteractionTests' started at 2026-09-13 06:28:51.576
+Test Case 'InteractionTests.testChineseQuoteKeyUsesChineseVariant' started at 2026-09-13 06:28:51.576
+Test Case 'InteractionTests.testChineseQuoteKeyUsesChineseVariant' passed (0.002 seconds)
+Test Case 'InteractionTests.testEnglishQuoteKeyUsesEnglishVariant' started at 2026-09-13 06:28:51.578
+Test Case 'InteractionTests.testEnglishQuoteKeyUsesEnglishVariant' passed (0.0 seconds)
+Test Case 'InteractionTests.testLanguageToggleReturnsToNineKey' started at 2026-09-13 06:28:51.578
+Test Case 'InteractionTests.testLanguageToggleReturnsToNineKey' passed (0.0 seconds)
+Test Case 'InteractionTests.testLongPressFloatListParsesAccentedV' started at 2026-09-13 06:28:51.578
+Test Case 'InteractionTests.testLongPressFloatListParsesAccentedV' passed (0.0 seconds)
+Test Case 'InteractionTests.testOneShotShiftConsumesAfterCharacter' started at 2026-09-13 06:28:51.579
+Test Case 'InteractionTests.testOneShotShiftConsumesAfterCharacter' passed (0.0 seconds)
+Test Case 'InteractionTests.testResolvedEnglishLayoutInheritedAllKeys' started at 2026-09-13 06:28:51.579
+Test Case 'InteractionTests.testResolvedEnglishLayoutInheritedAllKeys' passed (0.0 seconds)
+Test Case 'InteractionTests.testResolvedStrokeLayoutInheritedNineKeyGeometry' started at 2026-09-13 06:28:51.579
+Test Case 'InteractionTests.testResolvedStrokeLayoutInheritedNineKeyGeometry' passed (0.0 seconds)
+Test Case 'InteractionTests.testSwipeUpReadsExact26KeyNumber' started at 2026-09-13 06:28:51.579
+Test Case 'InteractionTests.testSwipeUpReadsExact26KeyNumber' passed (0.0 seconds)
+Test Suite 'InteractionTests' passed at 2026-09-13 06:28:51.579
+	 Executed 8 tests, with 0 failures (0 unexpected) in 0.003 (0.003) seconds
+Test Suite 'KeyboardSessionPersistenceTests' started at 2026-09-13 06:28:51.579
+Test Case 'KeyboardSessionPersistenceTests.testEnglishSessionRemembersLastChineseMode' started at 2026-09-13 06:28:51.579
+Test Case 'KeyboardSessionPersistenceTests.testEnglishSessionRemembersLastChineseMode' passed (0.0 seconds)
+Test Case 'KeyboardSessionPersistenceTests.testSessionSnapshotRestoresInputModeButNotTransientPanelOrShift' started at 2026-09-13 06:28:51.579
+Test Case 'KeyboardSessionPersistenceTests.testSessionSnapshotRestoresInputModeButNotTransientPanelOrShift' passed (0.0 seconds)
+Test Suite 'KeyboardSessionPersistenceTests' passed at 2026-09-13 06:28:51.580
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'LayoutTests' started at 2026-09-13 06:28:51.580
+Test Case 'LayoutTests.testNestedPanelReturn' started at 2026-09-13 06:28:51.580
+Test Case 'LayoutTests.testNestedPanelReturn' passed (0.0 seconds)
+Test Case 'LayoutTests.testPanelReturnPreservesInputMode' started at 2026-09-13 06:28:51.580
+Test Case 'LayoutTests.testPanelReturnPreservesInputMode' passed (0.0 seconds)
+Test Case 'LayoutTests.testT26GeometryMatches353' started at 2026-09-13 06:28:51.580
+Test Case 'LayoutTests.testT26GeometryMatches353' passed (0.0 seconds)
+Test Case 'LayoutTests.testT9GeometryMatches353' started at 2026-09-13 06:28:51.581
+Test Case 'LayoutTests.testT9GeometryMatches353' passed (0.0 seconds)
+Test Suite 'LayoutTests' passed at 2026-09-13 06:28:51.581
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'MemoryPressureBudgetTests' started at 2026-09-13 06:28:51.581
+Test Case 'MemoryPressureBudgetTests.testClipboardTrimKeepsPinnedFirstThenRecentUnpinned' started at 2026-09-13 06:28:51.581
+Test Case 'MemoryPressureBudgetTests.testClipboardTrimKeepsPinnedFirstThenRecentUnpinned' passed (0.001 seconds)
+Test Case 'MemoryPressureBudgetTests.testZeroBudgetDropsPresentationClipboard' started at 2026-09-13 06:28:51.582
+Test Case 'MemoryPressureBudgetTests.testZeroBudgetDropsPresentationClipboard' passed (0.0 seconds)
+Test Suite 'MemoryPressureBudgetTests' passed at 2026-09-13 06:28:51.582
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'PersistentStoreTests' started at 2026-09-13 06:28:51.582
+Test Case 'PersistentStoreTests.testClipboardDeduplicatesAndPins' started at 2026-09-13 06:28:51.582
+Test Case 'PersistentStoreTests.testClipboardDeduplicatesAndPins' passed (0.001 seconds)
+Test Case 'PersistentStoreTests.testEmojiUsagePersistsAndRanks' started at 2026-09-13 06:28:51.583
+Test Case 'PersistentStoreTests.testEmojiUsagePersistsAndRanks' passed (0.002 seconds)
+Test Case 'PersistentStoreTests.testPhraseStoreMaintainsOrder' started at 2026-09-13 06:28:51.585
+Test Case 'PersistentStoreTests.testPhraseStoreMaintainsOrder' passed (0.001 seconds)
+Test Suite 'PersistentStoreTests' passed at 2026-09-13 06:28:51.586
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.004 (0.004) seconds
+Test Suite 'PreviewIMEEngineTests' started at 2026-09-13 06:28:51.586
+Test Case 'PreviewIMEEngineTests.testPreviewEngineRejectsFunctionSymbols' started at 2026-09-13 06:28:51.586
+Test Case 'PreviewIMEEngineTests.testPreviewEngineRejectsFunctionSymbols' passed (0.0 seconds)
+Test Case 'PreviewIMEEngineTests.testPreviewEngineSupportsCompositionCandidateDeleteAndCommit' started at 2026-09-13 06:28:51.586
+Test Case 'PreviewIMEEngineTests.testPreviewEngineSupportsCompositionCandidateDeleteAndCommit' passed (0.0 seconds)
+Test Suite 'PreviewIMEEngineTests' passed at 2026-09-13 06:28:51.587
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'ProviderModelTests' started at 2026-09-13 06:28:51.587
+Test Case 'ProviderModelTests.testCloudCandidateMergeKeepsFirstLocalAndDeduplicates' started at 2026-09-13 06:28:51.587
+Test Case 'ProviderModelTests.testCloudCandidateMergeKeepsFirstLocalAndDeduplicates' passed (0.0 seconds)
+Test Case 'ProviderModelTests.testCloudOnlySortsByScore' started at 2026-09-13 06:28:51.587
+Test Case 'ProviderModelTests.testCloudOnlySortsByScore' passed (0.0 seconds)
+Test Case 'ProviderModelTests.testProviderConfigurationRoundTrip' started at 2026-09-13 06:28:51.587
+Test Case 'ProviderModelTests.testProviderConfigurationRoundTrip' passed (0.0 seconds)
+Test Suite 'ProviderModelTests' passed at 2026-09-13 06:28:51.587
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'ReturnKeyPresentationTests' started at 2026-09-13 06:28:51.587
+Test Case 'ReturnKeyPresentationTests.testDefaultReturnIsNeutralNewline' started at 2026-09-13 06:28:51.587
+Test Case 'ReturnKeyPresentationTests.testDefaultReturnIsNeutralNewline' passed (0.0 seconds)
+Test Case 'ReturnKeyPresentationTests.testSemanticReturnKeysUseBrandState' started at 2026-09-13 06:28:51.587
+Test Case 'ReturnKeyPresentationTests.testSemanticReturnKeysUseBrandState' passed (0.0 seconds)
+Test Suite 'ReturnKeyPresentationTests' passed at 2026-09-13 06:28:51.588
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'ServiceMailboxTests' started at 2026-09-13 06:28:51.588
+Test Case 'ServiceMailboxTests.testRequestResponseRoundTrip' started at 2026-09-13 06:28:51.588
+Test Case 'ServiceMailboxTests.testRequestResponseRoundTrip' passed (0.002 seconds)
+Test Suite 'ServiceMailboxTests' passed at 2026-09-13 06:28:51.589
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'SharedPreferencesTests' started at 2026-09-13 06:28:51.589
+Test Case 'SharedPreferencesTests.testSnapshotClampsUnsafeValues' started at 2026-09-13 06:28:51.589
+Test Case 'SharedPreferencesTests.testSnapshotClampsUnsafeValues' passed (0.002 seconds)
+Test Case 'SharedPreferencesTests.testSnapshotReadsSharedKeyboardSettings' started at 2026-09-13 06:28:51.592
+Test Case 'SharedPreferencesTests.testSnapshotReadsSharedKeyboardSettings' passed (0.001 seconds)
+Test Suite 'SharedPreferencesTests' passed at 2026-09-13 06:28:51.593
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.004 (0.004) seconds
+Test Suite 'TransferBatchTests' started at 2026-09-13 06:28:51.593
+Test Case 'TransferBatchTests.testBatchProgressAndRetryOnlyFailedItems' started at 2026-09-13 06:28:51.593
+Test Case 'TransferBatchTests.testBatchProgressAndRetryOnlyFailedItems' passed (0.0 seconds)
+Test Case 'TransferBatchTests.testCancelMarksPendingAndActiveButPreservesCompleted' started at 2026-09-13 06:28:51.593
+Test Case 'TransferBatchTests.testCancelMarksPendingAndActiveButPreservesCompleted' passed (0.0 seconds)
+Test Case 'TransferBatchTests.testRetryCapPreventsInfiniteShareExtensionLoop' started at 2026-09-13 06:28:51.593
+Test Case 'TransferBatchTests.testRetryCapPreventsInfiniteShareExtensionLoop' passed (0.0 seconds)
+Test Suite 'TransferBatchTests' passed at 2026-09-13 06:28:51.593
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'TransferPairingTests' started at 2026-09-13 06:28:51.593
+Test Case 'TransferPairingTests.testPairingCodeNormalization' started at 2026-09-13 06:28:51.593
+Test Case 'TransferPairingTests.testPairingCodeNormalization' passed (0.0 seconds)
+Test Case 'TransferPairingTests.testPairingCodeRequiresSixDigits' started at 2026-09-13 06:28:51.594
+Test Case 'TransferPairingTests.testPairingCodeRequiresSixDigits' passed (0.0 seconds)
+Test Suite 'TransferPairingTests' passed at 2026-09-13 06:28:51.594
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'TransferProtocolTests' started at 2026-09-13 06:28:51.594
+Test Case 'TransferProtocolTests.testAckCodableRoundTrip' started at 2026-09-13 06:28:51.594
+Test Case 'TransferProtocolTests.testAckCodableRoundTrip' passed (0.0 seconds)
+Test Case 'TransferProtocolTests.testControlFrameRoundTripLengthPrefix' started at 2026-09-13 06:28:51.594
+Test Case 'TransferProtocolTests.testControlFrameRoundTripLengthPrefix' passed (0.0 seconds)
+Test Case 'TransferProtocolTests.testEncryptedEnvelopeRoundTripsMetadata' started at 2026-09-13 06:28:51.594
+Test Case 'TransferProtocolTests.testEncryptedEnvelopeRoundTripsMetadata' passed (0.001 seconds)
+Test Case 'TransferProtocolTests.testEncryptedRecordFrameRoundTripLengthPrefix' started at 2026-09-13 06:28:51.595
+Test Case 'TransferProtocolTests.testEncryptedRecordFrameRoundTripLengthPrefix' passed (0.0 seconds)
+Test Case 'TransferProtocolTests.testEncryptedResumeAlignsToPlaintextChunkBoundary' started at 2026-09-13 06:28:51.595
+Test Case 'TransferProtocolTests.testEncryptedResumeAlignsToPlaintextChunkBoundary' passed (0.0 seconds)
+Test Case 'TransferProtocolTests.testEnvelopeSanitizesNameAndChunkSize' started at 2026-09-13 06:28:51.595
+Test Case 'TransferProtocolTests.testEnvelopeSanitizesNameAndChunkSize' passed (0.0 seconds)
+Test Case 'TransferProtocolTests.testResumeOffsetClampsToFileBounds' started at 2026-09-13 06:28:51.596
+Test Case 'TransferProtocolTests.testResumeOffsetClampsToFileBounds' passed (0.0 seconds)
+Test Suite 'TransferProtocolTests' passed at 2026-09-13 06:28:51.596
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'TransferTrustedDevicesTests' started at 2026-09-13 06:28:51.596
+Test Case 'TransferTrustedDevicesTests.testPruneOnlyOldRevokedEntries' started at 2026-09-13 06:28:51.596
+Test Case 'TransferTrustedDevicesTests.testPruneOnlyOldRevokedEntries' passed (0.0 seconds)
+Test Case 'TransferTrustedDevicesTests.testRecordSuccessfulTransferCreatesAndUpdatesDevice' started at 2026-09-13 06:28:51.596
+Test Case 'TransferTrustedDevicesTests.testRecordSuccessfulTransferCreatesAndUpdatesDevice' passed (0.001 seconds)
+Test Case 'TransferTrustedDevicesTests.testRevokeRestoreAndForget' started at 2026-09-13 06:28:51.597
+Test Case 'TransferTrustedDevicesTests.testRevokeRestoreAndForget' passed (0.0 seconds)
+Test Suite 'TransferTrustedDevicesTests' passed at 2026-09-13 06:28:51.597
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'UIModelTests' started at 2026-09-13 06:28:51.597
+Test Case 'UIModelTests.testKeyboardAdjustmentClampsToSafeRange' started at 2026-09-13 06:28:51.597
+Test Case 'UIModelTests.testKeyboardAdjustmentClampsToSafeRange' passed (0.001 seconds)
+Test Case 'UIModelTests.testMediaAndHotWordModelsAreStable' started at 2026-09-13 06:28:51.598
+Test Case 'UIModelTests.testMediaAndHotWordModelsAreStable' passed (0.0 seconds)
+Test Case 'UIModelTests.testNewV5PanelsPreserveReturnStack' started at 2026-09-13 06:28:51.598
+Test Case 'UIModelTests.testNewV5PanelsPreserveReturnStack' passed (0.0 seconds)
+Test Case 'UIModelTests.testPanelStateCanRoundTripFromNestedTools' started at 2026-09-13 06:28:51.598
+Test Case 'UIModelTests.testPanelStateCanRoundTripFromNestedTools' passed (0.0 seconds)
+Test Case 'UIModelTests.testSymbolCatalogIsPopulated' started at 2026-09-13 06:28:51.598
+Test Case 'UIModelTests.testSymbolCatalogIsPopulated' passed (0.0 seconds)
+Test Case 'UIModelTests.testToolbarCatalogHasExpectedCoverage' started at 2026-09-13 06:28:51.599
+Test Case 'UIModelTests.testToolbarCatalogHasExpectedCoverage' passed (0.0 seconds)
+Test Case 'UIModelTests.testVisualCalibrationProfileRoundTrips' started at 2026-09-13 06:28:51.599
+Test Case 'UIModelTests.testVisualCalibrationProfileRoundTrips' passed (0.0 seconds)
+Test Suite 'UIModelTests' passed at 2026-09-13 06:28:51.599
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'VisualParityManifestTests' started at 2026-09-13 06:28:51.599
+Test Case 'VisualParityManifestTests.testStarterManifestCoversCriticalKeyboardSurfaces' started at 2026-09-13 06:28:51.599
+Test Case 'VisualParityManifestTests.testStarterManifestCoversCriticalKeyboardSurfaces' passed (0.0 seconds)
+Test Case 'VisualParityManifestTests.testStarterManifestIncludesDarkLandscapeAndHostReturnCases' started at 2026-09-13 06:28:51.599
+Test Case 'VisualParityManifestTests.testStarterManifestIncludesDarkLandscapeAndHostReturnCases' passed (0.0 seconds)
+Test Suite 'VisualParityManifestTests' passed at 2026-09-13 06:28:51.599
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'debug.xctest' passed at 2026-09-13 06:28:51.599
+	 Executed 87 tests, with 0 failures (0 unexpected) in 0.133 (0.133) seconds
+Test Suite 'All tests' passed at 2026-09-13 06:28:51.599
+	 Executed 87 tests, with 0 failures (0 unexpected) in 0.133 (0.133) seconds
+◇ Test run started.
+↳ Testing Library Version: 6.2.1 (c9d57c83568b06d)
+↳ Target Platform: x86_64-unknown-linux-gnu
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.
+--- parse all swift files ---
+parsed=121
+--- no system symbols ---
+PASS: no Image(systemName:) or systemImage: placeholders remain in shipping UI sources
+--- v14 verifier ---
+V14 PRE-CI PASS
+- inherited V13 gates passed
+- trusted-device history/persistence UI path passed
+- bounded Share retry behavior passed
+- low-memory presentation budget passed
+- configurable Rime mode descriptor bridge passed
+--- plist/entitlements ---
+XcodeIntegration/Plists/Share-Info.plist: OK
+XcodeIntegration/Plists/Widget-Info.plist: OK
+XcodeIntegration/Plists/App-Info.plist: OK
+XcodeIntegration/Plists/Keyboard-Info.plist: OK
+XcodeIntegration/Plists/VoiceActivity-Info.plist: OK
+XcodeIntegration/Entitlements/VoiceActivity.entitlements: OK
+XcodeIntegration/Entitlements/Keyboard.entitlements: OK
+XcodeIntegration/Entitlements/Share.entitlements: OK
+XcodeIntegration/Entitlements/App.entitlements: OK
+XcodeIntegration/Entitlements/Widget.entitlements: OK
+linted=10

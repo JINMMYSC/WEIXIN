@@ -1,0 +1,192 @@
+{
+  "source": "style.ini",
+  "sections": [
+    {
+      "name": "GLOBAL",
+      "values": {
+        "DEFAULT_KEY_STYLE": "STYLE_NORMAL",
+        "GRAY_KEY_STYLE": "STYLE_GRAY",
+        "GREEN_KEY_STYLE": "STYLE_GREEN",
+        "FONT_T9_@": "19",
+        "FONT_T9_'": "16"
+      }
+    },
+    {
+      "name": "STYLE_NORMAL",
+      "values": {
+        "BG": "#FFFFFF,#BBBBBB66",
+        "HLBG": "#B7BCC4,#66666666",
+        "TINT": "#000000,#FEFEFE",
+        "STINT": "#00000066,#FEFEFE66",
+        "SHADOW": "#0000004D,#00000099",
+        "BORDER": "#0000001A,#FFFFFF1A",
+        "FONT": "22"
+      }
+    },
+    {
+      "name": "STYLE_GRAY",
+      "values": {
+        "BG": "#B7BCC4,#55555566",
+        "HLBG": "#FCFCFE,#BBBBBB66",
+        "TINT": "#000000,#FEFEFE",
+        "FONT": "15",
+        "SHADOW": "#0000004D,#00000099",
+        "BORDER": "#0000000D,#FFFFFF14"
+      }
+    },
+    {
+      "name": "STYLE_FONT_T26_@",
+      "values": {
+        "FONT": "15",
+        "M": "0",
+        "STY": "STYLE_GRAY",
+        "INHERIT": "STYLE_NORMAL",
+        "IMG": "['icon_keys_switch_zh,icon_keys_switch_zh_dark','icon_keys_switch_en,icon_keys_english_dark','icon_keys_switch_zh_wubi,icon_keys_switch_zh_wubi_dark','icon_keys_switch_en_wubi,icon_keys_switch_en_wubi_dark','icon_keys_switch_zh_shuangpin,icon_keys_switch_zh_shuangpin_dark','icon_keys_switch_en_shuangpin,icon_keys_switch_en_shuangpin_dark','icon_keys_bi_pin,icon_keys_bi_pin_dark','icon_keys_pin_bi,icon_keys_pin_bi_dark','icon_keys_ying_bi,icon_keys_ying_bi_dark','icon_keys_xie_pin,icon_keys_xie_pin_dark','icon_keys_pin_xie,icon_keys_pin_xie_dark','icon_keys_ying_xie,icon_keys_ying_xie_dark']",
+        "TINT": "",
+        "RULE": "6",
+        "INPUT": "' '",
+        "TITLE": "[,,'轻触结束']",
+        "FUNC": "langswitch"
+      }
+    },
+    {
+      "name": "STYLE_LANGSWITCH_NEW",
+      "values": {
+        "FUNC": "subkb",
+        "TINT": "",
+        "RULE": "10"
+      }
+    },
+    {
+      "name": "STYLE_ENKB",
+      "values": {
+        "TITLE": "'ABC'",
+        "FONT": "16",
+        "FUNC": "enkb",
+        "INHERIT": "STYLE_GRAY",
+        "RULE": "1",
+        "BG": "[~,'#23C891']",
+        "HLBG": "[~,'#FCFCFE,#BBBBBB66']",
+        "TINT": "[~,'#FEFEFE']",
+        "HLTINT": "[,'#000000,#FEFEFE']",
+        "BORDER": "[~,'#0000001A,#FFFFFF1A']"
+      }
+    },
+    {
+      "name": "STYLE_SHIFT",
+      "values": {
+        "INHERIT": "STYLE_GRAY",
+        "IMG": "['icon_keys_outlinedcapslock','icon_keys_capslock','icon_keys_capslocked',,,]",
+        "HLIMG": "['icon_keys_outlinedcapslock','icon_keys_capslock','icon_keys_capslocked',,,]",
+        "BG": "[~,'#FCFCFE,#707070','#FCFCFE,#707070','#B7BCC4,#66666666','#B7BCC4,#66666666','#B7BCC4,#55555566']",
+        "INPUT": "[,,,'(;)',,'(\\')']",
+        "TITLE": "[,,,';',符号,\\'词]",
+        "FONT": "[,,,17,15,17]",
+        "HLBG": "['#B7BCC4,#66666666','#FCFCFE,#707070','#FCFCFE,#707070','#FCFCFE,#707070','#FCFCFE,#BBBBBB66','#FCFCFE,#BBBBBB66']",
+        "RULE": "2"
+      }
+    },
+    {
+      "name": "STYLE_DEL",
+      "values": {
+        "INHERIT": "STYLE_GRAY",
+        "IMG": "icon_keys_delete",
+        "HLBG": "#FCFCFE,#707070",
+        "HLIMG": "icon_keys_deletepress",
+        "FLOATSTY": "4"
+      }
+    },
+    {
+      "name": "STYLE_RETYPE",
+      "values": {
+        "STY": "STYLE_GRAY",
+        "FONT": "15",
+        "RULE": "5"
+      }
+    },
+    {
+      "name": "STYLE_SYM",
+      "values": {
+        "STY": "STYLE_GRAY",
+        "FONT": "15"
+      }
+    },
+    {
+      "name": "STYLE_BACK",
+      "values": {
+        "STY": "STYLE_GRAY",
+        "FONT": "15"
+      }
+    },
+    {
+      "name": "STYLE_BACK_WHITE",
+      "values": {
+        "STY": "STYLE_NORMAL",
+        "FONT": "15"
+      }
+    },
+    {
+      "name": "STYLE_GREEN",
+      "values": {
+        "INHERIT": "STYLE_GRAY",
+        "BG": "#23C891",
+        "TINT": "#FEFEFE",
+        "HLTINT": "#000000,#FEFEFE",
+        "BORDER": "#0000001A,#FFFFFF1A"
+      }
+    },
+    {
+      "name": "STYLE_BACK_GREEN",
+      "values": {
+        "INHERIT": "STYLE_GREEN",
+        "IMG": "icon_keys_return"
+      }
+    },
+    {
+      "name": "STYLE_123",
+      "values": {
+        "STY": "STYLE_GRAY",
+        "FONT": "16",
+        "TITLE": "123"
+      }
+    },
+    {
+      "name": "STYLE_123_T9",
+      "values": {
+        "STY": "STYLE_NORMAL",
+        "FONT": "18",
+        "TITLE": "['@#','\\'词',';']",
+        "INPUT": "['(@#)','(\\')','(;)']",
+        "RULE": "4",
+        "UPFONT": "9",
+        "SUBTITLEPOS": "3",
+        "FLOATSTY": "2",
+        "M": "0",
+        "INHERIT": "STYLE_NORMAL",
+        "KERN": "1"
+      }
+    },
+    {
+      "name": "STYLE_NUMPAD",
+      "values": {
+        "INHERIT": "STYLE_NORMAL",
+        "FONT": "['24','22']",
+        "FLOATSTY": "1",
+        "SUBTITLEPOS": "3",
+        "UPFONT": "9",
+        "RULE": "3"
+      }
+    },
+    {
+      "name": "STYLE_SHIFT_WUBI",
+      "values": {
+        "INHERIT": "STYLE_GRAY",
+        "BG": "[~,'#FCFCFE,#BBBBBB66']",
+        "HLBG": "[~,'#B7BCC4,#66666666']",
+        "TITLE": "'拼音'",
+        "RULE": "7"
+      }
+    }
+  ],
+  "items": []
+}

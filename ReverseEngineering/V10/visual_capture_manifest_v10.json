@@ -1,0 +1,603 @@
+{
+  "formatVersion": 1,
+  "targetVersion": "3.5.3",
+  "cases": [
+    {
+      "id": "keyboard26-light",
+      "surface": "keyboard26",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "hostContext": "normalText"
+    },
+    {
+      "id": "keyboard9-light",
+      "surface": "keyboard9",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin9",
+      "hostContext": "normalText"
+    },
+    {
+      "id": "candidate-expanded-light",
+      "surface": "candidateExpanded",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "action": "expandCandidates"
+    },
+    {
+      "id": "symbol-cn-light",
+      "surface": "symbolPanel",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "chineseSymbol"
+    },
+    {
+      "id": "symbol-en-light",
+      "surface": "symbolPanel",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "englishSymbol"
+    },
+    {
+      "id": "emoji-light",
+      "surface": "emoji",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "clipboard-light",
+      "surface": "clipboard",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "handwriting-light",
+      "surface": "handwriting",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "voice-idle-light",
+      "surface": "voice",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "action": "idle"
+    },
+    {
+      "id": "voice-listening-light",
+      "surface": "voice",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "action": "listening"
+    },
+    {
+      "id": "translate-light",
+      "surface": "translate",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "ai-light",
+      "surface": "askAI",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "correction-light",
+      "surface": "correction",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "plus-light",
+      "surface": "plus",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "control-center-light",
+      "surface": "controlCenter",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "quick-settings-light",
+      "surface": "quickSettings",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "input-switcher-light",
+      "surface": "inputModeSwitcher",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "one-handed-left-light",
+      "surface": "oneHanded",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "action": "left"
+    },
+    {
+      "id": "one-handed-right-light",
+      "surface": "oneHanded",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "action": "right"
+    },
+    {
+      "id": "device-sync-light",
+      "surface": "deviceSync",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "sticker-gif-light",
+      "surface": "stickerGIF",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "book-video-light",
+      "surface": "bookVideo",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-home-light",
+      "surface": "settingsHome",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "keyboard26-dark",
+      "surface": "keyboard26",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "hostContext": "normalText"
+    },
+    {
+      "id": "keyboard9-dark",
+      "surface": "keyboard9",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin9",
+      "hostContext": "normalText"
+    },
+    {
+      "id": "candidate-expanded-dark",
+      "surface": "candidateExpanded",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "action": "expandCandidates"
+    },
+    {
+      "id": "symbol-cn-dark",
+      "surface": "symbolPanel",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "chineseSymbol"
+    },
+    {
+      "id": "symbol-en-dark",
+      "surface": "symbolPanel",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "englishSymbol"
+    },
+    {
+      "id": "emoji-dark",
+      "surface": "emoji",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "clipboard-dark",
+      "surface": "clipboard",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "handwriting-dark",
+      "surface": "handwriting",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "voice-idle-dark",
+      "surface": "voice",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true,
+      "action": "idle"
+    },
+    {
+      "id": "voice-listening-dark",
+      "surface": "voice",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true,
+      "action": "listening"
+    },
+    {
+      "id": "translate-dark",
+      "surface": "translate",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "ai-dark",
+      "surface": "askAI",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "correction-dark",
+      "surface": "correction",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "plus-dark",
+      "surface": "plus",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "control-center-dark",
+      "surface": "controlCenter",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "quick-settings-dark",
+      "surface": "quickSettings",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "input-switcher-dark",
+      "surface": "inputModeSwitcher",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "one-handed-left-dark",
+      "surface": "oneHanded",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "action": "left"
+    },
+    {
+      "id": "one-handed-right-dark",
+      "surface": "oneHanded",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "action": "right"
+    },
+    {
+      "id": "device-sync-dark",
+      "surface": "deviceSync",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "sticker-gif-dark",
+      "surface": "stickerGIF",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "book-video-dark",
+      "surface": "bookVideo",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-home-dark",
+      "surface": "settingsHome",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "popup-q",
+      "surface": "keyPopup",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "action": "press:q"
+    },
+    {
+      "id": "longpress-v",
+      "surface": "longPressPopup",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "action": "longPress:v"
+    },
+    {
+      "id": "candidate-menu",
+      "surface": "candidateActionMenu",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "action": "longPressCandidate"
+    },
+    {
+      "id": "return-send",
+      "surface": "returnKey",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "hostContext": "send"
+    },
+    {
+      "id": "return-search",
+      "surface": "returnKey",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "hostContext": "search"
+    },
+    {
+      "id": "secure-field",
+      "surface": "keyboard26",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "hostContext": "secureText"
+    },
+    {
+      "id": "spotlight",
+      "surface": "keyboard26",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true,
+      "inputMode": "pinyin26",
+      "hostContext": "spotlight"
+    },
+    {
+      "id": "landscape-26",
+      "surface": "keyboard26",
+      "appearance": "light",
+      "orientation": "landscape",
+      "required": true,
+      "inputMode": "pinyin26"
+    },
+    {
+      "id": "landscape-9",
+      "surface": "keyboard9",
+      "appearance": "light",
+      "orientation": "landscape",
+      "required": true,
+      "inputMode": "pinyin9"
+    },
+    {
+      "id": "share-extension",
+      "surface": "shareExtension",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "voice-widget",
+      "surface": "voiceWidget",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-keyboard-select-light",
+      "surface": "settingsKeyboardSelect",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-fuzzy-pinyin-light",
+      "surface": "settingsFuzzyPinyin",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-auxiliary-input-light",
+      "surface": "settingsAuxiliaryInput",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-display-light",
+      "surface": "settingsDisplay",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-keystroke-effect-light",
+      "surface": "settingsKeystrokeEffect",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-clipboard-light",
+      "surface": "settingsClipboard",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-desktop-light",
+      "surface": "settingsDesktop",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-migration-light",
+      "surface": "settingsMigration",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-plus-light",
+      "surface": "settingsPlus",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-shuangpin-light",
+      "surface": "settingsShuangpin",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-wubi-light",
+      "surface": "settingsWubi",
+      "appearance": "light",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-keyboard-select-dark",
+      "surface": "settingsKeyboardSelect",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-fuzzy-pinyin-dark",
+      "surface": "settingsFuzzyPinyin",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-auxiliary-input-dark",
+      "surface": "settingsAuxiliaryInput",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-display-dark",
+      "surface": "settingsDisplay",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-keystroke-effect-dark",
+      "surface": "settingsKeystrokeEffect",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-clipboard-dark",
+      "surface": "settingsClipboard",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-desktop-dark",
+      "surface": "settingsDesktop",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-migration-dark",
+      "surface": "settingsMigration",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-plus-dark",
+      "surface": "settingsPlus",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-shuangpin-dark",
+      "surface": "settingsShuangpin",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    },
+    {
+      "id": "settings-wubi-dark",
+      "surface": "settingsWubi",
+      "appearance": "dark",
+      "orientation": "portrait",
+      "required": true
+    }
+  ]
+}

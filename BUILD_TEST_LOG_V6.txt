@@ -1,0 +1,24 @@
+WeTypeReplicaOverlay V6 validation
+==================================
+
+Core package:
+- swift test: PASS
+- tests: 30 passed, 0 failed
+
+Swift source syntax:
+- Sources/*.swift: PASS
+- iOSOverlay/*.swift: PASS
+- iOSApp/*.swift: PASS
+- iOSExtensions/*.swift: PASS
+- iOSServices/*.swift: PASS
+- HamsterBridge/*.swift: PASS
+
+Integration structure:
+- Tools/verify_v6_integration.py: PASS
+- XcodeIntegration plist lint: PASS
+- XcodeIntegration entitlements lint: PASS
+
+Important limitation:
+- This environment is Linux, not macOS/Xcode. Real iOS SDK compilation,
+  code signing, entitlement behavior, Widget/Keyboard/Share extension loading,
+  and iPhone pixel/runtime validation remain unverified here.
