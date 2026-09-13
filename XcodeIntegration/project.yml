@@ -19,6 +19,8 @@ targets:
       - path: ../iOSShared
       - path: ../iOSApp
       - path: ../iOSServices
+        excludes:
+          - WTKeyboardServiceBinder.swift
     dependencies:
       - target: WeTypeReplicaKeyboard
         embed: true

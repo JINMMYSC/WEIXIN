@@ -7,7 +7,7 @@ public struct WTHostVoiceCaptureView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var state: WTVoiceState = .idle
     private let service: WTHostSpeechRecognitionService
-    @State private var liveActivityController: WTVoiceLiveActivityController?
+    @State private var liveActivityController: Any?
 
     public init(requestID: UUID, mailbox: WTServiceMailbox?) {
         self.requestID = requestID
@@ -38,14 +38,10 @@ public struct WTHostVoiceCaptureView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
-            if #available(iOS 16.1, *) {
-                let controller = WTVoiceLiveActivityController()
-                liveActivityController = controller
-                controller.start(requestID: requestID)
-            }
+            startLiveActivity()
             service.onStateChange = { next in
                 state = next
-                if #available(iOS 16.1, *) { liveActivityController?.update(next) }
+                updateLiveActivity(next)
                 if case .result(let text) = next { finish(value: text) }
                 if case .failed(let message) = next { finish(error: message, dismissImmediately: false) }
             }
@@ -69,15 +65,32 @@ public struct WTHostVoiceCaptureView: View {
     }
 
     private func finish(value: String) {
-        if #available(iOS 16.1, *) { liveActivityController?.end(finalText: value) }
+        endLiveActivity(finalText: value)
         try? mailbox?.complete(.init(requestID: requestID, value: value))
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) { dismiss() }
     }
 
     private func finish(error: String, dismissImmediately: Bool = true) {
-        if #available(iOS 16.1, *) { liveActivityController?.end() }
+        endLiveActivity()
         try? mailbox?.complete(.init(requestID: requestID, error: error))
         if dismissImmediately { dismiss() }
+    }
+
+    private func startLiveActivity() {
+        guard #available(iOS 16.1, *) else { return }
+        let controller = WTVoiceLiveActivityController()
+        liveActivityController = controller
+        controller.start(requestID: requestID)
+    }
+
+    private func updateLiveActivity(_ next: WTVoiceState) {
+        guard #available(iOS 16.1, *), let controller = liveActivityController as? WTVoiceLiveActivityController else { return }
+        controller.update(next)
+    }
+
+    private func endLiveActivity(finalText: String? = nil) {
+        guard #available(iOS 16.1, *), let controller = liveActivityController as? WTVoiceLiveActivityController else { return }
+        controller.end(finalText: finalText)
     }
 }
 
