@@ -121,7 +121,7 @@ require_minimal_signed_entitlements() {
   require_equal "$label get-task-allow" "$(plist_value "$plist" get-task-allow)" "false"
   require_single_array_value "$plist" "com.apple.security.application-groups" "$label App Group" "$EXPECTED_APP_GROUP"
   require_single_array_value "$plist" "keychain-access-groups" "$label keychain group" "$keychain_group"
-  key_count="$(/usr/bin/grep -c '<key>' "$plist" | /usr/bin/tr -d '[:space:]')"
+  key_count="$(/usr/bin/grep -o '<key>' "$plist" | /usr/bin/wc -l | /usr/bin/tr -d '[:space:]')"
   require_equal "$label entitlement key count" "$key_count" "5"
 }
 
