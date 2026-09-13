@@ -21,7 +21,7 @@ open class WTKeyboardInputViewController: UIInputViewController {
 
     open var appGroupIdentifier: String {
         Bundle.main.object(forInfoDictionaryKey: "WTAppGroupIdentifier") as? String
-            ?? "group.dev.wetype.replica.shared"
+            ?? "group.7518554"
     }
 
     open override func viewDidLoad() {

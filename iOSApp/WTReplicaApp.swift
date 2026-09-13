@@ -11,7 +11,7 @@ struct WTReplicaApp: App {
 
     private var appGroupIdentifier: String {
         Bundle.main.object(forInfoDictionaryKey: "WTAppGroupIdentifier") as? String
-            ?? "group.dev.wetype.replica.shared"
+            ?? "group.7518554"
     }
 
     var body: some Scene {

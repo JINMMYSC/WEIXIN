@@ -1,6 +1,6 @@
 name: WeTypeReplica
 options:
-  bundleIdPrefix: dev.wetype.replica
+  bundleIdPrefix: app.lgm.7517
 configFiles:
   Debug: Config.xcconfig
   Release: Config.xcconfig
@@ -11,7 +11,7 @@ settings:
   base:
     SWIFT_VERSION: 5.9
     IPHONEOS_DEPLOYMENT_TARGET: 15.1
-    WT_APP_GROUP_ID: group.dev.wetype.replica.shared
+    WT_APP_GROUP_ID: group.7518554
 targets:
   WeTypeReplicaApp:
     type: application
