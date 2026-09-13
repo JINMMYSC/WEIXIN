@@ -1,54 +1,34 @@
-name: iOS Unsigned CI
+name: Materialize V14 source
 
 on:
-  workflow_dispatch:
   push:
     branches:
-      - "**"
+      - work/v14-ci
+  workflow_dispatch:
 
 permissions:
-  contents: read
-
-concurrency:
-  group: ios-unsigned-${{ github.ref }}
-  cancel-in-progress: true
+  contents: write
 
 jobs:
-  build:
-    name: Core tests, five targets, unsigned IPA
+  materialize:
+    if: ${{ hashFiles('.v14-upload/part-*.bin') != '' }}
     runs-on: macos-15
-    timeout-minutes: 60
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - name: Expand V14 source
-        run: |
-          mkdir project
-          ditto -x -k WeTypeReplicaOverlay_v14-runtime.zip project
-      - name: Install XcodeGen
-        run: |
-          if ! command -v xcodegen >/dev/null 2>&1; then
-            brew install xcodegen
-          fi
-      - name: Build and package without signing
-        working-directory: project
-        run: |
-          chmod +x XcodeIntegration/ci_unsigned_build.sh
-          XcodeIntegration/ci_unsigned_build.sh
-      - name: Upload complete CI logs
-        if: always()
-        uses: actions/upload-artifact@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          name: WeTypeReplica-V14-CI-logs-${{ github.run_attempt }}
-          path: project/artifacts/logs/
-          if-no-files-found: warn
-          retention-days: 30
-      - name: Upload unsigned IPA and app bundle
-        if: success()
-        uses: actions/upload-artifact@v4
-        with:
-          name: WeTypeReplica-V14-unsigned-${{ github.run_attempt }}
-          path: |
-            project/artifacts/WeTypeReplicaApp-unsigned.ipa
-            project/artifacts/unsigned/Payload/WeTypeReplicaApp.app
-          if-no-files-found: error
-          retention-days: 30
+          ref: work/v14-ci
+      - name: Expand the approved V14 snapshot
+        run: |
+          cat .v14-upload/part-*.bin > "$RUNNER_TEMP/WeTypeReplicaOverlay_v14-full.zip"
+          rm -f WeTypeReplicaOverlay_v14-runtime.zip README.md
+          rm -rf .github
+          ditto -x -k "$RUNNER_TEMP/WeTypeReplicaOverlay_v14-full.zip" .
+          rm -rf .v14-upload
+      - name: Commit the complete source tree
+        run: |
+          git config user.name "Codex Work"
+          git config user.email "codex@localhost"
+          git add -A
+          git commit -m "ci: materialize complete V14 source baseline"
+          git push origin HEAD:work/v14-ci
