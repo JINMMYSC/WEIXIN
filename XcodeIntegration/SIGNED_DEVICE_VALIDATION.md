@@ -39,3 +39,47 @@ GitHub-hosted macOS runners cannot attach your physical iPhone. The signed build
 Mechanical certificate, profile, identifier, capability, or provisioning failures may be repaired within this workstream.
 
 If installation reveals a Keyboard Extension crash, Rime initialization failure, candidate or commit-text error, App Group state divergence, or lifecycle problem, record the device model, iOS version, reproduction steps, crash/device logs, and observed state. Stop before architectural changes and hand the blocker to ChatGPT / GPT-5.6 Sol High. Do not redesign the input state machine or Hamster/librime core in this phase.
+
+## Fixed ownership workflow
+
+### Codex
+
+Codex owns repository and CI mechanics:
+
+- fetch and switch GitHub branches;
+- inspect GitHub Actions logs;
+- repair ordinary Swift compiler errors;
+- repair XcodeGen and `project.yml` configuration;
+- repair target membership, paths, plist files, and entitlements;
+- build and package unsigned IPA artifacts;
+- commit and push focused fixes;
+- automatically repeat the log -> diagnosis -> fix -> push -> CI loop;
+- prepare a clean unsigned IPA suitable for local re-signing.
+
+Codex must not change V14 feature behavior, the input state machine, or Hamster/librime architecture while performing these tasks.
+
+### iOS signing app
+
+The iOS signing app owns device-side distribution:
+
+- re-sign the unsigned IPA using the user's legal signing identity;
+- install the re-signed app on the user's iPhone;
+- perform initial Host App and Keyboard Extension validation on the device.
+
+Signing certificates, private keys, Apple ID credentials, and provisioning secrets stay outside GitHub.
+
+### ChatGPT / GPT-5.6 Sol High
+
+Escalate the following issues with complete evidence instead of making broad changes in Codex:
+
+- Keyboard Extension crashes on a real device;
+- Hamster/librime or Rime initialization failures;
+- input state-machine defects;
+- candidate generation, ordering, selection, or commit-text defects;
+- App Group state divergence;
+- Keyboard Extension lifecycle defects;
+- UI or behavior differences from WeType 3.5.3;
+- a CI root cause that remains unresolved after two or three focused repair attempts;
+- core architecture issues.
+
+Each escalation must include the branch and commit, device model, exact iOS version, reproduction steps, expected and observed behavior, relevant Actions run or device logs, and the focused fixes already attempted.
