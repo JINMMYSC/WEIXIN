@@ -6,6 +6,9 @@ on:
       - work/v14-ci
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   materialize:
     runs-on: ubuntu-latest
@@ -14,17 +17,19 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: work/v14-ci
-      - name: Expand the approved V14 snapshot
+      - name: Expand V14 while preserving repository workflows
         run: |
           cat .v14-upload/part-*.bin > "$RUNNER_TEMP/WeTypeReplicaOverlay_v14-full.zip"
+          mv .github "$RUNNER_TEMP/repository-github"
           rm -f WeTypeReplicaOverlay_v14-runtime.zip README.md
-          rm -rf .github
           unzip -q "$RUNNER_TEMP/WeTypeReplicaOverlay_v14-full.zip" -d .
-          rm -rf .v14-upload
-      - name: Commit the complete source tree
+          rm -rf .github .v14-upload
+          mv "$RUNNER_TEMP/repository-github" .github
+      - name: Commit only the complete V14 source tree
         run: |
           git config user.name "Codex Work"
           git config user.email "codex@localhost"
           git add -A
+          git diff --cached --exit-code -- .github
           git commit -m "ci: materialize complete V14 source baseline"
           git push origin HEAD:work/v14-ci
