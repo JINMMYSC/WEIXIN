@@ -18,7 +18,7 @@ public struct WTToolbarArrangeView: View {
                     Text("已显示").font(.system(size: 11)).foregroundStyle(.secondary).frame(maxWidth: .infinity, alignment: .leading)
                     ForEach(Array(runtime.toolbarOrder.enumerated()), id: \.element.id) { index, tool in
                         HStack(spacing: 8) {
-                            WTToolIconView(tool: tool, size: 20).frame(width: 24)
+                            WTToolIconView(tool: tool).frame(width: 20, height: 20).frame(width: 24)
                             Text(tool.title).font(.system(size: 13))
                             Spacer()
                             Button { move(index, -1) } label: { WTBasicGlyphView(.chevronUp, size: 14) }.disabled(index == 0)
@@ -35,7 +35,7 @@ public struct WTToolbarArrangeView: View {
                             Button {
                                 if runtime.toolbarOrder.count < 8 { runtime.toolbarOrder.append(tool) }
                             } label: {
-                                HStack(spacing: 5) { WTToolIconView(tool: tool, size: 17); Text(tool.title).lineLimit(1) }
+                                HStack(spacing: 5) { WTToolIconView(tool: tool).frame(width: 17, height: 17); Text(tool.title).lineLimit(1) }
                                     .font(.system(size: 11)).frame(maxWidth: .infinity, minHeight: 34)
                                     .background(WTChrome353.surface).clipShape(RoundedRectangle(cornerRadius: 8))
                             }.buttonStyle(.plain)

@@ -21,7 +21,7 @@ public final class WTVisionHandwritingRecognizer: WTHandwritingRecognizer {
                     .filter { !$0.isEmpty && seen.insert($0).inserted }
                     .prefix(20)
                     .enumerated()
-                    .map { offset, text in WTCandidate(text: text, comment: nil, sourceIndex: offset) }
+                    .map { _, text in WTCandidate(text: text, comment: nil) }
                 continuation.resume(returning: Array(values))
             }
             request.recognitionLevel = .accurate
