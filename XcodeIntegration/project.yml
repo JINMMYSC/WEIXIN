@@ -1,6 +1,9 @@
 name: WeTypeReplica
 options:
   bundleIdPrefix: dev.wetype.replica
+configFiles:
+  Debug: Config.xcconfig
+  Release: Config.xcconfig
 configs:
   Debug: debug
   Release: release
@@ -8,7 +11,6 @@ settings:
   base:
     SWIFT_VERSION: 5.9
     IPHONEOS_DEPLOYMENT_TARGET: 15.1
-    DEVELOPMENT_TEAM: YOUR_TEAM_ID
     WT_APP_GROUP_ID: group.dev.wetype.replica.shared
 targets:
   WeTypeReplicaApp:
@@ -36,7 +38,7 @@ targets:
       path: Entitlements/App.entitlements
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: dev.wetype.replica
+        PRODUCT_BUNDLE_IDENTIFIER: $(WT_BASE_BUNDLE_ID)
   WeTypeReplicaKeyboard:
     type: app-extension
     platform: iOS
@@ -55,7 +57,7 @@ targets:
       path: Entitlements/Keyboard.entitlements
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: dev.wetype.replica.keyboard
+        PRODUCT_BUNDLE_IDENTIFIER: $(WT_BASE_BUNDLE_ID).keyboard
         APPLICATION_EXTENSION_API_ONLY: YES
   WeTypeReplicaShare:
     type: app-extension
@@ -73,7 +75,7 @@ targets:
       path: Entitlements/Share.entitlements
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: dev.wetype.replica.share
+        PRODUCT_BUNDLE_IDENTIFIER: $(WT_BASE_BUNDLE_ID).share
         APPLICATION_EXTENSION_API_ONLY: YES
   WeTypeReplicaWidget:
     type: app-extension
@@ -89,7 +91,7 @@ targets:
       path: Entitlements/Widget.entitlements
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: dev.wetype.replica.widget
+        PRODUCT_BUNDLE_IDENTIFIER: $(WT_BASE_BUNDLE_ID).widget
         APPLICATION_EXTENSION_API_ONLY: YES
 
   WeTypeReplicaVoiceActivity:
@@ -106,5 +108,5 @@ targets:
       path: Entitlements/VoiceActivity.entitlements
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: dev.wetype.replica.voiceactivity
+        PRODUCT_BUNDLE_IDENTIFIER: $(WT_BASE_BUNDLE_ID).voiceactivity
         APPLICATION_EXTENSION_API_ONLY: YES
