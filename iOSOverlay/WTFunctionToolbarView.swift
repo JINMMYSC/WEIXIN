@@ -16,7 +16,7 @@ public struct WTFunctionToolbarView: View {
                     RoundedRectangle(cornerRadius: 7, style: .continuous)
                         .fill(WTChrome353.accent.opacity(0.12))
                         .frame(width: 30, height: 30)
-                    WTToolIconView(tool: .plus, tint: WTChrome353.accent, size: 17)
+                    WTToolIconView(tool: .plus, tint: WTChrome353.accent).frame(width: 17, height: 17)
                 }
                 .frame(width: 42, height: runtime.visualCalibration.toolbarHeight)
             }

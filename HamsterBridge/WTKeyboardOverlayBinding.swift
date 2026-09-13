@@ -175,7 +175,7 @@ public final class WTKeyboardOverlayBinding {
 
     public func refreshHostTraits() {
         guard let proxy = inputController?.textDocumentProxy else { return }
-        runtime.returnKeyPresentation = WTReturnKeyPresentation(uiReturnKeyType: proxy.returnKeyType)
+        runtime.returnKeyPresentation = WTReturnKeyPresentation(uiReturnKeyType: proxy.returnKeyType ?? .default)
     }
 }
 

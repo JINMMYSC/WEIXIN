@@ -264,8 +264,7 @@ public final class WTKeyboardServiceBinder {
         guard let defaults = UserDefaults(suiteName: appGroupIdentifier),
               let idString = defaults.string(forKey: "wt.voice.pendingRequestID"),
               let id = UUID(uuidString: idString),
-              let response = try? serviceMailbox?.response(for: id),
-              let response else { return }
+              let response = try? serviceMailbox?.response(for: id) else { return }
         if let value = response.value, !value.isEmpty {
             runtime.commitDirectText(value)
             runtime.voiceState = .result(value)

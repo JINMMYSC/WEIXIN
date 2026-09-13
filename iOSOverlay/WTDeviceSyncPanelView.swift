@@ -42,7 +42,7 @@ public struct WTDeviceSyncPanelView: View {
         VStack(spacing: 8) {
             HStack {
                 HStack(spacing: 7) {
-                    WTToolIconView(tool: .deviceSync, size: 19)
+                    WTToolIconView(tool: .deviceSync).frame(width: 19, height: 19)
                     Text("设备配对码").font(.system(size: 13, weight: .medium))
                 }
                 Spacer()
@@ -116,7 +116,7 @@ public struct WTDeviceSyncPanelView: View {
                 .padding(.horizontal, 2)
                 ForEach(runtime.trustedTransferDevices) { device in
                     HStack(spacing: 12) {
-                        WTToolIconView(tool: .deviceSync, size: 21).frame(width: 34)
+                        WTToolIconView(tool: .deviceSync).frame(width: 21, height: 21).frame(width: 34)
                         VStack(alignment: .leading, spacing: 2) {
                             Text(device.name).font(.system(size: 14, weight: .medium))
                             Text("成功传输 \(device.successfulTransfers) 次")
@@ -152,7 +152,7 @@ public struct WTDeviceSyncPanelView: View {
                 .padding(.horizontal, 2)
                 ForEach(runtime.devicePeers) { peer in
                     HStack(spacing: 12) {
-                        WTToolIconView(tool: .deviceSync, size: 21).frame(width: 34)
+                        WTToolIconView(tool: .deviceSync).frame(width: 21, height: 21).frame(width: 34)
                         VStack(alignment: .leading, spacing: 2) {
                             Text(peer.name).font(.system(size: 14, weight: .medium))
                             Text(peer.id).font(.system(size: 10)).foregroundStyle(WTThemeColor353.secondaryText).lineLimit(1)
