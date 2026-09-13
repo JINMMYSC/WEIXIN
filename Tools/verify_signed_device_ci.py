@@ -52,6 +52,13 @@ def main() -> int:
     require("codesign --verify --strict" in script, "Keyboard codesign verification gate missing")
     require("codesign --verify --deep --strict" in script, "Host deep codesign verification gate missing")
     require("application-identifier" in script, "post-sign entitlement identifier gate missing")
+    require(
+        "/usr/bin/plutil -extract Entitlements" not in script,
+        "signing must not copy the provisioning profile Entitlements dictionary wholesale",
+    )
+    require("build_minimal_entitlements" in script, "minimal entitlement builder missing")
+    require("keychain-access-groups" in script, "minimal keychain entitlement missing")
+    require("require_minimal_signed_entitlements" in script, "post-sign minimal-entitlement gate missing")
     require("embedded.mobileprovision" in script, "profiles must be embedded in both signed bundles")
     require("WeTypeReplicaApp-sideload-diagnostic-signed.ipa" in script, "signed IPA output path missing")
 
