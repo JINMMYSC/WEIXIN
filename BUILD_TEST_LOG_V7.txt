@@ -1,0 +1,99 @@
+# V7 build/test log
+UTC 2026-09-13 02:58:40
+
+## swift test
+Test Suite 'IconGeometryTests' passed at 2026-09-13 02:58:41.141
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'InteractionTests' started at 2026-09-13 02:58:41.141
+Test Case 'InteractionTests.testChineseQuoteKeyUsesChineseVariant' started at 2026-09-13 02:58:41.141
+Test Case 'InteractionTests.testChineseQuoteKeyUsesChineseVariant' passed (0.0 seconds)
+Test Case 'InteractionTests.testEnglishQuoteKeyUsesEnglishVariant' started at 2026-09-13 02:58:41.142
+Test Case 'InteractionTests.testEnglishQuoteKeyUsesEnglishVariant' passed (0.0 seconds)
+Test Case 'InteractionTests.testLanguageToggleReturnsToNineKey' started at 2026-09-13 02:58:41.142
+Test Case 'InteractionTests.testLanguageToggleReturnsToNineKey' passed (0.0 seconds)
+Test Case 'InteractionTests.testLongPressFloatListParsesAccentedV' started at 2026-09-13 02:58:41.142
+Test Case 'InteractionTests.testLongPressFloatListParsesAccentedV' passed (0.0 seconds)
+Test Case 'InteractionTests.testOneShotShiftConsumesAfterCharacter' started at 2026-09-13 02:58:41.142
+Test Case 'InteractionTests.testOneShotShiftConsumesAfterCharacter' passed (0.0 seconds)
+Test Case 'InteractionTests.testResolvedEnglishLayoutInheritedAllKeys' started at 2026-09-13 02:58:41.142
+Test Case 'InteractionTests.testResolvedEnglishLayoutInheritedAllKeys' passed (0.0 seconds)
+Test Case 'InteractionTests.testResolvedStrokeLayoutInheritedNineKeyGeometry' started at 2026-09-13 02:58:41.142
+Test Case 'InteractionTests.testResolvedStrokeLayoutInheritedNineKeyGeometry' passed (0.0 seconds)
+Test Case 'InteractionTests.testSwipeUpReadsExact26KeyNumber' started at 2026-09-13 02:58:41.142
+Test Case 'InteractionTests.testSwipeUpReadsExact26KeyNumber' passed (0.0 seconds)
+Test Suite 'InteractionTests' passed at 2026-09-13 02:58:41.142
+	 Executed 8 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'LayoutTests' started at 2026-09-13 02:58:41.142
+Test Case 'LayoutTests.testNestedPanelReturn' started at 2026-09-13 02:58:41.142
+Test Case 'LayoutTests.testNestedPanelReturn' passed (0.0 seconds)
+Test Case 'LayoutTests.testPanelReturnPreservesInputMode' started at 2026-09-13 02:58:41.143
+Test Case 'LayoutTests.testPanelReturnPreservesInputMode' passed (0.0 seconds)
+Test Case 'LayoutTests.testT26GeometryMatches353' started at 2026-09-13 02:58:41.143
+Test Case 'LayoutTests.testT26GeometryMatches353' passed (0.0 seconds)
+Test Case 'LayoutTests.testT9GeometryMatches353' started at 2026-09-13 02:58:41.143
+Test Case 'LayoutTests.testT9GeometryMatches353' passed (0.0 seconds)
+Test Suite 'LayoutTests' passed at 2026-09-13 02:58:41.143
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'PersistentStoreTests' started at 2026-09-13 02:58:41.143
+Test Case 'PersistentStoreTests.testClipboardDeduplicatesAndPins' started at 2026-09-13 02:58:41.143
+Test Case 'PersistentStoreTests.testClipboardDeduplicatesAndPins' passed (0.001 seconds)
+Test Case 'PersistentStoreTests.testEmojiUsagePersistsAndRanks' started at 2026-09-13 02:58:41.144
+Test Case 'PersistentStoreTests.testEmojiUsagePersistsAndRanks' passed (0.001 seconds)
+Test Case 'PersistentStoreTests.testPhraseStoreMaintainsOrder' started at 2026-09-13 02:58:41.145
+Test Case 'PersistentStoreTests.testPhraseStoreMaintainsOrder' passed (0.001 seconds)
+Test Suite 'PersistentStoreTests' passed at 2026-09-13 02:58:41.146
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.003 (0.003) seconds
+Test Suite 'ProviderModelTests' started at 2026-09-13 02:58:41.146
+Test Case 'ProviderModelTests.testCloudCandidateMergeKeepsFirstLocalAndDeduplicates' started at 2026-09-13 02:58:41.146
+Test Case 'ProviderModelTests.testCloudCandidateMergeKeepsFirstLocalAndDeduplicates' passed (0.0 seconds)
+Test Case 'ProviderModelTests.testCloudOnlySortsByScore' started at 2026-09-13 02:58:41.146
+Test Case 'ProviderModelTests.testCloudOnlySortsByScore' passed (0.0 seconds)
+Test Case 'ProviderModelTests.testProviderConfigurationRoundTrip' started at 2026-09-13 02:58:41.146
+Test Case 'ProviderModelTests.testProviderConfigurationRoundTrip' passed (0.0 seconds)
+Test Suite 'ProviderModelTests' passed at 2026-09-13 02:58:41.147
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'ServiceMailboxTests' started at 2026-09-13 02:58:41.147
+Test Case 'ServiceMailboxTests.testRequestResponseRoundTrip' started at 2026-09-13 02:58:41.147
+Test Case 'ServiceMailboxTests.testRequestResponseRoundTrip' passed (0.001 seconds)
+Test Suite 'ServiceMailboxTests' passed at 2026-09-13 02:58:41.148
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'UIModelTests' started at 2026-09-13 02:58:41.148
+Test Case 'UIModelTests.testKeyboardAdjustmentClampsToSafeRange' started at 2026-09-13 02:58:41.148
+Test Case 'UIModelTests.testKeyboardAdjustmentClampsToSafeRange' passed (0.0 seconds)
+Test Case 'UIModelTests.testMediaAndHotWordModelsAreStable' started at 2026-09-13 02:58:41.148
+Test Case 'UIModelTests.testMediaAndHotWordModelsAreStable' passed (0.0 seconds)
+Test Case 'UIModelTests.testNewV5PanelsPreserveReturnStack' started at 2026-09-13 02:58:41.149
+Test Case 'UIModelTests.testNewV5PanelsPreserveReturnStack' passed (0.0 seconds)
+Test Case 'UIModelTests.testPanelStateCanRoundTripFromNestedTools' started at 2026-09-13 02:58:41.149
+Test Case 'UIModelTests.testPanelStateCanRoundTripFromNestedTools' passed (0.0 seconds)
+Test Case 'UIModelTests.testSymbolCatalogIsPopulated' started at 2026-09-13 02:58:41.149
+Test Case 'UIModelTests.testSymbolCatalogIsPopulated' passed (0.0 seconds)
+Test Case 'UIModelTests.testToolbarCatalogHasExpectedCoverage' started at 2026-09-13 02:58:41.149
+Test Case 'UIModelTests.testToolbarCatalogHasExpectedCoverage' passed (0.0 seconds)
+Test Case 'UIModelTests.testVisualCalibrationProfileRoundTrips' started at 2026-09-13 02:58:41.149
+Test Case 'UIModelTests.testVisualCalibrationProfileRoundTrips' passed (0.0 seconds)
+Test Suite 'UIModelTests' passed at 2026-09-13 02:58:41.149
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'debug.xctest' passed at 2026-09-13 02:58:41.149
+	 Executed 36 tests, with 0 failures (0 unexpected) in 0.113 (0.113) seconds
+Test Suite 'All tests' passed at 2026-09-13 02:58:41.149
+	 Executed 36 tests, with 0 failures (0 unexpected) in 0.113 (0.113) seconds
+◇ Test run started.
+↳ Testing Library Version: 6.2.1 (c9d57c83568b06d)
+↳ Target Platform: x86_64-unknown-linux-gnu
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.
+
+## swift parse
+ALL SWIFT FILES PARSE OK
+
+## plist / entitlements
+XcodeIntegration/Plists/App-Info.plist: OK
+XcodeIntegration/Plists/Keyboard-Info.plist: OK
+XcodeIntegration/Plists/Share-Info.plist: OK
+XcodeIntegration/Plists/Widget-Info.plist: OK
+XcodeIntegration/Entitlements/App.entitlements: OK
+XcodeIntegration/Entitlements/Keyboard.entitlements: OK
+XcodeIntegration/Entitlements/Share.entitlements: OK
+
+## V7 verifier
+V7 integration OK; measured icon families=190

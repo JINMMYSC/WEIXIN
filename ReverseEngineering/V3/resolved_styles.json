@@ -1,0 +1,240 @@
+{
+  "STYLE_NORMAL": {
+    "BG": "#FFFFFF,#BBBBBB66",
+    "HLBG": "#B7BCC4,#66666666",
+    "TINT": "#000000,#FEFEFE",
+    "STINT": "#00000066,#FEFEFE66",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000001A,#FFFFFF1A",
+    "FONT": "22"
+  },
+  "STYLE_GRAY": {
+    "BG": "#B7BCC4,#55555566",
+    "HLBG": "#FCFCFE,#BBBBBB66",
+    "TINT": "#000000,#FEFEFE",
+    "FONT": "15",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000000D,#FFFFFF14"
+  },
+  "STYLE_FONT_T26_@": {
+    "FONT": "5",
+    "M": "0"
+  },
+  "STYLE_FUNC_FONT16": {
+    "BG": "#B7BCC4,#55555566",
+    "HLBG": "#FCFCFE,#BBBBBB66",
+    "TINT": "#000000,#FEFEFE",
+    "FONT": "16",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000000D,#FFFFFF14",
+    "M": "0"
+  },
+  "STYLE_SPACE": {
+    "BG": "#FFFFFF,#BBBBBB66",
+    "HLBG": "#B7BCC4,#66666666",
+    "TINT": "#000000,#FEFEFE",
+    "STINT": "#00000066,#FEFEFE66",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000001A,#FFFFFF1A",
+    "FONT": "15"
+  },
+  "STYLE_SPACE_VOICEINPUT": {
+    "IMG": "[,'icon_keys_voice',]",
+    "TINT": "#0000004D,#FFFFFF4D",
+    "RULE": "8",
+    "INPUT": "' '",
+    "TITLE": "[,,'轻触结束']"
+  },
+  "STYLE_LANGSWITCH": {
+    "IMG": "['icon_keys_switch_zh,icon_keys_switch_zh_dark','icon_keys_switch_en,icon_keys_english_dark','icon_keys_switch_zh_wubi,icon_keys_switch_zh_wubi_dark','icon_keys_switch_en_wubi,icon_keys_switch_en_wubi_dark','icon_keys_switch_zh_shuangpin,icon_keys_switch_zh_shuangpin_dark','icon_keys_switch_en_shuangpin,icon_keys_switch_en_shuangpin_dark','icon_keys_bi_pin,icon_keys_bi_pin_dark','icon_keys_pin_bi,icon_keys_pin_bi_dark','icon_keys_ying_bi,icon_keys_ying_bi_dark','icon_keys_xie_pin,icon_keys_xie_pin_dark','icon_keys_pin_xie,icon_keys_pin_xie_dark','icon_keys_ying_xie,icon_keys_ying_xie_dark']",
+    "FUNC": "langswitch",
+    "TINT": "",
+    "RULE": "6"
+  },
+  "STYLE_LANGSWITCH_NEW": {
+    "FUNC": "subkb",
+    "TINT": "",
+    "RULE": "10"
+  },
+  "STYLE_ENKB": {
+    "TITLE": "'ABC'",
+    "FONT": "18",
+    "FUNC": "enkb"
+  },
+  "STYLE_RETURN": {
+    "BG": "[~,'#23C891']",
+    "HLBG": "[~,'#FCFCFE,#BBBBBB66']",
+    "TINT": "[~,'#FEFEFE']",
+    "FONT": "16",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "[~,'#0000001A,#FFFFFF1A']",
+    "RULE": "1",
+    "HLTINT": "[,'#000000,#FEFEFE']"
+  },
+  "STYLE_SHIFT": {
+    "BG": "[~,'#FCFCFE,#707070','#FCFCFE,#707070','#B7BCC4,#66666666','#B7BCC4,#66666666','#B7BCC4,#55555566']",
+    "HLBG": "['#B7BCC4,#66666666','#FCFCFE,#707070','#FCFCFE,#707070','#FCFCFE,#707070','#FCFCFE,#BBBBBB66','#FCFCFE,#BBBBBB66']",
+    "TINT": "#000000,#FEFEFE",
+    "FONT": "[,,,17,15,17]",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000000D,#FFFFFF14",
+    "IMG": "['icon_keys_outlinedcapslock','icon_keys_capslock','icon_keys_capslocked',,,]",
+    "HLIMG": "['icon_keys_outlinedcapslock','icon_keys_capslock','icon_keys_capslocked',,,]",
+    "INPUT": "[,,,'(;)',,'(\\')']",
+    "TITLE": "[,,,';',符号,\\'词]",
+    "RULE": "2"
+  },
+  "STYLE_DEL": {
+    "BG": "#B7BCC4,#55555566",
+    "HLBG": "#FCFCFE,#707070",
+    "TINT": "#000000,#FEFEFE",
+    "FONT": "15",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000000D,#FFFFFF14",
+    "IMG": "icon_keys_delete",
+    "HLIMG": "icon_keys_deletepress",
+    "FLOATSTY": "4"
+  },
+  "STYLE_RETYPE": {
+    "BG": "#B7BCC4,#55555566",
+    "HLBG": "#FCFCFE,#BBBBBB66",
+    "TINT": "#000000,#FEFEFE",
+    "FONT": "15",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000000D,#FFFFFF14",
+    "RULE": "5"
+  },
+  "STYLE_SYM": {
+    "BG": "#B7BCC4,#55555566",
+    "HLBG": "#FCFCFE,#BBBBBB66",
+    "TINT": "#000000,#FEFEFE",
+    "FONT": "15",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000000D,#FFFFFF14"
+  },
+  "STYLE_BACK": {
+    "BG": "#B7BCC4,#55555566",
+    "HLBG": "#FCFCFE,#BBBBBB66",
+    "TINT": "#000000,#FEFEFE",
+    "FONT": "15",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000000D,#FFFFFF14"
+  },
+  "STYLE_BACK_WHITE": {
+    "BG": "#FFFFFF,#BBBBBB66",
+    "HLBG": "#B7BCC4,#66666666",
+    "TINT": "#000000,#FEFEFE",
+    "STINT": "#00000066,#FEFEFE66",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000001A,#FFFFFF1A",
+    "FONT": "15"
+  },
+  "STYLE_GREEN": {
+    "BG": "#23C891",
+    "HLBG": "#FCFCFE,#BBBBBB66",
+    "TINT": "#FEFEFE",
+    "FONT": "15",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000001A,#FFFFFF1A",
+    "HLTINT": "#000000,#FEFEFE"
+  },
+  "STYLE_BACK_GREEN": {
+    "BG": "#23C891",
+    "HLBG": "#FCFCFE,#BBBBBB66",
+    "TINT": "#FEFEFE",
+    "FONT": "15",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000001A,#FFFFFF1A",
+    "HLTINT": "#000000,#FEFEFE",
+    "IMG": "icon_keys_return"
+  },
+  "STYLE_123": {
+    "BG": "#B7BCC4,#55555566",
+    "HLBG": "#FCFCFE,#BBBBBB66",
+    "TINT": "#000000,#FEFEFE",
+    "FONT": "16",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000000D,#FFFFFF14",
+    "TITLE": "123"
+  },
+  "STYLE_123_T9": {
+    "BG": "#FFFFFF,#BBBBBB66",
+    "HLBG": "#B7BCC4,#66666666",
+    "TINT": "#000000,#FEFEFE",
+    "STINT": "#00000066,#FEFEFE66",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000001A,#FFFFFF1A",
+    "FONT": "16",
+    "TITLE": "123"
+  },
+  "STYLE_T9_NUM0": {
+    "BG": "#FFFFFF,#BBBBBB66",
+    "HLBG": "#B7BCC4,#66666666",
+    "TINT": "#000000,#FEFEFE",
+    "STINT": "#00000066,#FEFEFE66",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000001A,#FFFFFF1A",
+    "FONT": "['20','18']",
+    "TITLE": "['@#','\\'词',';']",
+    "INPUT": "['(@#)','(\\')','(;)']",
+    "RULE": "4",
+    "UPFONT": "9",
+    "SUBTITLEPOS": "3",
+    "FLOATSTY": "2",
+    "M": "0"
+  },
+  "STYLE_T9_1": {
+    "BG": "#FFFFFF,#BBBBBB66",
+    "HLBG": "#B7BCC4,#66666666",
+    "TINT": "#000000,#FEFEFE",
+    "STINT": "#00000066,#FEFEFE66",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000001A,#FFFFFF1A",
+    "FONT": "21"
+  },
+  "STYLE_T9_ABC": {
+    "BG": "#FFFFFF,#BBBBBB66",
+    "HLBG": "#B7BCC4,#66666666",
+    "TINT": "#000000,#FEFEFE",
+    "STINT": "#00000066,#FEFEFE66",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000001A,#FFFFFF1A",
+    "FONT": "18",
+    "UPFONT": "9",
+    "SUBTITLEPOS": "3",
+    "FLOATSTY": "2",
+    "KERN": "1"
+  },
+  "STYLE_NUMPAD": {
+    "BG": "#FFFFFF,#BBBBBB66",
+    "HLBG": "#B7BCC4,#66666666",
+    "TINT": "#000000,#FEFEFE",
+    "STINT": "#00000066,#FEFEFE66",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000001A,#FFFFFF1A",
+    "FONT": "Medium,21"
+  },
+  "STYLE_T26_LETTER": {
+    "BG": "#FFFFFF,#BBBBBB66",
+    "HLBG": "#B7BCC4,#66666666",
+    "TINT": "#000000,#FEFEFE",
+    "STINT": "#00000066,#FEFEFE66",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000001A,#FFFFFF1A",
+    "FONT": "['24','22']",
+    "FLOATSTY": "1",
+    "SUBTITLEPOS": "3",
+    "UPFONT": "9",
+    "RULE": "3"
+  },
+  "STYLE_SHIFT_WUBI": {
+    "BG": "[~,'#FCFCFE,#BBBBBB66']",
+    "HLBG": "[~,'#B7BCC4,#66666666']",
+    "TINT": "#000000,#FEFEFE",
+    "FONT": "15",
+    "SHADOW": "#0000004D,#00000099",
+    "BORDER": "#0000000D,#FFFFFF14",
+    "TITLE": "'拼音'",
+    "RULE": "7"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "source": "t9_number_26.ini",
+  "sections": [
+    {
+      "name": "PANEL",
+      "values": {
+        "INHERIT": "t9_number"
+      }
+    },
+    {
+      "name": "KEY_SYMB",
+      "values": {
+        "RECT": "79,171,81,50",
+        "STY": "STYLE_BACK_WHITE"
+      }
+    },
+    {
+      "name": "KEY_BACK",
+      "values": {
+        "RECT": "5,171,69,50",
+        "STY": "STYLE_BACK_GREEN",
+        "TITLE": ""
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "KEY_SYMB",
+      "RECT": "79,171,81,50",
+      "STY": "STYLE_BACK_WHITE",
+      "rect": [
+        79.0,
+        171.0,
+        81.0,
+        50.0
+      ]
+    },
+    {
+      "id": "KEY_BACK",
+      "RECT": "5,171,69,50",
+      "STY": "STYLE_BACK_GREEN",
+      "TITLE": "",
+      "rect": [
+        5.0,
+        171.0,
+        69.0,
+        50.0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,291 @@
+{
+  "source": "t26_en_symbol.ini",
+  "sections": [
+    {
+      "name": "PANEL",
+      "values": {
+        "INHERIT": "t26_cn_symbol"
+      }
+    },
+    {
+      "name": "KEY_11",
+      "values": {
+        "FLOATLIST": "1①❶,0,0"
+      }
+    },
+    {
+      "name": "KEY_12",
+      "values": {
+        "FLOATLIST": "2②❷,0,0"
+      }
+    },
+    {
+      "name": "KEY_13",
+      "values": {
+        "FLOATLIST": "3③❸,0,0"
+      }
+    },
+    {
+      "name": "KEY_14",
+      "values": {
+        "FLOATLIST": "4④❹,0,0"
+      }
+    },
+    {
+      "name": "KEY_15",
+      "values": {
+        "FLOATLIST": "5⑤❺,0,0"
+      }
+    },
+    {
+      "name": "KEY_16",
+      "values": {
+        "FLOATLIST": "❻⑥6,2,2"
+      }
+    },
+    {
+      "name": "KEY_17",
+      "values": {
+        "FLOATLIST": "❼⑦7,2,2"
+      }
+    },
+    {
+      "name": "KEY_18",
+      "values": {
+        "FLOATLIST": "❽⑧8,2,2"
+      }
+    },
+    {
+      "name": "KEY_19",
+      "values": {
+        "FLOATLIST": "❾⑨9,2,2"
+      }
+    },
+    {
+      "name": "KEY_10",
+      "values": {
+        "FLOATLIST": "⓿⓪0,2,2"
+      }
+    },
+    {
+      "name": "KEY_21",
+      "values": {
+        "FLOATLIST": "-+×÷=•,0,0"
+      }
+    },
+    {
+      "name": "KEY_23",
+      "values": {
+        "INPUT": ":",
+        "FLOATLIST": ":：,0,0,："
+      }
+    },
+    {
+      "name": "KEY_24",
+      "values": {
+        "INPUT": "_",
+        "FLOATLIST": "_＿,0,0,＿"
+      }
+    },
+    {
+      "name": "KEY_25",
+      "values": {
+        "INPUT": "(",
+        "FLOATLIST": "<«(（[{,2,2,("
+      }
+    },
+    {
+      "name": "KEY_26",
+      "values": {
+        "INPUT": ")",
+        "FLOATLIST": ">»)）]},2,2,）"
+      }
+    },
+    {
+      "name": "KEY_27",
+      "values": {
+        "INPUT": "#",
+        "FLOATLIST": "＃#,1,1,＃"
+      }
+    },
+    {
+      "name": "KEY_28",
+      "values": {
+        "INPUT": "&",
+        "FLOATLIST": "§＆&,2,2,＃"
+      }
+    },
+    {
+      "name": "KEY_29",
+      "values": {
+        "INPUT": "@",
+        "FLOATLIST": ""
+      }
+    },
+    {
+      "name": "KEY_20",
+      "values": {
+        "INPUT": "\"",
+        "FLOATLIST": "„“”\",3,3"
+      }
+    },
+    {
+      "name": "KEY_33",
+      "values": {
+        "INPUT": ".",
+        "FLOATLIST": ".。·,0,0,。"
+      }
+    },
+    {
+      "name": "KEY_34",
+      "values": {
+        "INPUT": ",",
+        "FLOATLIST": ",，,0,0,，"
+      }
+    },
+    {
+      "name": "KEY_35",
+      "values": {
+        "INPUT": "?",
+        "FLOATLIST": "¿？?,2,2,？"
+      }
+    },
+    {
+      "name": "KEY_36",
+      "values": {
+        "INPUT": "!",
+        "FLOATLIST": "¡！!,2,2,！"
+      }
+    },
+    {
+      "name": "KEY_37",
+      "values": {
+        "INPUT": "…",
+        "FLOATLIST": "⋯…,1,1"
+      }
+    },
+    {
+      "name": "KEY_38",
+      "values": {
+        "INPUT": "'",
+        "FLOATLIST": "`‘’',3,3"
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "KEY_11",
+      "FLOATLIST": "1①❶,0,0"
+    },
+    {
+      "id": "KEY_12",
+      "FLOATLIST": "2②❷,0,0"
+    },
+    {
+      "id": "KEY_13",
+      "FLOATLIST": "3③❸,0,0"
+    },
+    {
+      "id": "KEY_14",
+      "FLOATLIST": "4④❹,0,0"
+    },
+    {
+      "id": "KEY_15",
+      "FLOATLIST": "5⑤❺,0,0"
+    },
+    {
+      "id": "KEY_16",
+      "FLOATLIST": "❻⑥6,2,2"
+    },
+    {
+      "id": "KEY_17",
+      "FLOATLIST": "❼⑦7,2,2"
+    },
+    {
+      "id": "KEY_18",
+      "FLOATLIST": "❽⑧8,2,2"
+    },
+    {
+      "id": "KEY_19",
+      "FLOATLIST": "❾⑨9,2,2"
+    },
+    {
+      "id": "KEY_10",
+      "FLOATLIST": "⓿⓪0,2,2"
+    },
+    {
+      "id": "KEY_21",
+      "FLOATLIST": "-+×÷=•,0,0"
+    },
+    {
+      "id": "KEY_23",
+      "INPUT": ":",
+      "FLOATLIST": ":：,0,0,："
+    },
+    {
+      "id": "KEY_24",
+      "INPUT": "_",
+      "FLOATLIST": "_＿,0,0,＿"
+    },
+    {
+      "id": "KEY_25",
+      "INPUT": "(",
+      "FLOATLIST": "<«(（[{,2,2,("
+    },
+    {
+      "id": "KEY_26",
+      "INPUT": ")",
+      "FLOATLIST": ">»)）]},2,2,）"
+    },
+    {
+      "id": "KEY_27",
+      "INPUT": "#",
+      "FLOATLIST": "＃#,1,1,＃"
+    },
+    {
+      "id": "KEY_28",
+      "INPUT": "&",
+      "FLOATLIST": "§＆&,2,2,＃"
+    },
+    {
+      "id": "KEY_29",
+      "INPUT": "@",
+      "FLOATLIST": ""
+    },
+    {
+      "id": "KEY_20",
+      "INPUT": "\"",
+      "FLOATLIST": "„“”\",3,3"
+    },
+    {
+      "id": "KEY_33",
+      "INPUT": ".",
+      "FLOATLIST": ".。·,0,0,。"
+    },
+    {
+      "id": "KEY_34",
+      "INPUT": ",",
+      "FLOATLIST": ",，,0,0,，"
+    },
+    {
+      "id": "KEY_35",
+      "INPUT": "?",
+      "FLOATLIST": "¿？?,2,2,？"
+    },
+    {
+      "id": "KEY_36",
+      "INPUT": "!",
+      "FLOATLIST": "¡！!,2,2,！"
+    },
+    {
+      "id": "KEY_37",
+      "INPUT": "…",
+      "FLOATLIST": "⋯…,1,1"
+    },
+    {
+      "id": "KEY_38",
+      "INPUT": "'",
+      "FLOATLIST": "`‘’',3,3"
+    }
+  ]
+}

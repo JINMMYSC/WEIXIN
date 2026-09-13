@@ -1,0 +1,557 @@
+{
+  "name": "full_symbol2",
+  "baseSize": [
+    414.0,
+    224.0
+  ],
+  "sections": {
+    "PANEL": {
+      "BASESIZE": "414,224"
+    },
+    "KEY_00": {
+      "RECT": "5,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_01": {
+      "RECT": "46,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_02": {
+      "RECT": "87,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_03": {
+      "RECT": "128,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_04": {
+      "RECT": "169,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_05": {
+      "RECT": "210,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_06": {
+      "RECT": "251,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_07": {
+      "RECT": "292,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_08": {
+      "RECT": "333,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_09": {
+      "RECT": "374,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_10": {
+      "RECT": "5,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_11": {
+      "RECT": "46,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_12": {
+      "RECT": "87,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_13": {
+      "RECT": "128,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_14": {
+      "RECT": "169,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_15": {
+      "RECT": "210,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_16": {
+      "RECT": "251,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_17": {
+      "RECT": "292,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_18": {
+      "RECT": "333,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_19": {
+      "RECT": "374,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_20": {
+      "RECT": "66,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_21": {
+      "RECT": "114,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_22": {
+      "RECT": "162,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_23": {
+      "RECT": "210,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_24": {
+      "RECT": "258,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_25": {
+      "RECT": "306,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_26": {
+      "RECT": "354,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_27": {
+      "RECT": "402,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic"
+    },
+    "KEY_123": {
+      "RECT": "5,117,46,46",
+      "STY": "STYLE_123",
+      "FUNC": "123"
+    },
+    "KEY_DEL": {
+      "RECT": "450,117,46,46",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL"
+    },
+    "KEY_BACK": {
+      "RECT": "5,173,46,46",
+      "STY": "STYLE_BACK_GREEN",
+      "FUNC": "backToInput"
+    },
+    "VIEW_CATEGORYBAR": {
+      "RECT": "57,173,46,46",
+      "func": "categorybar"
+    }
+  },
+  "items": [
+    {
+      "id": "KEY_00",
+      "RECT": "5,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        5.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_01",
+      "RECT": "46,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        46.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_02",
+      "RECT": "87,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        87.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_03",
+      "RECT": "128,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        128.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_04",
+      "RECT": "169,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        169.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_05",
+      "RECT": "210,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        210.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_06",
+      "RECT": "251,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        251.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_07",
+      "RECT": "292,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        292.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_08",
+      "RECT": "333,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        333.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_09",
+      "RECT": "374,5,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        374.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_10",
+      "RECT": "5,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        5.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_11",
+      "RECT": "46,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        46.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_12",
+      "RECT": "87,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        87.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_13",
+      "RECT": "128,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        128.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_14",
+      "RECT": "169,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        169.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_15",
+      "RECT": "210,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        210.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_16",
+      "RECT": "251,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        251.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_17",
+      "RECT": "292,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        292.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_18",
+      "RECT": "333,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        333.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_19",
+      "RECT": "374,62,35,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        374.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_20",
+      "RECT": "66,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        66.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_21",
+      "RECT": "114,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        114.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_22",
+      "RECT": "162,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        162.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_23",
+      "RECT": "210,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        210.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_24",
+      "RECT": "258,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        258.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_25",
+      "RECT": "306,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        306.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_26",
+      "RECT": "354,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        354.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_27",
+      "RECT": "402,117,42,46",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "dynamic",
+      "rect": [
+        402.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_123",
+      "RECT": "5,117,46,46",
+      "STY": "STYLE_123",
+      "FUNC": "123",
+      "rect": [
+        5.0,
+        117.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_DEL",
+      "RECT": "450,117,46,46",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL",
+      "rect": [
+        450.0,
+        117.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_BACK",
+      "RECT": "5,173,46,46",
+      "STY": "STYLE_BACK_GREEN",
+      "FUNC": "backToInput",
+      "rect": [
+        5.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "VIEW_CATEGORYBAR",
+      "RECT": "57,173,46,46",
+      "func": "categorybar",
+      "rect": [
+        57.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    }
+  ],
+  "inherits": null
+}

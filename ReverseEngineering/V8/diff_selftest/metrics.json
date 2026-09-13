@@ -1,0 +1,13 @@
+{
+  "size": [
+    828,
+    448
+  ],
+  "crop": null,
+  "mae_0_255": 0.0,
+  "rmse_0_255": 0.0,
+  "exact_pixel_fraction": 1.0,
+  "pixels_over_threshold_fraction": 0.0,
+  "threshold": 12.0,
+  "difference_bbox": null
+}

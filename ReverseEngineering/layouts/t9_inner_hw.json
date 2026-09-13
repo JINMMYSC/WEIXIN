@@ -1,0 +1,51 @@
+{
+  "source": "t9_inner_hw.ini",
+  "sections": [
+    {
+      "name": "PANEL",
+      "values": {
+        "INHERIT": "t9_pinyin"
+      }
+    },
+    {
+      "name": "KEY_DEL",
+      "values": {
+        "FUNC": "flex",
+        "STY": "STYLE_GRAY"
+      }
+    },
+    {
+      "name": "KEY_ABC",
+      "values": {
+        "FUNC": "delete",
+        "STY": "STYLE_DEL",
+        "FLOATSTY": "0"
+      }
+    },
+    {
+      "name": "KEY_SYMB",
+      "values": {
+        "STY": "STYLE_BACK_GREEN",
+        "TITLE": ""
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "KEY_DEL",
+      "FUNC": "flex",
+      "STY": "STYLE_GRAY"
+    },
+    {
+      "id": "KEY_ABC",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL",
+      "FLOATSTY": "0"
+    },
+    {
+      "id": "KEY_SYMB",
+      "STY": "STYLE_BACK_GREEN",
+      "TITLE": ""
+    }
+  ]
+}

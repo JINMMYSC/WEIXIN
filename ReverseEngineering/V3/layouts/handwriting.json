@@ -1,0 +1,217 @@
+{
+  "name": "handwriting",
+  "baseSize": [
+    375.0,
+    204.0
+  ],
+  "sections": {
+    "PANEL": {
+      "BASESIZE": "375,204"
+    },
+    "KEY_DEL": {
+      "RECT": "330,0,42,40",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL",
+      "SHADOW": "",
+      "BORDER": "",
+      "BG": "",
+      "HLBG": ""
+    },
+    "VIEW_LIST": {
+      "RECT": "330,43,365,60",
+      "STY": "STYLE_GRAY",
+      "FUNC": "symbols",
+      "SHADOW": "",
+      "BORDER": "",
+      "BG": "",
+      "HLBG": ""
+    },
+    "KEY_SYMB": {
+      "RECT": "3,160,42,40",
+      "STY": "STYLE_SYM",
+      "TITLE": "符号",
+      "FUNC": "fullSymbol"
+    },
+    "KEY_123": {
+      "RECT": "50,160,42,40",
+      "STY": "STYLE_123",
+      "FUNC": "123"
+    },
+    "KEY_EMOTION": {
+      "RECT": "97,160,42,40",
+      "STY": "STYLE_GRAY",
+      "FUNC": "emoji",
+      "IMG": "icon_keys_emoji"
+    },
+    "KEY_SWITCH": {
+      "RECT": "144,160,42,40",
+      "STY": "STYLE_GRAY",
+      "IMG": "icon_keys_globe",
+      "FUNC": "🌐"
+    },
+    "KEY_ENKB": {
+      "FONT": "15",
+      "RECT": "193,160,42,40",
+      "STY": "STYLE_NORMAL,STYLE_ENKB"
+    },
+    "KEY_SPACE": {
+      "RECT": "242,160,92,40",
+      "FUNC": "space",
+      "STY": "STYLE_SPACE,STYLE_SPACE_VOICEINPUT",
+      "FLOATSTY": "0",
+      "SUBTITLEPOS": "3",
+      "UPFONT": "9",
+      "DINPUT": "。",
+      "INPUT": "' '"
+    },
+    "KEY_ABC": {
+      "RECT": "334,160,42,40",
+      "STY": "STYLE_LANGSWITCH,STYLE_NORMAL",
+      "FLOATSTY": "2"
+    },
+    "KEY_RETURN": {
+      "RECT": "383,160,84,40",
+      "STY": "STYLE_RETURN",
+      "FUNC": "return"
+    }
+  },
+  "items": [
+    {
+      "id": "KEY_DEL",
+      "RECT": "330,0,42,40",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL",
+      "SHADOW": "",
+      "BORDER": "",
+      "BG": "",
+      "HLBG": "",
+      "rect": [
+        330.0,
+        0.0,
+        42.0,
+        40.0
+      ]
+    },
+    {
+      "id": "VIEW_LIST",
+      "RECT": "330,43,365,60",
+      "STY": "STYLE_GRAY",
+      "FUNC": "symbols",
+      "SHADOW": "",
+      "BORDER": "",
+      "BG": "",
+      "HLBG": "",
+      "rect": [
+        330.0,
+        43.0,
+        365.0,
+        60.0
+      ]
+    },
+    {
+      "id": "KEY_SYMB",
+      "RECT": "3,160,42,40",
+      "STY": "STYLE_SYM",
+      "TITLE": "符号",
+      "FUNC": "fullSymbol",
+      "rect": [
+        3.0,
+        160.0,
+        42.0,
+        40.0
+      ]
+    },
+    {
+      "id": "KEY_123",
+      "RECT": "50,160,42,40",
+      "STY": "STYLE_123",
+      "FUNC": "123",
+      "rect": [
+        50.0,
+        160.0,
+        42.0,
+        40.0
+      ]
+    },
+    {
+      "id": "KEY_EMOTION",
+      "RECT": "97,160,42,40",
+      "STY": "STYLE_GRAY",
+      "FUNC": "emoji",
+      "IMG": "icon_keys_emoji",
+      "rect": [
+        97.0,
+        160.0,
+        42.0,
+        40.0
+      ]
+    },
+    {
+      "id": "KEY_SWITCH",
+      "RECT": "144,160,42,40",
+      "STY": "STYLE_GRAY",
+      "IMG": "icon_keys_globe",
+      "FUNC": "🌐",
+      "rect": [
+        144.0,
+        160.0,
+        42.0,
+        40.0
+      ]
+    },
+    {
+      "id": "KEY_ENKB",
+      "FONT": "15",
+      "RECT": "193,160,42,40",
+      "STY": "STYLE_NORMAL,STYLE_ENKB",
+      "rect": [
+        193.0,
+        160.0,
+        42.0,
+        40.0
+      ]
+    },
+    {
+      "id": "KEY_SPACE",
+      "RECT": "242,160,92,40",
+      "FUNC": "space",
+      "STY": "STYLE_SPACE,STYLE_SPACE_VOICEINPUT",
+      "FLOATSTY": "0",
+      "SUBTITLEPOS": "3",
+      "UPFONT": "9",
+      "DINPUT": "。",
+      "INPUT": "' '",
+      "rect": [
+        242.0,
+        160.0,
+        92.0,
+        40.0
+      ]
+    },
+    {
+      "id": "KEY_ABC",
+      "RECT": "334,160,42,40",
+      "STY": "STYLE_LANGSWITCH,STYLE_NORMAL",
+      "FLOATSTY": "2",
+      "rect": [
+        334.0,
+        160.0,
+        42.0,
+        40.0
+      ]
+    },
+    {
+      "id": "KEY_RETURN",
+      "RECT": "383,160,84,40",
+      "STY": "STYLE_RETURN",
+      "FUNC": "return",
+      "rect": [
+        383.0,
+        160.0,
+        84.0,
+        40.0
+      ]
+    }
+  ],
+  "inherits": null
+}

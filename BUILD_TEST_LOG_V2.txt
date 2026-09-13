@@ -1,0 +1,75 @@
+== swift test ==
+Building for debugging...
+[0/13] Write sources
+[2/13] Write swift-version--1BA0962812E73E12.txt
+[4/19] Compiling WeTypeReplicaCore FeatureServices.swift
+[5/19] Compiling WeTypeReplicaCore GeneratedLayouts.swift
+[6/19] Compiling WeTypeReplicaCore IMEEngine.swift
+[7/19] Emitting module WeTypeReplicaCore
+[8/19] Compiling WeTypeReplicaCore Models.swift
+[9/19] Compiling WeTypeReplicaCore KeyboardState.swift
+[10/20] Compiling WeTypeReplicaCore ThemeTokens.swift
+[11/21] Wrapping AST for WeTypeReplicaCore for debugging
+[13/25] Compiling WeTypeReplicaCoreTests LayoutTests.swift
+[14/25] Compiling WeTypeReplicaCoreTests CoordinatorTests.swift
+[15/25] Emitting module WeTypeReplicaCoreTests
+[16/25] Compiling WeTypeReplicaCoreTests FeatureModelTests.swift
+[17/26] /mnt/data/WeTypeReplicaWork/WeTypeReplicaOverlay/.build/x86_64-unknown-linux-gnu/debug/WeTypeReplicaOverlayPackageDiscoveredTests.derived/all-discovered-tests.swift
+[18/26] Write sources
+[19/26] Wrapping AST for WeTypeReplicaCoreTests for debugging
+[21/29] Emitting module WeTypeReplicaOverlayPackageDiscoveredTests
+[22/29] Compiling WeTypeReplicaOverlayPackageDiscoveredTests all-discovered-tests.swift
+[23/29] Compiling WeTypeReplicaOverlayPackageDiscoveredTests WeTypeReplicaCoreTests.swift
+[24/30] /mnt/data/WeTypeReplicaWork/WeTypeReplicaOverlay/.build/x86_64-unknown-linux-gnu/debug/WeTypeReplicaOverlayPackageTests.derived/runner.swift
+[25/30] Write sources
+[26/30] Wrapping AST for WeTypeReplicaOverlayPackageDiscoveredTests for debugging
+[28/32] Emitting module WeTypeReplicaOverlayPackageTests
+[29/32] Compiling WeTypeReplicaOverlayPackageTests runner.swift
+[30/33] Wrapping AST for WeTypeReplicaOverlayPackageTests for debugging
+[31/33] Write Objects.LinkFileList
+[32/33] Linking WeTypeReplicaOverlayPackageTests.xctest
+Build complete! (9.20s)
+Test Suite 'All tests' started at 2026-09-13 00:26:49.692
+Test Suite 'debug.xctest' started at 2026-09-13 00:26:49.694
+Test Suite 'CoordinatorTests' started at 2026-09-13 00:26:49.694
+Test Case 'CoordinatorTests.testCompositionGoesToEngineAndCandidateCommitsToDocument' started at 2026-09-13 00:26:49.694
+Test Case 'CoordinatorTests.testCompositionGoesToEngineAndCandidateCommitsToDocument' passed (0.001 seconds)
+Test Case 'CoordinatorTests.testDeletePrefersCompositionBeforeHostDocument' started at 2026-09-13 00:26:49.695
+Test Case 'CoordinatorTests.testDeletePrefersCompositionBeforeHostDocument' passed (0.101 seconds)
+Test Suite 'CoordinatorTests' passed at 2026-09-13 00:26:49.795
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.102 (0.102) seconds
+Test Suite 'FeatureModelTests' started at 2026-09-13 00:26:49.796
+Test Case 'FeatureModelTests.testClipboardItemPinStateRoundTrip' started at 2026-09-13 00:26:49.796
+Test Case 'FeatureModelTests.testClipboardItemPinStateRoundTrip' passed (0.001 seconds)
+Test Case 'FeatureModelTests.testTransferProgressCarriesPeerAndFraction' started at 2026-09-13 00:26:49.796
+Test Case 'FeatureModelTests.testTransferProgressCarriesPeerAndFraction' passed (0.0 seconds)
+Test Suite 'FeatureModelTests' passed at 2026-09-13 00:26:49.797
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'LayoutTests' started at 2026-09-13 00:26:49.797
+Test Case 'LayoutTests.testNestedPanelReturn' started at 2026-09-13 00:26:49.797
+Test Case 'LayoutTests.testNestedPanelReturn' passed (0.0 seconds)
+Test Case 'LayoutTests.testPanelReturnPreservesInputMode' started at 2026-09-13 00:26:49.797
+Test Case 'LayoutTests.testPanelReturnPreservesInputMode' passed (0.0 seconds)
+Test Case 'LayoutTests.testT26GeometryMatches353' started at 2026-09-13 00:26:49.797
+Test Case 'LayoutTests.testT26GeometryMatches353' passed (0.0 seconds)
+Test Case 'LayoutTests.testT9GeometryMatches353' started at 2026-09-13 00:26:49.797
+Test Case 'LayoutTests.testT9GeometryMatches353' passed (0.0 seconds)
+Test Suite 'LayoutTests' passed at 2026-09-13 00:26:49.797
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'debug.xctest' passed at 2026-09-13 00:26:49.797
+	 Executed 8 tests, with 0 failures (0 unexpected) in 0.103 (0.103) seconds
+Test Suite 'All tests' passed at 2026-09-13 00:26:49.797
+	 Executed 8 tests, with 0 failures (0 unexpected) in 0.103 (0.103) seconds
+◇ Test run started.
+↳ Testing Library Version: 6.2.1 (c9d57c83568b06d)
+↳ Target Platform: x86_64-unknown-linux-gnu
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.
+
+== iOS parser ==
+PASS: iOSOverlay syntax parse
+
+== python tools compile ==
+PASS: Python tools compile
+
+== resolved layout count ==
+0

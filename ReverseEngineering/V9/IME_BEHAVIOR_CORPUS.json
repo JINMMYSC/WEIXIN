@@ -1,0 +1,1406 @@
+{
+  "formatVersion": 2,
+  "source": "clean-room-black-box-corpus-v9",
+  "probes": [
+    {
+      "id": "pinyin-nihao",
+      "category": "pinyin",
+      "keys": [
+        "n",
+        "i",
+        "h",
+        "a",
+        "o"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-zhongguo",
+      "category": "pinyin",
+      "keys": [
+        "z",
+        "h",
+        "o",
+        "n",
+        "g",
+        "g",
+        "u",
+        "o"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-shijie",
+      "category": "pinyin",
+      "keys": [
+        "s",
+        "h",
+        "i",
+        "j",
+        "i",
+        "e"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-weixin",
+      "category": "pinyin",
+      "keys": [
+        "w",
+        "e",
+        "i",
+        "x",
+        "i",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-shurufa",
+      "category": "pinyin",
+      "keys": [
+        "s",
+        "h",
+        "u",
+        "r",
+        "u",
+        "f",
+        "a"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-changan",
+      "category": "segmentation",
+      "keys": [
+        "c",
+        "h",
+        "a",
+        "n",
+        "g",
+        "a",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-xian",
+      "category": "segmentation",
+      "keys": [
+        "x",
+        "i",
+        "a",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-fangan",
+      "category": "segmentation",
+      "keys": [
+        "f",
+        "a",
+        "n",
+        "g",
+        "a",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-renmin",
+      "category": "ranking",
+      "keys": [
+        "r",
+        "e",
+        "n",
+        "m",
+        "i",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-jintian",
+      "category": "ranking",
+      "keys": [
+        "j",
+        "i",
+        "n",
+        "t",
+        "i",
+        "a",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-mingtian",
+      "category": "ranking",
+      "keys": [
+        "m",
+        "i",
+        "n",
+        "g",
+        "t",
+        "i",
+        "a",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-gongzuo",
+      "category": "ranking",
+      "keys": [
+        "g",
+        "o",
+        "n",
+        "g",
+        "z",
+        "u",
+        "o"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-pengyou",
+      "category": "ranking",
+      "keys": [
+        "p",
+        "e",
+        "n",
+        "g",
+        "y",
+        "o",
+        "u"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-xihuan",
+      "category": "ranking",
+      "keys": [
+        "x",
+        "i",
+        "h",
+        "u",
+        "a",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-xiexie",
+      "category": "ranking",
+      "keys": [
+        "x",
+        "i",
+        "e",
+        "x",
+        "i",
+        "e"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-keyi",
+      "category": "ranking",
+      "keys": [
+        "k",
+        "e",
+        "y",
+        "i"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-shenme",
+      "category": "ranking",
+      "keys": [
+        "s",
+        "h",
+        "e",
+        "n",
+        "m",
+        "e"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-zenme",
+      "category": "ranking",
+      "keys": [
+        "z",
+        "e",
+        "n",
+        "m",
+        "e"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-yinggai",
+      "category": "ranking",
+      "keys": [
+        "y",
+        "i",
+        "n",
+        "g",
+        "g",
+        "a",
+        "i"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "pinyin-yijing",
+      "category": "ranking",
+      "keys": [
+        "y",
+        "i",
+        "j",
+        "i",
+        "n",
+        "g"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "fuzzy-z-c",
+      "category": "fuzzy",
+      "keys": [
+        "z",
+        "i",
+        "c",
+        "i"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "fuzzy-zh-z",
+      "category": "fuzzy",
+      "keys": [
+        "z",
+        "i",
+        "s",
+        "i"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "fuzzy-n-l",
+      "category": "fuzzy",
+      "keys": [
+        "n",
+        "a",
+        "l",
+        "i"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "fuzzy-en-eng",
+      "category": "fuzzy",
+      "keys": [
+        "s",
+        "h",
+        "e",
+        "n",
+        "g",
+        "r",
+        "e",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "longphrase-1",
+      "category": "longPhrase",
+      "keys": [
+        "j",
+        "i",
+        "n",
+        "t",
+        "i",
+        "a",
+        "n",
+        "t",
+        "i",
+        "a",
+        "n",
+        "q",
+        "i",
+        "h",
+        "e",
+        "n",
+        "h",
+        "a",
+        "o"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "longphrase-2",
+      "category": "longPhrase",
+      "keys": [
+        "w",
+        "o",
+        "m",
+        "e",
+        "n",
+        "y",
+        "i",
+        "q",
+        "i",
+        "q",
+        "u",
+        "c",
+        "h",
+        "i",
+        "f",
+        "a",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "longphrase-3",
+      "category": "longPhrase",
+      "keys": [
+        "w",
+        "o",
+        "x",
+        "i",
+        "a",
+        "n",
+        "g",
+        "z",
+        "h",
+        "i",
+        "d",
+        "a",
+        "o",
+        "w",
+        "e",
+        "i",
+        "s",
+        "h",
+        "e",
+        "n",
+        "m",
+        "e"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "english-mixed-1",
+      "category": "mixed",
+      "keys": [
+        "i",
+        "p",
+        "h",
+        "o",
+        "n",
+        "e"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "english-mixed-2",
+      "category": "mixed",
+      "keys": [
+        "w",
+        "e",
+        "c",
+        "h",
+        "a",
+        "t"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "english-mixed-3",
+      "category": "mixed",
+      "keys": [
+        "o",
+        "p",
+        "e",
+        "n",
+        "a",
+        "i"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "seg-beijing",
+      "category": "segmentation",
+      "keys": [
+        "b",
+        "e",
+        "i",
+        "j",
+        "i",
+        "n",
+        "g"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "seg-xiangan",
+      "category": "segmentation",
+      "keys": [
+        "x",
+        "i",
+        "a",
+        "n",
+        "g",
+        "a",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "seg-fangan2",
+      "category": "segmentation",
+      "keys": [
+        "f",
+        "a",
+        "n",
+        "g",
+        "a",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "seg-shangan",
+      "category": "segmentation",
+      "keys": [
+        "s",
+        "h",
+        "a",
+        "n",
+        "g",
+        "a",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "rank-shanghai",
+      "category": "segmentation",
+      "keys": [
+        "s",
+        "h",
+        "a",
+        "n",
+        "g",
+        "h",
+        "a",
+        "i"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "rank-guangzhou",
+      "category": "segmentation",
+      "keys": [
+        "g",
+        "u",
+        "a",
+        "n",
+        "g",
+        "z",
+        "h",
+        "o",
+        "u"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "rank-shenzhen",
+      "category": "segmentation",
+      "keys": [
+        "s",
+        "h",
+        "e",
+        "n",
+        "z",
+        "h",
+        "e",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "rank-gongsi",
+      "category": "segmentation",
+      "keys": [
+        "g",
+        "o",
+        "n",
+        "g",
+        "s",
+        "i"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "rank-shijian",
+      "category": "segmentation",
+      "keys": [
+        "s",
+        "h",
+        "i",
+        "j",
+        "i",
+        "a",
+        "n"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "rank-wenti",
+      "category": "segmentation",
+      "keys": [
+        "w",
+        "e",
+        "n",
+        "t",
+        "i"
+      ],
+      "candidateLimit": 10
+    },
+    {
+      "id": "t9-nihao",
+      "category": "t9",
+      "keys": [
+        "6",
+        "4",
+        "4",
+        "2",
+        "6"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "t9-zhongguo",
+      "category": "t9",
+      "keys": [
+        "9",
+        "4",
+        "6",
+        "6",
+        "4",
+        "4",
+        "8",
+        "6"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "t9-weixin",
+      "category": "t9",
+      "keys": [
+        "9",
+        "3",
+        "4",
+        "9",
+        "4",
+        "6"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "t9-shurufa",
+      "category": "t9",
+      "keys": [
+        "7",
+        "4",
+        "8",
+        "7",
+        "8",
+        "3",
+        "2"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "t9-jintian",
+      "category": "t9",
+      "keys": [
+        "5",
+        "4",
+        "6",
+        "8",
+        "4",
+        "2",
+        "6"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "t9-mingtian",
+      "category": "t9",
+      "keys": [
+        "6",
+        "4",
+        "6",
+        "4",
+        "8",
+        "4",
+        "2",
+        "6"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "t9-gongzuo",
+      "category": "t9",
+      "keys": [
+        "4",
+        "6",
+        "6",
+        "4",
+        "9",
+        "8",
+        "6"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "t9-pengyou",
+      "category": "t9",
+      "keys": [
+        "7",
+        "3",
+        "6",
+        "4",
+        "9",
+        "6",
+        "8"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "t9-xiexie",
+      "category": "t9",
+      "keys": [
+        "9",
+        "4",
+        "3",
+        "9",
+        "4",
+        "3"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "t9-shenme",
+      "category": "t9",
+      "keys": [
+        "7",
+        "4",
+        "3",
+        "6",
+        "6",
+        "3"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "t9-yinggai",
+      "category": "t9",
+      "keys": [
+        "9",
+        "4",
+        "6",
+        "4",
+        "4",
+        "2",
+        "4"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "t9-beijing",
+      "category": "t9",
+      "keys": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "4",
+        "6",
+        "4"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "t9-shanghai",
+      "category": "t9",
+      "keys": [
+        "7",
+        "4",
+        "2",
+        "6",
+        "4",
+        "4",
+        "2",
+        "4"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "t9-guangzhou",
+      "category": "t9",
+      "keys": [
+        "4",
+        "8",
+        "2",
+        "6",
+        "4",
+        "9",
+        "4",
+        "6",
+        "8"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "t9-shenzhen",
+      "category": "t9",
+      "keys": [
+        "7",
+        "4",
+        "3",
+        "6",
+        "9",
+        "4",
+        "3",
+        "6"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin9",
+      "notes": "Replay as taps on the actual WeType 3.5.3 T9 ABC/DEF… keys."
+    },
+    {
+      "id": "shuangpin-1",
+      "category": "shuangpin",
+      "keys": [
+        "ni",
+        "hao"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "shuangpin",
+      "notes": "Canonical syllable tokens; map through the same selected shuangpin schema on both sides."
+    },
+    {
+      "id": "shuangpin-2",
+      "category": "shuangpin",
+      "keys": [
+        "zhong",
+        "guo"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "shuangpin",
+      "notes": "Canonical syllable tokens; map through the same selected shuangpin schema on both sides."
+    },
+    {
+      "id": "shuangpin-3",
+      "category": "shuangpin",
+      "keys": [
+        "wei",
+        "xin"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "shuangpin",
+      "notes": "Canonical syllable tokens; map through the same selected shuangpin schema on both sides."
+    },
+    {
+      "id": "shuangpin-4",
+      "category": "shuangpin",
+      "keys": [
+        "shu",
+        "ru",
+        "fa"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "shuangpin",
+      "notes": "Canonical syllable tokens; map through the same selected shuangpin schema on both sides."
+    },
+    {
+      "id": "shuangpin-5",
+      "category": "shuangpin",
+      "keys": [
+        "jin",
+        "tian"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "shuangpin",
+      "notes": "Canonical syllable tokens; map through the same selected shuangpin schema on both sides."
+    },
+    {
+      "id": "shuangpin-6",
+      "category": "shuangpin",
+      "keys": [
+        "ming",
+        "tian"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "shuangpin",
+      "notes": "Canonical syllable tokens; map through the same selected shuangpin schema on both sides."
+    },
+    {
+      "id": "shuangpin-7",
+      "category": "shuangpin",
+      "keys": [
+        "gong",
+        "zuo"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "shuangpin",
+      "notes": "Canonical syllable tokens; map through the same selected shuangpin schema on both sides."
+    },
+    {
+      "id": "shuangpin-8",
+      "category": "shuangpin",
+      "keys": [
+        "peng",
+        "you"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "shuangpin",
+      "notes": "Canonical syllable tokens; map through the same selected shuangpin schema on both sides."
+    },
+    {
+      "id": "shuangpin-9",
+      "category": "shuangpin",
+      "keys": [
+        "xie",
+        "xie"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "shuangpin",
+      "notes": "Canonical syllable tokens; map through the same selected shuangpin schema on both sides."
+    },
+    {
+      "id": "shuangpin-10",
+      "category": "shuangpin",
+      "keys": [
+        "shen",
+        "me"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "shuangpin",
+      "notes": "Canonical syllable tokens; map through the same selected shuangpin schema on both sides."
+    },
+    {
+      "id": "wubi-ni",
+      "category": "wubi",
+      "keys": [
+        "w",
+        "q"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "wubi86",
+      "notes": "Representative Wubi86 code; compare displayed candidate ordering."
+    },
+    {
+      "id": "wubi-hao",
+      "category": "wubi",
+      "keys": [
+        "v",
+        "b"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "wubi86",
+      "notes": "Representative Wubi86 code; compare displayed candidate ordering."
+    },
+    {
+      "id": "wubi-zhong",
+      "category": "wubi",
+      "keys": [
+        "k"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "wubi86",
+      "notes": "Representative Wubi86 code; compare displayed candidate ordering."
+    },
+    {
+      "id": "wubi-guo",
+      "category": "wubi",
+      "keys": [
+        "l",
+        "g",
+        "y",
+        "i"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "wubi86",
+      "notes": "Representative Wubi86 code; compare displayed candidate ordering."
+    },
+    {
+      "id": "wubi-ren",
+      "category": "wubi",
+      "keys": [
+        "w"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "wubi86",
+      "notes": "Representative Wubi86 code; compare displayed candidate ordering."
+    },
+    {
+      "id": "wubi-min",
+      "category": "wubi",
+      "keys": [
+        "n",
+        "a",
+        "v"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "wubi86",
+      "notes": "Representative Wubi86 code; compare displayed candidate ordering."
+    },
+    {
+      "id": "wubi-da",
+      "category": "wubi",
+      "keys": [
+        "d",
+        "d"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "wubi86",
+      "notes": "Representative Wubi86 code; compare displayed candidate ordering."
+    },
+    {
+      "id": "wubi-xiao",
+      "category": "wubi",
+      "keys": [
+        "i",
+        "h",
+        "t",
+        "y"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "wubi86",
+      "notes": "Representative Wubi86 code; compare displayed candidate ordering."
+    },
+    {
+      "id": "wubi-shang",
+      "category": "wubi",
+      "keys": [
+        "h",
+        "h",
+        "g",
+        "g"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "wubi86",
+      "notes": "Representative Wubi86 code; compare displayed candidate ordering."
+    },
+    {
+      "id": "wubi-xia",
+      "category": "wubi",
+      "keys": [
+        "g",
+        "h",
+        "i"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "wubi86",
+      "notes": "Representative Wubi86 code; compare displayed candidate ordering."
+    },
+    {
+      "id": "stroke-1",
+      "category": "stroke",
+      "keys": [
+        "b"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "stroke",
+      "notes": "Internal stroke sequence from shipped 3.5.3 layout: 一/丨/丿/丶/ㄥ -> b/c/d/e/f."
+    },
+    {
+      "id": "stroke-2",
+      "category": "stroke",
+      "keys": [
+        "c"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "stroke",
+      "notes": "Internal stroke sequence from shipped 3.5.3 layout: 一/丨/丿/丶/ㄥ -> b/c/d/e/f."
+    },
+    {
+      "id": "stroke-3",
+      "category": "stroke",
+      "keys": [
+        "d"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "stroke",
+      "notes": "Internal stroke sequence from shipped 3.5.3 layout: 一/丨/丿/丶/ㄥ -> b/c/d/e/f."
+    },
+    {
+      "id": "stroke-4",
+      "category": "stroke",
+      "keys": [
+        "e"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "stroke",
+      "notes": "Internal stroke sequence from shipped 3.5.3 layout: 一/丨/丿/丶/ㄥ -> b/c/d/e/f."
+    },
+    {
+      "id": "stroke-5",
+      "category": "stroke",
+      "keys": [
+        "f"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "stroke",
+      "notes": "Internal stroke sequence from shipped 3.5.3 layout: 一/丨/丿/丶/ㄥ -> b/c/d/e/f."
+    },
+    {
+      "id": "stroke-6",
+      "category": "stroke",
+      "keys": [
+        "b",
+        "d"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "stroke",
+      "notes": "Internal stroke sequence from shipped 3.5.3 layout: 一/丨/丿/丶/ㄥ -> b/c/d/e/f."
+    },
+    {
+      "id": "stroke-7",
+      "category": "stroke",
+      "keys": [
+        "b",
+        "e"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "stroke",
+      "notes": "Internal stroke sequence from shipped 3.5.3 layout: 一/丨/丿/丶/ㄥ -> b/c/d/e/f."
+    },
+    {
+      "id": "stroke-8",
+      "category": "stroke",
+      "keys": [
+        "b",
+        "c",
+        "d",
+        "f"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "stroke",
+      "notes": "Internal stroke sequence from shipped 3.5.3 layout: 一/丨/丿/丶/ㄥ -> b/c/d/e/f."
+    },
+    {
+      "id": "stroke-9",
+      "category": "stroke",
+      "keys": [
+        "b",
+        "b",
+        "d",
+        "e"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "stroke",
+      "notes": "Internal stroke sequence from shipped 3.5.3 layout: 一/丨/丿/丶/ㄥ -> b/c/d/e/f."
+    },
+    {
+      "id": "stroke-10",
+      "category": "stroke",
+      "keys": [
+        "d",
+        "e",
+        "f",
+        "b"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "stroke",
+      "notes": "Internal stroke sequence from shipped 3.5.3 layout: 一/丨/丿/丶/ㄥ -> b/c/d/e/f."
+    },
+    {
+      "id": "learning-1-jianyu",
+      "category": "learning",
+      "keys": [
+        "j",
+        "i",
+        "a",
+        "n",
+        "y",
+        "u"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "repeatCount": 5,
+      "selectCandidateIndex": 5,
+      "notes": "Capture before each repeat and after final commit to measure personalization persistence."
+    },
+    {
+      "id": "learning-2-gongzuo",
+      "category": "learning",
+      "keys": [
+        "g",
+        "o",
+        "n",
+        "g",
+        "z",
+        "u",
+        "o"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "repeatCount": 5,
+      "selectCandidateIndex": 2,
+      "notes": "Capture before each repeat and after final commit to measure personalization persistence."
+    },
+    {
+      "id": "learning-3-pengyou",
+      "category": "learning",
+      "keys": [
+        "p",
+        "e",
+        "n",
+        "g",
+        "y",
+        "o",
+        "u"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "repeatCount": 5,
+      "selectCandidateIndex": 2,
+      "notes": "Capture before each repeat and after final commit to measure personalization persistence."
+    },
+    {
+      "id": "learning-4-shurufa",
+      "category": "learning",
+      "keys": [
+        "s",
+        "h",
+        "u",
+        "r",
+        "u",
+        "f",
+        "a"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "repeatCount": 5,
+      "selectCandidateIndex": 2,
+      "notes": "Capture before each repeat and after final commit to measure personalization persistence."
+    },
+    {
+      "id": "learning-5-weixin",
+      "category": "learning",
+      "keys": [
+        "w",
+        "e",
+        "i",
+        "x",
+        "i",
+        "n"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "repeatCount": 5,
+      "selectCandidateIndex": 2,
+      "notes": "Capture before each repeat and after final commit to measure personalization persistence."
+    },
+    {
+      "id": "learning-6-jintian",
+      "category": "learning",
+      "keys": [
+        "j",
+        "i",
+        "n",
+        "t",
+        "i",
+        "a",
+        "n"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "repeatCount": 5,
+      "selectCandidateIndex": 2,
+      "notes": "Capture before each repeat and after final commit to measure personalization persistence."
+    },
+    {
+      "id": "learning-7-shanghai",
+      "category": "learning",
+      "keys": [
+        "s",
+        "h",
+        "a",
+        "n",
+        "g",
+        "h",
+        "a",
+        "i"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "repeatCount": 5,
+      "selectCandidateIndex": 2,
+      "notes": "Capture before each repeat and after final commit to measure personalization persistence."
+    },
+    {
+      "id": "learning-8-beijing",
+      "category": "learning",
+      "keys": [
+        "b",
+        "e",
+        "i",
+        "j",
+        "i",
+        "n",
+        "g"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "repeatCount": 5,
+      "selectCandidateIndex": 2,
+      "notes": "Capture before each repeat and after final commit to measure personalization persistence."
+    },
+    {
+      "id": "correction-nihqo",
+      "category": "correction",
+      "keys": [
+        "n",
+        "i",
+        "h",
+        "q",
+        "o"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "notes": "Capture correction candidates, auto-fix state and committed output."
+    },
+    {
+      "id": "correction-zhonggou",
+      "category": "correction",
+      "keys": [
+        "z",
+        "h",
+        "o",
+        "n",
+        "g",
+        "g",
+        "o",
+        "u"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "notes": "Capture correction candidates, auto-fix state and committed output."
+    },
+    {
+      "id": "correction-weixni",
+      "category": "correction",
+      "keys": [
+        "w",
+        "e",
+        "i",
+        "x",
+        "n",
+        "i"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "notes": "Capture correction candidates, auto-fix state and committed output."
+    },
+    {
+      "id": "correction-shurufa",
+      "category": "correction",
+      "keys": [
+        "s",
+        "h",
+        "u",
+        "r",
+        "u",
+        "f",
+        "a"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "notes": "Capture correction candidates, auto-fix state and committed output."
+    },
+    {
+      "id": "correction-jintina",
+      "category": "correction",
+      "keys": [
+        "j",
+        "i",
+        "n",
+        "t",
+        "i",
+        "n",
+        "a"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "notes": "Capture correction candidates, auto-fix state and committed output."
+    },
+    {
+      "id": "correction-pengyo",
+      "category": "correction",
+      "keys": [
+        "p",
+        "e",
+        "n",
+        "g",
+        "y",
+        "o"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "notes": "Capture correction candidates, auto-fix state and committed output."
+    },
+    {
+      "id": "correction-shenem",
+      "category": "correction",
+      "keys": [
+        "s",
+        "h",
+        "e",
+        "n",
+        "e",
+        "m"
+      ],
+      "candidateLimit": 10,
+      "inputMode": "pinyin26",
+      "notes": "Capture correction candidates, auto-fix state and committed output."
+    }
+  ]
+}

@@ -1,0 +1,221 @@
+{
+  "name": "numpad",
+  "baseSize": [
+    375.0,
+    214.0
+  ],
+  "sections": {
+    "PANEL": {
+      "BASESIZE": "375,214"
+    },
+    "KEY_1": {
+      "RECT": "3,5,119,46",
+      "INPUT": "1",
+      "STY": "STYLE_NUMPAD"
+    },
+    "KEY_2": {
+      "RECT": "128,5,119,46",
+      "INPUT": "2",
+      "STY": "STYLE_NUMPAD"
+    },
+    "KEY_3": {
+      "RECT": "253,5,119,46",
+      "INPUT": "3",
+      "STY": "STYLE_NUMPAD"
+    },
+    "KEY_4": {
+      "RECT": "3,58,119,46",
+      "INPUT": "4",
+      "STY": "STYLE_NUMPAD"
+    },
+    "KEY_5": {
+      "RECT": "128,58,119,46",
+      "INPUT": "5",
+      "STY": "STYLE_NUMPAD"
+    },
+    "KEY_6": {
+      "RECT": "253,58,119,46",
+      "INPUT": "6",
+      "STY": "STYLE_NUMPAD"
+    },
+    "KEY_7": {
+      "RECT": "3,111,119,46",
+      "INPUT": "7",
+      "STY": "STYLE_NUMPAD"
+    },
+    "KEY_8": {
+      "RECT": "128,111,119,46",
+      "INPUT": "8",
+      "STY": "STYLE_NUMPAD"
+    },
+    "KEY_9": {
+      "RECT": "253,111,119,46",
+      "INPUT": "9",
+      "STY": "STYLE_NUMPAD"
+    },
+    "KEY_.": {
+      "RECT": "3,164,119,46",
+      "INPUT": ".",
+      "STY": "STYLE_GRAY",
+      "FONT": "Medium,20"
+    },
+    "KEY_0": {
+      "RECT": "128,164,119,46",
+      "INPUT": "0",
+      "STY": "STYLE_NUMPAD"
+    },
+    "KEY_DEL": {
+      "RECT": "253,164,119,46",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL"
+    }
+  },
+  "items": [
+    {
+      "id": "KEY_1",
+      "RECT": "3,5,119,46",
+      "INPUT": "1",
+      "STY": "STYLE_NUMPAD",
+      "rect": [
+        3.0,
+        5.0,
+        119.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_2",
+      "RECT": "128,5,119,46",
+      "INPUT": "2",
+      "STY": "STYLE_NUMPAD",
+      "rect": [
+        128.0,
+        5.0,
+        119.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_3",
+      "RECT": "253,5,119,46",
+      "INPUT": "3",
+      "STY": "STYLE_NUMPAD",
+      "rect": [
+        253.0,
+        5.0,
+        119.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_4",
+      "RECT": "3,58,119,46",
+      "INPUT": "4",
+      "STY": "STYLE_NUMPAD",
+      "rect": [
+        3.0,
+        58.0,
+        119.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_5",
+      "RECT": "128,58,119,46",
+      "INPUT": "5",
+      "STY": "STYLE_NUMPAD",
+      "rect": [
+        128.0,
+        58.0,
+        119.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_6",
+      "RECT": "253,58,119,46",
+      "INPUT": "6",
+      "STY": "STYLE_NUMPAD",
+      "rect": [
+        253.0,
+        58.0,
+        119.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_7",
+      "RECT": "3,111,119,46",
+      "INPUT": "7",
+      "STY": "STYLE_NUMPAD",
+      "rect": [
+        3.0,
+        111.0,
+        119.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_8",
+      "RECT": "128,111,119,46",
+      "INPUT": "8",
+      "STY": "STYLE_NUMPAD",
+      "rect": [
+        128.0,
+        111.0,
+        119.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_9",
+      "RECT": "253,111,119,46",
+      "INPUT": "9",
+      "STY": "STYLE_NUMPAD",
+      "rect": [
+        253.0,
+        111.0,
+        119.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_.",
+      "RECT": "3,164,119,46",
+      "INPUT": ".",
+      "STY": "STYLE_GRAY",
+      "FONT": "Medium,20",
+      "rect": [
+        3.0,
+        164.0,
+        119.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_0",
+      "RECT": "128,164,119,46",
+      "INPUT": "0",
+      "STY": "STYLE_NUMPAD",
+      "rect": [
+        128.0,
+        164.0,
+        119.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_DEL",
+      "RECT": "253,164,119,46",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL",
+      "rect": [
+        253.0,
+        164.0,
+        119.0,
+        46.0
+      ]
+    }
+  ],
+  "inherits": null
+}

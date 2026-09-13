@@ -1,0 +1,60 @@
+[0/1] Planning build
+Building for debugging...
+[0/11] Write sources
+[2/11] Write swift-version--1BA0962812E73E12.txt
+[4/13] Emitting module WeTypeReplicaCore
+[5/13] Compiling WeTypeReplicaCore FeatureServices.swift
+[6/14] Wrapping AST for WeTypeReplicaCore for debugging
+[8/18] Compiling WeTypeReplicaCoreTests FeatureModelTests.swift
+[9/18] Compiling WeTypeReplicaCoreTests LayoutTests.swift
+[10/18] Emitting module WeTypeReplicaCoreTests
+[11/18] Compiling WeTypeReplicaCoreTests CoordinatorTests.swift
+[12/19] /mnt/data/WeTypeReplicaOverlay/.build/x86_64-unknown-linux-gnu/debug/WeTypeReplicaOverlayPackageDiscoveredTests.derived/all-discovered-tests.swift
+[13/20] Write sources
+[14/20] Wrapping AST for WeTypeReplicaCoreTests for debugging
+[16/23] Compiling WeTypeReplicaOverlayPackageDiscoveredTests WeTypeReplicaCoreTests.swift
+[17/23] Emitting module WeTypeReplicaOverlayPackageDiscoveredTests
+[18/23] Compiling WeTypeReplicaOverlayPackageDiscoveredTests all-discovered-tests.swift
+[19/24] /mnt/data/WeTypeReplicaOverlay/.build/x86_64-unknown-linux-gnu/debug/WeTypeReplicaOverlayPackageTests.derived/runner.swift
+[20/25] Write sources
+[21/25] Wrapping AST for WeTypeReplicaOverlayPackageDiscoveredTests for debugging
+[23/27] Emitting module WeTypeReplicaOverlayPackageTests
+[24/27] Compiling WeTypeReplicaOverlayPackageTests runner.swift
+[25/27] Write Objects.LinkFileList
+[26/27] Linking WeTypeReplicaOverlayPackageTests.xctest
+Build complete! (1.66s)
+Test Suite 'All tests' started at 2026-09-12 19:32:19.674
+Test Suite 'debug.xctest' started at 2026-09-12 19:32:19.676
+Test Suite 'CoordinatorTests' started at 2026-09-12 19:32:19.676
+Test Case 'CoordinatorTests.testCompositionGoesToEngineAndCandidateCommitsToDocument' started at 2026-09-12 19:32:19.676
+Test Case 'CoordinatorTests.testCompositionGoesToEngineAndCandidateCommitsToDocument' passed (0.001 seconds)
+Test Case 'CoordinatorTests.testDeletePrefersCompositionBeforeHostDocument' started at 2026-09-12 19:32:19.676
+Test Case 'CoordinatorTests.testDeletePrefersCompositionBeforeHostDocument' passed (0.0 seconds)
+Test Suite 'CoordinatorTests' passed at 2026-09-12 19:32:19.677
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'FeatureModelTests' started at 2026-09-12 19:32:19.677
+Test Case 'FeatureModelTests.testClipboardItemPinStateRoundTrip' started at 2026-09-12 19:32:19.677
+Test Case 'FeatureModelTests.testClipboardItemPinStateRoundTrip' passed (0.001 seconds)
+Test Case 'FeatureModelTests.testTransferProgressCarriesPeerAndFraction' started at 2026-09-12 19:32:19.677
+Test Case 'FeatureModelTests.testTransferProgressCarriesPeerAndFraction' passed (0.0 seconds)
+Test Suite 'FeatureModelTests' passed at 2026-09-12 19:32:19.677
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'LayoutTests' started at 2026-09-12 19:32:19.677
+Test Case 'LayoutTests.testNestedPanelReturn' started at 2026-09-12 19:32:19.677
+Test Case 'LayoutTests.testNestedPanelReturn' passed (0.0 seconds)
+Test Case 'LayoutTests.testPanelReturnPreservesInputMode' started at 2026-09-12 19:32:19.678
+Test Case 'LayoutTests.testPanelReturnPreservesInputMode' passed (0.0 seconds)
+Test Case 'LayoutTests.testT26GeometryMatches353' started at 2026-09-12 19:32:19.678
+Test Case 'LayoutTests.testT26GeometryMatches353' passed (0.0 seconds)
+Test Case 'LayoutTests.testT9GeometryMatches353' started at 2026-09-12 19:32:19.678
+Test Case 'LayoutTests.testT9GeometryMatches353' passed (0.1 seconds)
+Test Suite 'LayoutTests' passed at 2026-09-12 19:32:19.778
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.101 (0.101) seconds
+Test Suite 'debug.xctest' passed at 2026-09-12 19:32:19.778
+	 Executed 8 tests, with 0 failures (0 unexpected) in 0.102 (0.102) seconds
+Test Suite 'All tests' passed at 2026-09-12 19:32:19.778
+	 Executed 8 tests, with 0 failures (0 unexpected) in 0.102 (0.102) seconds
+◇ Test run started.
+↳ Testing Library Version: 6.2.1 (c9d57c83568b06d)
+↳ Target Platform: x86_64-unknown-linux-gnu
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.

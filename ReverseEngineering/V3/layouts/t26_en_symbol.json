@@ -1,0 +1,711 @@
+{
+  "name": "t26_en_symbol",
+  "baseSize": [
+    414.0,
+    224.0
+  ],
+  "sections": {
+    "PANEL": {
+      "BASESIZE": "414,224"
+    },
+    "KEY_11": {
+      "RECT": "5,5,35,46",
+      "INPUT": "1",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "1①❶,0,0"
+    },
+    "KEY_12": {
+      "RECT": "46,5,35,46",
+      "INPUT": "2",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "2②❷,0,0"
+    },
+    "KEY_13": {
+      "RECT": "87,5,35,46",
+      "INPUT": "3",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "3③❸,0,0"
+    },
+    "KEY_14": {
+      "RECT": "128,5,35,46",
+      "INPUT": "4",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "4④❹,0,0"
+    },
+    "KEY_15": {
+      "RECT": "169,5,35,46",
+      "INPUT": "5",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "5⑤❺,0,0"
+    },
+    "KEY_16": {
+      "RECT": "210,5,35,46",
+      "INPUT": "6",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "❻⑥6,2,2"
+    },
+    "KEY_17": {
+      "RECT": "251,5,35,46",
+      "INPUT": "7",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "❼⑦7,2,2"
+    },
+    "KEY_18": {
+      "RECT": "292,5,35,46",
+      "INPUT": "8",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "❽⑧8,2,2"
+    },
+    "KEY_19": {
+      "RECT": "333,5,35,46",
+      "INPUT": "9",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "❾⑨9,2,2"
+    },
+    "KEY_10": {
+      "RECT": "374,5,35,46",
+      "INPUT": "0",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "⓿⓪0,2,2"
+    },
+    "KEY_21": {
+      "RECT": "5,62,35,46",
+      "INPUT": "-",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "-+×÷=•,0,0"
+    },
+    "KEY_22": {
+      "RECT": "46,62,35,46",
+      "INPUT": "/",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "/／|｜\\＼,0,0,／｜＼"
+    },
+    "KEY_23": {
+      "RECT": "87,62,35,46",
+      "INPUT": ":",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": ":：,0,0,："
+    },
+    "KEY_24": {
+      "RECT": "128,62,35,46",
+      "INPUT": "_",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "_＿,0,0,＿"
+    },
+    "KEY_25": {
+      "RECT": "169,62,35,46",
+      "INPUT": "(",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "<«(（[{,2,2,("
+    },
+    "KEY_26": {
+      "RECT": "210,62,35,46",
+      "INPUT": ")",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": ">»)）]},2,2,）"
+    },
+    "KEY_27": {
+      "RECT": "251,62,35,46",
+      "INPUT": "#",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "＃#,1,1,＃"
+    },
+    "KEY_28": {
+      "RECT": "292,62,35,46",
+      "INPUT": "&",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "§＆&,2,2,＃"
+    },
+    "KEY_29": {
+      "RECT": "333,62,35,46",
+      "INPUT": "@",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": ""
+    },
+    "KEY_20": {
+      "RECT": "374,62,35,46",
+      "INPUT": "\"",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "„“”\",3,3"
+    },
+    "KEY_33": {
+      "RECT": "66,117,42,46",
+      "INPUT": ".",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": ".。·,0,0,。"
+    },
+    "KEY_34": {
+      "RECT": "114,117,42,46",
+      "INPUT": ",",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": ",，,0,0,，"
+    },
+    "KEY_35": {
+      "RECT": "162,117,42,46",
+      "INPUT": "?",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "¿？?,2,2,？"
+    },
+    "KEY_36": {
+      "RECT": "210,117,42,46",
+      "INPUT": "!",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "¡！!,2,2,！"
+    },
+    "KEY_37": {
+      "RECT": "258,117,42,46",
+      "INPUT": "…",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "⋯…,1,1"
+    },
+    "KEY_38": {
+      "RECT": "306,117,42,46",
+      "INPUT": "'",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "`‘’',3,3"
+    },
+    "KEY_SYMB": {
+      "RECT": "5,117,46,46",
+      "STY": "STYLE_SYM",
+      "TITLE": "符号",
+      "FUNC": "fullSymbol"
+    },
+    "KEY_DEL": {
+      "RECT": "363,117,46,46",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL"
+    },
+    "KEY_BACK": {
+      "RECT": "5,173,46,46",
+      "STY": "STYLE_BACK_GREEN",
+      "FUNC": "backToInput",
+      "FLOATSTY": "2"
+    },
+    "KEY_EMOTION": {
+      "RECT": "57,173,46,46",
+      "STY": "STYLE_GRAY",
+      "FUNC": "emoji",
+      "IMG": "icon_keys_emoji"
+    },
+    "KEY_T9_123": {
+      "RECT": "109,173,46,46",
+      "STY": "STYLE_NORMAL",
+      "IMG": "icon_keys_number9",
+      "FUNC": "123"
+    },
+    "KEY_SPACE": {
+      "RECT": "161,173,46,46",
+      "FUNC": "space",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "' '"
+    },
+    "KEY_NEWLINE": {
+      "RECT": "213,173,46,46",
+      "STY": "STYLE_NORMAL",
+      "TITLE": "换行",
+      "FONT": "14",
+      "FUNC": "newline"
+    },
+    "KEY_ENTER": {
+      "RECT": "317,173,86,46",
+      "STY": "STYLE_RETURN",
+      "FUNC": "return"
+    }
+  },
+  "items": [
+    {
+      "id": "KEY_11",
+      "RECT": "5,5,35,46",
+      "INPUT": "1",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "1①❶,0,0",
+      "rect": [
+        5.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_12",
+      "RECT": "46,5,35,46",
+      "INPUT": "2",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "2②❷,0,0",
+      "rect": [
+        46.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_13",
+      "RECT": "87,5,35,46",
+      "INPUT": "3",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "3③❸,0,0",
+      "rect": [
+        87.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_14",
+      "RECT": "128,5,35,46",
+      "INPUT": "4",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "4④❹,0,0",
+      "rect": [
+        128.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_15",
+      "RECT": "169,5,35,46",
+      "INPUT": "5",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "5⑤❺,0,0",
+      "rect": [
+        169.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_16",
+      "RECT": "210,5,35,46",
+      "INPUT": "6",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "❻⑥6,2,2",
+      "rect": [
+        210.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_17",
+      "RECT": "251,5,35,46",
+      "INPUT": "7",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "❼⑦7,2,2",
+      "rect": [
+        251.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_18",
+      "RECT": "292,5,35,46",
+      "INPUT": "8",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "❽⑧8,2,2",
+      "rect": [
+        292.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_19",
+      "RECT": "333,5,35,46",
+      "INPUT": "9",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "❾⑨9,2,2",
+      "rect": [
+        333.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_10",
+      "RECT": "374,5,35,46",
+      "INPUT": "0",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "⓿⓪0,2,2",
+      "rect": [
+        374.0,
+        5.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_21",
+      "RECT": "5,62,35,46",
+      "INPUT": "-",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "-+×÷=•,0,0",
+      "rect": [
+        5.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_22",
+      "RECT": "46,62,35,46",
+      "INPUT": "/",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "/／|｜\\＼,0,0,／｜＼",
+      "rect": [
+        46.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_23",
+      "RECT": "87,62,35,46",
+      "INPUT": ":",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": ":：,0,0,：",
+      "rect": [
+        87.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_24",
+      "RECT": "128,62,35,46",
+      "INPUT": "_",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "_＿,0,0,＿",
+      "rect": [
+        128.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_25",
+      "RECT": "169,62,35,46",
+      "INPUT": "(",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "<«(（[{,2,2,(",
+      "rect": [
+        169.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_26",
+      "RECT": "210,62,35,46",
+      "INPUT": ")",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": ">»)）]},2,2,）",
+      "rect": [
+        210.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_27",
+      "RECT": "251,62,35,46",
+      "INPUT": "#",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "＃#,1,1,＃",
+      "rect": [
+        251.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_28",
+      "RECT": "292,62,35,46",
+      "INPUT": "&",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "§＆&,2,2,＃",
+      "rect": [
+        292.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_29",
+      "RECT": "333,62,35,46",
+      "INPUT": "@",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "",
+      "rect": [
+        333.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_20",
+      "RECT": "374,62,35,46",
+      "INPUT": "\"",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "„“”\",3,3",
+      "rect": [
+        374.0,
+        62.0,
+        35.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_33",
+      "RECT": "66,117,42,46",
+      "INPUT": ".",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": ".。·,0,0,。",
+      "rect": [
+        66.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_34",
+      "RECT": "114,117,42,46",
+      "INPUT": ",",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": ",，,0,0,，",
+      "rect": [
+        114.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_35",
+      "RECT": "162,117,42,46",
+      "INPUT": "?",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "¿？?,2,2,？",
+      "rect": [
+        162.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_36",
+      "RECT": "210,117,42,46",
+      "INPUT": "!",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "¡！!,2,2,！",
+      "rect": [
+        210.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_37",
+      "RECT": "258,117,42,46",
+      "INPUT": "…",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "⋯…,1,1",
+      "rect": [
+        258.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_38",
+      "RECT": "306,117,42,46",
+      "INPUT": "'",
+      "STY": "STYLE_NORMAL",
+      "FLOATSTY": "1",
+      "FLOATLIST": "`‘’',3,3",
+      "rect": [
+        306.0,
+        117.0,
+        42.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_SYMB",
+      "RECT": "5,117,46,46",
+      "STY": "STYLE_SYM",
+      "TITLE": "符号",
+      "FUNC": "fullSymbol",
+      "rect": [
+        5.0,
+        117.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_DEL",
+      "RECT": "363,117,46,46",
+      "FUNC": "delete",
+      "STY": "STYLE_DEL",
+      "rect": [
+        363.0,
+        117.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_BACK",
+      "RECT": "5,173,46,46",
+      "STY": "STYLE_BACK_GREEN",
+      "FUNC": "backToInput",
+      "FLOATSTY": "2",
+      "rect": [
+        5.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_EMOTION",
+      "RECT": "57,173,46,46",
+      "STY": "STYLE_GRAY",
+      "FUNC": "emoji",
+      "IMG": "icon_keys_emoji",
+      "rect": [
+        57.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_T9_123",
+      "RECT": "109,173,46,46",
+      "STY": "STYLE_NORMAL",
+      "IMG": "icon_keys_number9",
+      "FUNC": "123",
+      "rect": [
+        109.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_SPACE",
+      "RECT": "161,173,46,46",
+      "FUNC": "space",
+      "STY": "STYLE_NORMAL",
+      "INPUT": "' '",
+      "rect": [
+        161.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_NEWLINE",
+      "RECT": "213,173,46,46",
+      "STY": "STYLE_NORMAL",
+      "TITLE": "换行",
+      "FONT": "14",
+      "FUNC": "newline",
+      "rect": [
+        213.0,
+        173.0,
+        46.0,
+        46.0
+      ]
+    },
+    {
+      "id": "KEY_ENTER",
+      "RECT": "317,173,86,46",
+      "STY": "STYLE_RETURN",
+      "FUNC": "return",
+      "rect": [
+        317.0,
+        173.0,
+        86.0,
+        46.0
+      ]
+    }
+  ],
+  "inherits": "t26_cn_symbol"
+}

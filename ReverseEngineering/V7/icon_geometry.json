@@ -1,0 +1,3616 @@
+{
+  "source": "WeType 3.5.3 keyboard extension",
+  "count": 190,
+  "icons": [
+    {
+      "file": "control_center_correction@3x.png",
+      "logicalName": "control_center_correction",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        40,
+        25,
+        106,
+        111
+      ],
+      "glyphPointWidth": 22.0,
+      "glyphPointHeight": 28.667,
+      "glyphOffsetPointX": 13.333,
+      "glyphOffsetPointY": 8.333
+    },
+    {
+      "file": "control_center_emoji@3x.png",
+      "logicalName": "control_center_emoji",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        24,
+        24,
+        108,
+        108
+      ],
+      "glyphPointWidth": 28.0,
+      "glyphPointHeight": 28.0,
+      "glyphOffsetPointX": 8.0,
+      "glyphOffsetPointY": 8.0
+    },
+    {
+      "file": "control_center_hotword@3x.png",
+      "logicalName": "control_center_hotword",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        29,
+        29,
+        104,
+        104
+      ],
+      "glyphPointWidth": 25.0,
+      "glyphPointHeight": 25.0,
+      "glyphOffsetPointX": 9.667,
+      "glyphOffsetPointY": 9.667
+    },
+    {
+      "file": "control_center_quicksend@3x.png",
+      "logicalName": "control_center_quicksend",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        32,
+        25,
+        103,
+        108
+      ],
+      "glyphPointWidth": 23.667,
+      "glyphPointHeight": 27.667,
+      "glyphOffsetPointX": 10.667,
+      "glyphOffsetPointY": 8.333
+    },
+    {
+      "file": "control_center_voice@3x.png",
+      "logicalName": "control_center_voice",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        34,
+        25,
+        98,
+        106
+      ],
+      "glyphPointWidth": 21.333,
+      "glyphPointHeight": 27.0,
+      "glyphOffsetPointX": 11.333,
+      "glyphOffsetPointY": 8.333
+    },
+    {
+      "file": "control_center_write@3x.png",
+      "logicalName": "control_center_write",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        31,
+        22,
+        102,
+        107
+      ],
+      "glyphPointWidth": 23.667,
+      "glyphPointHeight": 28.333,
+      "glyphOffsetPointX": 10.333,
+      "glyphOffsetPointY": 7.333
+    },
+    {
+      "file": "icon_bar_changyongyu_24@3x.png",
+      "logicalName": "icon_bar_changyongyu_24",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        9,
+        7,
+        63,
+        65
+      ],
+      "glyphPointWidth": 18.0,
+      "glyphPointHeight": 19.333,
+      "glyphOffsetPointX": 3.0,
+      "glyphOffsetPointY": 2.333
+    },
+    {
+      "file": "icon_bar_combined@3x.png",
+      "logicalName": "icon_bar_combined",
+      "scale": 3,
+      "pixelWidth": 66,
+      "pixelHeight": 66,
+      "pointWidth": 22.0,
+      "pointHeight": 22.0,
+      "alphaBBoxPixels": [
+        2,
+        14,
+        64,
+        52
+      ],
+      "glyphPointWidth": 20.667,
+      "glyphPointHeight": 12.667,
+      "glyphOffsetPointX": 0.667,
+      "glyphOffsetPointY": 4.667
+    },
+    {
+      "file": "icon_bar_correction_24@3x.png",
+      "logicalName": "icon_bar_correction_24",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        21,
+        9,
+        63,
+        64
+      ],
+      "glyphPointWidth": 14.0,
+      "glyphPointHeight": 18.333,
+      "glyphOffsetPointX": 7.0,
+      "glyphOffsetPointY": 3.0
+    },
+    {
+      "file": "icon_bar_drop@3x.png",
+      "logicalName": "icon_bar_drop",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        13,
+        25,
+        62,
+        58
+      ],
+      "glyphPointWidth": 16.333,
+      "glyphPointHeight": 11.0,
+      "glyphOffsetPointX": 4.333,
+      "glyphOffsetPointY": 8.333
+    },
+    {
+      "file": "icon_bar_drop_24@3x.png",
+      "logicalName": "icon_bar_drop_24",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        15,
+        28,
+        57,
+        53
+      ],
+      "glyphPointWidth": 14.0,
+      "glyphPointHeight": 8.333,
+      "glyphOffsetPointX": 5.0,
+      "glyphOffsetPointY": 9.333
+    },
+    {
+      "file": "icon_bar_emoji_24@3x.png",
+      "logicalName": "icon_bar_emoji_24",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        10,
+        13,
+        62,
+        60
+      ],
+      "glyphPointWidth": 17.333,
+      "glyphPointHeight": 15.667,
+      "glyphOffsetPointX": 3.333,
+      "glyphOffsetPointY": 4.333
+    },
+    {
+      "file": "icon_bar_fan_24@3x.png",
+      "logicalName": "icon_bar_fan_24",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        12,
+        12,
+        60,
+        60
+      ],
+      "glyphPointWidth": 16.0,
+      "glyphPointHeight": 16.0,
+      "glyphOffsetPointX": 4.0,
+      "glyphOffsetPointY": 4.0
+    },
+    {
+      "file": "icon_bar_handedly_24@3x.png",
+      "logicalName": "icon_bar_handedly_24",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        15,
+        12,
+        65,
+        60
+      ],
+      "glyphPointWidth": 16.667,
+      "glyphPointHeight": 16.0,
+      "glyphOffsetPointX": 5.0,
+      "glyphOffsetPointY": 4.0
+    },
+    {
+      "file": "icon_bar_jian_24@3x.png",
+      "logicalName": "icon_bar_jian_24",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        12,
+        11,
+        59,
+        60
+      ],
+      "glyphPointWidth": 15.667,
+      "glyphPointHeight": 16.333,
+      "glyphOffsetPointX": 4.0,
+      "glyphOffsetPointY": 3.667
+    },
+    {
+      "file": "icon_bar_keyboard_24@3x.png",
+      "logicalName": "icon_bar_keyboard_24",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        12,
+        18,
+        60,
+        57
+      ],
+      "glyphPointWidth": 16.0,
+      "glyphPointHeight": 13.0,
+      "glyphOffsetPointX": 4.0,
+      "glyphOffsetPointY": 6.0
+    },
+    {
+      "file": "icon_bar_quicksend_24@3x.png",
+      "logicalName": "icon_bar_quicksend_24",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        12,
+        9,
+        60,
+        66
+      ],
+      "glyphPointWidth": 16.0,
+      "glyphPointHeight": 19.0,
+      "glyphOffsetPointX": 4.0,
+      "glyphOffsetPointY": 3.0
+    },
+    {
+      "file": "icon_bar_retouching_24@3x.png",
+      "logicalName": "icon_bar_retouching_24",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        11,
+        8,
+        61,
+        63
+      ],
+      "glyphPointWidth": 16.667,
+      "glyphPointHeight": 18.333,
+      "glyphOffsetPointX": 3.667,
+      "glyphOffsetPointY": 2.667
+    },
+    {
+      "file": "icon_bar_retouching_44@3x.png",
+      "logicalName": "icon_bar_retouching_44",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        39,
+        36,
+        93,
+        96
+      ],
+      "glyphPointWidth": 18.0,
+      "glyphPointHeight": 20.0,
+      "glyphOffsetPointX": 13.0,
+      "glyphOffsetPointY": 12.0
+    },
+    {
+      "file": "icon_bar_separate@3x.png",
+      "logicalName": "icon_bar_separate",
+      "scale": 3,
+      "pixelWidth": 66,
+      "pixelHeight": 66,
+      "pointWidth": 22.0,
+      "pointHeight": 22.0,
+      "alphaBBoxPixels": [
+        2,
+        14,
+        64,
+        52
+      ],
+      "glyphPointWidth": 20.667,
+      "glyphPointHeight": 12.667,
+      "glyphOffsetPointX": 0.667,
+      "glyphOffsetPointY": 4.667
+    },
+    {
+      "file": "icon_bar_translate_24@3x.png",
+      "logicalName": "icon_bar_translate_24",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        9,
+        10,
+        62,
+        59
+      ],
+      "glyphPointWidth": 17.667,
+      "glyphPointHeight": 16.333,
+      "glyphOffsetPointX": 3.0,
+      "glyphOffsetPointY": 3.333
+    },
+    {
+      "file": "icon_bar_transmission_24_ani.png",
+      "logicalName": "icon_bar_transmission_24_ani",
+      "scale": 1,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 72.0,
+      "pointHeight": 72.0,
+      "alphaBBoxPixels": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "glyphPointWidth": 0.0,
+      "glyphPointHeight": 0.0,
+      "glyphOffsetPointX": 0.0,
+      "glyphOffsetPointY": 0.0
+    },
+    {
+      "file": "icon_bar_transmission_24_ani_dark.png",
+      "logicalName": "icon_bar_transmission_24_ani_dark",
+      "scale": 1,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 72.0,
+      "pointHeight": 72.0,
+      "alphaBBoxPixels": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "glyphPointWidth": 0.0,
+      "glyphPointHeight": 0.0,
+      "glyphOffsetPointX": 0.0,
+      "glyphOffsetPointY": 0.0
+    },
+    {
+      "file": "icon_bar_voice_24@3x.png",
+      "logicalName": "icon_bar_voice_24",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        14,
+        7,
+        59,
+        65
+      ],
+      "glyphPointWidth": 15.0,
+      "glyphPointHeight": 19.333,
+      "glyphOffsetPointX": 4.667,
+      "glyphOffsetPointY": 2.333
+    },
+    {
+      "file": "icon_bar_write_24@3x.png",
+      "logicalName": "icon_bar_write_24",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        12,
+        7,
+        61,
+        66
+      ],
+      "glyphPointWidth": 16.333,
+      "glyphPointHeight": 19.667,
+      "glyphOffsetPointX": 4.0,
+      "glyphOffsetPointY": 2.333
+    },
+    {
+      "file": "icon_bookvideo_ani_baike.png",
+      "logicalName": "icon_bookvideo_ani_baike",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        28,
+        19,
+        79,
+        89
+      ],
+      "glyphPointWidth": 51.0,
+      "glyphPointHeight": 70.0,
+      "glyphOffsetPointX": 28.0,
+      "glyphOffsetPointY": 19.0
+    },
+    {
+      "file": "icon_bookvideo_ani_baike_dark.png",
+      "logicalName": "icon_bookvideo_ani_baike_dark",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        28,
+        19,
+        79,
+        89
+      ],
+      "glyphPointWidth": 51.0,
+      "glyphPointHeight": 70.0,
+      "glyphOffsetPointX": 28.0,
+      "glyphOffsetPointY": 19.0
+    },
+    {
+      "file": "icon_bookvideo_ani_book.png",
+      "logicalName": "icon_bookvideo_ani_book",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        19,
+        23,
+        89,
+        91
+      ],
+      "glyphPointWidth": 70.0,
+      "glyphPointHeight": 68.0,
+      "glyphOffsetPointX": 19.0,
+      "glyphOffsetPointY": 23.0
+    },
+    {
+      "file": "icon_bookvideo_ani_book_dark.png",
+      "logicalName": "icon_bookvideo_ani_book_dark",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        19,
+        23,
+        89,
+        91
+      ],
+      "glyphPointWidth": 70.0,
+      "glyphPointHeight": 68.0,
+      "glyphOffsetPointX": 19.0,
+      "glyphOffsetPointY": 23.0
+    },
+    {
+      "file": "icon_bookvideo_ani_finder.png",
+      "logicalName": "icon_bookvideo_ani_finder",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        20,
+        23,
+        88,
+        85
+      ],
+      "glyphPointWidth": 68.0,
+      "glyphPointHeight": 62.0,
+      "glyphOffsetPointX": 20.0,
+      "glyphOffsetPointY": 23.0
+    },
+    {
+      "file": "icon_bookvideo_ani_finder_dark.png",
+      "logicalName": "icon_bookvideo_ani_finder_dark",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        20,
+        23,
+        88,
+        85
+      ],
+      "glyphPointWidth": 68.0,
+      "glyphPointHeight": 62.0,
+      "glyphOffsetPointX": 20.0,
+      "glyphOffsetPointY": 23.0
+    },
+    {
+      "file": "icon_bookvideo_ani_greeting.png",
+      "logicalName": "icon_bookvideo_ani_greeting",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        20,
+        17,
+        87,
+        91
+      ],
+      "glyphPointWidth": 67.0,
+      "glyphPointHeight": 74.0,
+      "glyphOffsetPointX": 20.0,
+      "glyphOffsetPointY": 17.0
+    },
+    {
+      "file": "icon_bookvideo_ani_greeting_dark.png",
+      "logicalName": "icon_bookvideo_ani_greeting_dark",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        20,
+        17,
+        87,
+        91
+      ],
+      "glyphPointWidth": 67.0,
+      "glyphPointHeight": 74.0,
+      "glyphOffsetPointX": 20.0,
+      "glyphOffsetPointY": 17.0
+    },
+    {
+      "file": "icon_bookvideo_ani_gzh.png",
+      "logicalName": "icon_bookvideo_ani_gzh",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        21,
+        21,
+        87,
+        87
+      ],
+      "glyphPointWidth": 66.0,
+      "glyphPointHeight": 66.0,
+      "glyphOffsetPointX": 21.0,
+      "glyphOffsetPointY": 21.0
+    },
+    {
+      "file": "icon_bookvideo_ani_gzh_dark.png",
+      "logicalName": "icon_bookvideo_ani_gzh_dark",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        21,
+        21,
+        87,
+        87
+      ],
+      "glyphPointWidth": 66.0,
+      "glyphPointHeight": 66.0,
+      "glyphOffsetPointX": 21.0,
+      "glyphOffsetPointY": 21.0
+    },
+    {
+      "file": "icon_bookvideo_ani_hot.png",
+      "logicalName": "icon_bookvideo_ani_hot",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        27,
+        16,
+        84,
+        92
+      ],
+      "glyphPointWidth": 57.0,
+      "glyphPointHeight": 76.0,
+      "glyphOffsetPointX": 27.0,
+      "glyphOffsetPointY": 16.0
+    },
+    {
+      "file": "icon_bookvideo_ani_hot_dark.png",
+      "logicalName": "icon_bookvideo_ani_hot_dark",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        27,
+        16,
+        84,
+        92
+      ],
+      "glyphPointWidth": 57.0,
+      "glyphPointHeight": 76.0,
+      "glyphOffsetPointX": 27.0,
+      "glyphOffsetPointY": 16.0
+    },
+    {
+      "file": "icon_bookvideo_ani_location.png",
+      "logicalName": "icon_bookvideo_ani_location",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        23,
+        19,
+        85,
+        91
+      ],
+      "glyphPointWidth": 62.0,
+      "glyphPointHeight": 72.0,
+      "glyphOffsetPointX": 23.0,
+      "glyphOffsetPointY": 19.0
+    },
+    {
+      "file": "icon_bookvideo_ani_location_dark.png",
+      "logicalName": "icon_bookvideo_ani_location_dark",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        23,
+        19,
+        85,
+        91
+      ],
+      "glyphPointWidth": 62.0,
+      "glyphPointHeight": 72.0,
+      "glyphOffsetPointX": 23.0,
+      "glyphOffsetPointY": 19.0
+    },
+    {
+      "file": "icon_bookvideo_ani_miniprogram.png",
+      "logicalName": "icon_bookvideo_ani_miniprogram",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        19,
+        19,
+        89,
+        89
+      ],
+      "glyphPointWidth": 70.0,
+      "glyphPointHeight": 70.0,
+      "glyphOffsetPointX": 19.0,
+      "glyphOffsetPointY": 19.0
+    },
+    {
+      "file": "icon_bookvideo_ani_miniprogram_dark.png",
+      "logicalName": "icon_bookvideo_ani_miniprogram_dark",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        19,
+        19,
+        89,
+        89
+      ],
+      "glyphPointWidth": 70.0,
+      "glyphPointHeight": 70.0,
+      "glyphOffsetPointX": 19.0,
+      "glyphOffsetPointY": 19.0
+    },
+    {
+      "file": "icon_bookvideo_ani_movie.png",
+      "logicalName": "icon_bookvideo_ani_movie",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        19,
+        23,
+        89,
+        87
+      ],
+      "glyphPointWidth": 70.0,
+      "glyphPointHeight": 64.0,
+      "glyphOffsetPointX": 19.0,
+      "glyphOffsetPointY": 23.0
+    },
+    {
+      "file": "icon_bookvideo_ani_movie_dark.png",
+      "logicalName": "icon_bookvideo_ani_movie_dark",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        19,
+        23,
+        89,
+        87
+      ],
+      "glyphPointWidth": 70.0,
+      "glyphPointHeight": 64.0,
+      "glyphOffsetPointX": 19.0,
+      "glyphOffsetPointY": 23.0
+    },
+    {
+      "file": "icon_bookvideo_ani_music.png",
+      "logicalName": "icon_bookvideo_ani_music",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        20,
+        22,
+        81,
+        89
+      ],
+      "glyphPointWidth": 61.0,
+      "glyphPointHeight": 67.0,
+      "glyphOffsetPointX": 20.0,
+      "glyphOffsetPointY": 22.0
+    },
+    {
+      "file": "icon_bookvideo_ani_music_dark.png",
+      "logicalName": "icon_bookvideo_ani_music_dark",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        20,
+        22,
+        81,
+        89
+      ],
+      "glyphPointWidth": 61.0,
+      "glyphPointHeight": 67.0,
+      "glyphOffsetPointX": 20.0,
+      "glyphOffsetPointY": 22.0
+    },
+    {
+      "file": "icon_bookvideo_ani_stock.png",
+      "logicalName": "icon_bookvideo_ani_stock",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        21,
+        17,
+        87,
+        95
+      ],
+      "glyphPointWidth": 66.0,
+      "glyphPointHeight": 78.0,
+      "glyphOffsetPointX": 21.0,
+      "glyphOffsetPointY": 17.0
+    },
+    {
+      "file": "icon_bookvideo_ani_stock_dark.png",
+      "logicalName": "icon_bookvideo_ani_stock_dark",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        21,
+        17,
+        87,
+        95
+      ],
+      "glyphPointWidth": 66.0,
+      "glyphPointHeight": 78.0,
+      "glyphOffsetPointX": 21.0,
+      "glyphOffsetPointY": 17.0
+    },
+    {
+      "file": "icon_bookvideo_ani_word_trans.png",
+      "logicalName": "icon_bookvideo_ani_word_trans",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        24,
+        20,
+        84,
+        88
+      ],
+      "glyphPointWidth": 60.0,
+      "glyphPointHeight": 68.0,
+      "glyphOffsetPointX": 24.0,
+      "glyphOffsetPointY": 20.0
+    },
+    {
+      "file": "icon_bookvideo_ani_word_trans_dark.png",
+      "logicalName": "icon_bookvideo_ani_word_trans_dark",
+      "scale": 1,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 108.0,
+      "pointHeight": 108.0,
+      "alphaBBoxPixels": [
+        24,
+        20,
+        84,
+        88
+      ],
+      "glyphPointWidth": 60.0,
+      "glyphPointHeight": 68.0,
+      "glyphOffsetPointX": 24.0,
+      "glyphOffsetPointY": 20.0
+    },
+    {
+      "file": "icon_bookvideo_quicksend@3x.png",
+      "logicalName": "icon_bookvideo_quicksend",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        15,
+        11,
+        59,
+        63
+      ],
+      "glyphPointWidth": 14.667,
+      "glyphPointHeight": 17.333,
+      "glyphOffsetPointX": 5.0,
+      "glyphOffsetPointY": 3.667
+    },
+    {
+      "file": "icon_bookvideo_stock@3x.png",
+      "logicalName": "icon_bookvideo_stock",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        15,
+        12,
+        57,
+        63
+      ],
+      "glyphPointWidth": 14.0,
+      "glyphPointHeight": 17.0,
+      "glyphOffsetPointX": 5.0,
+      "glyphOffsetPointY": 4.0
+    },
+    {
+      "file": "icon_emoji_kbshown_more@3x.png",
+      "logicalName": "icon_emoji_kbshown_more",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        13,
+        30,
+        63,
+        41
+      ],
+      "glyphPointWidth": 16.667,
+      "glyphPointHeight": 3.667,
+      "glyphOffsetPointX": 4.333,
+      "glyphOffsetPointY": 10.0
+    },
+    {
+      "file": "icon_emojibar_deletepress@3x.png",
+      "logicalName": "icon_emojibar_deletepress",
+      "scale": 3,
+      "pixelWidth": 90,
+      "pixelHeight": 90,
+      "pointWidth": 30.0,
+      "pointHeight": 30.0,
+      "alphaBBoxPixels": [
+        15,
+        21,
+        75,
+        66
+      ],
+      "glyphPointWidth": 20.0,
+      "glyphPointHeight": 15.0,
+      "glyphOffsetPointX": 5.0,
+      "glyphOffsetPointY": 7.0
+    },
+    {
+      "file": "icon_emojikb_0@3x.png",
+      "logicalName": "icon_emojikb_0",
+      "scale": 3,
+      "pixelWidth": 90,
+      "pixelHeight": 90,
+      "pointWidth": 30.0,
+      "pointHeight": 30.0,
+      "alphaBBoxPixels": [
+        21,
+        21,
+        69,
+        69
+      ],
+      "glyphPointWidth": 16.0,
+      "glyphPointHeight": 16.0,
+      "glyphOffsetPointX": 7.0,
+      "glyphOffsetPointY": 7.0
+    },
+    {
+      "file": "icon_emojikb_1@3x.png",
+      "logicalName": "icon_emojikb_1",
+      "scale": 3,
+      "pixelWidth": 90,
+      "pixelHeight": 90,
+      "pointWidth": 30.0,
+      "pointHeight": 30.0,
+      "alphaBBoxPixels": [
+        21,
+        21,
+        69,
+        69
+      ],
+      "glyphPointWidth": 16.0,
+      "glyphPointHeight": 16.0,
+      "glyphOffsetPointX": 7.0,
+      "glyphOffsetPointY": 7.0
+    },
+    {
+      "file": "icon_emojikb_2@3x.png",
+      "logicalName": "icon_emojikb_2",
+      "scale": 3,
+      "pixelWidth": 90,
+      "pixelHeight": 90,
+      "pointWidth": 30.0,
+      "pointHeight": 30.0,
+      "alphaBBoxPixels": [
+        21,
+        21,
+        70,
+        69
+      ],
+      "glyphPointWidth": 16.333,
+      "glyphPointHeight": 16.0,
+      "glyphOffsetPointX": 7.0,
+      "glyphOffsetPointY": 7.0
+    },
+    {
+      "file": "icon_emojikb_3@3x.png",
+      "logicalName": "icon_emojikb_3",
+      "scale": 3,
+      "pixelWidth": 90,
+      "pixelHeight": 90,
+      "pointWidth": 30.0,
+      "pointHeight": 30.0,
+      "alphaBBoxPixels": [
+        21,
+        18,
+        69,
+        66
+      ],
+      "glyphPointWidth": 16.0,
+      "glyphPointHeight": 16.0,
+      "glyphOffsetPointX": 7.0,
+      "glyphOffsetPointY": 6.0
+    },
+    {
+      "file": "icon_emojikb_4@3x.png",
+      "logicalName": "icon_emojikb_4",
+      "scale": 3,
+      "pixelWidth": 90,
+      "pixelHeight": 90,
+      "pointWidth": 30.0,
+      "pointHeight": 30.0,
+      "alphaBBoxPixels": [
+        21,
+        21,
+        69,
+        69
+      ],
+      "glyphPointWidth": 16.0,
+      "glyphPointHeight": 16.0,
+      "glyphOffsetPointX": 7.0,
+      "glyphOffsetPointY": 7.0
+    },
+    {
+      "file": "icon_emojikb_5@3x.png",
+      "logicalName": "icon_emojikb_5",
+      "scale": 3,
+      "pixelWidth": 90,
+      "pixelHeight": 90,
+      "pointWidth": 30.0,
+      "pointHeight": 30.0,
+      "alphaBBoxPixels": [
+        24,
+        24,
+        66,
+        66
+      ],
+      "glyphPointWidth": 14.0,
+      "glyphPointHeight": 14.0,
+      "glyphOffsetPointX": 8.0,
+      "glyphOffsetPointY": 8.0
+    },
+    {
+      "file": "icon_emojikb_6@3x.png",
+      "logicalName": "icon_emojikb_6",
+      "scale": 3,
+      "pixelWidth": 90,
+      "pixelHeight": 90,
+      "pointWidth": 30.0,
+      "pointHeight": 30.0,
+      "alphaBBoxPixels": [
+        27,
+        24,
+        61,
+        67
+      ],
+      "glyphPointWidth": 11.333,
+      "glyphPointHeight": 14.333,
+      "glyphOffsetPointX": 9.0,
+      "glyphOffsetPointY": 8.0
+    },
+    {
+      "file": "icon_emojikb_delete@3x.png",
+      "logicalName": "icon_emojikb_delete",
+      "scale": 3,
+      "pixelWidth": 90,
+      "pixelHeight": 90,
+      "pointWidth": 30.0,
+      "pointHeight": 30.0,
+      "alphaBBoxPixels": [
+        15,
+        21,
+        75,
+        66
+      ],
+      "glyphPointWidth": 20.0,
+      "glyphPointHeight": 15.0,
+      "glyphOffsetPointX": 5.0,
+      "glyphOffsetPointY": 7.0
+    },
+    {
+      "file": "icon_key_add@3x.png",
+      "logicalName": "icon_key_add",
+      "scale": 3,
+      "pixelWidth": 36,
+      "pixelHeight": 36,
+      "pointWidth": 12.0,
+      "pointHeight": 12.0,
+      "alphaBBoxPixels": [
+        1,
+        1,
+        35,
+        35
+      ],
+      "glyphPointWidth": 11.333,
+      "glyphPointHeight": 11.333,
+      "glyphOffsetPointX": 0.333,
+      "glyphOffsetPointY": 0.333
+    },
+    {
+      "file": "icon_key_delete@3x.png",
+      "logicalName": "icon_key_delete",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        12,
+        10,
+        62,
+        60
+      ],
+      "glyphPointWidth": 16.667,
+      "glyphPointHeight": 16.667,
+      "glyphOffsetPointX": 4.0,
+      "glyphOffsetPointY": 3.333
+    },
+    {
+      "file": "icon_key_t26_voice@3x.png",
+      "logicalName": "icon_key_t26_voice",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        16,
+        10,
+        56,
+        62
+      ],
+      "glyphPointWidth": 13.333,
+      "glyphPointHeight": 17.333,
+      "glyphOffsetPointX": 5.333,
+      "glyphOffsetPointY": 3.333
+    },
+    {
+      "file": "icon_key_t9_voice@3x.png",
+      "logicalName": "icon_key_t9_voice",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        15,
+        9,
+        59,
+        65
+      ],
+      "glyphPointWidth": 14.667,
+      "glyphPointHeight": 18.667,
+      "glyphOffsetPointX": 5.0,
+      "glyphOffsetPointY": 3.0
+    },
+    {
+      "file": "icon_keybar_option_emoji@3x.png",
+      "logicalName": "icon_keybar_option_emoji",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        12,
+        12,
+        60,
+        60
+      ],
+      "glyphPointWidth": 16.0,
+      "glyphPointHeight": 16.0,
+      "glyphOffsetPointX": 4.0,
+      "glyphOffsetPointY": 4.0
+    },
+    {
+      "file": "icon_keybar_option_gif@3x.png",
+      "logicalName": "icon_keybar_option_gif",
+      "scale": 3,
+      "pixelWidth": 90,
+      "pixelHeight": 90,
+      "pointWidth": 30.0,
+      "pointHeight": 30.0,
+      "alphaBBoxPixels": [
+        22,
+        25,
+        68,
+        66
+      ],
+      "glyphPointWidth": 15.333,
+      "glyphPointHeight": 13.667,
+      "glyphOffsetPointX": 7.333,
+      "glyphOffsetPointY": 8.333
+    },
+    {
+      "file": "icon_keybar_option_sticker@3x.png",
+      "logicalName": "icon_keybar_option_sticker",
+      "scale": 3,
+      "pixelWidth": 60,
+      "pixelHeight": 60,
+      "pointWidth": 20.0,
+      "pointHeight": 20.0,
+      "alphaBBoxPixels": [
+        10,
+        12,
+        50,
+        48
+      ],
+      "glyphPointWidth": 13.333,
+      "glyphPointHeight": 12.0,
+      "glyphOffsetPointX": 3.333,
+      "glyphOffsetPointY": 4.0
+    },
+    {
+      "file": "icon_keybar_setup@3x.png",
+      "logicalName": "icon_keybar_setup",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        12,
+        18,
+        62,
+        57
+      ],
+      "glyphPointWidth": 16.667,
+      "glyphPointHeight": 13.0,
+      "glyphOffsetPointX": 4.0,
+      "glyphOffsetPointY": 6.0
+    },
+    {
+      "file": "icon_keyboardbar_close@3x.png",
+      "logicalName": "icon_keyboardbar_close",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        18,
+        18,
+        54,
+        54
+      ],
+      "glyphPointWidth": 12.0,
+      "glyphPointHeight": 12.0,
+      "glyphOffsetPointX": 6.0,
+      "glyphOffsetPointY": 6.0
+    },
+    {
+      "file": "icon_keys_bi_pin@3x.png",
+      "logicalName": "icon_keys_bi_pin",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        0,
+        0,
+        68,
+        71
+      ],
+      "glyphPointWidth": 22.667,
+      "glyphPointHeight": 23.667,
+      "glyphOffsetPointX": 0.0,
+      "glyphOffsetPointY": 0.0
+    },
+    {
+      "file": "icon_keys_bi_pin_dark@3x.png",
+      "logicalName": "icon_keys_bi_pin_dark",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        0,
+        0,
+        68,
+        71
+      ],
+      "glyphPointWidth": 22.667,
+      "glyphPointHeight": 23.667,
+      "glyphOffsetPointX": 0.0,
+      "glyphOffsetPointY": 0.0
+    },
+    {
+      "file": "icon_keys_capslock@3x.png",
+      "logicalName": "icon_keys_capslock",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        7,
+        12,
+        65,
+        62
+      ],
+      "glyphPointWidth": 19.333,
+      "glyphPointHeight": 16.667,
+      "glyphOffsetPointX": 2.333,
+      "glyphOffsetPointY": 4.0
+    },
+    {
+      "file": "icon_keys_capslocked@3x.png",
+      "logicalName": "icon_keys_capslocked",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        7,
+        9,
+        65,
+        62
+      ],
+      "glyphPointWidth": 19.333,
+      "glyphPointHeight": 17.667,
+      "glyphOffsetPointX": 2.333,
+      "glyphOffsetPointY": 3.0
+    },
+    {
+      "file": "icon_keys_delete@3x.png",
+      "logicalName": "icon_keys_delete",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        1,
+        12,
+        66,
+        60
+      ],
+      "glyphPointWidth": 21.667,
+      "glyphPointHeight": 16.0,
+      "glyphOffsetPointX": 0.333,
+      "glyphOffsetPointY": 4.0
+    },
+    {
+      "file": "icon_keys_deletepress@3x.png",
+      "logicalName": "icon_keys_deletepress",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        1,
+        12,
+        66,
+        60
+      ],
+      "glyphPointWidth": 21.667,
+      "glyphPointHeight": 16.0,
+      "glyphOffsetPointX": 0.333,
+      "glyphOffsetPointY": 4.0
+    },
+    {
+      "file": "icon_keys_emoji@3x.png",
+      "logicalName": "icon_keys_emoji",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        0,
+        0,
+        72,
+        72
+      ],
+      "glyphPointWidth": 24.0,
+      "glyphPointHeight": 24.0,
+      "glyphOffsetPointX": 0.0,
+      "glyphOffsetPointY": 0.0
+    },
+    {
+      "file": "icon_keys_globe@3x.png",
+      "logicalName": "icon_keys_globe",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        7,
+        7,
+        65,
+        65
+      ],
+      "glyphPointWidth": 19.333,
+      "glyphPointHeight": 19.333,
+      "glyphOffsetPointX": 2.333,
+      "glyphOffsetPointY": 2.333
+    },
+    {
+      "file": "icon_keys_outlinedcapslock@3x.png",
+      "logicalName": "icon_keys_outlinedcapslock",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        7,
+        12,
+        65,
+        62
+      ],
+      "glyphPointWidth": 19.333,
+      "glyphPointHeight": 16.667,
+      "glyphOffsetPointX": 2.333,
+      "glyphOffsetPointY": 4.0
+    },
+    {
+      "file": "icon_keys_return@3x.png",
+      "logicalName": "icon_keys_return",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        9,
+        18,
+        63,
+        54
+      ],
+      "glyphPointWidth": 18.0,
+      "glyphPointHeight": 12.0,
+      "glyphOffsetPointX": 3.0,
+      "glyphOffsetPointY": 6.0
+    },
+    {
+      "file": "icon_keys_switch_zh@3x.png",
+      "logicalName": "icon_keys_switch_zh",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        1,
+        0,
+        70,
+        70
+      ],
+      "glyphPointWidth": 23.0,
+      "glyphPointHeight": 23.333,
+      "glyphOffsetPointX": 0.333,
+      "glyphOffsetPointY": 0.0
+    },
+    {
+      "file": "icon_keys_switch_zh_dark@3x.png",
+      "logicalName": "icon_keys_switch_zh_dark",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        1,
+        0,
+        70,
+        70
+      ],
+      "glyphPointWidth": 23.0,
+      "glyphPointHeight": 23.333,
+      "glyphOffsetPointX": 0.333,
+      "glyphOffsetPointY": 0.0
+    },
+    {
+      "file": "icon_keys_switch_zh_shuangpin@3x.png",
+      "logicalName": "icon_keys_switch_zh_shuangpin",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        0,
+        2,
+        70,
+        70
+      ],
+      "glyphPointWidth": 23.333,
+      "glyphPointHeight": 22.667,
+      "glyphOffsetPointX": 0.0,
+      "glyphOffsetPointY": 0.667
+    },
+    {
+      "file": "icon_keys_switch_zh_shuangpin_dark@3x.png",
+      "logicalName": "icon_keys_switch_zh_shuangpin_dark",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        0,
+        2,
+        70,
+        70
+      ],
+      "glyphPointWidth": 23.333,
+      "glyphPointHeight": 22.667,
+      "glyphOffsetPointX": 0.0,
+      "glyphOffsetPointY": 0.667
+    },
+    {
+      "file": "icon_keys_switch_zh_wubi@3x.png",
+      "logicalName": "icon_keys_switch_zh_wubi",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        0,
+        3,
+        70,
+        70
+      ],
+      "glyphPointWidth": 23.333,
+      "glyphPointHeight": 22.333,
+      "glyphOffsetPointX": 0.0,
+      "glyphOffsetPointY": 1.0
+    },
+    {
+      "file": "icon_keys_switch_zh_wubi_dark@3x.png",
+      "logicalName": "icon_keys_switch_zh_wubi_dark",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        0,
+        3,
+        70,
+        70
+      ],
+      "glyphPointWidth": 23.333,
+      "glyphPointHeight": 22.333,
+      "glyphOffsetPointX": 0.0,
+      "glyphOffsetPointY": 1.0
+    },
+    {
+      "file": "icon_keys_voice@3x.png",
+      "logicalName": "icon_keys_voice",
+      "scale": 3,
+      "pixelWidth": 84,
+      "pixelHeight": 84,
+      "pointWidth": 28.0,
+      "pointHeight": 28.0,
+      "alphaBBoxPixels": [
+        22,
+        16,
+        62,
+        68
+      ],
+      "glyphPointWidth": 13.333,
+      "glyphPointHeight": 17.333,
+      "glyphOffsetPointX": 7.333,
+      "glyphOffsetPointY": 5.333
+    },
+    {
+      "file": "icon_keys_xie_pin@3x.png",
+      "logicalName": "icon_keys_xie_pin",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        0,
+        2,
+        68,
+        71
+      ],
+      "glyphPointWidth": 22.667,
+      "glyphPointHeight": 23.0,
+      "glyphOffsetPointX": 0.0,
+      "glyphOffsetPointY": 0.667
+    },
+    {
+      "file": "icon_keys_xie_pin_dark@3x.png",
+      "logicalName": "icon_keys_xie_pin_dark",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        0,
+        2,
+        68,
+        71
+      ],
+      "glyphPointWidth": 22.667,
+      "glyphPointHeight": 23.0,
+      "glyphOffsetPointX": 0.0,
+      "glyphOffsetPointY": 0.667
+    },
+    {
+      "file": "icon_plus_ci@3x.png",
+      "logicalName": "icon_plus_ci",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        26,
+        13,
+        108,
+        81
+      ],
+      "glyphPointWidth": 27.333,
+      "glyphPointHeight": 22.667,
+      "glyphOffsetPointX": 8.667,
+      "glyphOffsetPointY": 4.333
+    },
+    {
+      "file": "icon_plus_ci_dark@3x.png",
+      "logicalName": "icon_plus_ci_dark",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        26,
+        13,
+        108,
+        81
+      ],
+      "glyphPointWidth": 27.333,
+      "glyphPointHeight": 22.667,
+      "glyphOffsetPointX": 8.667,
+      "glyphOffsetPointY": 4.333
+    },
+    {
+      "file": "icon_plus_correct@3x.png",
+      "logicalName": "icon_plus_correct",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        32,
+        27,
+        81,
+        90
+      ],
+      "glyphPointWidth": 16.333,
+      "glyphPointHeight": 21.0,
+      "glyphOffsetPointX": 10.667,
+      "glyphOffsetPointY": 9.0
+    },
+    {
+      "file": "icon_plus_dark@3x.png",
+      "logicalName": "icon_plus_dark",
+      "scale": 3,
+      "pixelWidth": 48,
+      "pixelHeight": 48,
+      "pointWidth": 16.0,
+      "pointHeight": 16.0,
+      "alphaBBoxPixels": [
+        0,
+        0,
+        48,
+        48
+      ],
+      "glyphPointWidth": 16.0,
+      "glyphPointHeight": 16.0,
+      "glyphOffsetPointX": 0.0,
+      "glyphOffsetPointY": 0.0
+    },
+    {
+      "file": "icon_plus_emoji@3x.png",
+      "logicalName": "icon_plus_emoji",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        22,
+        26,
+        87,
+        85
+      ],
+      "glyphPointWidth": 21.667,
+      "glyphPointHeight": 19.667,
+      "glyphOffsetPointX": 7.333,
+      "glyphOffsetPointY": 8.667
+    },
+    {
+      "file": "icon_plus_quicksend@3x.png",
+      "logicalName": "icon_plus_quicksend",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        26,
+        20,
+        82,
+        85
+      ],
+      "glyphPointWidth": 18.667,
+      "glyphPointHeight": 21.667,
+      "glyphOffsetPointX": 8.667,
+      "glyphOffsetPointY": 6.667
+    },
+    {
+      "file": "icon_setup_blurpinyin_40@3x.png",
+      "logicalName": "icon_setup_blurpinyin_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        21,
+        30,
+        99,
+        89
+      ],
+      "glyphPointWidth": 26.0,
+      "glyphPointHeight": 19.667,
+      "glyphOffsetPointX": 7.0,
+      "glyphOffsetPointY": 10.0
+    },
+    {
+      "file": "icon_setup_changyongyu_44@3x.png",
+      "logicalName": "icon_setup_changyongyu_44",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        36,
+        34,
+        96,
+        100
+      ],
+      "glyphPointWidth": 20.0,
+      "glyphPointHeight": 22.0,
+      "glyphOffsetPointX": 12.0,
+      "glyphOffsetPointY": 11.333
+    },
+    {
+      "file": "icon_setup_cloudcandidate@3x.png",
+      "logicalName": "icon_setup_cloudcandidate",
+      "scale": 3,
+      "pixelWidth": 60,
+      "pixelHeight": 60,
+      "pointWidth": 20.0,
+      "pointHeight": 20.0,
+      "alphaBBoxPixels": [
+        1,
+        6,
+        60,
+        54
+      ],
+      "glyphPointWidth": 19.667,
+      "glyphPointHeight": 16.0,
+      "glyphOffsetPointX": 0.333,
+      "glyphOffsetPointY": 2.0
+    },
+    {
+      "file": "icon_setup_commonwords@3x.png",
+      "logicalName": "icon_setup_commonwords",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        23,
+        20,
+        85,
+        87
+      ],
+      "glyphPointWidth": 20.667,
+      "glyphPointHeight": 22.333,
+      "glyphOffsetPointX": 7.667,
+      "glyphOffsetPointY": 6.667
+    },
+    {
+      "file": "icon_setup_correct@3x.png",
+      "logicalName": "icon_setup_correct",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        30,
+        23,
+        85,
+        92
+      ],
+      "glyphPointWidth": 18.333,
+      "glyphPointHeight": 23.0,
+      "glyphOffsetPointX": 10.0,
+      "glyphOffsetPointY": 7.667
+    },
+    {
+      "file": "icon_setup_correction@3x.png",
+      "logicalName": "icon_setup_correction",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        29,
+        25,
+        79,
+        87
+      ],
+      "glyphPointWidth": 16.667,
+      "glyphPointHeight": 20.667,
+      "glyphOffsetPointX": 9.667,
+      "glyphOffsetPointY": 8.333
+    },
+    {
+      "file": "icon_setup_correction_40@3x.png",
+      "logicalName": "icon_setup_correction_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        36,
+        23,
+        97,
+        101
+      ],
+      "glyphPointWidth": 20.333,
+      "glyphPointHeight": 26.0,
+      "glyphOffsetPointX": 12.0,
+      "glyphOffsetPointY": 7.667
+    },
+    {
+      "file": "icon_setup_correction_44@3x.png",
+      "logicalName": "icon_setup_correction_44",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        45,
+        36,
+        93,
+        99
+      ],
+      "glyphPointWidth": 16.0,
+      "glyphPointHeight": 21.0,
+      "glyphOffsetPointX": 15.0,
+      "glyphOffsetPointY": 12.0
+    },
+    {
+      "file": "icon_setup_correction_check@3x.png",
+      "logicalName": "icon_setup_correction_check",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        33,
+        21,
+        87,
+        91
+      ],
+      "glyphPointWidth": 18.0,
+      "glyphPointHeight": 23.333,
+      "glyphOffsetPointX": 11.0,
+      "glyphOffsetPointY": 7.0
+    },
+    {
+      "file": "icon_setup_customize_40@3x.png",
+      "logicalName": "icon_setup_customize_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        23,
+        26,
+        97,
+        94
+      ],
+      "glyphPointWidth": 24.667,
+      "glyphPointHeight": 22.667,
+      "glyphOffsetPointX": 7.667,
+      "glyphOffsetPointY": 8.667
+    },
+    {
+      "file": "icon_setup_debug_40@3x.png",
+      "logicalName": "icon_setup_debug_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        27,
+        30,
+        93,
+        90
+      ],
+      "glyphPointWidth": 22.0,
+      "glyphPointHeight": 20.0,
+      "glyphOffsetPointX": 9.0,
+      "glyphOffsetPointY": 10.0
+    },
+    {
+      "file": "icon_setup_drop_44@3x.png",
+      "logicalName": "icon_setup_drop_44",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        43,
+        55,
+        89,
+        83
+      ],
+      "glyphPointWidth": 15.333,
+      "glyphPointHeight": 9.333,
+      "glyphOffsetPointX": 14.333,
+      "glyphOffsetPointY": 18.333
+    },
+    {
+      "file": "icon_setup_emoji@3x.png",
+      "logicalName": "icon_setup_emoji",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        20,
+        20,
+        88,
+        88
+      ],
+      "glyphPointWidth": 22.667,
+      "glyphPointHeight": 22.667,
+      "glyphOffsetPointX": 6.667,
+      "glyphOffsetPointY": 6.667
+    },
+    {
+      "file": "icon_setup_emoji_40@3x.png",
+      "logicalName": "icon_setup_emoji_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        22,
+        22,
+        98,
+        98
+      ],
+      "glyphPointWidth": 25.333,
+      "glyphPointHeight": 25.333,
+      "glyphOffsetPointX": 7.333,
+      "glyphOffsetPointY": 7.333
+    },
+    {
+      "file": "icon_setup_emoji_44@3x.png",
+      "logicalName": "icon_setup_emoji_44",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        36,
+        39,
+        96,
+        93
+      ],
+      "glyphPointWidth": 20.0,
+      "glyphPointHeight": 18.0,
+      "glyphOffsetPointX": 12.0,
+      "glyphOffsetPointY": 13.0
+    },
+    {
+      "file": "icon_setup_experiment_40@3x.png",
+      "logicalName": "icon_setup_experiment_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        31,
+        30,
+        89,
+        92
+      ],
+      "glyphPointWidth": 19.333,
+      "glyphPointHeight": 20.667,
+      "glyphOffsetPointX": 10.333,
+      "glyphOffsetPointY": 10.0
+    },
+    {
+      "file": "icon_setup_fan_40@3x.png",
+      "logicalName": "icon_setup_fan_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        33,
+        30,
+        92,
+        89
+      ],
+      "glyphPointWidth": 19.667,
+      "glyphPointHeight": 19.667,
+      "glyphOffsetPointX": 11.0,
+      "glyphOffsetPointY": 10.0
+    },
+    {
+      "file": "icon_setup_fan_44@3x.png",
+      "logicalName": "icon_setup_fan_44",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        39,
+        40,
+        93,
+        93
+      ],
+      "glyphPointWidth": 18.0,
+      "glyphPointHeight": 17.667,
+      "glyphOffsetPointX": 13.0,
+      "glyphOffsetPointY": 13.333
+    },
+    {
+      "file": "icon_setup_fivestrokes@3x.png",
+      "logicalName": "icon_setup_fivestrokes",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        27,
+        27,
+        81,
+        78
+      ],
+      "glyphPointWidth": 18.0,
+      "glyphPointHeight": 17.0,
+      "glyphOffsetPointX": 9.0,
+      "glyphOffsetPointY": 9.0
+    },
+    {
+      "file": "icon_setup_fivestrokes_40@3x.png",
+      "logicalName": "icon_setup_fivestrokes_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        31,
+        33,
+        89,
+        87
+      ],
+      "glyphPointWidth": 19.333,
+      "glyphPointHeight": 18.0,
+      "glyphOffsetPointX": 10.333,
+      "glyphOffsetPointY": 11.0
+    },
+    {
+      "file": "icon_setup_guide_correction@3x.png",
+      "logicalName": "icon_setup_guide_correction",
+      "scale": 3,
+      "pixelWidth": 126,
+      "pixelHeight": 126,
+      "pointWidth": 42.0,
+      "pointHeight": 42.0,
+      "alphaBBoxPixels": [
+        44,
+        37,
+        87,
+        96
+      ],
+      "glyphPointWidth": 14.333,
+      "glyphPointHeight": 19.667,
+      "glyphOffsetPointX": 14.667,
+      "glyphOffsetPointY": 12.333
+    },
+    {
+      "file": "icon_setup_guide_feedback@3x.png",
+      "logicalName": "icon_setup_guide_feedback",
+      "scale": 3,
+      "pixelWidth": 126,
+      "pixelHeight": 126,
+      "pointWidth": 42.0,
+      "pointHeight": 42.0,
+      "alphaBBoxPixels": [
+        35,
+        35,
+        91,
+        91
+      ],
+      "glyphPointWidth": 18.667,
+      "glyphPointHeight": 18.667,
+      "glyphOffsetPointX": 11.667,
+      "glyphOffsetPointY": 11.667
+    },
+    {
+      "file": "icon_setup_guide_gif@3x.png",
+      "logicalName": "icon_setup_guide_gif",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        30,
+        33,
+        77,
+        75
+      ],
+      "glyphPointWidth": 15.667,
+      "glyphPointHeight": 14.0,
+      "glyphOffsetPointX": 10.0,
+      "glyphOffsetPointY": 11.0
+    },
+    {
+      "file": "icon_setup_guide_gif-1@3x.png",
+      "logicalName": "icon_setup_guide_gif-1",
+      "scale": 3,
+      "pixelWidth": 126,
+      "pixelHeight": 126,
+      "pointWidth": 42.0,
+      "pointHeight": 42.0,
+      "alphaBBoxPixels": [
+        35,
+        38,
+        90,
+        88
+      ],
+      "glyphPointWidth": 18.333,
+      "glyphPointHeight": 16.667,
+      "glyphOffsetPointX": 11.667,
+      "glyphOffsetPointY": 12.667
+    },
+    {
+      "file": "icon_setup_guide_quicksend@3x.png",
+      "logicalName": "icon_setup_guide_quicksend",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        35,
+        31,
+        75,
+        77
+      ],
+      "glyphPointWidth": 13.333,
+      "glyphPointHeight": 15.333,
+      "glyphOffsetPointX": 11.667,
+      "glyphOffsetPointY": 10.333
+    },
+    {
+      "file": "icon_setup_guide_quicksend-1@3x.png",
+      "logicalName": "icon_setup_guide_quicksend-1",
+      "scale": 3,
+      "pixelWidth": 126,
+      "pixelHeight": 126,
+      "pointWidth": 42.0,
+      "pointHeight": 42.0,
+      "alphaBBoxPixels": [
+        41,
+        37,
+        87,
+        90
+      ],
+      "glyphPointWidth": 15.333,
+      "glyphPointHeight": 17.667,
+      "glyphOffsetPointX": 13.667,
+      "glyphOffsetPointY": 12.333
+    },
+    {
+      "file": "icon_setup_guide_voice@3x.png",
+      "logicalName": "icon_setup_guide_voice",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        36,
+        29,
+        75,
+        80
+      ],
+      "glyphPointWidth": 13.0,
+      "glyphPointHeight": 17.0,
+      "glyphOffsetPointX": 12.0,
+      "glyphOffsetPointY": 9.667
+    },
+    {
+      "file": "icon_setup_hand@3x.png",
+      "logicalName": "icon_setup_hand",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        29,
+        26,
+        91,
+        85
+      ],
+      "glyphPointWidth": 20.667,
+      "glyphPointHeight": 19.667,
+      "glyphOffsetPointX": 9.667,
+      "glyphOffsetPointY": 8.667
+    },
+    {
+      "file": "icon_setup_hand_40@3x.png",
+      "logicalName": "icon_setup_hand_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        29,
+        29,
+        98,
+        95
+      ],
+      "glyphPointWidth": 23.0,
+      "glyphPointHeight": 22.0,
+      "glyphOffsetPointX": 9.667,
+      "glyphOffsetPointY": 9.667
+    },
+    {
+      "file": "icon_setup_handedly_44@3x.png",
+      "logicalName": "icon_setup_handedly_44",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        39,
+        38,
+        98,
+        94
+      ],
+      "glyphPointWidth": 19.667,
+      "glyphPointHeight": 18.667,
+      "glyphOffsetPointX": 13.0,
+      "glyphOffsetPointY": 12.667
+    },
+    {
+      "file": "icon_setup_handwritten@3x.png",
+      "logicalName": "icon_setup_handwritten",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        27,
+        27,
+        81,
+        83
+      ],
+      "glyphPointWidth": 18.0,
+      "glyphPointHeight": 18.667,
+      "glyphOffsetPointX": 9.0,
+      "glyphOffsetPointY": 9.0
+    },
+    {
+      "file": "icon_setup_handwritten_40@3x.png",
+      "logicalName": "icon_setup_handwritten_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        33,
+        33,
+        87,
+        89
+      ],
+      "glyphPointWidth": 18.0,
+      "glyphPointHeight": 18.667,
+      "glyphOffsetPointX": 11.0,
+      "glyphOffsetPointY": 11.0
+    },
+    {
+      "file": "icon_setup_help@3x.png",
+      "logicalName": "icon_setup_help",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        22,
+        22,
+        86,
+        86
+      ],
+      "glyphPointWidth": 21.333,
+      "glyphPointHeight": 21.333,
+      "glyphOffsetPointX": 7.333,
+      "glyphOffsetPointY": 7.333
+    },
+    {
+      "file": "icon_setup_hotword@3x.png",
+      "logicalName": "icon_setup_hotword",
+      "scale": 3,
+      "pixelWidth": 96,
+      "pixelHeight": 96,
+      "pointWidth": 32.0,
+      "pointHeight": 32.0,
+      "alphaBBoxPixels": [
+        21,
+        24,
+        75,
+        78
+      ],
+      "glyphPointWidth": 18.0,
+      "glyphPointHeight": 18.0,
+      "glyphOffsetPointX": 7.0,
+      "glyphOffsetPointY": 8.0
+    },
+    {
+      "file": "icon_setup_keyboard_44@3x.png",
+      "logicalName": "icon_setup_keyboard_44",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        36,
+        42,
+        96,
+        91
+      ],
+      "glyphPointWidth": 20.0,
+      "glyphPointHeight": 16.333,
+      "glyphOffsetPointX": 12.0,
+      "glyphOffsetPointY": 14.0
+    },
+    {
+      "file": "icon_setup_keyboard_management@3x.png",
+      "logicalName": "icon_setup_keyboard_management",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        24,
+        25,
+        90,
+        87
+      ],
+      "glyphPointWidth": 22.0,
+      "glyphPointHeight": 20.667,
+      "glyphOffsetPointX": 8.0,
+      "glyphOffsetPointY": 8.333
+    },
+    {
+      "file": "icon_setup_keyboard_management 1@3x.png",
+      "logicalName": "icon_setup_keyboard_management 1",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        28,
+        27,
+        95,
+        89
+      ],
+      "glyphPointWidth": 22.333,
+      "glyphPointHeight": 20.667,
+      "glyphOffsetPointX": 9.333,
+      "glyphOffsetPointY": 9.0
+    },
+    {
+      "file": "icon_setup_language_more@3x.png",
+      "logicalName": "icon_setup_language_more",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        26,
+        47,
+        82,
+        61
+      ],
+      "glyphPointWidth": 18.667,
+      "glyphPointHeight": 4.667,
+      "glyphOffsetPointX": 8.667,
+      "glyphOffsetPointY": 15.667
+    },
+    {
+      "file": "icon_setup_language_pu@3x.png",
+      "logicalName": "icon_setup_language_pu",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        21,
+        20,
+        87,
+        88
+      ],
+      "glyphPointWidth": 22.0,
+      "glyphPointHeight": 22.667,
+      "glyphOffsetPointX": 7.0,
+      "glyphOffsetPointY": 6.667
+    },
+    {
+      "file": "icon_setup_language_ying@3x.png",
+      "logicalName": "icon_setup_language_ying",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        20,
+        20,
+        88,
+        88
+      ],
+      "glyphPointWidth": 22.667,
+      "glyphPointHeight": 22.667,
+      "glyphOffsetPointX": 6.667,
+      "glyphOffsetPointY": 6.667
+    },
+    {
+      "file": "icon_setup_language_yue@3x.png",
+      "logicalName": "icon_setup_language_yue",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        21,
+        20,
+        87,
+        88
+      ],
+      "glyphPointWidth": 22.0,
+      "glyphPointHeight": 22.667,
+      "glyphOffsetPointX": 7.0,
+      "glyphOffsetPointY": 6.667
+    },
+    {
+      "file": "icon_setup_more@3x.png",
+      "logicalName": "icon_setup_more",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        27,
+        21,
+        81,
+        84
+      ],
+      "glyphPointWidth": 18.0,
+      "glyphPointHeight": 21.0,
+      "glyphOffsetPointX": 9.0,
+      "glyphOffsetPointY": 7.0
+    },
+    {
+      "file": "icon_setup_plus@3x.png",
+      "logicalName": "icon_setup_plus",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        20,
+        27,
+        88,
+        85
+      ],
+      "glyphPointWidth": 22.667,
+      "glyphPointHeight": 19.333,
+      "glyphOffsetPointX": 6.667,
+      "glyphOffsetPointY": 9.0
+    },
+    {
+      "file": "icon_setup_plus_logo@3x.png",
+      "logicalName": "icon_setup_plus_logo",
+      "scale": 3,
+      "pixelWidth": 27,
+      "pixelHeight": 27,
+      "pointWidth": 9.0,
+      "pointHeight": 9.0,
+      "alphaBBoxPixels": [
+        0,
+        0,
+        27,
+        27
+      ],
+      "glyphPointWidth": 9.0,
+      "glyphPointHeight": 9.0,
+      "glyphOffsetPointX": 0.0,
+      "glyphOffsetPointY": 0.0
+    },
+    {
+      "file": "icon_setup_plus_logo_dark@3x.png",
+      "logicalName": "icon_setup_plus_logo_dark",
+      "scale": 3,
+      "pixelWidth": 27,
+      "pixelHeight": 27,
+      "pointWidth": 9.0,
+      "pointHeight": 9.0,
+      "alphaBBoxPixels": [
+        0,
+        0,
+        27,
+        27
+      ],
+      "glyphPointWidth": 9.0,
+      "glyphPointHeight": 9.0,
+      "glyphOffsetPointX": 0.0,
+      "glyphOffsetPointY": 0.0
+    },
+    {
+      "file": "icon_setup_plus_new@3x.png",
+      "logicalName": "icon_setup_plus_new",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        21,
+        27,
+        87,
+        84
+      ],
+      "glyphPointWidth": 22.0,
+      "glyphPointHeight": 19.0,
+      "glyphOffsetPointX": 7.0,
+      "glyphOffsetPointY": 9.0
+    },
+    {
+      "file": "icon_setup_quick@3x.png",
+      "logicalName": "icon_setup_quick",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        24,
+        24,
+        84,
+        82
+      ],
+      "glyphPointWidth": 20.0,
+      "glyphPointHeight": 19.333,
+      "glyphOffsetPointX": 8.0,
+      "glyphOffsetPointY": 8.0
+    },
+    {
+      "file": "icon_setup_quicksend@3x.png",
+      "logicalName": "icon_setup_quicksend",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        26,
+        20,
+        85,
+        89
+      ],
+      "glyphPointWidth": 19.667,
+      "glyphPointHeight": 23.0,
+      "glyphOffsetPointX": 8.667,
+      "glyphOffsetPointY": 6.667
+    },
+    {
+      "file": "icon_setup_quicksend_40@3x.png",
+      "logicalName": "icon_setup_quicksend_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        26,
+        19,
+        93,
+        98
+      ],
+      "glyphPointWidth": 22.333,
+      "glyphPointHeight": 26.333,
+      "glyphOffsetPointX": 8.667,
+      "glyphOffsetPointY": 6.333
+    },
+    {
+      "file": "icon_setup_quicksend_44@3x.png",
+      "logicalName": "icon_setup_quicksend_44",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        39,
+        34,
+        93,
+        98
+      ],
+      "glyphPointWidth": 18.0,
+      "glyphPointHeight": 21.333,
+      "glyphOffsetPointX": 13.0,
+      "glyphOffsetPointY": 11.333
+    },
+    {
+      "file": "icon_setup_rect@3x.png",
+      "logicalName": "icon_setup_rect",
+      "scale": 3,
+      "pixelWidth": 78,
+      "pixelHeight": 78,
+      "pointWidth": 26.0,
+      "pointHeight": 26.0,
+      "alphaBBoxPixels": [
+        1,
+        1,
+        77,
+        77
+      ],
+      "glyphPointWidth": 25.333,
+      "glyphPointHeight": 25.333,
+      "glyphOffsetPointX": 0.333,
+      "glyphOffsetPointY": 0.333
+    },
+    {
+      "file": "icon_setup_rewrite_40@3x.png",
+      "logicalName": "icon_setup_rewrite_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        27,
+        24,
+        93,
+        96
+      ],
+      "glyphPointWidth": 22.0,
+      "glyphPointHeight": 24.0,
+      "glyphOffsetPointX": 9.0,
+      "glyphOffsetPointY": 8.0
+    },
+    {
+      "file": "icon_setup_segment_keyboard@3x.png",
+      "logicalName": "icon_setup_segment_keyboard",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        13,
+        16,
+        62,
+        59
+      ],
+      "glyphPointWidth": 16.333,
+      "glyphPointHeight": 14.333,
+      "glyphOffsetPointX": 4.333,
+      "glyphOffsetPointY": 5.333
+    },
+    {
+      "file": "icon_setup_segment_others@3x.png",
+      "logicalName": "icon_setup_segment_others",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        14,
+        11,
+        58,
+        62
+      ],
+      "glyphPointWidth": 14.667,
+      "glyphPointHeight": 17.0,
+      "glyphOffsetPointX": 4.667,
+      "glyphOffsetPointY": 3.667
+    },
+    {
+      "file": "icon_setup_segment_plus@3x.png",
+      "logicalName": "icon_setup_segment_plus",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        10,
+        15,
+        60,
+        57
+      ],
+      "glyphPointWidth": 16.667,
+      "glyphPointHeight": 14.0,
+      "glyphOffsetPointX": 3.333,
+      "glyphOffsetPointY": 5.0
+    },
+    {
+      "file": "icon_setup_shortcut@3x.png",
+      "logicalName": "icon_setup_shortcut",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        24,
+        24,
+        85,
+        85
+      ],
+      "glyphPointWidth": 20.333,
+      "glyphPointHeight": 20.333,
+      "glyphOffsetPointX": 8.0,
+      "glyphOffsetPointY": 8.0
+    },
+    {
+      "file": "icon_setup_shuangpin@3x.png",
+      "logicalName": "icon_setup_shuangpin",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        27,
+        30,
+        81,
+        81
+      ],
+      "glyphPointWidth": 18.0,
+      "glyphPointHeight": 17.0,
+      "glyphOffsetPointX": 9.0,
+      "glyphOffsetPointY": 10.0
+    },
+    {
+      "file": "icon_setup_shuangpin_40@3x.png",
+      "logicalName": "icon_setup_shuangpin_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        31,
+        33,
+        90,
+        88
+      ],
+      "glyphPointWidth": 19.667,
+      "glyphPointHeight": 18.333,
+      "glyphOffsetPointX": 10.333,
+      "glyphOffsetPointY": 11.0
+    },
+    {
+      "file": "icon_setup_size@3x.png",
+      "logicalName": "icon_setup_size",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        26,
+        26,
+        82,
+        82
+      ],
+      "glyphPointWidth": 18.667,
+      "glyphPointHeight": 18.667,
+      "glyphOffsetPointX": 8.667,
+      "glyphOffsetPointY": 8.667
+    },
+    {
+      "file": "icon_setup_size_40@3x.png",
+      "logicalName": "icon_setup_size_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        29,
+        29,
+        91,
+        91
+      ],
+      "glyphPointWidth": 20.667,
+      "glyphPointHeight": 20.667,
+      "glyphOffsetPointX": 9.667,
+      "glyphOffsetPointY": 9.667
+    },
+    {
+      "file": "icon_setup_strokes@3x.png",
+      "logicalName": "icon_setup_strokes",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        27,
+        27,
+        84,
+        84
+      ],
+      "glyphPointWidth": 19.0,
+      "glyphPointHeight": 19.0,
+      "glyphOffsetPointX": 9.0,
+      "glyphOffsetPointY": 9.0
+    },
+    {
+      "file": "icon_setup_strokes_40@3x.png",
+      "logicalName": "icon_setup_strokes_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        33,
+        33,
+        90,
+        90
+      ],
+      "glyphPointWidth": 19.0,
+      "glyphPointHeight": 19.0,
+      "glyphOffsetPointX": 11.0,
+      "glyphOffsetPointY": 11.0
+    },
+    {
+      "file": "icon_setup_t26@3x.png",
+      "logicalName": "icon_setup_t26",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        18,
+        25,
+        90,
+        83
+      ],
+      "glyphPointWidth": 24.0,
+      "glyphPointHeight": 19.333,
+      "glyphOffsetPointX": 6.0,
+      "glyphOffsetPointY": 8.333
+    },
+    {
+      "file": "icon_setup_t26_40@3x.png",
+      "logicalName": "icon_setup_t26_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        24,
+        31,
+        96,
+        89
+      ],
+      "glyphPointWidth": 24.0,
+      "glyphPointHeight": 19.333,
+      "glyphOffsetPointX": 8.0,
+      "glyphOffsetPointY": 10.333
+    },
+    {
+      "file": "icon_setup_t26fivestrokes@3x.png",
+      "logicalName": "icon_setup_t26fivestrokes",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        18,
+        25,
+        98,
+        98
+      ],
+      "glyphPointWidth": 26.667,
+      "glyphPointHeight": 24.333,
+      "glyphOffsetPointX": 6.0,
+      "glyphOffsetPointY": 8.333
+    },
+    {
+      "file": "icon_setup_t9@3x.png",
+      "logicalName": "icon_setup_t9",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        25,
+        25,
+        83,
+        83
+      ],
+      "glyphPointWidth": 19.333,
+      "glyphPointHeight": 19.333,
+      "glyphOffsetPointX": 8.333,
+      "glyphOffsetPointY": 8.333
+    },
+    {
+      "file": "icon_setup_t9_40@3x.png",
+      "logicalName": "icon_setup_t9_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        31,
+        31,
+        89,
+        89
+      ],
+      "glyphPointWidth": 19.333,
+      "glyphPointHeight": 19.333,
+      "glyphOffsetPointX": 10.333,
+      "glyphOffsetPointY": 10.333
+    },
+    {
+      "file": "icon_setup_t9fivestrokes@3x.png",
+      "logicalName": "icon_setup_t9fivestrokes",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        25,
+        25,
+        98,
+        98
+      ],
+      "glyphPointWidth": 24.333,
+      "glyphPointHeight": 24.333,
+      "glyphOffsetPointX": 8.333,
+      "glyphOffsetPointY": 8.333
+    },
+    {
+      "file": "icon_setup_textcheck@3x.png",
+      "logicalName": "icon_setup_textcheck",
+      "scale": 3,
+      "pixelWidth": 96,
+      "pixelHeight": 96,
+      "pointWidth": 32.0,
+      "pointHeight": 32.0,
+      "alphaBBoxPixels": [
+        27,
+        24,
+        69,
+        75
+      ],
+      "glyphPointWidth": 14.0,
+      "glyphPointHeight": 17.0,
+      "glyphOffsetPointX": 9.0,
+      "glyphOffsetPointY": 8.0
+    },
+    {
+      "file": "icon_setup_translate@3x.png",
+      "logicalName": "icon_setup_translate",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        23,
+        23,
+        88,
+        85
+      ],
+      "glyphPointWidth": 21.667,
+      "glyphPointHeight": 20.667,
+      "glyphOffsetPointX": 7.667,
+      "glyphOffsetPointY": 7.667
+    },
+    {
+      "file": "icon_setup_translate_40@3x.png",
+      "logicalName": "icon_setup_translate_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        24,
+        27,
+        95,
+        92
+      ],
+      "glyphPointWidth": 23.667,
+      "glyphPointHeight": 21.667,
+      "glyphOffsetPointX": 8.0,
+      "glyphOffsetPointY": 9.0
+    },
+    {
+      "file": "icon_setup_translate_44@3x.png",
+      "logicalName": "icon_setup_translate_44",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        36,
+        38,
+        95,
+        91
+      ],
+      "glyphPointWidth": 19.667,
+      "glyphPointHeight": 17.667,
+      "glyphOffsetPointX": 12.0,
+      "glyphOffsetPointY": 12.667
+    },
+    {
+      "file": "icon_setup_vibration_40@3x.png",
+      "logicalName": "icon_setup_vibration_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        20,
+        31,
+        100,
+        89
+      ],
+      "glyphPointWidth": 26.667,
+      "glyphPointHeight": 19.333,
+      "glyphOffsetPointX": 6.667,
+      "glyphOffsetPointY": 10.333
+    },
+    {
+      "file": "icon_setup_voice@3x.png",
+      "logicalName": "icon_setup_voice",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        28,
+        21,
+        80,
+        87
+      ],
+      "glyphPointWidth": 17.333,
+      "glyphPointHeight": 22.0,
+      "glyphOffsetPointX": 9.333,
+      "glyphOffsetPointY": 7.0
+    },
+    {
+      "file": "icon_setup_voice_40@3x.png",
+      "logicalName": "icon_setup_voice_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        31,
+        23,
+        89,
+        97
+      ],
+      "glyphPointWidth": 19.333,
+      "glyphPointHeight": 24.667,
+      "glyphOffsetPointX": 10.333,
+      "glyphOffsetPointY": 7.667
+    },
+    {
+      "file": "icon_setup_voice_44@3x.png",
+      "logicalName": "icon_setup_voice_44",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        42,
+        34,
+        91,
+        97
+      ],
+      "glyphPointWidth": 16.333,
+      "glyphPointHeight": 21.0,
+      "glyphOffsetPointX": 14.0,
+      "glyphOffsetPointY": 11.333
+    },
+    {
+      "file": "icon_setup_voice_setting@3x.png",
+      "logicalName": "icon_setup_voice_setting",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        23,
+        25,
+        85,
+        84
+      ],
+      "glyphPointWidth": 20.667,
+      "glyphPointHeight": 19.667,
+      "glyphOffsetPointX": 7.667,
+      "glyphOffsetPointY": 8.333
+    },
+    {
+      "file": "icon_setup_voice_setup@3x.png",
+      "logicalName": "icon_setup_voice_setup",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        28,
+        21,
+        90,
+        87
+      ],
+      "glyphPointWidth": 20.667,
+      "glyphPointHeight": 22.0,
+      "glyphOffsetPointX": 9.333,
+      "glyphOffsetPointY": 7.0
+    },
+    {
+      "file": "icon_setup_voiceset_40@3x.png",
+      "logicalName": "icon_setup_voiceset_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        31,
+        23,
+        100,
+        97
+      ],
+      "glyphPointWidth": 23.0,
+      "glyphPointHeight": 24.667,
+      "glyphOffsetPointX": 10.333,
+      "glyphOffsetPointY": 7.667
+    },
+    {
+      "file": "icon_setup_write@3x.png",
+      "logicalName": "icon_setup_write",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        25,
+        18,
+        84,
+        87
+      ],
+      "glyphPointWidth": 19.667,
+      "glyphPointHeight": 23.0,
+      "glyphOffsetPointX": 8.333,
+      "glyphOffsetPointY": 6.0
+    },
+    {
+      "file": "icon_setup_write_40@3x.png",
+      "logicalName": "icon_setup_write_40",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        28,
+        20,
+        93,
+        97
+      ],
+      "glyphPointWidth": 21.667,
+      "glyphPointHeight": 25.667,
+      "glyphOffsetPointX": 9.333,
+      "glyphOffsetPointY": 6.667
+    },
+    {
+      "file": "icon_setup_write_44@3x.png",
+      "logicalName": "icon_setup_write_44",
+      "scale": 3,
+      "pixelWidth": 132,
+      "pixelHeight": 132,
+      "pointWidth": 44.0,
+      "pointHeight": 44.0,
+      "alphaBBoxPixels": [
+        39,
+        34,
+        94,
+        99
+      ],
+      "glyphPointWidth": 18.333,
+      "glyphPointHeight": 21.667,
+      "glyphOffsetPointX": 13.0,
+      "glyphOffsetPointY": 11.333
+    },
+    {
+      "file": "icon_size_T26_left@3x.png",
+      "logicalName": "icon_size_T26_left",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        2,
+        15,
+        70,
+        57
+      ],
+      "glyphPointWidth": 22.667,
+      "glyphPointHeight": 14.0,
+      "glyphOffsetPointX": 0.667,
+      "glyphOffsetPointY": 5.0
+    },
+    {
+      "file": "icon_size_T26_right@3x.png",
+      "logicalName": "icon_size_T26_right",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        2,
+        15,
+        70,
+        57
+      ],
+      "glyphPointWidth": 22.667,
+      "glyphPointHeight": 14.0,
+      "glyphOffsetPointX": 0.667,
+      "glyphOffsetPointY": 5.0
+    },
+    {
+      "file": "icon_size_T9_left@3x.png",
+      "logicalName": "icon_size_T9_left",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        2,
+        15,
+        70,
+        57
+      ],
+      "glyphPointWidth": 22.667,
+      "glyphPointHeight": 14.0,
+      "glyphOffsetPointX": 0.667,
+      "glyphOffsetPointY": 5.0
+    },
+    {
+      "file": "icon_size_T9_left_22@3x.png",
+      "logicalName": "icon_size_T9_left_22",
+      "scale": 3,
+      "pixelWidth": 66,
+      "pixelHeight": 66,
+      "pointWidth": 22.0,
+      "pointHeight": 22.0,
+      "alphaBBoxPixels": [
+        2,
+        14,
+        64,
+        52
+      ],
+      "glyphPointWidth": 20.667,
+      "glyphPointHeight": 12.667,
+      "glyphOffsetPointX": 0.667,
+      "glyphOffsetPointY": 4.667
+    },
+    {
+      "file": "icon_size_T9_right@3x.png",
+      "logicalName": "icon_size_T9_right",
+      "scale": 3,
+      "pixelWidth": 72,
+      "pixelHeight": 72,
+      "pointWidth": 24.0,
+      "pointHeight": 24.0,
+      "alphaBBoxPixels": [
+        2,
+        15,
+        70,
+        57
+      ],
+      "glyphPointWidth": 22.667,
+      "glyphPointHeight": 14.0,
+      "glyphOffsetPointX": 0.667,
+      "glyphOffsetPointY": 5.0
+    },
+    {
+      "file": "icon_size_T9_right_22@3x.png",
+      "logicalName": "icon_size_T9_right_22",
+      "scale": 3,
+      "pixelWidth": 66,
+      "pixelHeight": 66,
+      "pointWidth": 22.0,
+      "pointHeight": 22.0,
+      "alphaBBoxPixels": [
+        2,
+        14,
+        64,
+        52
+      ],
+      "glyphPointWidth": 20.667,
+      "glyphPointHeight": 12.667,
+      "glyphOffsetPointX": 0.667,
+      "glyphOffsetPointY": 4.667
+    },
+    {
+      "file": "icon_size_cancel@3x.png",
+      "logicalName": "icon_size_cancel",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        21,
+        30,
+        99,
+        111
+      ],
+      "glyphPointWidth": 26.0,
+      "glyphPointHeight": 27.0,
+      "glyphOffsetPointX": 7.0,
+      "glyphOffsetPointY": 10.0
+    },
+    {
+      "file": "icon_size_determine@3x.png",
+      "logicalName": "icon_size_determine",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        12,
+        34,
+        111,
+        114
+      ],
+      "glyphPointWidth": 33.0,
+      "glyphPointHeight": 26.667,
+      "glyphOffsetPointX": 4.0,
+      "glyphOffsetPointY": 11.333
+    },
+    {
+      "file": "icon_size_drag_transverse@3x.png",
+      "logicalName": "icon_size_drag_transverse",
+      "scale": 3,
+      "pixelWidth": 108,
+      "pixelHeight": 108,
+      "pointWidth": 36.0,
+      "pointHeight": 36.0,
+      "alphaBBoxPixels": [
+        12,
+        18,
+        96,
+        42
+      ],
+      "glyphPointWidth": 28.0,
+      "glyphPointHeight": 8.0,
+      "glyphOffsetPointX": 4.0,
+      "glyphOffsetPointY": 6.0
+    },
+    {
+      "file": "icon_size_full@3x.png",
+      "logicalName": "icon_size_full",
+      "scale": 3,
+      "pixelWidth": 84,
+      "pixelHeight": 84,
+      "pointWidth": 28.0,
+      "pointHeight": 28.0,
+      "alphaBBoxPixels": [
+        21,
+        21,
+        63,
+        63
+      ],
+      "glyphPointWidth": 14.0,
+      "glyphPointHeight": 14.0,
+      "glyphOffsetPointX": 7.0,
+      "glyphOffsetPointY": 7.0
+    },
+    {
+      "file": "icon_size_left@3x.png",
+      "logicalName": "icon_size_left",
+      "scale": 3,
+      "pixelWidth": 84,
+      "pixelHeight": 84,
+      "pointWidth": 28.0,
+      "pointHeight": 28.0,
+      "alphaBBoxPixels": [
+        3,
+        18,
+        81,
+        66
+      ],
+      "glyphPointWidth": 26.0,
+      "glyphPointHeight": 16.0,
+      "glyphOffsetPointX": 1.0,
+      "glyphOffsetPointY": 6.0
+    },
+    {
+      "file": "icon_size_reset@3x.png",
+      "logicalName": "icon_size_reset",
+      "scale": 3,
+      "pixelWidth": 120,
+      "pixelHeight": 120,
+      "pointWidth": 40.0,
+      "pointHeight": 40.0,
+      "alphaBBoxPixels": [
+        9,
+        22,
+        110,
+        120
+      ],
+      "glyphPointWidth": 33.667,
+      "glyphPointHeight": 32.667,
+      "glyphOffsetPointX": 3.0,
+      "glyphOffsetPointY": 7.333
+    },
+    {
+      "file": "icon_size_right@3x.png",
+      "logicalName": "icon_size_right",
+      "scale": 3,
+      "pixelWidth": 84,
+      "pixelHeight": 84,
+      "pointWidth": 28.0,
+      "pointHeight": 28.0,
+      "alphaBBoxPixels": [
+        3,
+        18,
+        81,
+        66
+      ],
+      "glyphPointWidth": 26.0,
+      "glyphPointHeight": 16.0,
+      "glyphOffsetPointX": 1.0,
+      "glyphOffsetPointY": 6.0
+    }
+  ]
+}

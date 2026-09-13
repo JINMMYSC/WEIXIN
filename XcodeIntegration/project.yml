@@ -1,0 +1,108 @@
+name: WeTypeReplica
+options:
+  bundleIdPrefix: dev.wetype.replica
+configs:
+  Debug: debug
+  Release: release
+settings:
+  base:
+    SWIFT_VERSION: 5.9
+    IPHONEOS_DEPLOYMENT_TARGET: 15.1
+    DEVELOPMENT_TEAM: YOUR_TEAM_ID
+    WT_APP_GROUP_ID: group.dev.wetype.replica.shared
+targets:
+  WeTypeReplicaApp:
+    type: application
+    platform: iOS
+    sources:
+      - path: ../Sources/WeTypeReplicaCore
+      - path: ../iOSShared
+      - path: ../iOSApp
+      - path: ../iOSServices
+    dependencies:
+      - target: WeTypeReplicaKeyboard
+        embed: true
+      - target: WeTypeReplicaShare
+        embed: true
+      - target: WeTypeReplicaWidget
+        embed: true
+      - target: WeTypeReplicaVoiceActivity
+        embed: true
+    info:
+      path: Plists/App-Info.plist
+    entitlements:
+      path: Entitlements/App.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.wetype.replica
+  WeTypeReplicaKeyboard:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: ../Sources/WeTypeReplicaCore
+      - path: ../iOSShared
+      - path: ../iOSOverlay
+      - path: ../HamsterBridge
+      - path: ../iOSServices
+        excludes:
+          - WTHostSpeechRecognitionService.swift
+      - path: ../iOSExtensions/WTKeyboardInputViewController.swift
+    info:
+      path: Plists/Keyboard-Info.plist
+    entitlements:
+      path: Entitlements/Keyboard.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.wetype.replica.keyboard
+        APPLICATION_EXTENSION_API_ONLY: YES
+  WeTypeReplicaShare:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: ../Sources/WeTypeReplicaCore
+      - path: ../iOSShared
+      - path: ../iOSExtensions/WTQuickSendShareView.swift
+      - path: ../iOSExtensions/WTQuickSendShareViewController.swift
+      - path: ../iOSServices/WTBonjourTransferService.swift
+    info:
+      path: Plists/Share-Info.plist
+    entitlements:
+      path: Entitlements/Share.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.wetype.replica.share
+        APPLICATION_EXTENSION_API_ONLY: YES
+  WeTypeReplicaWidget:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: ../iOSShared
+      - path: ../iOSExtensions/WTVoiceWidgetView.swift
+      - path: ../iOSExtensions/WTWidgetBundle.swift
+    info:
+      path: Plists/Widget-Info.plist
+    entitlements:
+      path: Entitlements/Widget.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.wetype.replica.widget
+        APPLICATION_EXTENSION_API_ONLY: YES
+
+  WeTypeReplicaVoiceActivity:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "16.1"
+    sources:
+      - path: ../Sources/WeTypeReplicaCore
+      - path: ../iOSShared
+      - path: ../iOSExtensions/WTVoiceLiveActivityWidget.swift
+    info:
+      path: Plists/VoiceActivity-Info.plist
+    entitlements:
+      path: Entitlements/VoiceActivity.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.wetype.replica.voiceactivity
+        APPLICATION_EXTENSION_API_ONLY: YES

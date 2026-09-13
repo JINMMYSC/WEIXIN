@@ -1,0 +1,77 @@
+Building for debugging...
+[0/2] Write swift-version--1BA0962812E73E12.txt
+Build complete! (0.09s)
+Test Suite 'All tests' started at 2026-09-13 00:35:51.735
+Test Suite 'debug.xctest' started at 2026-09-13 00:35:51.736
+Test Suite 'CandidatePreferenceTests' started at 2026-09-13 00:35:51.736
+Test Case 'CandidatePreferenceTests.testHiddenCandidateIsFiltered' started at 2026-09-13 00:35:51.736
+Test Case 'CandidatePreferenceTests.testHiddenCandidateIsFiltered' passed (0.002 seconds)
+Test Case 'CandidatePreferenceTests.testPinnedCandidateMovesToFront' started at 2026-09-13 00:35:51.738
+Test Case 'CandidatePreferenceTests.testPinnedCandidateMovesToFront' passed (0.001 seconds)
+Test Suite 'CandidatePreferenceTests' passed at 2026-09-13 00:35:51.738
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'CoordinatorTests' started at 2026-09-13 00:35:51.739
+Test Case 'CoordinatorTests.testCompositionGoesToEngineAndCandidateCommitsToDocument' started at 2026-09-13 00:35:51.739
+Test Case 'CoordinatorTests.testCompositionGoesToEngineAndCandidateCommitsToDocument' passed (0.0 seconds)
+Test Case 'CoordinatorTests.testDeletePrefersCompositionBeforeHostDocument' started at 2026-09-13 00:35:51.739
+Test Case 'CoordinatorTests.testDeletePrefersCompositionBeforeHostDocument' passed (0.0 seconds)
+Test Suite 'CoordinatorTests' passed at 2026-09-13 00:35:51.739
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'FeatureModelTests' started at 2026-09-13 00:35:51.739
+Test Case 'FeatureModelTests.testClipboardItemPinStateRoundTrip' started at 2026-09-13 00:35:51.739
+Test Case 'FeatureModelTests.testClipboardItemPinStateRoundTrip' passed (0.001 seconds)
+Test Case 'FeatureModelTests.testTransferProgressCarriesPeerAndFraction' started at 2026-09-13 00:35:51.739
+Test Case 'FeatureModelTests.testTransferProgressCarriesPeerAndFraction' passed (0.0 seconds)
+Test Suite 'FeatureModelTests' passed at 2026-09-13 00:35:51.740
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+Test Suite 'InteractionTests' started at 2026-09-13 00:35:51.740
+Test Case 'InteractionTests.testChineseQuoteKeyUsesChineseVariant' started at 2026-09-13 00:35:51.740
+Test Case 'InteractionTests.testChineseQuoteKeyUsesChineseVariant' passed (0.0 seconds)
+Test Case 'InteractionTests.testEnglishQuoteKeyUsesEnglishVariant' started at 2026-09-13 00:35:51.740
+Test Case 'InteractionTests.testEnglishQuoteKeyUsesEnglishVariant' passed (0.0 seconds)
+Test Case 'InteractionTests.testLanguageToggleReturnsToNineKey' started at 2026-09-13 00:35:51.740
+Test Case 'InteractionTests.testLanguageToggleReturnsToNineKey' passed (0.0 seconds)
+Test Case 'InteractionTests.testLongPressFloatListParsesAccentedV' started at 2026-09-13 00:35:51.741
+Test Case 'InteractionTests.testLongPressFloatListParsesAccentedV' passed (0.0 seconds)
+Test Case 'InteractionTests.testOneShotShiftConsumesAfterCharacter' started at 2026-09-13 00:35:51.741
+Test Case 'InteractionTests.testOneShotShiftConsumesAfterCharacter' passed (0.0 seconds)
+Test Case 'InteractionTests.testResolvedEnglishLayoutInheritedAllKeys' started at 2026-09-13 00:35:51.741
+Test Case 'InteractionTests.testResolvedEnglishLayoutInheritedAllKeys' passed (0.0 seconds)
+Test Case 'InteractionTests.testResolvedStrokeLayoutInheritedNineKeyGeometry' started at 2026-09-13 00:35:51.741
+Test Case 'InteractionTests.testResolvedStrokeLayoutInheritedNineKeyGeometry' passed (0.0 seconds)
+Test Case 'InteractionTests.testSwipeUpReadsExact26KeyNumber' started at 2026-09-13 00:35:51.741
+Test Case 'InteractionTests.testSwipeUpReadsExact26KeyNumber' passed (0.0 seconds)
+Test Suite 'InteractionTests' passed at 2026-09-13 00:35:51.742
+	 Executed 8 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'LayoutTests' started at 2026-09-13 00:35:51.742
+Test Case 'LayoutTests.testNestedPanelReturn' started at 2026-09-13 00:35:51.742
+Test Case 'LayoutTests.testNestedPanelReturn' passed (0.0 seconds)
+Test Case 'LayoutTests.testPanelReturnPreservesInputMode' started at 2026-09-13 00:35:51.742
+Test Case 'LayoutTests.testPanelReturnPreservesInputMode' passed (0.0 seconds)
+Test Case 'LayoutTests.testT26GeometryMatches353' started at 2026-09-13 00:35:51.742
+Test Case 'LayoutTests.testT26GeometryMatches353' passed (0.0 seconds)
+Test Case 'LayoutTests.testT9GeometryMatches353' started at 2026-09-13 00:35:51.742
+Test Case 'LayoutTests.testT9GeometryMatches353' passed (0.0 seconds)
+Test Suite 'LayoutTests' passed at 2026-09-13 00:35:51.742
+	 Executed 4 tests, with 0 failures (0 unexpected) in 0.0 (0.0) seconds
+Test Suite 'PersistentStoreTests' started at 2026-09-13 00:35:51.742
+Test Case 'PersistentStoreTests.testClipboardDeduplicatesAndPins' started at 2026-09-13 00:35:51.742
+Test Case 'PersistentStoreTests.testClipboardDeduplicatesAndPins' passed (0.001 seconds)
+Test Case 'PersistentStoreTests.testEmojiUsagePersistsAndRanks' started at 2026-09-13 00:35:51.743
+Test Case 'PersistentStoreTests.testEmojiUsagePersistsAndRanks' passed (0.001 seconds)
+Test Case 'PersistentStoreTests.testPhraseStoreMaintainsOrder' started at 2026-09-13 00:35:51.744
+Test Case 'PersistentStoreTests.testPhraseStoreMaintainsOrder' passed (0.001 seconds)
+Test Suite 'PersistentStoreTests' passed at 2026-09-13 00:35:51.745
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.003 (0.003) seconds
+Test Suite 'debug.xctest' passed at 2026-09-13 00:35:51.745
+	 Executed 21 tests, with 0 failures (0 unexpected) in 0.009 (0.009) seconds
+Test Suite 'All tests' passed at 2026-09-13 00:35:51.745
+	 Executed 21 tests, with 0 failures (0 unexpected) in 0.009 (0.009) seconds
+◇ Test run started.
+↳ Testing Library Version: 6.2.1 (c9d57c83568b06d)
+↳ Target Platform: x86_64-unknown-linux-gnu
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.
+
+== verification ==
+python tools: PASS
+iOS/bridge/services parse: PASS
