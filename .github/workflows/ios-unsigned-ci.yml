@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   materialize:
-    runs-on: macos-15
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -22,7 +22,7 @@ jobs:
           cat .v14-upload/part-*.bin > "$RUNNER_TEMP/WeTypeReplicaOverlay_v14-full.zip"
           rm -f WeTypeReplicaOverlay_v14-runtime.zip README.md
           rm -rf .github
-          ditto -x -k "$RUNNER_TEMP/WeTypeReplicaOverlay_v14-full.zip" .
+          unzip -q "$RUNNER_TEMP/WeTypeReplicaOverlay_v14-full.zip" -d .
           rm -rf .v14-upload
       - name: Commit the complete source tree
         run: |
