@@ -41,7 +41,7 @@ jobs:
           fi
 
       - name: Verify signed-device CI contract
-        run: python3 tools/verify_signed_device_ci.py
+        run: python3 Tools/verify_signed_device_ci.py
 
       - name: Build unsigned diagnostic package
         run: |

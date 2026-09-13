@@ -26,8 +26,8 @@
 ### Task 1: Add a static signed-CI contract verifier
 
 **Files:**
-- Create: `tools/verify_signed_device_ci.py`
-- Test: `tools/verify_signed_device_ci.py`
+- Create: `Tools/verify_signed_device_ci.py`
+- Test: `Tools/verify_signed_device_ci.py`
 
 **Interfaces:**
 - Consumes: repository files `.github/workflows/ios-signed-device-ci.yml` and `XcodeIntegration/ci_signed_device_package.sh`.
@@ -92,7 +92,7 @@ if __name__ == "__main__":
 Run:
 
 ```bash
-python tools/verify_signed_device_ci.py
+python Tools/verify_signed_device_ci.py
 ```
 
 Expected: non-zero exit with `missing signed-device workflow` before Tasks 2–3 create the required files.
@@ -108,7 +108,7 @@ Do not make an isolated red-only commit. The verifier becomes the local regressi
 **Files:**
 - Create: `XcodeIntegration/ci_signed_device_package.sh`
 - Modify: `CI_FIX_LOG.md`
-- Test: `tools/verify_signed_device_ci.py`
+- Test: `Tools/verify_signed_device_ci.py`
 
 **Interfaces:**
 - Consumes environment variables `WT_SIGNING_IDENTITY`, `WT_HOST_PROFILE_PATH`, `WT_KEYBOARD_PROFILE_PATH`, and the unsigned app produced at `artifacts/unsigned/Payload/WeTypeReplicaApp.app`.
@@ -220,7 +220,7 @@ Document the observed device-install blocker: the phone-side signer replaced the
 
 **Files:**
 - Create: `.github/workflows/ios-signed-device-ci.yml`
-- Test: `tools/verify_signed_device_ci.py`
+- Test: `Tools/verify_signed_device_ci.py`
 
 **Interfaces:**
 - Consumes repository secrets `WT_SIGNING_P12_BASE64`, `WT_SIGNING_P12_PASSWORD`, `WT_HOST_PROFILE_BASE64`, `WT_KEYBOARD_PROFILE_BASE64`.
@@ -294,7 +294,7 @@ rm -rf "$RUNNER_TEMP/wetype-signing" "$KEYCHAIN_PATH"
 Run:
 
 ```bash
-python tools/verify_signed_device_ci.py
+python Tools/verify_signed_device_ci.py
 ```
 
 Expected: `Signed-device CI configuration verifier passed`.
@@ -304,7 +304,7 @@ Expected: `Signed-device CI configuration verifier passed`.
 Run:
 
 ```bash
-git add .github/workflows/ios-signed-device-ci.yml XcodeIntegration/ci_signed_device_package.sh tools/verify_signed_device_ci.py CI_FIX_LOG.md docs/superpowers/plans/2026-09-13-signed-device-ci.md
+git add .github/workflows/ios-signed-device-ci.yml XcodeIntegration/ci_signed_device_package.sh Tools/verify_signed_device_ci.py CI_FIX_LOG.md docs/superpowers/plans/2026-09-13-signed-device-ci.md
 git commit -m "signing: add dual-profile device CI"
 ```
 

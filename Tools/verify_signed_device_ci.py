@@ -24,7 +24,7 @@ def main() -> int:
     require("macos-15" in workflow, "signed workflow must use the macOS runner")
     require("ci_unsigned_build.sh" in workflow, "signed workflow must reuse the unsigned build gate")
     require("ci_signed_device_package.sh" in workflow, "signed workflow must invoke the signing script")
-    require("python3 tools/verify_signed_device_ci.py" in workflow, "signed workflow must run its static verifier")
+    require("python3 Tools/verify_signed_device_ci.py" in workflow, "signed workflow must run its static verifier")
     require("actions/upload-artifact@v4" in workflow, "signed workflow must upload artifacts")
     require("if: always()" in workflow, "signed workflow must always upload logs and clean up")
     require("security delete-keychain" in workflow, "signed workflow must delete its ephemeral keychain")
