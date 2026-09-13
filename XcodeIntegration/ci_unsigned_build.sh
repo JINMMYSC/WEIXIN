@@ -8,7 +8,7 @@ LOG_DIR="$ARTIFACTS_DIR/logs"
 SIM_DERIVED_DATA="$ARTIFACTS_DIR/DerivedData-Simulator"
 DEVICE_DERIVED_DATA="$ARTIFACTS_DIR/DerivedData-Device"
 UNSIGNED_DIR="$ARTIFACTS_DIR/unsigned"
-IPA_PATH="$ARTIFACTS_DIR/WeTypeReplicaApp-unsigned.ipa"
+IPA_PATH="$ARTIFACTS_DIR/WeTypeReplicaApp-sideload-diagnostic-unsigned.ipa"
 
 rm -rf "$ARTIFACTS_DIR"
 mkdir -p "$LOG_DIR" "$UNSIGNED_DIR/Payload"
@@ -84,4 +84,3 @@ ditto "$APP_PATH" "$UNSIGNED_DIR/Payload/WeTypeReplicaApp.app"
   echo "IPA contents:"
   unzip -l "$IPA_PATH"
 } | tee "$LOG_DIR/package.log"
-

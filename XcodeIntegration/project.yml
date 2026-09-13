@@ -26,12 +26,6 @@ targets:
     dependencies:
       - target: WeTypeReplicaKeyboard
         embed: true
-      - target: WeTypeReplicaShare
-        embed: true
-      - target: WeTypeReplicaWidget
-        embed: true
-      - target: WeTypeReplicaVoiceActivity
-        embed: true
     info:
       path: Plists/App-Info.plist
     entitlements:

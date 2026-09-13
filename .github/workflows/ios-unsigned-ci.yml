@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - work/v14-ci
+      - work/v14-signed-device
   pull_request:
 
 permissions:
@@ -48,9 +49,9 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: WeTypeReplica-V14-unsigned-${{ github.run_attempt }}
+          name: WeTypeReplica-V14-sideload-diagnostic-${{ github.run_attempt }}
           path: |
-            artifacts/WeTypeReplicaApp-unsigned.ipa
+            artifacts/WeTypeReplicaApp-sideload-diagnostic-unsigned.ipa
             artifacts/unsigned/Payload/WeTypeReplicaApp.app
           if-no-files-found: error
           retention-days: 30
