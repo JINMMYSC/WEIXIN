@@ -112,8 +112,8 @@ chmod 0644 "$SIGNED_APP/embedded.mobileprovision"
   --generate-entitlement-der \
   "$SIGNED_APP"
 
-/bin/cmp -s "$KEYBOARD_PROFILE" "$KEYBOARD_APP/embedded.mobileprovision" || fail "Keyboard embedded profile changed during signing"
-/bin/cmp -s "$HOST_PROFILE" "$SIGNED_APP/embedded.mobileprovision" || fail "Host embedded profile changed during signing"
+/usr/bin/cmp -s "$KEYBOARD_PROFILE" "$KEYBOARD_APP/embedded.mobileprovision" || fail "Keyboard embedded profile changed during signing"
+/usr/bin/cmp -s "$HOST_PROFILE" "$SIGNED_APP/embedded.mobileprovision" || fail "Host embedded profile changed during signing"
 
 /usr/bin/codesign -d --entitlements :- "$KEYBOARD_APP" > "$TEMP_DIR/keyboard-codesign-entitlements.plist" 2> "$TEMP_DIR/keyboard-codesign-display.log"
 /usr/bin/codesign -d --entitlements :- "$SIGNED_APP" > "$TEMP_DIR/host-codesign-entitlements.plist" 2> "$TEMP_DIR/host-codesign-display.log"
