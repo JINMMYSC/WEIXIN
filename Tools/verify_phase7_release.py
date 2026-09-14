@@ -39,9 +39,10 @@ def main() -> int:
     for token in ('name: "WeixinRebuild"', 'path: "Sources/WeTypeReplicaCore"', 'path: "Tests"'):
         require(token in package, f"SwiftPM Core/replay test entry missing: {token}")
 
-    for scheme in ("ClawBaseShare", "ClawBaseWidget", "ClawBaseVoiceActivity", "ClawBaseHost"):
-        require(f"-scheme {scheme}" in build or f'"{scheme}"' in build,
-                f"unsigned all-target build missing scheme: {scheme}")
+    require("for scheme in ClawBaseShare ClawBaseWidget ClawBaseVoiceActivity" in build,
+            "unsigned build must compile all Phase 5 system-extension schemes")
+    require('-scheme "$scheme"' in build, "system-extension loop must build each selected scheme")
+    require("-scheme ClawBaseHost" in build, "unsigned build must compile ClawBaseHost")
 
     keyboard_first = sign.find("# SIGN_KEYBOARD_FIRST")
     host_last = sign.find("# SIGN_HOST_LAST")
