@@ -12,8 +12,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
 
-        let host = UIHostingController(rootView: WTSettingsAppView())
-        host.view.backgroundColor = .systemBackground
+        let host = UIHostingController(rootView: WTHostHomeParityView())
+        host.view.backgroundColor = UIColor(red: 5.0/255.0, green: 5.0/255.0, blue: 5.0/255.0, alpha: 1)
 
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = host
