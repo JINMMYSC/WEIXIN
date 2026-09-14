@@ -5,6 +5,7 @@ on:
     branches:
       - work/v14-clawbase-t9-rime
       - work/v14-clawbase-phase4
+      - work/v14-phase5-7-integration
 
 permissions:
   contents: read
@@ -15,7 +16,7 @@ concurrency:
 
 jobs:
   sign:
-    name: Build, dual-profile sign, validate ClawBase IPA
+    name: Build, Phase 1-7 regress, dual-profile sign, validate ClawBase IPA
     runs-on: macos-15
     timeout-minutes: 45
     env:
@@ -48,6 +49,9 @@ jobs:
           if ! command -v xcodegen >/dev/null 2>&1; then
             brew install xcodegen
           fi
+
+      - name: Phase 1-4 core regression suite
+        run: swift test --parallel
 
       - name: Verify ClawBase Phase 3 real-engine contract
         run: python3 Tools/verify_claw_base_ci.py
@@ -87,6 +91,9 @@ jobs:
 
       - name: Verify Phase 4 panel completion contract
         run: python3 Tools/verify_phase4_completion.py
+
+      - name: Verify Phase 5-7 and Phase 1-7 automated release contract
+        run: python3 Tools/verify_phase5_7_release.py
 
       - name: Build unsigned ClawBase package with pinned librime
         run: |
@@ -140,20 +147,20 @@ jobs:
           WT_KEYBOARD_PROFILE_PATH="$WT_SIGNING_DIR/keyboard.mobileprovision" \
           ClawBase/ci_sign_and_validate.sh
 
-      - name: Upload ClawBase CI logs
+      - name: Upload Phase 1-7 CI logs and release-gate report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ClawBase-3.0.1-2-phase4-logs-${{ github.run_attempt }}
+          name: ClawBase-3.0.1-2-phase1-7-logs-${{ github.run_attempt }}
           path: artifacts/claw-base/logs/
           if-no-files-found: warn
           retention-days: 30
 
-      - name: Upload signed ClawBase IPA
+      - name: Upload final signed ClawBase IPA
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: ClawBase-3.0.1-2-phase4-signed-${{ github.run_attempt }}
+          name: ClawBase-3.0.1-2-phase1-7-signed-${{ github.run_attempt }}
           path: artifacts/claw-base/ClawBase-3.0.1-2-signed.ipa
           if-no-files-found: error
           retention-days: 30
