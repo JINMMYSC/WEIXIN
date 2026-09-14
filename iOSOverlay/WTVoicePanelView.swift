@@ -7,9 +7,28 @@ public struct WTVoicePanelView: View {
     public var body: some View {
         VStack(spacing: 0) {
             WTPanelHeader(title: "语音输入", onBack: { runtime.cancelVoice(); runtime.state.back() })
+            let panelState = runtime.panelLoadState(.voice)
+            switch panelState {
+            case .permissionDenied, .offline, .failed, .fallback:
+                WTPhase4PanelStateView(
+                    state: panelState,
+                    emptyTitle: "语音输入",
+                    emptySubtitle: "语音输入需要主应用承载麦克风与系统识别权限。",
+                    retry: { runtime.startVoice() },
+                    requestPermission: { runtime.startVoice() }
+                )
+            default:
+                voiceSurface
+            }
+        }
+        .background(WTChrome353.surface)
+    }
+
+    private var voiceSurface: some View {
+        VStack(spacing: 0) {
             Spacer(minLength: 6)
             ZStack {
-                Circle().fill(WTChrome353.accent.opacity(0.10)).frame(width: 76, height: 76)
+                Circle().fill(WTChrome353.accent.opacity(0.10)).frame(width: 80, height: 80)
                 WTPulsingVoiceGlyph(name: iconName, isBusy: isBusy, isFailure: isFailure)
             }
             Text(statusText)
@@ -35,7 +54,6 @@ public struct WTVoicePanelView: View {
             .frame(height: 48)
             .padding(.bottom, 4)
         }
-        .background(WTChrome353.surface)
     }
 
     private var wave: some View {
@@ -44,8 +62,7 @@ public struct WTVoicePanelView: View {
                 Capsule().fill(WTChrome353.accent.opacity(0.75)).frame(width: 2, height: CGFloat(7 + (i % 5) * 4))
             }
         }
-        .frame(height: 26)
-        .padding(.top, 4)
+        .frame(height: 26).padding(.top, 4)
     }
 
     private var isBusy: Bool {
@@ -66,7 +83,6 @@ public struct WTVoicePanelView: View {
         }
     }
 }
-
 
 private struct WTPulsingVoiceGlyph: View {
     let name: String

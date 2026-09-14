@@ -4,7 +4,6 @@ public struct WTStickerGIFPanelView: View {
     @ObservedObject var runtime: WTKeyboardRuntime
     @State private var kind: WTMediaContentKind = .sticker
     @State private var query = ""
-    @State private var loading = false
     @State private var preview: WTMediaCard?
 
     public init(runtime: WTKeyboardRuntime) { self.runtime = runtime }
@@ -26,32 +25,14 @@ public struct WTStickerGIFPanelView: View {
                     WTBasicGlyphView(.search, tint: WTChrome353.secondary, size: 15)
                     TextField(searchPlaceholder, text: $query)
                         .font(.system(size: 13)).onSubmit { Task { await reload() } }
-                    if !query.isEmpty { Button { query = "" } label: { WTBasicGlyphView(.close, tint: WTChrome353.secondary, size: 14) }.buttonStyle(.plain) }
+                    if !query.isEmpty {
+                        Button { query = "" } label: { WTBasicGlyphView(.close, tint: WTChrome353.secondary, size: 14) }.buttonStyle(.plain)
+                    }
                 }
                 .padding(.horizontal, 10).frame(height: 34)
                 .background(WTChrome353.panelBackground)
 
-                if loading {
-                    ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
-                } else if runtime.mediaCards.isEmpty {
-                    WTEmptyPanelState(systemName: kind == .gif ? "photo.stack" : "face.smiling.inverse", title: kind == .gif ? "暂无 GIF" : "暂无表情包", subtitle: "界面和交互位已经补齐；在线内容由独立 provider 提供。")
-                } else {
-                    ScrollView {
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: kind == .gif ? 3 : 4), spacing: 8) {
-                            ForEach(runtime.mediaCards) { card in
-                                Button { preview = card } label: {
-                                    VStack(spacing: 5) {
-                                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                            .fill(Color(uiColor: .tertiarySystemFill))
-                                            .aspectRatio(kind == .gif ? 1.3 : 1, contentMode: .fit)
-                                            .overlay { WTSemanticGlyph(name: mediaSymbol).font(.system(size: 22)).foregroundStyle(.secondary) }
-                                        Text(card.title).font(.system(size: 10)).lineLimit(1).foregroundStyle(.primary)
-                                    }
-                                }.buttonStyle(.plain)
-                            }
-                        }.padding(8)
-                    }
-                }
+                panelContent
             }
             .background(WTChrome353.surface)
 
@@ -73,9 +54,49 @@ public struct WTStickerGIFPanelView: View {
         .task { await reload() }
     }
 
+    @ViewBuilder private var panelContent: some View {
+        let state = runtime.panelLoadState(.stickers)
+        switch state {
+        case .loading, .permissionDenied, .offline, .failed, .fallback:
+            WTPhase4PanelStateView(
+                state: state,
+                emptyTitle: emptyTitle,
+                emptySubtitle: "没有可显示的在线内容。",
+                retry: { Task { await reload() } }
+            )
+        case .idle, .empty:
+            WTPhase4PanelStateView(state: .empty, emptyTitle: emptyTitle, emptySubtitle: query.isEmpty ? "暂无内容" : "没有找到相关内容")
+        case .ready:
+            if runtime.mediaCards.isEmpty {
+                WTPhase4PanelStateView(state: .empty, emptyTitle: emptyTitle, emptySubtitle: "暂无内容")
+            } else {
+                grid
+            }
+        }
+    }
+
+    private var grid: some View {
+        ScrollView {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: kind == .gif ? 3 : 4), spacing: 8) {
+                ForEach(runtime.mediaCards) { card in
+                    Button { preview = card } label: {
+                        VStack(spacing: 5) {
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .fill(Color(uiColor: .tertiarySystemFill))
+                                .aspectRatio(kind == .gif ? 1.3 : 1, contentMode: .fit)
+                                .overlay { WTSemanticGlyph(name: mediaSymbol).font(.system(size: 22)).foregroundStyle(.secondary) }
+                            Text(card.title).font(.system(size: 10)).lineLimit(1).foregroundStyle(.primary)
+                        }
+                    }.buttonStyle(.plain)
+                }
+            }.padding(8)
+        }
+    }
+
     private var panelTitle: String {
         switch kind { case .sticker: return "表情包"; case .customSticker: return "自定义表情"; case .gif: return "GIF" }
     }
+    private var emptyTitle: String { kind == .gif ? "暂无 GIF" : (kind == .customSticker ? "暂无自定义表情" : "暂无表情包") }
     private var searchPlaceholder: String {
         switch kind { case .sticker: return "搜索表情包"; case .customSticker: return "搜索自定义表情"; case .gif: return "搜索 GIF" }
     }
@@ -91,8 +112,6 @@ public struct WTStickerGIFPanelView: View {
     }
 
     @MainActor private func reload() async {
-        loading = true
         runtime.mediaCards = await runtime.loadMedia(kind, query)
-        loading = false
     }
 }

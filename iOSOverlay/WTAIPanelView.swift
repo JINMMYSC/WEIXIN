@@ -12,6 +12,31 @@ public struct WTAIPanelView: View {
     public var body: some View {
         VStack(spacing: 0) {
             WTPanelHeader(title: "AI", onBack: { runtime.state.back() }, trailingSystemName: "square.and.arrow.up") {}
+            let state = runtime.panelLoadState(selectedPanel)
+            switch state {
+            case .permissionDenied, .offline, .failed, .fallback:
+                WTPhase4PanelStateView(
+                    state: state,
+                    emptyTitle: "开始使用 AI",
+                    emptySubtitle: "选择工具并输入内容。",
+                    retry: input.isEmpty ? nil : { run() }
+                )
+            default:
+                workingSurface
+            }
+        }
+        .background(WTChrome353.surface)
+    }
+
+    private var selectedPanel: WTPanel {
+        switch selected {
+        case .rewrite, .polish: return .textPolish
+        default: return .askAI
+        }
+    }
+
+    private var workingSurface: some View {
+        VStack(spacing: 0) {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 6) {
                     toolButton(.askAI, "问 AI", "sparkles")
@@ -22,16 +47,26 @@ public struct WTAIPanelView: View {
                 }
                 .padding(.horizontal, 8)
             }
-            .frame(height: 42)
+            .frame(height: 48)
 
-            TextEditor(text: $input)
-                .font(.system(size: 14))
-                .padding(6)
-                .background(WTChrome353.panelBackground)
-                .clipShape(RoundedRectangle(cornerRadius: 9))
-                .padding(.horizontal, 8)
+            ZStack {
+                TextEditor(text: $input)
+                    .font(.system(size: 14))
+                    .padding(6)
+                    .background(WTChrome353.panelBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: 9))
+                if input.isEmpty {
+                    Text("输入你想处理的内容")
+                        .font(.system(size: 12)).foregroundStyle(.tertiary)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                        .padding(14).allowsHitTesting(false)
+                }
+            }
+            .padding(.horizontal, 8)
 
-            if !result.isEmpty {
+            if runtime.panelLoadState(selectedPanel) == .loading {
+                ProgressView().tint(WTChrome353.accent).frame(height: 72)
+            } else if !result.isEmpty {
                 ScrollView {
                     Text(result).font(.system(size: 14)).frame(maxWidth: .infinity, alignment: .leading).padding(9)
                 }
@@ -51,19 +86,29 @@ public struct WTAIPanelView: View {
     }
 
     private func toolButton(_ tool: WTAITool, _ title: String, _ symbol: String) -> some View {
-        Button { selected = tool } label: {
-            HStack(spacing: 4) { WTSemanticGlyph(name: symbol); Text(title) }
-                .font(.system(size: 12, weight: selected == tool ? .semibold : .regular))
-                .foregroundStyle(selected == tool ? WTChrome353.accent : Color.primary)
-                .padding(.horizontal, 10).frame(height: 30)
-                .background(selected == tool ? WTChrome353.accent.opacity(0.10) : WTChrome353.panelBackground)
-                .clipShape(Capsule())
+        Button {
+            selected = tool
+            result = ""
+        } label: {
+            VStack(spacing: 3) {
+                WTSemanticGlyph(name: symbol).font(.system(size: 19))
+                Text(title).font(.system(size: 10, weight: selected == tool ? .semibold : .regular))
+            }
+            .foregroundStyle(selected == tool ? WTChrome353.accent : Color.primary)
+            .frame(width: 54, height: 42)
         }
         .buttonStyle(.plain)
     }
 
     private func run() {
+        guard !input.isEmpty else { return }
         running = true
-        Task { let value = await runtime.runAI(selected, input); await MainActor.run { result = value; running = false } }
+        Task {
+            let value = await runtime.runAI(selected, input)
+            await MainActor.run {
+                result = value
+                running = false
+            }
+        }
     }
 }

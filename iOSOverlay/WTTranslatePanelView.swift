@@ -13,6 +13,24 @@ public struct WTTranslatePanelView: View {
     public var body: some View {
         VStack(spacing: 0) {
             WTPanelHeader(title: "翻译", onBack: { runtime.state.back() })
+            let state = runtime.panelLoadState(.translate)
+            switch state {
+            case .permissionDenied, .offline, .failed, .fallback:
+                WTPhase4PanelStateView(
+                    state: state,
+                    emptyTitle: "暂无翻译结果",
+                    emptySubtitle: "输入内容后开始翻译。",
+                    retry: input.isEmpty ? nil : { run() }
+                )
+            default:
+                editorSurface
+            }
+        }
+        .background(WTChrome353.surface)
+    }
+
+    private var editorSurface: some View {
+        VStack(spacing: 0) {
             HStack(spacing: 0) {
                 Menu(source) { languageButtons(binding: $source) }.frame(maxWidth: .infinity)
                 Button { swap(&source, &target); swap(&input, &result) } label: {
@@ -27,7 +45,12 @@ public struct WTTranslatePanelView: View {
 
             HStack(spacing: 6) {
                 editor($input, placeholder: "输入要翻译的内容")
-                editor($result, placeholder: "翻译结果")
+                if runtime.panelLoadState(.translate) == .loading {
+                    ProgressView().tint(WTChrome353.accent).frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(WTChrome353.panelBackground).clipShape(RoundedRectangle(cornerRadius: 9))
+                } else {
+                    editor($result, placeholder: "翻译结果")
+                }
             }
             .padding(7)
 
@@ -56,7 +79,14 @@ public struct WTTranslatePanelView: View {
     }
 
     private func run() {
+        guard !input.isEmpty else { return }
         running = true
-        Task { let value = await runtime.translate(input, source, target); await MainActor.run { result = value; running = false } }
+        Task {
+            let value = await runtime.translate(input, source, target)
+            await MainActor.run {
+                result = value
+                running = false
+            }
+        }
     }
 }
