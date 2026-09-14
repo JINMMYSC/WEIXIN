@@ -52,6 +52,9 @@ public final class WTKeyboardRuntime: ObservableObject {
     @Published public var transferPairing = WTTransferPairingInfo(code: "", deviceName: "")
     @Published public var transferLastReceivedFileName: String?
     @Published public var trustedTransferDevices: [WTTrustedTransferDevice] = []
+    /// Phase 4 deliberately exposes provider/content states instead of treating every provider
+    /// failure as an empty list. Keys use WTPanel.rawValue so the model stays Codable-independent.
+    @Published public var phase4PanelStates: [String: WTPanelLoadState] = [:]
 
     public var insertText: (String) -> Void
     public var commitDirectText: (String) -> Void
@@ -204,6 +207,14 @@ public final class WTKeyboardRuntime: ObservableObject {
         self.performBookVideoProvider = performBookVideoProvider
     }
 
+    public func panelLoadState(_ panel: WTPanel) -> WTPanelLoadState {
+        phase4PanelStates[panel.rawValue] ?? .idle
+    }
+
+    public func setPanelLoadState(_ value: WTPanelLoadState, for panel: WTPanel) {
+        phase4PanelStates[panel.rawValue] = value
+    }
+
     public func handle(_ item: WTKeyboardItem, gesture: WTKeyGesture = .tap) {
         let action = WTKeyActionResolver.action(for: item, gesture: gesture, state: state)
         handle(action, sourceItem: item)
@@ -238,8 +249,6 @@ public final class WTKeyboardRuntime: ObservableObject {
         guard candidates.indices.contains(index) else { return }
         let sourceIndex = candidateSourceIndexes.indices.contains(index) ? candidateSourceIndexes[index] : index
         if sourceIndex < 0 {
-            // Cloud/provider candidates do not belong to the Rime candidate menu.
-            // Direct commit first resets any active local preedit via commitDirectText.
             commitDirectText(candidates[index])
         } else {
             selectCandidate(sourceIndex)
@@ -328,8 +337,6 @@ public final class WTKeyboardRuntime: ObservableObject {
         moveCandidatePage(direction)
     }
 
-    /// Shed large/transient view state before an extension memory-pressure eviction.
-    /// Composition remains owned by the engine so an active keystroke is not silently lost.
     public func releaseTransientCaches(budget: WTKeyboardMemoryPressureBudget = .extensionWarning) {
         candidateExpanded = false
         candidateActionTarget = nil
