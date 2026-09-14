@@ -248,7 +248,7 @@ private struct WTKeyCap: View {
         guard let popup = runtime.longPressPopup,
               popup.keyID == item.id,
               !popup.items.isEmpty else { return }
-        let delta = Int((value.translation.width / 42).rounded())
+        let delta = Int((value.translation.width / 33).rounded())
         let index = min(max(longPressGlideOriginIndex + delta, 0), popup.items.count - 1)
         guard index != longPressGlideSelectedIndex else { return }
         longPressGlideSelectedIndex = index
@@ -298,9 +298,6 @@ private struct WTKeyCap: View {
         }
         guard !clear else { return }
 
-        // The 3.5.3 tutorial demonstrates distance-based deletion with rightward restoration.
-        // One step per ~22pt makes the behavior deterministic across device scale because SwiftUI
-        // reports gesture translation in points.
         let targetSteps: Int
         if dx < -10, abs(dx) >= abs(dy) {
             targetSteps = min(24, max(0, Int((-dx - 10) / 22) + 1))
@@ -509,34 +506,24 @@ private struct WTLongPressPopupView: View {
 
     var body: some View {
         HStack(spacing: 0) {
+            if showsLeftSingleHandShortcut { singleHandButton(.left) }
+
             ForEach(Array(popup.items.enumerated()), id: \.offset) { index, text in
-                Button {
-                    commit(text)
-                } label: {
+                Button { commit(text) } label: {
                     Text(text)
                         .font(.system(size: 18, weight: .regular))
                         .foregroundStyle(index == popup.defaultIndex ? Color.white : WTChrome353.primaryText)
-                        .frame(width: text == "换行" ? 58 : 42, height: 50)
-                        .background(index == popup.defaultIndex ? WTChrome353.accent : Color.clear)
+                        .frame(width: text == "换行" ? 56 : 33, height: 58)
+                        .background {
+                            RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                .fill(index == popup.defaultIndex ? WTChrome353.accent : Color.clear)
+                                .padding(.vertical, 4)
+                        }
                 }
                 .buttonStyle(.plain)
             }
 
-            if showsHandwritingShortcut {
-                Rectangle()
-                    .fill(WTThemeColor353.normalBorder)
-                    .frame(width: 0.5, height: 32)
-                Button {
-                    runtime.longPressPopup = nil
-                    runtime.state.present(.handwriting)
-                } label: {
-                    WTSemanticGlyph(name: "hand.draw")
-                        .foregroundStyle(WTChrome353.primaryText)
-                        .frame(width: 48, height: 50)
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel("手写")
-            }
+            if showsRightSingleHandShortcut { singleHandButton(.right) }
         }
         .padding(.horizontal, 4)
         .background(WTChrome353.elevatedSurface)
@@ -544,11 +531,40 @@ private struct WTLongPressPopupView: View {
         .shadow(color: WTThemeColor353.keyShadow, radius: 4, y: 2)
     }
 
-    private var showsHandwritingShortcut: Bool {
+    private var letterOnlyPopup: Bool {
         guard popup.items.count >= 2 else { return false }
         return popup.items.allSatisfy { value in
             value.count == 1 && value.unicodeScalars.allSatisfy { CharacterSet.letters.contains($0) }
         }
+    }
+
+    private var sourceCenterX: Double {
+        guard let rect = popup.sourceRect else { return 207 }
+        return rect.x + rect.width / 2
+    }
+
+    private var showsLeftSingleHandShortcut: Bool {
+        letterOnlyPopup && sourceCenterX >= 138
+    }
+
+    private var showsRightSingleHandShortcut: Bool {
+        letterOnlyPopup && sourceCenterX <= 276
+    }
+
+    @ViewBuilder private func singleHandButton(_ side: WTOneHandedMode) -> some View {
+        Rectangle()
+            .fill(WTThemeColor353.normalBorder)
+            .frame(width: 0.5, height: 36)
+        Button {
+            runtime.longPressPopup = nil
+            runtime.toggleOneHanded(side)
+        } label: {
+            WTSemanticGlyph(name: side == .left ? "keyboard.arrow.left" : "keyboard.arrow.right")
+                .foregroundStyle(WTChrome353.primaryText)
+                .frame(width: 48, height: 58)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(side == .left ? "左手模式" : "右手模式")
     }
 
     private func commit(_ text: String) {
