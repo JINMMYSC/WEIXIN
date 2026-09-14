@@ -1,9 +1,10 @@
 # CLAW TALK Phase 3 public Rime schema: 9-key pinyin.
-# Phrase data comes from the pinned mobile-oriented pinyin_simp dictionary; spelling is projected to T9 digits.
+# The pinned public luna_pinyin dictionary keeps traditional source forms and is projected to
+# T9 digits by the speller.  zh_hans performs the real OpenCC simplified conversion at runtime.
 schema:
   schema_id: claw_pinyin9
   name: CLAW 九宫格
-  version: "0.3"
+  version: "0.4"
   dependencies:
     - stroke
 
@@ -60,9 +61,10 @@ speller:
     - xlit/abcdefghijklmnopqrstuvwxyz/22233344455566677778889999/
 
 translator:
-  dictionary: pinyin_simp
+  dictionary: luna_pinyin
   prism: claw_pinyin9
   enable_user_dict: true
+  enable_sentence: true
   preedit_format:
     - xlit/23456789/23456789/
 
