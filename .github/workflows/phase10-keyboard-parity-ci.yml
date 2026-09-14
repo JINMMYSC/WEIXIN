@@ -1,0 +1,27 @@
+name: Phase 10 Keyboard Parity CI
+
+on:
+  push:
+    branches:
+      - work/v14-phase10-keyboard-parity
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase10-keyboard-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Swift core and gesture tests
+        run: swift test --parallel
+      - name: Verify current device-visible geometry contract
+        run: python3 Tools/verify_phase3_device_ui_contract.py
+      - name: Verify 79-case structural manifest
+        run: python3 Tools/verify_ui_79_alignment.py
