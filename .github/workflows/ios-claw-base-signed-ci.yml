@@ -45,6 +45,9 @@ jobs:
       - name: Verify ClawBase T9 and Phase 3 real-engine contract
         run: python3 Tools/verify_claw_base_ci.py
 
+      - name: Verify Phase 3 black-box matrix
+        run: python3 Tools/verify_phase3_blackbox_matrix.py
+
       - name: Build unsigned ClawBase package with pinned librime
         run: |
           chmod +x ClawBase/ci_build_unsigned.sh ClawBase/ci_prepare_librimekit.sh
