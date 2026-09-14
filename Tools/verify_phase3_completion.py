@@ -31,9 +31,14 @@ def main() -> int:
     pinyin26 = text("ClawBase/RimeSchemas/claw_pinyin26.schema.yaml")
     pinyin9 = text("ClawBase/RimeSchemas/claw_pinyin9.schema.yaml")
     sogou = text("ClawBase/RimeSchemas/claw_double_pinyin_sogou.schema.yaml")
+    wubi98 = text("ClawBase/RimeSchemas/claw_wubi98.schema.yaml")
+    segmentation = text("ClawBase/Phase3BlackBox/SEGMENTATION_CONTRACT.md")
+    blackbox = text("Tools/phase3_blackbox_matrix.py")
 
     for source in ("../iOSShared", "../iOSOverlay", "../HamsterBridge", "../iOSServices"):
         require(source in project, f"missing complete migrated keyboard source group: {source}")
+    require("../iOSApp/WTSettingsAppView.swift" in project,
+            "Host Phase 3 settings surface missing from project")
     require("WTPanelRootView(runtime: runtime)" in root,
             "ClawBase live root must use the complete V14 panel router")
     for token in (
@@ -69,7 +74,7 @@ def main() -> int:
         "derive/^zh/z/", "derive/^ch/c/", "derive/^sh/s/", "derive/^n/l/",
         "derive/^f/h/", "derive/an$/ang/", "derive/en$/eng/", "derive/in$/ing/",
         "wt.double.scheme", "double_pinyin_flypy", "double_pinyin_mspy", "claw_double_pinyin_sogou",
-        "group.7518554",
+        "wt.wubi.scheme", "claw_wubi98", "group.7518554",
     ):
         require(token in session, f"real session missing Phase 3 behavior token: {token}")
 
@@ -90,6 +95,8 @@ def main() -> int:
             "pinyin user dictionary learning must stay enabled")
     require("schema_id: claw_double_pinyin_sogou" in sogou and "dictionary: luna_pinyin" in sogou,
             "Sogou double-pinyin must stay clean-room and use the pinned public dictionary")
+    for token in ("schema_id: claw_wubi98", "dictionary: claw_wubi98", "opencc_config: s2t.json", "option_name: zh_trad"):
+        require(token in wubi98, f"Wubi98 schema missing: {token}")
     for token in ("derive/^zh/z/", "derive/^n/l/", "derive/^f/h/", "derive/an$/ang/", "derive/en$/eng/", "derive/in$/ing/"):
         require(token in generator, f"fuzzy schema generator missing rule: {token}")
 
@@ -98,8 +105,31 @@ def main() -> int:
         "claw_pinyin26_fuzzy_zhz.schema.yaml", "claw_pinyin26_fuzzy_ln.schema.yaml", "claw_pinyin26_fuzzy_all.schema.yaml",
         "double_pinyin.schema.yaml", "double_pinyin_flypy.schema.yaml", "double_pinyin_mspy.schema.yaml",
         "claw_double_pinyin_sogou.schema.yaml",
+        "wubi86.schema.yaml", "wubi86.dict.yaml", "claw_wubi98.schema.yaml", "claw_wubi98.dict.yaml",
+        "stroke.schema.yaml", "stroke.dict.yaml",
     ):
         require(name in prepare, f"CI does not require Phase 3 Rime resource: {name}")
+    for token in (
+        'WUBI98_TABLE_BLOB="8500e3b9c5d09a7eef29708693d41bfc70ce2e7c"',
+        'WUBI98_TABLE_BYTES="1988020"',
+        'wubi98-license=Unlicense-public-domain',
+    ):
+        require(token in prepare, f"Wubi98 reproducibility contract missing: {token}")
+
+    # Do not overstate librime segmentation capability. The pinned C API exposes preedit,
+    # length/cursor/selection metadata but no explicit internal segment array.
+    require("does not expose explicit internal segmentation boundaries" in segmentation,
+            "segmentation capability boundary must stay explicit")
+    require("compositionLength" in bridge_h and "cursorPosition" in bridge_h,
+            "real composition metadata bridge missing")
+
+    # Matrix must include explicit 86/98 Wubi stimuli while never fabricating reference output.
+    require('"behavior-021"' in blackbox and '"set_wubi86"' in blackbox,
+            "explicit Wubi86 black-box stimulus missing")
+    require('"behavior-022"' in blackbox and '"set_wubi98"' in blackbox,
+            "explicit Wubi98 black-box stimulus missing")
+    require("Reference observations are a separate real-device capture artifact" in blackbox,
+            "black-box matrix must keep WeChat observations external/fail-closed")
 
     print("Phase 3 functional completion gate: PASS")
     return 0
