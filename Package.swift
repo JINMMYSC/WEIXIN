@@ -5,17 +5,17 @@ let package = Package(
     name: "WeTypeReplicaOverlay",
     platforms: [.iOS(.v15)],
     products: [
-        .library(name: "WeTypeReplicaCore", targets: ["WeixinRebuild"])
+        .library(name: "WeTypeReplicaCore", targets: ["WeTypeReplicaCore"])
     ],
     targets: [
         .target(
-            name: "WeixinRebuild",
+            name: "WeTypeReplicaCore",
             path: "Sources/WeTypeReplicaCore"
         ),
         .testTarget(
             name: "WeTypeReplicaCoreTests",
-            dependencies: ["WeixinRebuild"],
-            path: "Tests"
+            dependencies: ["WeTypeReplicaCore"],
+            path: "Tests/WeTypeReplicaCoreTests"
         )
     ]
 )
