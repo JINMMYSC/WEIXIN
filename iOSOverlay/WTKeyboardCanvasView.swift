@@ -86,6 +86,7 @@ private struct WTKeyCap: View {
     @GestureState private var pressing = false
     @Environment(\.colorScheme) private var colorScheme
     @State private var deleteGestureActive = false
+    @State private var deleteGestureDidMutate = false
     @State private var deleteDeletedSteps = 0
     @State private var deleteClearArmed = false
     @State private var deleteRepeatTask: Task<Void, Never>?
@@ -222,6 +223,7 @@ private struct WTKeyCap: View {
     private func beginDeleteGestureIfNeeded() {
         guard !deleteGestureActive else { return }
         deleteGestureActive = true
+        deleteGestureDidMutate = false
         deleteDeletedSteps = 0
         deleteClearArmed = false
         WTDeleteGestureBridge.begin(runtime)
@@ -252,11 +254,13 @@ private struct WTKeyCap: View {
             WTDeleteGestureBridge.deleteStep(runtime)
             runtime.performKeyFeedback(true)
             deleteDeletedSteps += 1
+            deleteGestureDidMutate = true
         }
         while deleteDeletedSteps > targetSteps {
             WTDeleteGestureBridge.restoreStep(runtime)
             runtime.performKeyFeedback(false)
             deleteDeletedSteps -= 1
+            deleteGestureDidMutate = true
         }
     }
 
@@ -267,21 +271,24 @@ private struct WTKeyCap: View {
         let shouldClear = deleteClearArmed || (dy < -28 && abs(dy) > abs(dx) * 0.72)
 
         if shouldClear {
+            deleteGestureDidMutate = true
             WTDeleteGestureBridge.clear(runtime)
             runtime.performKeyFeedback(true)
-        } else if deleteDeletedSteps == 0 && abs(dx) < 10 && abs(dy) < 10 {
+        } else if !deleteGestureDidMutate && deleteDeletedSteps == 0 && abs(dx) < 10 && abs(dy) < 10 {
             runtime.performKeyFeedback(true)
             runtime.handle(item, gesture: .tap)
         }
 
         WTDeleteGestureBridge.end(runtime)
         deleteGestureActive = false
+        deleteGestureDidMutate = false
         deleteDeletedSteps = 0
         deleteClearArmed = false
     }
 
     private func startRapidDelete() {
         stopRapidDelete()
+        deleteGestureDidMutate = true
         runtime.performKeyFeedback(true)
         WTDeleteGestureBridge.deleteStep(runtime)
         deleteDeletedSteps += 1
