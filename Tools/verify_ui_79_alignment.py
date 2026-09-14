@@ -59,7 +59,7 @@ def main() -> int:
         "r.width * sx", "r.height * sy", "WTKeyTapPopupView", "WTLongPressPopupView",
         "runtime.visualCalibration.keyPopupScale", "runtime.visualCalibration.keyPopupDuration",
         "T26_LETTER", "WTTheme353.letterFontSize", "WTTheme353.keySubtitleFontSize",
-        "Intentionally not clipped",
+        "The original 3.5.3 key popup rises above",
     ):
         require(token in canvas, f"live keyboard canvas missing parity token: {token}")
 
@@ -83,6 +83,7 @@ def main() -> int:
         "WTLayouts353Resolved.t9Stroke", "WTLayouts353Resolved.t9Number",
         "WTLayouts353Resolved.t26CnSymbol", "WTLayouts353Resolved.t26EnSymbol",
         "WTOneHandedShell", "WTCandidateBar(runtime: runtime)",
+        "WT353RuntimeLayoutGeometry.primaryLayout", "WTIdleInputBar353(runtime: runtime)",
     ):
         require(token in panel, f"live panel router missing extracted UI path: {token}")
 
@@ -94,7 +95,7 @@ def main() -> int:
                 offenders.append(str(path.relative_to(ROOT)))
     require(not offenders, "direct SF Symbol placeholders remain: " + ", ".join(offenders))
 
-    print("UI 79 static alignment gate: PASS (79 capture cases structurally locked; same-device capture still required)")
+    print("UI 79 static manifest gate: PASS (capture cases defined; same-device visual acceptance remains required)")
     return 0
 
 
