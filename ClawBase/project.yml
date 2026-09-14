@@ -34,6 +34,7 @@ targets:
     sources:
       - path: Keyboard/HamsterKeyboardInputViewController.swift
       - path: Keyboard/WTPhase2KeyboardRootView.swift
+      - path: Keyboard/WTPhase3KeyboardSurface.swift
       - path: Keyboard/WTPhase3AdapterSmokeSession.swift
       - path: Keyboard/WTLibrimeRimeSession.swift
       - path: Keyboard/WTLibrimeBridge.m
@@ -47,6 +48,9 @@ targets:
       - path: ../iOSOverlay/WTKeyboardRuntime.swift
       - path: ../iOSOverlay/WTKeyboardCanvasView.swift
       - path: ../iOSOverlay/WTCandidateBar.swift
+      - path: ../iOSOverlay/WTEmojiPanelView.swift
+      - path: ../iOSOverlay/WTInputModeSwitcherView.swift
+      - path: ../iOSOverlay/WTCleanRoomIconView.swift
       - path: ../iOSOverlay/WTThemeColor353.swift
       - path: ../iOSOverlay/WTChrome.swift
       - path: ../iOSOverlay/WTBasicGlyphView.swift
