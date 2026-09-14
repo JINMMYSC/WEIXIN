@@ -4,35 +4,25 @@ import Foundation
 /// session/controller to. This removes the last UI dependency on concrete Hamster
 /// symbols while still giving the overlay a real, typed session bridge.
 public protocol WTHamsterRimeSessionProtocol: AnyObject {
-    /// Current composition/preedit text shown above candidates.
     var wtComposition: String { get }
-    /// Cursor/selection metadata from librime's RimeComposition structure.
     var wtCompositionState: WTIMECompositionState { get }
-    /// Current visible Rime candidates in source order.
     var wtCandidates: [WTCandidate] { get }
-    /// Whether Rime currently owns a composition.
     var wtIsComposing: Bool { get }
-    /// Current Rime candidate page metadata. Public Hamster revisions that do not expose it can
-    /// keep the default single-page implementation below.
     var wtCandidatePageState: WTCandidatePageState { get }
 
-    /// Process one UTF-8 key/text input through Rime. Returns true when consumed.
     @discardableResult func wtProcess(_ input: String) -> Bool
-    /// Drain librime get_commit() after a processed key/action.
     func wtDrainCommit() -> String?
-    /// Switch schema/options/layout semantics for pinyin26/T9/shuangpin/Wubi/stroke/English.
     func wtSetInputMode(_ mode: WTInputMode)
-    /// Optional lower-level mapping used when the selected Hamster revision exposes schema/options.
-    /// Default implementation falls back to `wtSetInputMode` so existing conformances keep working.
     func wtApplyModeDescriptor(_ descriptor: WTRimeModeDescriptor, logicalMode: WTInputMode)
-    /// Move the Rime candidate menu by one page without altering composition.
     @discardableResult func wtMoveCandidatePage(_ direction: WTCandidatePageDirection) -> Bool
-    /// Select candidate at the original Rime candidate index and return committed text.
     func wtSelectCandidate(at index: Int) -> String?
-    /// Delete inside Rime composition.
     func wtDeleteBackward()
-    /// Clear current composition/session state without inserting text.
     func wtReset()
+
+    /// Phase 3 production controls.  They have no-op defaults so adapter smoke conformances
+    /// remain source-compatible while Release can drive the real public Rime session.
+    func wtSetSimplifiedChinese(_ simplified: Bool)
+    func wtSetFuzzyPinyin(_ option: WTFuzzyPinyinOption, enabled: Bool)
 }
 
 public extension WTHamsterRimeSessionProtocol {
@@ -42,6 +32,8 @@ public extension WTHamsterRimeSessionProtocol {
     var wtCandidatePageState: WTCandidatePageState { .singlePage }
     func wtApplyModeDescriptor(_ descriptor: WTRimeModeDescriptor, logicalMode: WTInputMode) { wtSetInputMode(logicalMode) }
     @discardableResult func wtMoveCandidatePage(_ direction: WTCandidatePageDirection) -> Bool { false }
+    func wtSetSimplifiedChinese(_ simplified: Bool) {}
+    func wtSetFuzzyPinyin(_ option: WTFuzzyPinyinOption, enabled: Bool) {}
 }
 
 public final class WTHamsterRimeSessionAdapter: WTIMEEngine {
@@ -83,4 +75,12 @@ public final class WTHamsterRimeSessionAdapter: WTIMEEngine {
 
     public func deleteBackward() { session?.wtDeleteBackward() }
     public func reset() { session?.wtReset() }
+
+    public func setSimplifiedChinese(_ simplified: Bool) {
+        session?.wtSetSimplifiedChinese(simplified)
+    }
+
+    public func setFuzzyPinyin(_ option: WTFuzzyPinyinOption, enabled: Bool) {
+        session?.wtSetFuzzyPinyin(option, enabled: enabled)
+    }
 }
