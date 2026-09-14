@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "reference_build": "WeChat IME 3.5.3",
+  "required_cases": 79,
+  "capture_requirements": {
+    "same_device": true,
+    "same_host_app": true,
+    "same_orientation": true,
+    "same_appearance": true,
+    "same_text_state": true,
+    "no_resize_for_acceptance": true
+  },
+  "captures": []
+}

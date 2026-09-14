@@ -2,7 +2,7 @@ import UIKit
 import SwiftUI
 
 final class HamsterKeyboardInputViewController: UIInputViewController {
-    private static let appGroupID = "group.7518554"
+    private static let appGroupID = WTPhase5SharedRuntime.appGroupIdentifier
     private static let simplifiedNotification = Notification.Name("WTPhase3SimplifiedChanged")
     private static let fuzzyRetroflexNotification = Notification.Name("WTPhase3FuzzyRetroflexChanged")
     private static let fuzzyNLNotification = Notification.Name("WTPhase3FuzzyNLChanged")
@@ -32,6 +32,8 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
+        WTPhase5SharedRuntime.markActive(.keyboard)
+        _ = WTPhase5SharedRuntime.pruneTransientFiles()
 
         #if DEBUG
         assert(WTPhase3AdapterSmokeSession.selfTest(), "Phase 3 adapter/T9 smoke test failed")
@@ -66,6 +68,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        WTPhase5SharedRuntime.markActive(.keyboard)
         serviceBinder?.reloadSharedSettings()
         serviceBinder?.consumeServiceResponses()
         applyStoredPhase3Settings()
@@ -75,6 +78,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     override func viewDidDisappear(_ animated: Bool) {
         serviceBinder?.persistSessionState()
         phase3Engine.syncUserData()
+        WTPhase5SharedRuntime.markBackground(.keyboard)
         super.viewDidDisappear(animated)
     }
 
@@ -100,6 +104,8 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
         serviceBinder?.persistSessionState()
         phase3Engine.syncUserData()
         runtime?.releaseTransientCaches()
+        WTPhase5SharedRuntime.noteMemoryWarning()
+        _ = WTPhase5SharedRuntime.pruneTransientFiles(olderThan: 60 * 60, maxFilesPerDirectory: 8)
         super.didReceiveMemoryWarning()
     }
 
@@ -150,9 +156,6 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
         })
     }
 
-    /// The containing app owns the detailed fuzzy/double-pinyin settings surface. Every time the
-    /// extension becomes visible, reload all shared Phase 3 preferences in one batch and then
-    /// re-apply the active backend descriptor so schema/script changes take effect immediately.
     private func applyStoredPhase3Settings() {
         phase3Engine.reloadPhase3Preferences()
         guard let mode = runtime?.state.inputMode else { return }

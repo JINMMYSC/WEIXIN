@@ -1,21 +1,23 @@
-name: iOS ClawBase Signed CI
+name: iOS ClawBase Phase 1-7 Final Signed CI
 
 on:
   push:
     branches:
       - work/v14-clawbase-t9-rime
       - work/v14-clawbase-phase4
+      - work/v14-clawbase-phase5-7
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: ios-claw-base-signed-${{ github.ref }}
+  group: ios-claw-base-final-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   sign:
-    name: Build, dual-profile sign, validate ClawBase IPA
+    name: Build, dual-profile sign, validate Phase 1-7 IPA
     runs-on: macos-15
     timeout-minutes: 45
     env:
@@ -49,7 +51,7 @@ jobs:
             brew install xcodegen
           fi
 
-      - name: Verify ClawBase Phase 3 real-engine contract
+      - name: Verify ClawBase Phase 1/3 base contract
         run: python3 Tools/verify_claw_base_ci.py
 
       - name: Verify Phase 3 black-box matrix
@@ -87,6 +89,18 @@ jobs:
 
       - name: Verify Phase 4 panel completion contract
         run: python3 Tools/verify_phase4_completion.py
+
+      - name: Verify Phase 5 Host/Keyboard convergence
+        run: python3 Tools/verify_phase5_convergence.py
+
+      - name: Verify Phase 6 calibration pipeline
+        run: python3 Tools/verify_phase6_parity.py
+
+      - name: Verify Phase 7 release contract
+        run: python3 Tools/verify_phase7_release.py
+
+      - name: Run final Phase 1-7 engineering regression
+        run: python3 Tools/verify_phase1_7_release.py
 
       - name: Build unsigned ClawBase package with pinned librime
         run: |
@@ -140,20 +154,29 @@ jobs:
           WT_KEYBOARD_PROFILE_PATH="$WT_SIGNING_DIR/keyboard.mobileprovision" \
           ClawBase/ci_sign_and_validate.sh
 
-      - name: Upload ClawBase CI logs
+      - name: Record Phase 7 final release digest
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          IPA="artifacts/claw-base/ClawBase-3.0.1-2-signed.ipa"
+          test -f "$IPA"
+          /usr/bin/shasum -a 256 "$IPA" | tee artifacts/claw-base/logs/final-sha256.txt
+          /usr/bin/unzip -t "$IPA" >/dev/null
+
+      - name: Upload ClawBase Phase 1-7 CI logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ClawBase-3.0.1-2-phase4-logs-${{ github.run_attempt }}
+          name: ClawBase-3.0.1-2-phase1-7-final-logs-${{ github.run_attempt }}
           path: artifacts/claw-base/logs/
           if-no-files-found: warn
           retention-days: 30
 
-      - name: Upload signed ClawBase IPA
+      - name: Upload final signed ClawBase IPA
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: ClawBase-3.0.1-2-phase4-signed-${{ github.run_attempt }}
+          name: ClawBase-3.0.1-2-phase1-7-final-signed-${{ github.run_attempt }}
           path: artifacts/claw-base/ClawBase-3.0.1-2-signed.ipa
           if-no-files-found: error
           retention-days: 30

@@ -2,7 +2,7 @@ import UIKit
 import SwiftUI
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    private static let appGroupID = "group.7518554"
+    private static let appGroupID = WTPhase5SharedRuntime.appGroupIdentifier
     var window: UIWindow?
 
     func scene(
@@ -20,9 +20,25 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         window.makeKeyAndVisible()
 
+        WTPhase5SharedRuntime.markActive(.host)
+        _ = WTPhase5SharedRuntime.pruneTransientFiles()
+
         if let url = connectionOptions.urlContexts.first?.url {
             DispatchQueue.main.async { [weak self] in self?.openPhase4Route(url) }
         }
+    }
+
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        WTPhase5SharedRuntime.markActive(.host)
+        _ = WTPhase5SharedRuntime.pruneTransientFiles()
+    }
+
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        WTPhase5SharedRuntime.markBackground(.host)
+    }
+
+    func sceneDidDisconnect(_ scene: UIScene) {
+        WTPhase5SharedRuntime.markBackground(.host)
     }
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -48,7 +64,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
               let raw = components.queryItems?.first(where: { $0.name == "request" })?.value,
               let requestID = UUID(uuidString: raw),
-              let groupURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Self.appGroupID) else {
+              let groupURL = WTPhase5SharedRuntime.containerURL() else {
             presentRoute(.voiceUnavailable)
             return
         }

@@ -1,10 +1,11 @@
-name: Phase 3 and 4 Static Verification
+name: Phase 1-7 Static Verification
 
 on:
   push:
     branches:
       - work/v14-clawbase-t9-rime
       - work/v14-clawbase-phase4
+      - work/v14-clawbase-phase5-7
       - work/v14-p3-*
   workflow_dispatch:
 
@@ -12,14 +13,14 @@ permissions:
   contents: read
 
 concurrency:
-  group: phase3-phase4-static-${{ github.ref }}
+  group: phase1-7-static-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   verify:
-    name: Phase 3/4 contract, matrix and UI gates
+    name: Phase 1-7 contract, parity and release gates
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -29,10 +30,10 @@ jobs:
           python3 --version
           uname -a
 
-      - name: Verify ClawBase Phase 3 contract
+      - name: Verify ClawBase Phase 1/3 base contract
         run: python3 Tools/verify_claw_base_ci.py
 
-      - name: Verify 120-case black-box matrix
+      - name: Verify Phase 3 black-box matrix
         run: python3 Tools/verify_phase3_blackbox_matrix.py
 
       - name: Verify Phase 3 functional completion contract
@@ -67,3 +68,15 @@ jobs:
 
       - name: Verify Phase 4 panel completion contract
         run: python3 Tools/verify_phase4_completion.py
+
+      - name: Verify Phase 5 Host/Keyboard convergence
+        run: python3 Tools/verify_phase5_convergence.py
+
+      - name: Verify Phase 6 calibration pipeline
+        run: python3 Tools/verify_phase6_parity.py
+
+      - name: Verify Phase 7 release contract
+        run: python3 Tools/verify_phase7_release.py
+
+      - name: Run final Phase 1-7 engineering regression
+        run: python3 Tools/verify_phase1_7_release.py
