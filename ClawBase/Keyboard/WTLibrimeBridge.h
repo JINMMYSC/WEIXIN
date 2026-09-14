@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)processText:(NSString *)text;
 - (nullable NSString *)drainCommit;
 - (BOOL)selectSchema:(NSString *)schemaID;
+- (BOOL)deploySchemaFile:(NSString *)schemaFile;
+- (BOOL)syncUserData;
 - (void)setOption:(NSString *)option value:(BOOL)value;
 - (void)setProperty:(NSString *)property value:(NSString *)value;
 - (BOOL)movePage:(NSInteger)direction;

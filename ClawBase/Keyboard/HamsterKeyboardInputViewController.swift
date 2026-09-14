@@ -55,9 +55,6 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
         services.bind()
         serviceBinder = services
 
-        // The screenshot-reference surface does not show the optional tool strip between the
-        // candidate row and keys. Keep it hidden on a fresh install, but respect an explicit
-        // shared setting if the user enabled it in the containing app.
         let defaults = UserDefaults(suiteName: Self.appGroupID)
         runtime.toolbarEnabled = (defaults?.object(forKey: WTSharedPreferenceKey.toolbarEnabled) as? Bool) ?? false
 
@@ -77,6 +74,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         serviceBinder?.persistSessionState()
+        phase3Engine.syncUserData()
         super.viewDidDisappear(animated)
     }
 
@@ -100,6 +98,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
 
     override func didReceiveMemoryWarning() {
         serviceBinder?.persistSessionState()
+        phase3Engine.syncUserData()
         runtime?.releaseTransientCaches()
         super.didReceiveMemoryWarning()
     }
@@ -151,17 +150,13 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
         })
     }
 
+    /// The containing app owns the detailed fuzzy/double-pinyin settings surface. Every time the
+    /// extension becomes visible, reload all shared Phase 3 preferences in one batch and then
+    /// re-apply the active backend descriptor so schema/script changes take effect immediately.
     private func applyStoredPhase3Settings() {
-        let defaults = UserDefaults(suiteName: Self.appGroupID)
-        let simplified = (defaults?.object(forKey: "wt.script.simplified") as? Bool) ?? true
-        let master = (defaults?.object(forKey: "wt.pinyin.blur") as? Bool) ?? true
-        let retroflex = master && ["wt.fuzzy.z_zh", "wt.fuzzy.c_ch", "wt.fuzzy.s_sh"].contains {
-            defaults?.object(forKey: $0) as? Bool == true
-        }
-        let nl = master && ((defaults?.object(forKey: "wt.fuzzy.n_l") as? Bool) ?? false)
-        phase3Engine.setSimplifiedChinese(simplified)
-        phase3Engine.setFuzzyPinyin(.retroflexInitials, enabled: retroflex)
-        phase3Engine.setFuzzyPinyin(.nasalLateral, enabled: nl)
+        phase3Engine.reloadPhase3Preferences()
+        guard let mode = runtime?.state.inputMode else { return }
+        engine.setInputMode(mode)
     }
 
     private func wireRuntime(_ runtime: WTKeyboardRuntime) {

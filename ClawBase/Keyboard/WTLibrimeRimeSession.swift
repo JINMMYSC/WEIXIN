@@ -10,6 +10,10 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     private static let fuzzyCChKey = "wt.fuzzy.c_ch"
     private static let fuzzySShKey = "wt.fuzzy.s_sh"
     private static let fuzzyNLKey = "wt.fuzzy.n_l"
+    private static let fuzzyFHKey = "wt.fuzzy.f_h"
+    private static let fuzzyAnAngKey = "wt.fuzzy.an_ang"
+    private static let fuzzyEnEngKey = "wt.fuzzy.en_eng"
+    private static let fuzzyInIngKey = "wt.fuzzy.in_ing"
     private static let doubleSchemeKey = "wt.double.scheme"
     private static let legacyFuzzyRetroflexKey = "phase3.fuzzy.retroflexInitials"
     private static let legacyFuzzyNasalLateralKey = "phase3.fuzzy.nasalLateral"
@@ -18,9 +22,6 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     patch:
       schema_list:
         - schema: claw_pinyin26
-        - schema: claw_pinyin26_fuzzy_zhz
-        - schema: claw_pinyin26_fuzzy_ln
-        - schema: claw_pinyin26_fuzzy_all
         - schema: claw_pinyin9
         - schema: double_pinyin
         - schema: double_pinyin_flypy
@@ -31,13 +32,38 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         - schema: pinyin_simp
     """
 
+    private struct FuzzySettings: Equatable {
+        var zZh = false
+        var cCh = false
+        var sSh = false
+        var nL = false
+        var fH = false
+        var anAng = false
+        var enEng = false
+        var inIng = false
+
+        var algebraRules: [String] {
+            var rules: [String] = []
+            if zZh { rules += ["derive/^zh/z/", "derive/^z/zh/"] }
+            if cCh { rules += ["derive/^ch/c/", "derive/^c/ch/"] }
+            if sSh { rules += ["derive/^sh/s/", "derive/^s/sh/"] }
+            if nL { rules += ["derive/^n/l/", "derive/^l/n/"] }
+            if fH { rules += ["derive/^f/h/", "derive/^h/f/"] }
+            if anAng { rules += ["derive/an$/ang/", "derive/ang$/an/"] }
+            if enEng { rules += ["derive/en$/eng/", "derive/eng$/en/"] }
+            if inIng { rules += ["derive/in$/ing/", "derive/ing$/in/"] }
+            return rules
+        }
+    }
+
     private let bridge: WTLibrimeBridge
     private let preferences: UserDefaults?
+    private let userDataURL: URL
+    private let sharedPinyinSchemaPath: String?
     private var logicalMode: WTInputMode = .chinesePinyin9
     private var snapshotStorage: WTLibrimeContextSnapshot
     private var simplifiedChinese: Bool
-    private var fuzzyRetroflexInitials: Bool
-    private var fuzzyNasalLateral: Bool
+    private var fuzzySettings: FuzzySettings
 
     init() {
         let preferences = UserDefaults(suiteName: Self.appGroupID)
@@ -48,9 +74,7 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
             fallback: Self.legacySimplifiedKey,
             defaultValue: true
         )
-        let fuzzy = Self.loadFuzzyPreferences(preferences)
-        self.fuzzyRetroflexInitials = fuzzy.retroflex
-        self.fuzzyNasalLateral = fuzzy.nasalLateral
+        self.fuzzySettings = Self.loadFuzzyPreferences(preferences)
 
         let fileManager = FileManager.default
         let bundle = Bundle.main
@@ -58,8 +82,11 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         let userRoot = fileManager.containerURL(forSecurityApplicationGroupIdentifier: Self.appGroupID)
             ?? fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let userURL = userRoot.appendingPathComponent("RimeUserData", isDirectory: true)
+        self.userDataURL = userURL
+        self.sharedPinyinSchemaPath = sharedURL?.appendingPathComponent("claw_pinyin26.schema.yaml").path
         try? fileManager.createDirectory(at: userURL, withIntermediateDirectories: true)
         Self.stagePhase3DefaultCustomization(in: userURL)
+        Self.stageFuzzyCustomization(self.fuzzySettings, in: userURL)
 
         let sharedPath = sharedURL?.path ?? bundle.bundlePath
         bridge = WTLibrimeBridge(sharedDataDir: sharedPath, userDataDir: userURL.path)
@@ -113,6 +140,7 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         logicalMode = mode
         reloadSharedPreferences()
         bridge.reset()
+        if mode == .chinesePinyin26 { deployCurrentFuzzyCustomization() }
 
         if let requested = descriptor.schemaID, !requested.isEmpty {
             let schemaID = effectiveSchemaID(baseSchemaID: requested, mode: mode)
@@ -127,9 +155,7 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
             bridge.setOption(option, value: value)
         }
         applyScriptPreference(for: mode)
-        for (property, value) in descriptor.properties {
-            bridge.setProperty(property, value: value)
-        }
+        for (property, value) in descriptor.properties { bridge.setProperty(property, value: value) }
         refresh()
     }
 
@@ -144,24 +170,50 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     func wtSetFuzzyPinyin(_ option: WTFuzzyPinyinOption, enabled: Bool) {
         preferences?.set(true, forKey: Self.fuzzyMasterKey)
         switch option {
+        case .zZh:
+            preferences?.set(enabled, forKey: Self.fuzzyZZhKey)
+        case .cCh:
+            preferences?.set(enabled, forKey: Self.fuzzyCChKey)
+        case .sSh:
+            preferences?.set(enabled, forKey: Self.fuzzySShKey)
+        case .nasalLateral:
+            preferences?.set(enabled, forKey: Self.fuzzyNLKey)
+            preferences?.set(enabled, forKey: Self.legacyFuzzyNasalLateralKey)
+        case .fH:
+            preferences?.set(enabled, forKey: Self.fuzzyFHKey)
+        case .anAng:
+            preferences?.set(enabled, forKey: Self.fuzzyAnAngKey)
+        case .enEng:
+            preferences?.set(enabled, forKey: Self.fuzzyEnEngKey)
+        case .inIng:
+            preferences?.set(enabled, forKey: Self.fuzzyInIngKey)
         case .retroflexInitials:
-            fuzzyRetroflexInitials = enabled
-            preferences?.set(enabled, forKey: Self.legacyFuzzyRetroflexKey)
             preferences?.set(enabled, forKey: Self.fuzzyZZhKey)
             preferences?.set(enabled, forKey: Self.fuzzyCChKey)
             preferences?.set(enabled, forKey: Self.fuzzySShKey)
-        case .nasalLateral:
-            fuzzyNasalLateral = enabled
-            preferences?.set(enabled, forKey: Self.legacyFuzzyNasalLateralKey)
-            preferences?.set(enabled, forKey: Self.fuzzyNLKey)
+            preferences?.set(enabled, forKey: Self.legacyFuzzyRetroflexKey)
         }
+
+        let updated = Self.loadFuzzyPreferences(preferences)
+        guard updated != fuzzySettings else { return }
+        fuzzySettings = updated
+        Self.stageFuzzyCustomization(updated, in: userDataURL)
         guard logicalMode == .chinesePinyin26 else { return }
         bridge.reset()
-        let schemaID = effectiveSchemaID(baseSchemaID: "claw_pinyin26", mode: .chinesePinyin26)
-        if !bridge.selectSchema(schemaID) { _ = bridge.selectSchema("claw_pinyin26") }
+        deployCurrentFuzzyCustomization()
+        if !bridge.selectSchema("claw_pinyin26") { _ = bridge.selectSchema("pinyin_simp") }
         bridge.setOption("ascii_mode", value: false)
         applyScriptPreference(for: .chinesePinyin26)
         refresh()
+    }
+
+    func wtReloadPhase3Preferences() {
+        reloadSharedPreferences()
+        refresh()
+    }
+
+    func wtSyncUserData() {
+        _ = bridge.syncUserData()
     }
 
     @discardableResult
@@ -198,9 +250,16 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
             fallback: Self.legacySimplifiedKey,
             defaultValue: simplifiedChinese
         )
-        let fuzzy = Self.loadFuzzyPreferences(preferences)
-        fuzzyRetroflexInitials = fuzzy.retroflex
-        fuzzyNasalLateral = fuzzy.nasalLateral
+        let updated = Self.loadFuzzyPreferences(preferences)
+        if updated != fuzzySettings {
+            fuzzySettings = updated
+            Self.stageFuzzyCustomization(updated, in: userDataURL)
+        }
+    }
+
+    private func deployCurrentFuzzyCustomization() {
+        guard let sharedPinyinSchemaPath else { return }
+        _ = bridge.deploySchemaFile(sharedPinyinSchemaPath)
     }
 
     private func normalizedInput(_ input: String) -> String {
@@ -213,13 +272,7 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         if mode == .doublePinyin, baseSchemaID == "double_pinyin" {
             return Self.doublePinyinSchemaID(preferences?.string(forKey: Self.doubleSchemeKey))
         }
-        guard mode == .chinesePinyin26, baseSchemaID == "claw_pinyin26" else { return baseSchemaID }
-        switch (fuzzyRetroflexInitials, fuzzyNasalLateral) {
-        case (true, true): return "claw_pinyin26_fuzzy_all"
-        case (true, false): return "claw_pinyin26_fuzzy_zhz"
-        case (false, true): return "claw_pinyin26_fuzzy_ln"
-        case (false, false): return "claw_pinyin26"
-        }
+        return baseSchemaID
     }
 
     private static func doublePinyinSchemaID(_ configured: String?) -> String {
@@ -254,18 +307,36 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         return defaultValue
     }
 
-    private static func loadFuzzyPreferences(_ defaults: UserDefaults?) -> (retroflex: Bool, nasalLateral: Bool) {
-        let master = defaults?.object(forKey: fuzzyMasterKey) as? Bool
-        let configuredRetroflex = [fuzzyZZhKey, fuzzyCChKey, fuzzySShKey]
-            .contains { defaults?.object(forKey: $0) as? Bool == true }
-        let configuredNL = defaults?.object(forKey: fuzzyNLKey) as? Bool == true
+    private static func loadFuzzyPreferences(_ defaults: UserDefaults?) -> FuzzySettings {
+        let master = (defaults?.object(forKey: fuzzyMasterKey) as? Bool) ?? true
+        guard master else { return FuzzySettings() }
         let legacyRetroflex = defaults?.object(forKey: legacyFuzzyRetroflexKey) as? Bool ?? false
         let legacyNL = defaults?.object(forKey: legacyFuzzyNasalLateralKey) as? Bool ?? false
-        let enabledByMaster = master ?? true
-        return (
-            enabledByMaster && (configuredRetroflex || legacyRetroflex),
-            enabledByMaster && (configuredNL || legacyNL)
+        return FuzzySettings(
+            zZh: (defaults?.object(forKey: fuzzyZZhKey) as? Bool) ?? legacyRetroflex,
+            cCh: (defaults?.object(forKey: fuzzyCChKey) as? Bool) ?? legacyRetroflex,
+            sSh: (defaults?.object(forKey: fuzzySShKey) as? Bool) ?? legacyRetroflex,
+            nL: (defaults?.object(forKey: fuzzyNLKey) as? Bool) ?? legacyNL,
+            fH: (defaults?.object(forKey: fuzzyFHKey) as? Bool) ?? false,
+            anAng: (defaults?.object(forKey: fuzzyAnAngKey) as? Bool) ?? false,
+            enEng: (defaults?.object(forKey: fuzzyEnEngKey) as? Bool) ?? false,
+            inIng: (defaults?.object(forKey: fuzzyInIngKey) as? Bool) ?? false
         )
+    }
+
+    private static func stageFuzzyCustomization(_ settings: FuzzySettings, in userURL: URL) {
+        let target = userURL.appendingPathComponent("claw_pinyin26.custom.yaml", isDirectory: false)
+        let rules = settings.algebraRules
+        guard !rules.isEmpty else {
+            if FileManager.default.fileExists(atPath: target.path) { try? FileManager.default.removeItem(at: target) }
+            return
+        }
+        var lines = ["patch:", "  \"speller/algebra/+\":"]
+        lines.append(contentsOf: rules.map { "    - \($0)" })
+        lines.append("")
+        let expected = Data(lines.joined(separator: "\n").utf8)
+        if let existing = try? Data(contentsOf: target), existing == expected { return }
+        try? expected.write(to: target, options: .atomic)
     }
 
     private static func stagePhase3DefaultCustomization(in userURL: URL) {
@@ -291,13 +362,7 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     }
 
     private static let t9GroupToDigit: [String: String] = [
-        "ABC": "2",
-        "DEF": "3",
-        "GHI": "4",
-        "JKL": "5",
-        "MNO": "6",
-        "PQRS": "7",
-        "TUV": "8",
-        "WXYZ": "9"
+        "ABC": "2", "DEF": "3", "GHI": "4", "JKL": "5",
+        "MNO": "6", "PQRS": "7", "TUV": "8", "WXYZ": "9"
     ]
 }

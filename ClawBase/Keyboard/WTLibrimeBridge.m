@@ -208,6 +208,16 @@ static const int WTKeyPageDown = 0xff56;
   return RimeSelectSchema(_sessionID, schemaID.UTF8String) != 0;
 }
 
+- (BOOL)deploySchemaFile:(NSString *)schemaFile {
+  if (!_ready || schemaFile.length == 0) return NO;
+  return RimeDeploySchema(schemaFile.fileSystemRepresentation) != 0;
+}
+
+- (BOOL)syncUserData {
+  if (!_ready) return NO;
+  return RimeSyncUserData() != 0;
+}
+
 - (void)setOption:(NSString *)option value:(BOOL)value {
   if (!_ready || option.length == 0) return;
   RimeSetOption(_sessionID, option.UTF8String, value ? True : False);

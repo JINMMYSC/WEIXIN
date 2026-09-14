@@ -1,13 +1,16 @@
 import Foundation
 
 public enum WTFuzzyPinyinOption: String, Codable, Sendable, CaseIterable {
-    /// z/zh, c/ch and s/sh are kept as one compatibility switch for legacy callers.
-    case retroflexInitials
+    case zZh
+    case cCh
+    case sSh
     case nasalLateral
     case fH
     case anAng
     case enEng
     case inIng
+    /// Compatibility aggregate used by the compact keyboard quick-settings switch.
+    case retroflexInitials
 }
 
 /// Declarative backend mapping used at the Hamster/librime integration boundary.
@@ -34,7 +37,6 @@ public struct WTRimeBackendProfile: Codable, Equatable, Sendable {
 
     public subscript(_ mode: WTInputMode) -> WTRimeModeDescriptor? { modes[mode] }
 
-    /// Conservative compatibility profile for adapter-only tests.
     public static let safeDefault = WTRimeBackendProfile(modes: [
         .chinesePinyin26: .init(options: ["ascii_mode": false]),
         .chinesePinyin9: .init(options: ["ascii_mode": false]),
@@ -45,8 +47,6 @@ public struct WTRimeBackendProfile: Codable, Equatable, Sendable {
         .english26: .init(options: ["ascii_mode": true])
     ])
 
-    /// Phase 3 production bootstrap backed by exact pinned public Rime data.
-    /// Handwriting remains outside librime and is intentionally left schema-less.
     public static let phase3PublicLibrime = WTRimeBackendProfile(modes: [
         .chinesePinyin26: .init(
             schemaID: "claw_pinyin26",
@@ -60,19 +60,10 @@ public struct WTRimeBackendProfile: Codable, Equatable, Sendable {
             schemaID: "double_pinyin",
             options: ["ascii_mode": false, "simplification": true]
         ),
-        .wubi: .init(
-            schemaID: "wubi86",
-            options: ["ascii_mode": false]
-        ),
-        .stroke: .init(
-            schemaID: "stroke",
-            options: ["ascii_mode": false]
-        ),
+        .wubi: .init(schemaID: "wubi86", options: ["ascii_mode": false]),
+        .stroke: .init(schemaID: "stroke", options: ["ascii_mode": false]),
         .handwriting: .init(options: ["ascii_mode": false]),
-        .english26: .init(
-            schemaID: "claw_pinyin26",
-            options: ["ascii_mode": true]
-        )
+        .english26: .init(schemaID: "claw_pinyin26", options: ["ascii_mode": true])
     ])
 
     public func merging(_ override: WTRimeBackendProfile) -> WTRimeBackendProfile {

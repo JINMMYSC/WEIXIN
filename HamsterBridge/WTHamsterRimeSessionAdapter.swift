@@ -19,10 +19,10 @@ public protocol WTHamsterRimeSessionProtocol: AnyObject {
     func wtDeleteBackward()
     func wtReset()
 
-    /// Phase 3 production controls.  They have no-op defaults so adapter smoke conformances
-    /// remain source-compatible while Release can drive the real public Rime session.
     func wtSetSimplifiedChinese(_ simplified: Bool)
     func wtSetFuzzyPinyin(_ option: WTFuzzyPinyinOption, enabled: Bool)
+    func wtReloadPhase3Preferences()
+    func wtSyncUserData()
 }
 
 public extension WTHamsterRimeSessionProtocol {
@@ -34,6 +34,8 @@ public extension WTHamsterRimeSessionProtocol {
     @discardableResult func wtMoveCandidatePage(_ direction: WTCandidatePageDirection) -> Bool { false }
     func wtSetSimplifiedChinese(_ simplified: Bool) {}
     func wtSetFuzzyPinyin(_ option: WTFuzzyPinyinOption, enabled: Bool) {}
+    func wtReloadPhase3Preferences() {}
+    func wtSyncUserData() {}
 }
 
 public final class WTHamsterRimeSessionAdapter: WTIMEEngine {
@@ -56,31 +58,26 @@ public final class WTHamsterRimeSessionAdapter: WTIMEEngine {
         )
     }
 
-    @discardableResult public func process(_ input: String) -> Bool {
-        session?.wtProcess(input) ?? false
-    }
-
+    @discardableResult public func process(_ input: String) -> Bool { session?.wtProcess(input) ?? false }
     public func drainCommit() -> String? { session?.wtDrainCommit() }
+
     public func setInputMode(_ mode: WTInputMode) {
         if let descriptor = backendProfile[mode] { session?.wtApplyModeDescriptor(descriptor, logicalMode: mode) }
         else { session?.wtSetInputMode(mode) }
     }
+
     @discardableResult public func moveCandidatePage(_ direction: WTCandidatePageDirection) -> Bool {
         session?.wtMoveCandidatePage(direction) ?? false
     }
 
-    public func selectCandidate(at index: Int) -> String? {
-        session?.wtSelectCandidate(at: index)
-    }
-
+    public func selectCandidate(at index: Int) -> String? { session?.wtSelectCandidate(at: index) }
     public func deleteBackward() { session?.wtDeleteBackward() }
     public func reset() { session?.wtReset() }
 
-    public func setSimplifiedChinese(_ simplified: Bool) {
-        session?.wtSetSimplifiedChinese(simplified)
-    }
-
+    public func setSimplifiedChinese(_ simplified: Bool) { session?.wtSetSimplifiedChinese(simplified) }
     public func setFuzzyPinyin(_ option: WTFuzzyPinyinOption, enabled: Bool) {
         session?.wtSetFuzzyPinyin(option, enabled: enabled)
     }
+    public func reloadPhase3Preferences() { session?.wtReloadPhase3Preferences() }
+    public func syncUserData() { session?.wtSyncUserData() }
 }

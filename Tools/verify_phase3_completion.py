@@ -22,6 +22,8 @@ def main() -> int:
     service_binder = text("iOSServices/WTKeyboardServiceBinder.swift")
     controller = text("ClawBase/Keyboard/HamsterKeyboardInputViewController.swift")
     session = text("ClawBase/Keyboard/WTLibrimeRimeSession.swift")
+    bridge_h = text("ClawBase/Keyboard/WTLibrimeBridge.h")
+    bridge_m = text("ClawBase/Keyboard/WTLibrimeBridge.m")
     adapter = text("HamsterBridge/WTHamsterRimeSessionAdapter.swift")
     profile = text("Sources/WeTypeReplicaCore/InputModeBackendProfile.swift")
     generator = text("ClawBase/RimeSchemas/generate_fuzzy_variants.py")
@@ -53,16 +55,32 @@ def main() -> int:
     require("runtime.recordEmoji" in service_binder and "emojiStore?.record" in service_binder,
             "emoji recents are not persisted by the shared App Group store")
 
-    require("wtSetSimplifiedChinese" in adapter and "wtSetFuzzyPinyin" in adapter,
-            "typed Phase 3 script/fuzzy controls missing")
-    require("WTFuzzyPinyinOption" in profile, "fuzzy option model missing")
+    for token in ("wtSetSimplifiedChinese", "wtSetFuzzyPinyin", "wtReloadPhase3Preferences", "wtSyncUserData"):
+        require(token in adapter, f"typed Phase 3 adapter control missing: {token}")
+    for option in ("zZh", "cCh", "sSh", "nasalLateral", "fH", "anAng", "enEng", "inIng"):
+        require(f"case {option}" in profile or f"case .{option}" in session,
+                f"fuzzy option missing: {option}")
+
     for token in (
-        "claw_pinyin26_fuzzy_zhz", "claw_pinyin26_fuzzy_ln", "claw_pinyin26_fuzzy_all",
-        "wt.script.simplified", "wt.pinyin.blur", "wt.fuzzy.z_zh", "wt.fuzzy.n_l",
+        "wt.script.simplified", "wt.pinyin.blur",
+        "wt.fuzzy.z_zh", "wt.fuzzy.c_ch", "wt.fuzzy.s_sh", "wt.fuzzy.n_l",
+        "wt.fuzzy.f_h", "wt.fuzzy.an_ang", "wt.fuzzy.en_eng", "wt.fuzzy.in_ing",
+        "stageFuzzyCustomization", "deployCurrentFuzzyCustomization",
+        "derive/^zh/z/", "derive/^ch/c/", "derive/^sh/s/", "derive/^n/l/",
+        "derive/^f/h/", "derive/an$/ang/", "derive/en$/eng/", "derive/in$/ing/",
         "wt.double.scheme", "double_pinyin_flypy", "double_pinyin_mspy", "claw_double_pinyin_sogou",
         "group.7518554",
     ):
         require(token in session, f"real session missing Phase 3 behavior token: {token}")
+
+    require("deploySchemaFile" in bridge_h and "RimeDeploySchema" in bridge_m,
+            "runtime fuzzy schema redeploy bridge missing")
+    require("syncUserData" in bridge_h and "RimeSyncUserData" in bridge_m,
+            "librime user-dictionary sync bridge missing")
+    require("phase3Engine.syncUserData()" in controller,
+            "keyboard lifecycle does not persist learned user data")
+    require("reloadPhase3Preferences" in controller,
+            "shared Host settings are not reloaded when keyboard reappears")
 
     require("dictionary: luna_pinyin" in pinyin26 and "dictionary: luna_pinyin" in pinyin9,
             "pinyin schemas must retain traditional source forms for a real 简/繁 toggle")
@@ -72,8 +90,9 @@ def main() -> int:
             "pinyin user dictionary learning must stay enabled")
     require("schema_id: claw_double_pinyin_sogou" in sogou and "dictionary: luna_pinyin" in sogou,
             "Sogou double-pinyin must stay clean-room and use the pinned public dictionary")
-    require("derive/^zh/z/" in generator and "derive/^n/l/" in generator,
-            "fuzzy schema generator missing required fuzzy pairs")
+    for token in ("derive/^zh/z/", "derive/^n/l/", "derive/^f/h/", "derive/an$/ang/", "derive/en$/eng/", "derive/in$/ing/"):
+        require(token in generator, f"fuzzy schema generator missing rule: {token}")
+
     for name in (
         "luna_pinyin.dict.yaml",
         "claw_pinyin26_fuzzy_zhz.schema.yaml", "claw_pinyin26_fuzzy_ln.schema.yaml", "claw_pinyin26_fuzzy_all.schema.yaml",
