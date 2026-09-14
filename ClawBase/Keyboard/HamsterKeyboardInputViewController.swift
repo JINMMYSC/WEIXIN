@@ -3,7 +3,6 @@ import SwiftUI
 
 final class HamsterKeyboardInputViewController: UIInputViewController {
     private static let appGroupID = "group.7518554"
-    private static let recentEmojiKey = "phase3.recentEmoji"
 
     private lazy var phase3Session: WTHamsterRimeSessionProtocol = {
         #if DEBUG
@@ -12,11 +11,13 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
         return WTLibrimeRimeSession()
         #endif
     }()
-    private lazy var engine: WTIMEEngine = WTHamsterRimeSessionAdapter(
+    private lazy var phase3Engine = WTHamsterRimeSessionAdapter(
         session: phase3Session,
         backendProfile: .phase3PublicLibrime
     )
+    private lazy var engine: WTIMEEngine = phase3Engine
     private var runtime: WTKeyboardRuntime?
+    private var serviceBinder: WTKeyboardServiceBinder?
     private var hostingController: UIHostingController<WTPhase2KeyboardRootView>?
     private var heightConstraint: NSLayoutConstraint?
 
@@ -28,16 +29,25 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
         assert(WTPhase3AdapterSmokeSession.selfTest(), "Phase 3 adapter/T9 smoke test failed")
         #endif
 
+        // The binder restores the last Chinese/English mode after the closures are wired.
+        // T9 is only the cold-install fallback; extension relaunch no longer forces T9 every time.
         let initialMode: WTInputMode = .chinesePinyin9
         engine.setInputMode(initialMode)
-        let recents = UserDefaults(suiteName: Self.appGroupID)?.stringArray(forKey: Self.recentEmojiKey) ?? []
-        let runtime = WTKeyboardRuntime(
-            state: WTKeyboardState(inputMode: initialMode),
-            recentEmoji: Array(recents.prefix(48))
-        )
-        runtime.toolbarEnabled = false
+        let runtime = WTKeyboardRuntime(state: WTKeyboardState(inputMode: initialMode))
         wireRuntime(runtime)
         self.runtime = runtime
+
+        let services = WTKeyboardServiceBinder(
+            runtime: runtime,
+            appGroupIdentifier: Self.appGroupID,
+            openURL: { [weak self] url, completion in
+                guard let context = self?.extensionContext else { completion(false); return }
+                context.open(url, completionHandler: completion)
+            }
+        )
+        services.bind()
+        serviceBinder = services
+
         refreshFromEngine()
         installPhase2Root(runtime: runtime)
         installKeyboardHeightConstraint()
@@ -45,11 +55,20 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        serviceBinder?.reloadSharedSettings()
+        serviceBinder?.consumeServiceResponses()
         refreshFromEngine()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        serviceBinder?.persistSessionState()
+        super.viewDidDisappear(animated)
     }
 
     override func textWillChange(_ textInput: UITextInput?) {
         super.textWillChange(textInput)
+        // Composition belongs to one host text session. Never leak old Rime preedit/candidates
+        // when iOS moves the keyboard to a different field/application.
         engine.reset()
         runtime?.composition = ""
         runtime?.candidates = []
@@ -63,17 +82,18 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     override func textDidChange(_ textInput: UITextInput?) {
         super.textDidChange(textInput)
         refreshFromEngine()
+        serviceBinder?.consumeServiceResponses()
     }
 
     override func didReceiveMemoryWarning() {
+        serviceBinder?.persistSessionState()
         runtime?.releaseTransientCaches()
         super.didReceiveMemoryWarning()
     }
 
     private func installKeyboardHeightConstraint() {
-        // The extracted WeType 3.5.3 canvas is exactly 414x224.  During composition the
-        // candidate area is 18pt preedit + 40pt candidates, so 282pt avoids the previous
-        // vertical squeeze that distorted all key rectangles while typing.
+        // The extracted WeType 3.5.3 canvas is exactly 414x224. Candidate/preedit is
+        // 40+18 points, so 282pt keeps every key's measured Y coordinate stable.
         let measuredHeight = WTTheme353.keyboardHeight + WTTheme353.compositionHeight + WTTheme353.candidateCompactHeight
         let constraint = view.heightAnchor.constraint(equalToConstant: CGFloat(measuredHeight))
         constraint.priority = UILayoutPriority(999)
@@ -104,15 +124,6 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     private func wireRuntime(_ runtime: WTKeyboardRuntime) {
         runtime.insertText = { [weak self] text in
             self?.textDocumentProxy.insertText(text)
-        }
-
-        runtime.recordEmoji = { symbol in
-            let defaults = UserDefaults(suiteName: Self.appGroupID)
-            var items = defaults?.stringArray(forKey: Self.recentEmojiKey) ?? []
-            items.removeAll { $0 == symbol }
-            items.insert(symbol, at: 0)
-            if items.count > 48 { items.removeLast(items.count - 48) }
-            defaults?.set(items, forKey: Self.recentEmojiKey)
         }
 
         runtime.commitDirectText = { [weak self] text in
