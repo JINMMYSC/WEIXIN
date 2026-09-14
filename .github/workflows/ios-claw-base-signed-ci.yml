@@ -63,8 +63,17 @@ jobs:
       - name: Verify Phase 3 stroke contract
         run: python3 Tools/verify_phase3_stroke_contract.py
 
+      - name: Verify Phase 3 T9 and candidate input chain
+        run: python3 Tools/verify_phase3_input_chain.py
+
+      - name: Verify Phase 3 Host settings surface
+        run: python3 Tools/verify_phase3_host_surface.py
+
       - name: Validate extracted Phase 3 layout names
         run: python3 Tools/validate_phase3_layout_names.py
+
+      - name: Verify extracted key style rendering
+        run: python3 Tools/verify_ui_style_tokens.py
 
       - name: Verify 79-case UI static alignment
         run: python3 Tools/verify_ui_79_alignment.py
