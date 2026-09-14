@@ -119,8 +119,6 @@ done
   exit 1
 }
 
-# Public data only. The public LibrimeKit test support provides OpenCC data; the remaining
-# schemas/dictionaries are copied from exact public Rime revisions listed above.
 cp -R "$LIBRIMEKIT_DIR/Tests/LibrimeKitTests/Resources/SharedSupport/." "$RIME_SHARED_DIR/"
 copy_root_rime_data "$PRELUDE_DIR"
 copy_root_rime_data "$LUNA_DIR"
@@ -130,6 +128,7 @@ copy_root_rime_data "$STROKE_DIR"
 copy_root_rime_data "$PINYIN_SIMP_DIR"
 cp "$ROOT_DIR/ClawBase/RimeSchemas/claw_pinyin26.schema.yaml" "$RIME_SHARED_DIR/"
 cp "$ROOT_DIR/ClawBase/RimeSchemas/claw_pinyin9.schema.yaml" "$RIME_SHARED_DIR/"
+cp "$ROOT_DIR/ClawBase/RimeSchemas/claw_double_pinyin_sogou.schema.yaml" "$RIME_SHARED_DIR/"
 python3 "$ROOT_DIR/ClawBase/RimeSchemas/generate_fuzzy_variants.py" "$RIME_SHARED_DIR"
 
 cat > "$RIME_SHARED_DIR/CLAW_PHASE3_PROVENANCE.txt" <<EOF
@@ -144,6 +143,7 @@ rime-double-pinyin=$RIME_DOUBLE_PINYIN_COMMIT
 rime-wubi=$RIME_WUBI_COMMIT
 rime-stroke=$RIME_STROKE_COMMIT
 rime-pinyin-simp=$RIME_PINYIN_SIMP_COMMIT
+claw-double-pinyin-sogou=clean-room-public-mapping
 EOF
 
 required_rime_files=(
@@ -156,6 +156,9 @@ required_rime_files=(
   claw_pinyin26_fuzzy_all.schema.yaml
   claw_pinyin9.schema.yaml
   double_pinyin.schema.yaml
+  double_pinyin_flypy.schema.yaml
+  double_pinyin_mspy.schema.yaml
+  claw_double_pinyin_sogou.schema.yaml
   wubi86.schema.yaml
   wubi86.dict.yaml
   stroke.schema.yaml
