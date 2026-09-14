@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Shared Phase 4 state surface.  WeType exposes distinct loading/empty/permission/network/error
+/// Shared Phase 4 state surface. WeType exposes distinct loading/empty/permission/network/error
 /// states; keeping them explicit prevents an unavailable provider from looking like a valid empty
 /// result. Artwork is independently drawn through WTSemanticGlyph.
 public struct WTPhase4PanelStateView: View {
@@ -84,10 +84,14 @@ public struct WTPhase4PanelStateView: View {
 
     @ViewBuilder private var actionButton: some View {
         switch state {
-        case .permissionDenied where requestPermission != nil:
-            Button("去授权") { requestPermission?() }.buttonStyle(WTGreenPillButtonStyle())
-        case .offline, .failed where retry != nil:
-            Button("重试") { retry?() }.buttonStyle(WTGreenPillButtonStyle())
+        case .permissionDenied:
+            if requestPermission != nil {
+                Button("去授权") { requestPermission?() }.buttonStyle(WTGreenPillButtonStyle())
+            }
+        case .offline, .failed:
+            if retry != nil {
+                Button("重试") { retry?() }.buttonStyle(WTGreenPillButtonStyle())
+            }
         default:
             EmptyView()
         }
