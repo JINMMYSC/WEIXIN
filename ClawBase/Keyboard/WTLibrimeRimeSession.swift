@@ -10,11 +10,10 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     private static let fuzzyCChKey = "wt.fuzzy.c_ch"
     private static let fuzzySShKey = "wt.fuzzy.s_sh"
     private static let fuzzyNLKey = "wt.fuzzy.n_l"
+    private static let doubleSchemeKey = "wt.double.scheme"
     private static let legacyFuzzyRetroflexKey = "phase3.fuzzy.retroflexInitials"
     private static let legacyFuzzyNasalLateralKey = "phase3.fuzzy.nasalLateral"
 
-    /// Rime deploys schemas listed by default.yaml plus the user's deterministic overlay.
-    /// All entries here are CLAW-owned schema wrappers or exact pinned public Rime schemas.
     private static let phase3DefaultCustomYAML = """
     patch:
       schema_list:
@@ -24,6 +23,9 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         - schema: claw_pinyin26_fuzzy_all
         - schema: claw_pinyin9
         - schema: double_pinyin
+        - schema: double_pinyin_flypy
+        - schema: double_pinyin_mspy
+        - schema: claw_double_pinyin_sogou
         - schema: wubi86
         - schema: stroke
         - schema: pinyin_simp
@@ -145,9 +147,6 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         case .retroflexInitials:
             fuzzyRetroflexInitials = enabled
             preferences?.set(enabled, forKey: Self.legacyFuzzyRetroflexKey)
-            // The adapter-level option represents the three WeType retroflex toggles as one
-            // black-box action. The Host settings can still persist the three keys independently;
-            // loadFuzzyPreferences() ORs them for the currently supported public-Rime profile.
             preferences?.set(enabled, forKey: Self.fuzzyZZhKey)
             preferences?.set(enabled, forKey: Self.fuzzyCChKey)
             preferences?.set(enabled, forKey: Self.fuzzySShKey)
@@ -211,12 +210,25 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     }
 
     private func effectiveSchemaID(baseSchemaID: String, mode: WTInputMode) -> String {
+        if mode == .doublePinyin, baseSchemaID == "double_pinyin" {
+            return Self.doublePinyinSchemaID(preferences?.string(forKey: Self.doubleSchemeKey))
+        }
         guard mode == .chinesePinyin26, baseSchemaID == "claw_pinyin26" else { return baseSchemaID }
         switch (fuzzyRetroflexInitials, fuzzyNasalLateral) {
         case (true, true): return "claw_pinyin26_fuzzy_all"
         case (true, false): return "claw_pinyin26_fuzzy_zhz"
         case (false, true): return "claw_pinyin26_fuzzy_ln"
         case (false, false): return "claw_pinyin26"
+        }
+    }
+
+    private static func doublePinyinSchemaID(_ configured: String?) -> String {
+        switch configured {
+        case "小鹤双拼": return "double_pinyin_flypy"
+        case "微软双拼": return "double_pinyin_mspy"
+        case "搜狗双拼": return "claw_double_pinyin_sogou"
+        case "自然码": return "double_pinyin"
+        default: return "double_pinyin_flypy"
         }
     }
 
@@ -268,7 +280,7 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         case .chinesePinyin26, .english26:
             return ["pinyin_simp", "luna_pinyin"]
         case .doublePinyin:
-            return ["double_pinyin", "pinyin_simp"]
+            return ["double_pinyin_flypy", "double_pinyin", "pinyin_simp"]
         case .wubi:
             return ["wubi86"]
         case .stroke:
