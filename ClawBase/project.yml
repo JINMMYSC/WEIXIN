@@ -17,6 +17,7 @@ targets:
       - path: Host/AppDelegate.swift
       - path: Host/SceneDelegate.swift
       - path: ../iOSApp/WTSettingsAppView.swift
+      - path: ../iOSApp/WTHostHomeParityView.swift
       - path: ../iOSApp/WTHostVoiceCaptureView.swift
       - path: ../iOSApp/WTHostPhase4HandoffView.swift
       - path: ../iOSServices/WTHostSpeechRecognitionService.swift
