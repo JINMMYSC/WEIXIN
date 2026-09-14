@@ -102,7 +102,7 @@ private struct WTKeyCap: View {
                 }
                 if let subtitle = subtitleText, !subtitle.isEmpty, !isEmojiKey {
                     Text(subtitle)
-                        .font(.system(size: WTTheme353.keySubtitleFontSize))
+                        .font(.system(size: CGFloat(WTTheme353.keySubtitleFontSize)))
                         .foregroundStyle(secondaryTextColor)
                         .lineLimit(1)
                 }
