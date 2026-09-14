@@ -7,6 +7,7 @@ on:
       - work/v14-clawbase-phase4
       - work/v14-phase1-7-final
       - work/v14-phase8-package-parity
+      - work/v14-phase8-12-integration
   workflow_dispatch:
 
 permissions:
@@ -18,7 +19,7 @@ concurrency:
 
 jobs:
   sign:
-    name: Build all targets, sign available package profile set, validate IPA
+    name: Build Phase 8-12 integration, sign available package profile set, validate IPA
     runs-on: macos-15
     timeout-minutes: 55
     env:
@@ -53,9 +54,9 @@ jobs:
           for v in "$WT_SHARE_PROFILE_BASE64" "$WT_WIDGET_PROFILE_BASE64" "$WT_VOICE_ACTIVITY_PROFILE_BASE64"; do [[ -n "$v" ]] && count=$((count + 1)); done
           [[ "$count" == "0" || "$count" == "3" ]] || { echo "Extension provisioning secrets must be supplied as a complete Share/Widget/VoiceActivity set" >&2; exit 1; }
           if [[ "$count" == "0" ]]; then
-            echo "Full package profiles are not configured; CI will keep the installable Host+Keyboard engineering IPA while still validating four-extension unsigned embedding."
+            echo "Full-package extension profiles are not configured; unsigned build must still embed all four extensions and signed engineering IPA will remain Host+Keyboard."
           else
-            echo "Full package profiles detected; CI will require and sign all four extensions."
+            echo "Full-package extension profiles detected; signed IPA must include all four extensions."
           fi
 
       - name: Install XcodeGen
@@ -94,7 +95,22 @@ jobs:
         run: python3 Tools/verify_phase6_evidence.py --json artifacts/phase6/evidence-report.json
       - name: Verify Phase 7 engineering stability/release contract
         run: python3 Tools/verify_phase7_release.py
-      - name: Run Core and replay Swift tests
+      - name: Verify Phase 9 observed Host SetupMain contract
+        run: python3 Tools/verify_phase9_host_parity.py
+      - name: Verify Phase 11 tooling is fail-closed
+        run: |
+          python3 -m py_compile Tools/analyze_phase11_ime_delta.py
+          python3 Tools/phase3_capture_template.py --kind reference --output artifacts/phase11/reference-template.json
+          python3 Tools/phase3_capture_template.py --kind actual --output artifacts/phase11/replica-template.json
+          python3 Tools/analyze_phase11_ime_delta.py artifacts/phase11/reference-template.json artifacts/phase11/replica-template.json --output artifacts/phase11/delta.json
+          python3 - <<'PY'
+          import json
+          p=json.load(open('artifacts/phase11/delta.json'))
+          assert p['counts']['uncaptured_reference'] > 0
+          assert p['strict_ready'] is False
+          print('Phase 11 reference pipeline: PASS (missing original observations are not fabricated)')
+          PY
+      - name: Run Core, gesture and replay Swift tests
         run: swift test --parallel
 
       - name: Build unsigned Host plus all four embedded extensions
@@ -112,7 +128,6 @@ jobs:
           rm -rf "$SIGNING_DIR" "$KEYCHAIN_PATH"
           mkdir -p "$SIGNING_DIR"
           chmod 700 "$SIGNING_DIR"
-
           printf '%s' "$WT_SIGNING_P12_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/signing.p12"
           printf '%s' "$WT_HOST_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/host.mobileprovision"
           printf '%s' "$WT_KEYBOARD_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/keyboard.mobileprovision"
@@ -153,22 +168,23 @@ jobs:
           chmod +x ClawBase/ci_sign_and_validate.sh
           ClawBase/ci_sign_and_validate.sh
 
-      - name: Upload CI logs and evidence report
+      - name: Upload CI logs and evidence reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ClawBase-3.0.1-2-phase8-logs-${{ github.run_attempt }}
+          name: ClawBase-3.0.1-2-phase8-12-logs-${{ github.run_attempt }}
           path: |
             artifacts/claw-base/logs/
             artifacts/phase6/evidence-report.json
+            artifacts/phase11/
           if-no-files-found: warn
           retention-days: 30
 
-      - name: Upload signed IPA
+      - name: Upload signed engineering IPA
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: ClawBase-3.0.1-2-phase8-signed-${{ github.run_attempt }}
+          name: ClawBase-3.0.1-2-phase8-12-signed-${{ github.run_attempt }}
           path: artifacts/claw-base/ClawBase-3.0.1-2-signed.ipa
           if-no-files-found: error
           retention-days: 30
