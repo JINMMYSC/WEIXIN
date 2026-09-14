@@ -1,9 +1,10 @@
-name: Phase 3 Static Verification
+name: Phase 3 and 4 Static Verification
 
 on:
   push:
     branches:
       - work/v14-clawbase-t9-rime
+      - work/v14-clawbase-phase4
       - work/v14-p3-*
   workflow_dispatch:
 
@@ -11,12 +12,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: phase3-static-${{ github.ref }}
+  group: phase3-phase4-static-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   verify:
-    name: Phase 3 contract, matrix and UI gates
+    name: Phase 3/4 contract, matrix and UI gates
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -58,8 +59,11 @@ jobs:
       - name: Verify extracted key style rendering
         run: python3 Tools/verify_ui_style_tokens.py
 
-      - name: Verify 79-case UI static alignment
+      - name: Verify 79-case UI structural alignment
         run: python3 Tools/verify_ui_79_alignment.py
 
       - name: Verify device-visible 3.5.3 runtime geometry
         run: python3 Tools/verify_phase3_device_ui_contract.py
+
+      - name: Verify Phase 4 panel completion contract
+        run: python3 Tools/verify_phase4_completion.py
