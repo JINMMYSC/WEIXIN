@@ -6,6 +6,7 @@ on:
       - work/v14-clawbase-t9-rime
       - work/v14-clawbase-phase4
       - work/v14-clawbase-phase5-7
+      - work/v14-phase1-7-integration
       - work/v14-p3-*
   workflow_dispatch:
 
