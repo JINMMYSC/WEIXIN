@@ -15,7 +15,7 @@ concurrency:
 jobs:
   sign:
     name: Build, dual-profile sign, validate ClawBase IPA
-    runs-on: macos-14
+    runs-on: macos-15
     timeout-minutes: 45
     env:
       WT_SIGNING_P12_BASE64: ${{ secrets.WT_SIGNING_P12_BASE64 }}
@@ -26,6 +26,12 @@ jobs:
     steps:
       - name: Check out T9 plus Phase 3 real-engine branch
         uses: actions/checkout@v4
+
+      - name: Report runner and Xcode image
+        run: |
+          sw_vers
+          xcodebuild -version
+          uname -m
 
       - name: Validate signing secret presence
         shell: bash
