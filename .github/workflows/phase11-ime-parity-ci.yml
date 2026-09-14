@@ -1,0 +1,40 @@
+name: Phase 11 IME Parity CI
+
+on:
+  push:
+    branches:
+      - work/v14-phase11-ime-parity
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile black-box tools
+        run: |
+          python3 -m py_compile Tools/phase3_capture_template.py Tools/compare_phase3_blackbox.py Tools/analyze_phase11_ime_delta.py
+      - name: Verify black-box case matrix
+        run: python3 Tools/verify_phase3_blackbox_matrix.py
+      - name: Generate reference and replica capture worksheets
+        run: |
+          python3 Tools/phase3_capture_template.py --kind reference --output artifacts/phase11/reference-template.json
+          python3 Tools/phase3_capture_template.py --kind actual --output artifacts/phase11/replica-template.json
+      - name: Confirm analyzer reports uncaptured references without inventing output
+        run: |
+          python3 Tools/analyze_phase11_ime_delta.py artifacts/phase11/reference-template.json artifacts/phase11/replica-template.json --output artifacts/phase11/delta.json
+          python3 - <<'PY'
+          import json
+          p=json.load(open('artifacts/phase11/delta.json'))
+          assert p['counts']['uncaptured_reference'] > 0
+          assert p['strict_ready'] is False
+          print('Phase 11 fail-closed capture pipeline: PASS')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phase11-ime-parity-${{ github.run_attempt }}
+          path: artifacts/phase11/
