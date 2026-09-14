@@ -125,6 +125,7 @@ targets:
         PRODUCT_NAME: ClawBaseShare
         INFOPLIST_FILE: ../XcodeIntegration/Plists/Share-Info.plist
         APPLICATION_EXTENSION_API_ONLY: YES
+        CODE_SIGNING_ALLOWED: NO
         SKIP_INSTALL: YES
 
   ClawBaseWidget:
@@ -147,6 +148,7 @@ targets:
         PRODUCT_NAME: ClawBaseWidget
         INFOPLIST_FILE: ../XcodeIntegration/Plists/Widget-Info.plist
         APPLICATION_EXTENSION_API_ONLY: YES
+        CODE_SIGNING_ALLOWED: NO
         SKIP_INSTALL: YES
 
   ClawBaseVoiceActivity:
@@ -167,4 +169,5 @@ targets:
         PRODUCT_NAME: ClawBaseVoiceActivity
         INFOPLIST_FILE: ../XcodeIntegration/Plists/VoiceActivity-Info.plist
         APPLICATION_EXTENSION_API_ONLY: YES
+        CODE_SIGNING_ALLOWED: NO
         SKIP_INSTALL: YES
