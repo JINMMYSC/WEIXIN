@@ -90,6 +90,9 @@ private struct WTKeyCap: View {
     @State private var deleteDeletedSteps = 0
     @State private var deleteClearArmed = false
     @State private var deleteRepeatTask: Task<Void, Never>?
+    @State private var longPressGlideActive = false
+    @State private var longPressGlideOriginIndex = 0
+    @State private var longPressGlideSelectedIndex: Int?
 
     private var styleValues: [String: String] { WTStyleCatalog353.values(for: item.style) }
 
@@ -167,9 +170,13 @@ private struct WTKeyCap: View {
                     } else {
                         runtime.handle(item, gesture: .longPress)
                     }
+                    beginLongPressGlideIfPossible()
                 }
         )
-        .onDisappear { stopRapidDelete() }
+        .onDisappear {
+            stopRapidDelete()
+            longPressGlideActive = false
+        }
         .accessibilityLabel(isLanguageKey ? languageMarker + "英" : displayTitle)
     }
 
@@ -195,17 +202,25 @@ private struct WTKeyCap: View {
                     updateDeleteGesture(value)
                     return
                 }
+                if longPressGlideActive, runtime.longPressPopup?.keyID == item.id {
+                    updateLongPressGlide(value)
+                    return
+                }
                 guard shouldShowTapPopup, runtime.longPressPopup?.keyID != item.id else { return }
                 onTapPopupChanged(true, displayTitle)
             }
             .onEnded { value in
                 onTapPopupChanged(false, displayTitle)
-                if runtime.longPressPopup?.keyID == item.id { return }
 
                 if isDeleteKey {
                     finishDeleteGesture(value)
                     return
                 }
+                if longPressGlideActive, runtime.longPressPopup?.keyID == item.id {
+                    finishLongPressGlide()
+                    return
+                }
+                if runtime.longPressPopup?.keyID == item.id { return }
 
                 runtime.performKeyFeedback(false)
                 let dx = value.translation.width
@@ -218,6 +233,51 @@ private struct WTKeyCap: View {
                     runtime.handle(item, gesture: .tap)
                 }
             }
+    }
+
+    private func beginLongPressGlideIfPossible() {
+        guard let popup = runtime.longPressPopup,
+              popup.keyID == item.id,
+              !popup.items.isEmpty else { return }
+        longPressGlideActive = true
+        longPressGlideOriginIndex = min(max(popup.defaultIndex ?? 0, 0), popup.items.count - 1)
+        longPressGlideSelectedIndex = longPressGlideOriginIndex
+    }
+
+    private func updateLongPressGlide(_ value: DragGesture.Value) {
+        guard let popup = runtime.longPressPopup,
+              popup.keyID == item.id,
+              !popup.items.isEmpty else { return }
+        let delta = Int((value.translation.width / 42).rounded())
+        let index = min(max(longPressGlideOriginIndex + delta, 0), popup.items.count - 1)
+        guard index != longPressGlideSelectedIndex else { return }
+        longPressGlideSelectedIndex = index
+        runtime.performKeyFeedback(false)
+        runtime.longPressPopup = .init(
+            keyID: popup.keyID,
+            items: popup.items,
+            defaultIndex: index,
+            sourceRect: popup.sourceRect
+        )
+    }
+
+    private func finishLongPressGlide() {
+        defer {
+            longPressGlideActive = false
+            longPressGlideSelectedIndex = nil
+        }
+        guard let popup = runtime.longPressPopup,
+              popup.keyID == item.id,
+              !popup.items.isEmpty else { return }
+        let index = min(max(longPressGlideSelectedIndex ?? longPressGlideOriginIndex, 0), popup.items.count - 1)
+        let text = popup.items[index]
+        if text == "换行" {
+            runtime.longPressPopup = nil
+            runtime.submitReturn()
+            runtime.refreshIMEContext()
+        } else {
+            runtime.selectLongPressText(text)
+        }
     }
 
     private func beginDeleteGestureIfNeeded() {
@@ -451,13 +511,7 @@ private struct WTLongPressPopupView: View {
         HStack(spacing: 0) {
             ForEach(Array(popup.items.enumerated()), id: \.offset) { index, text in
                 Button {
-                    if text == "换行" {
-                        runtime.longPressPopup = nil
-                        runtime.submitReturn()
-                        runtime.refreshIMEContext()
-                    } else {
-                        runtime.selectLongPressText(text)
-                    }
+                    commit(text)
                 } label: {
                     Text(text)
                         .font(.system(size: 18, weight: .regular))
@@ -467,10 +521,43 @@ private struct WTLongPressPopupView: View {
                 }
                 .buttonStyle(.plain)
             }
+
+            if showsHandwritingShortcut {
+                Rectangle()
+                    .fill(WTThemeColor353.normalBorder)
+                    .frame(width: 0.5, height: 32)
+                Button {
+                    runtime.longPressPopup = nil
+                    runtime.state.present(.handwriting)
+                } label: {
+                    WTSemanticGlyph(name: "hand.draw")
+                        .foregroundStyle(WTChrome353.primaryText)
+                        .frame(width: 48, height: 50)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("手写")
+            }
         }
         .padding(.horizontal, 4)
         .background(WTChrome353.elevatedSurface)
         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
         .shadow(color: WTThemeColor353.keyShadow, radius: 4, y: 2)
+    }
+
+    private var showsHandwritingShortcut: Bool {
+        guard popup.items.count >= 2 else { return false }
+        return popup.items.allSatisfy { value in
+            value.count == 1 && value.unicodeScalars.allSatisfy { CharacterSet.letters.contains($0) }
+        }
+    }
+
+    private func commit(_ text: String) {
+        if text == "换行" {
+            runtime.longPressPopup = nil
+            runtime.submitReturn()
+            runtime.refreshIMEContext()
+        } else {
+            runtime.selectLongPressText(text)
+        }
     }
 }
