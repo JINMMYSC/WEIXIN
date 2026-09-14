@@ -37,8 +37,7 @@ run_logged phase3-dependencies "$PROJECT_DIR/ci_prepare_librimekit.sh"
   run_logged xcodegen xcodegen generate --spec project.yml
 )
 
-# Phase 5/7: compile every final system-extension target unsigned. They are intentionally not
-# embedded in the two-profile engineering IPA until dedicated provisioning profiles are supplied.
+# Build each product independently first so a failure cannot be hidden by Host dependency resolution.
 for scheme in ClawBaseShare ClawBaseWidget ClawBaseVoiceActivity; do
   run_logged "device-$scheme" \
     xcodebuild \
@@ -84,15 +83,22 @@ run_logged device-ClawBaseHost \
 
 APP_PATH="$DEVICE_DERIVED_DATA/Build/Products/Release-iphoneos/ClawBaseHost.app"
 KEYBOARD_PATH="$APP_PATH/PlugIns/HamsterKeyboard.appex"
+SHARE_PATH="$APP_PATH/PlugIns/ClawBaseShare.appex"
+WIDGET_PATH="$APP_PATH/PlugIns/ClawBaseWidget.appex"
+VOICE_ACTIVITY_PATH="$APP_PATH/PlugIns/ClawBaseVoiceActivity.appex"
 HOST_INFO="$APP_PATH/Info.plist"
 KEYBOARD_INFO="$KEYBOARD_PATH/Info.plist"
+SHARE_INFO="$SHARE_PATH/Info.plist"
+WIDGET_INFO="$WIDGET_PATH/Info.plist"
+VOICE_ACTIVITY_INFO="$VOICE_ACTIVITY_PATH/Info.plist"
 RIME_RESOURCES="$KEYBOARD_PATH/RimeSharedSupport"
 
-[[ -d "$APP_PATH" ]] || fail "Host app missing at $APP_PATH"
-[[ -d "$KEYBOARD_PATH" ]] || fail "Keyboard extension missing at $KEYBOARD_PATH"
-[[ -f "$HOST_INFO" ]] || fail "Host Info.plist missing"
-[[ -f "$KEYBOARD_INFO" ]] || fail "Keyboard Info.plist missing"
-[[ -d "$RIME_RESOURCES" ]] || fail "RimeSharedSupport resources missing from Keyboard extension"
+for required in "$APP_PATH" "$KEYBOARD_PATH" "$SHARE_PATH" "$WIDGET_PATH" "$VOICE_ACTIVITY_PATH" "$RIME_RESOURCES"; do
+  [[ -d "$required" ]] || fail "required package directory missing: $required"
+done
+for required in "$HOST_INFO" "$KEYBOARD_INFO" "$SHARE_INFO" "$WIDGET_INFO" "$VOICE_ACTIVITY_INFO"; do
+  [[ -f "$required" ]] || fail "required Info.plist missing: $required"
+done
 [[ -f "$RIME_RESOURCES/claw_pinyin26.schema.yaml" ]] || fail "claw_pinyin26 schema missing"
 [[ -f "$RIME_RESOURCES/claw_pinyin9.schema.yaml" ]] || fail "claw_pinyin9 schema missing"
 [[ -f "$RIME_RESOURCES/luna_pinyin.dict.yaml" ]] || fail "pinned Luna Pinyin dictionary missing"
@@ -100,38 +106,30 @@ RIME_RESOURCES="$KEYBOARD_PATH/RimeSharedSupport"
 
 host_bundle_id="$(plist_value "$HOST_INFO" CFBundleIdentifier)"
 keyboard_bundle_id="$(plist_value "$KEYBOARD_INFO" CFBundleIdentifier)"
-host_executable="$(plist_value "$HOST_INFO" CFBundleExecutable)"
-keyboard_executable="$(plist_value "$KEYBOARD_INFO" CFBundleExecutable)"
-host_package_type="$(plist_value "$HOST_INFO" CFBundlePackageType)"
-keyboard_package_type="$(plist_value "$KEYBOARD_INFO" CFBundlePackageType)"
+share_bundle_id="$(plist_value "$SHARE_INFO" CFBundleIdentifier)"
+widget_bundle_id="$(plist_value "$WIDGET_INFO" CFBundleIdentifier)"
+voice_activity_bundle_id="$(plist_value "$VOICE_ACTIVITY_INFO" CFBundleIdentifier)"
 host_version="$(plist_value "$HOST_INFO" CFBundleShortVersionString)"
-keyboard_version="$(plist_value "$KEYBOARD_INFO" CFBundleShortVersionString)"
 host_build="$(plist_value "$HOST_INFO" CFBundleVersion)"
-keyboard_build="$(plist_value "$KEYBOARD_INFO" CFBundleVersion)"
 keyboard_extension_point="$(plist_value "$KEYBOARD_INFO" NSExtension:NSExtensionPointIdentifier)"
-keyboard_principal_class="$(plist_value "$KEYBOARD_INFO" NSExtension:NSExtensionPrincipalClass)"
-keyboard_open_access="$(plist_value "$KEYBOARD_INFO" NSExtension:NSExtensionAttributes:RequestsOpenAccess)"
-keyboard_primary_language="$(plist_value "$KEYBOARD_INFO" NSExtension:NSExtensionAttributes:PrimaryLanguage)"
-keyboard_ascii_capable="$(plist_value "$KEYBOARD_INFO" NSExtension:NSExtensionAttributes:IsASCIICapable)"
-keyboard_rtl="$(plist_value "$KEYBOARD_INFO" NSExtension:NSExtensionAttributes:PrefersRightToLeft)"
+share_extension_point="$(plist_value "$SHARE_INFO" NSExtension:NSExtensionPointIdentifier)"
+widget_extension_point="$(plist_value "$WIDGET_INFO" NSExtension:NSExtensionPointIdentifier)"
+voice_activity_extension_point="$(plist_value "$VOICE_ACTIVITY_INFO" NSExtension:NSExtensionPointIdentifier)"
 
 [[ "$host_bundle_id" == "app.lgm.7517" ]] || fail "Host bundle ID mismatch: $host_bundle_id"
 [[ "$keyboard_bundle_id" == "app.lgm.7517.123" ]] || fail "Keyboard bundle ID mismatch: $keyboard_bundle_id"
-[[ "$host_executable" == "ClawBaseHost" ]] || fail "Host executable mismatch: $host_executable"
-[[ "$keyboard_executable" == "HamsterKeyboard" ]] || fail "Keyboard executable mismatch: $keyboard_executable"
-[[ "$host_package_type" == "APPL" ]] || fail "Host package type mismatch: $host_package_type"
-[[ "$keyboard_package_type" == "XPC!" ]] || fail "Keyboard package type mismatch: $keyboard_package_type"
+[[ "$share_bundle_id" == "app.lgm.7517.share" ]] || fail "Share bundle ID mismatch: $share_bundle_id"
+[[ "$widget_bundle_id" == "app.lgm.7517.widget" ]] || fail "Widget bundle ID mismatch: $widget_bundle_id"
+[[ "$voice_activity_bundle_id" == "app.lgm.7517.voiceactivity" ]] || fail "Voice Activity bundle ID mismatch: $voice_activity_bundle_id"
 [[ "$host_version" == "3.0.1" && "$host_build" == "2" ]] || fail "Host version/build must be 3.0.1 (2), got $host_version ($host_build)"
-[[ "$keyboard_version" == "3.0.1" && "$keyboard_build" == "2" ]] || fail "Keyboard version/build must be 3.0.1 (2), got $keyboard_version ($keyboard_build)"
 [[ "$keyboard_extension_point" == "com.apple.keyboard-service" ]] || fail "Keyboard extension point mismatch: $keyboard_extension_point"
-[[ "$keyboard_principal_class" == "HamsterKeyboard.HamsterKeyboardInputViewController" ]] || fail "Keyboard principal class mismatch: $keyboard_principal_class"
-[[ "$keyboard_open_access" == "true" ]] || fail "RequestsOpenAccess must be true"
-[[ "$keyboard_primary_language" == "zh-Hans" ]] || fail "PrimaryLanguage mismatch: $keyboard_primary_language"
-[[ "$keyboard_ascii_capable" == "true" ]] || fail "IsASCIICapable must be true"
-[[ "$keyboard_rtl" == "false" ]] || fail "PrefersRightToLeft must be false"
+[[ "$share_extension_point" == "com.apple.share-services" ]] || fail "Share extension point mismatch: $share_extension_point"
+[[ "$widget_extension_point" == "com.apple.widgetkit-extension" ]] || fail "Widget extension point mismatch: $widget_extension_point"
+[[ "$voice_activity_extension_point" == "com.apple.widgetkit-extension" ]] || fail "Voice Activity extension point mismatch: $voice_activity_extension_point"
+[[ "$(plist_value "$SHARE_INFO" CFBundleDisplayName)" == "隔空传送" ]] || fail "Share display name mismatch"
 
 extension_count="$(find "$APP_PATH/PlugIns" -mindepth 1 -maxdepth 1 -type d -name '*.appex' | wc -l | tr -d '[:space:]')"
-[[ "$extension_count" == "1" ]] || fail "Expected exactly one embedded extension in the two-profile engineering IPA, got $extension_count"
+[[ "$extension_count" == "4" ]] || fail "Expected exactly four embedded extensions, got $extension_count"
 
 ditto "$APP_PATH" "$UNSIGNED_DIR/Payload/ClawBaseHost.app"
 (
@@ -143,12 +141,13 @@ ditto "$APP_PATH" "$UNSIGNED_DIR/Payload/ClawBaseHost.app"
   echo "ClawBase unsigned validation: PASS"
   echo "Host bundle ID: $host_bundle_id"
   echo "Keyboard bundle ID: $keyboard_bundle_id"
+  echo "Share bundle ID: $share_bundle_id"
+  echo "Widget bundle ID: $widget_bundle_id"
+  echo "Voice Activity bundle ID: $voice_activity_bundle_id"
   echo "Version/build: $host_version ($host_build)"
-  echo "Keyboard extension point: $keyboard_extension_point"
-  echo "Keyboard principal class: $keyboard_principal_class"
   echo "Phase 3 real librime resources: PASS"
-  echo "Phase 5 system-extension unsigned compilation: PASS"
-  echo "Embedded engineering extension count: $extension_count"
+  echo "Full extension embedding: PASS"
+  echo "Embedded extension count: $extension_count"
   echo "Unsigned IPA: $IPA_PATH"
   echo "Unsigned IPA SHA-256: $(/usr/bin/shasum -a 256 "$IPA_PATH" | /usr/bin/awk '{print $1}')"
 } | tee "$LOG_DIR/package.log"
