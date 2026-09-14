@@ -34,6 +34,8 @@ RIME_WUBI_COMMIT="152a0d3f3efe40cae216d1e3b338242446848d07"
 WUBI98_REPOSITORY="https://github.com/yanhuacuo/98wubi-tables.git"
 WUBI98_COMMIT="6b8b6fb9d3c34e0d5e3b17211e1f1c100e7eb697"
 WUBI98_TABLE="98五笔含词表-【单义】.txt"
+WUBI98_TABLE_BLOB="8500e3b9c5d09a7eef29708693d41bfc70ce2e7c"
+WUBI98_TABLE_BYTES="1988020"
 RIME_STROKE_REPOSITORY="https://github.com/rime/rime-stroke.git"
 RIME_STROKE_COMMIT="1e8fff9b9494ddec23b0cbc526bcfd8171a6fd48"
 RIME_PINYIN_SIMP_REPOSITORY="https://github.com/rime/rime-pinyin-simp.git"
@@ -85,6 +87,16 @@ checkout_exact "$RIME_PINYIN_SIMP_REPOSITORY" "$RIME_PINYIN_SIMP_COMMIT" "$PINYI
   echo "PHASE3 DEPENDENCY ERROR: Wubi98 source table missing" >&2
   exit 1
 }
+wubi98_blob="$(git -C "$WUBI98_DIR" hash-object "$WUBI98_TABLE")"
+[[ "$wubi98_blob" == "$WUBI98_TABLE_BLOB" ]] || {
+  echo "PHASE3 DEPENDENCY ERROR: Wubi98 source table blob mismatch: $wubi98_blob" >&2
+  exit 1
+}
+wubi98_bytes="$(wc -c < "$WUBI98_DIR/$WUBI98_TABLE" | tr -d '[:space:]')"
+[[ "$wubi98_bytes" == "$WUBI98_TABLE_BYTES" ]] || {
+  echo "PHASE3 DEPENDENCY ERROR: Wubi98 source table byte-size mismatch: $wubi98_bytes" >&2
+  exit 1
+}
 
 /usr/bin/curl --fail --location --retry 3 --retry-delay 2 --output "$ARCHIVE" "$FRAMEWORKS_URL"
 archive_bytes="$(/usr/bin/stat -f '%z' "$ARCHIVE")"
@@ -110,6 +122,8 @@ echo "rime-luna-pinyin commit: $RIME_LUNA_COMMIT"
 echo "rime-double-pinyin commit: $RIME_DOUBLE_PINYIN_COMMIT"
 echo "rime-wubi commit: $RIME_WUBI_COMMIT"
 echo "Wubi98 public-domain table commit: $WUBI98_COMMIT"
+echo "Wubi98 source table blob: $wubi98_blob"
+echo "Wubi98 source table bytes: $wubi98_bytes"
 echo "rime-stroke commit: $RIME_STROKE_COMMIT"
 echo "rime-pinyin-simp commit: $RIME_PINYIN_SIMP_COMMIT"
 
@@ -164,6 +178,8 @@ rime-double-pinyin=$RIME_DOUBLE_PINYIN_COMMIT
 rime-wubi=$RIME_WUBI_COMMIT
 wubi98-public-domain=$WUBI98_COMMIT
 wubi98-source-table=$WUBI98_TABLE
+wubi98-source-blob=$wubi98_blob
+wubi98-source-bytes=$wubi98_bytes
 wubi98-license=Unlicense-public-domain
 rime-stroke=$RIME_STROKE_COMMIT
 rime-pinyin-simp=$RIME_PINYIN_SIMP_COMMIT
