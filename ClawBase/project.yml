@@ -16,6 +16,9 @@ targets:
     sources:
       - path: Host/AppDelegate.swift
       - path: Host/SceneDelegate.swift
+      - path: ../iOSApp/WTSettingsAppView.swift
+      - path: ../iOSShared/WTSemanticGlyph.swift
+      - path: ../Sources/WeTypeReplicaCore
     dependencies:
       - target: HamsterKeyboard
         embed: true
