@@ -42,18 +42,12 @@ targets:
         type: folder
         buildPhase: resources
       - path: ../Sources/WeTypeReplicaCore
-      - path: ../HamsterBridge/WTHamsterRimeSessionAdapter.swift
-      - path: ../HamsterBridge/WTHamsterAdapterTemplate.swift
-      - path: ../iOSShared/WTSemanticGlyph.swift
-      - path: ../iOSOverlay/WTKeyboardRuntime.swift
-      - path: ../iOSOverlay/WTKeyboardCanvasView.swift
-      - path: ../iOSOverlay/WTCandidateBar.swift
-      - path: ../iOSOverlay/WTEmojiPanelView.swift
-      - path: ../iOSOverlay/WTInputModeSwitcherView.swift
-      - path: ../iOSOverlay/WTCleanRoomIconView.swift
-      - path: ../iOSOverlay/WTThemeColor353.swift
-      - path: ../iOSOverlay/WTChrome.swift
-      - path: ../iOSOverlay/WTBasicGlyphView.swift
+      - path: ../iOSShared
+      - path: ../iOSOverlay
+      - path: ../HamsterBridge
+      - path: ../iOSServices
+        excludes:
+          - WTHostSpeechRecognitionService.swift
     dependencies:
       - framework: Vendor/LibrimeKit/Frameworks/librime.xcframework
         embed: false
