@@ -101,6 +101,9 @@ public enum WTKeyActionResolver {
     ) -> WTResolvedKeyAction {
         switch gesture {
         case .longPress:
+            if item.id == "KEY_CHANGE" || item.id == "KEY_ABC" || (item.style?.contains("STYLE_LANGSWITCH") == true) {
+                return .function("inputMode")
+            }
             let parsed = WTFloatListParser.options(item.floatList)
             return parsed.items.isEmpty ? .none : .longPressOptions(parsed.items, defaultIndex: parsed.defaultIndex)
         case .swipeUp:
@@ -112,7 +115,7 @@ public enum WTKeyActionResolver {
         }
 
         // Some 3.5.3 keys express their behavior entirely through style rules.
-        if item.id == "KEY_CHANGE" || (item.style?.contains("STYLE_LANGSWITCH") == true) {
+        if item.id == "KEY_CHANGE" || item.id == "KEY_ABC" || (item.style?.contains("STYLE_LANGSWITCH") == true) {
             return .function("langswitch")
         }
         if item.id == "KEY_SHIFT" || item.function == "shift" {
@@ -133,7 +136,9 @@ public enum WTKeyActionResolver {
 
     public static func visibleTitle(for item: WTKeyboardItem, state: WTKeyboardState) -> String {
         if let title = variant(item.title, state: state), !title.isEmpty { return title }
-        if item.id == "KEY_CHANGE" { return state.inputMode == .english26 ? "中" : "英" }
+        if item.id == "KEY_CHANGE" || item.id == "KEY_ABC" || (item.style?.contains("STYLE_LANGSWITCH") == true) {
+            return state.inputMode == .english26 ? "中" : "英"
+        }
         if item.id == "KEY_SHIFT" {
             switch state.shiftState {
             case .off: return "⇧"
