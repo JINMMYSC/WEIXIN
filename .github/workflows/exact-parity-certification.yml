@@ -1,0 +1,24 @@
+name: Exact WeChat Parity Certification
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    name: Fail-closed 122 behavior + 79 pixel certification
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out certification branch
+        uses: actions/checkout@v4
+
+      - name: Report environment
+        run: |
+          python3 --version
+          uname -a
+
+      - name: Certify exact WeChat parity evidence
+        run: python3 Tools/verify_exact_wechat_parity.py

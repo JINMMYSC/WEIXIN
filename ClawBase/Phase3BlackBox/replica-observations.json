@@ -1,0 +1,7 @@
+{
+  "schema_version": 2,
+  "kind": "actual",
+  "implementation": "claw-phase3",
+  "note": "No result is prefilled. Populate only from a real-device replica capture using the same stimulus matrix as the WeChat reference.",
+  "observations": []
+}
