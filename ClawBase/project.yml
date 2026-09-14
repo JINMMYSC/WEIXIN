@@ -27,6 +27,12 @@ targets:
     dependencies:
       - target: HamsterKeyboard
         embed: true
+      - target: ClawBaseShare
+        embed: true
+      - target: ClawBaseWidget
+        embed: true
+      - target: ClawBaseVoiceActivity
+        embed: true
       - sdk: Speech.framework
       - sdk: AVFoundation.framework
       - sdk: PhotosUI.framework
@@ -119,7 +125,7 @@ targets:
         PRODUCT_NAME: ClawBaseShare
         INFOPLIST_FILE: ../XcodeIntegration/Plists/Share-Info.plist
         APPLICATION_EXTENSION_API_ONLY: YES
-        CODE_SIGNING_ALLOWED: NO
+        SKIP_INSTALL: YES
 
   ClawBaseWidget:
     type: app-extension
@@ -141,7 +147,7 @@ targets:
         PRODUCT_NAME: ClawBaseWidget
         INFOPLIST_FILE: ../XcodeIntegration/Plists/Widget-Info.plist
         APPLICATION_EXTENSION_API_ONLY: YES
-        CODE_SIGNING_ALLOWED: NO
+        SKIP_INSTALL: YES
 
   ClawBaseVoiceActivity:
     type: app-extension
@@ -161,4 +167,4 @@ targets:
         PRODUCT_NAME: ClawBaseVoiceActivity
         INFOPLIST_FILE: ../XcodeIntegration/Plists/VoiceActivity-Info.plist
         APPLICATION_EXTENSION_API_ONLY: YES
-        CODE_SIGNING_ALLOWED: NO
+        SKIP_INSTALL: YES
