@@ -1,5 +1,12 @@
 import Foundation
 
+public enum WTFuzzyPinyinOption: String, Codable, Sendable, CaseIterable {
+    /// Retroflex/non-retroflex initials: zh/z, ch/c, sh/s.
+    case retroflexInitials
+    /// Nasal/lateral initials: n/l.
+    case nasalLateral
+}
+
 /// Declarative backend mapping used at the Hamster/librime integration boundary.
 /// Schema identifiers come only from CLAW-owned wrappers or exact pinned public Rime projects;
 /// no Tencent/WeChat private schema or dictionary is used.
