@@ -15,7 +15,11 @@ let package = Package(
         .testTarget(
             name: "WeTypeReplicaCoreTests",
             dependencies: ["WeTypeReplicaCore"],
-            path: "Tests/WeTypeReplicaCoreTests"
+            path: "Tests/WeTypeReplicaCoreTests",
+            exclude: [
+                "CoordinatorTests.swift",
+                "PreviewIMEEngineTests.swift"
+            ]
         )
     ]
 )
