@@ -1,0 +1,61 @@
+name: Phase 5 Full Extension Package CI
+
+on:
+  push:
+    branches:
+      - work/v14-parity-certification
+    paths:
+      - ClawBase/project-full.yml
+      - ClawBase/ci_build_unsigned_full.sh
+      - XcodeIntegration/Plists/**
+      - XcodeIntegration/Entitlements/**
+      - iOSExtensions/**
+      - iOSShared/**
+      - iOSServices/WTBonjourTransferService.swift
+      - Sources/WeTypeReplicaCore/**
+      - Tools/verify_phase5_extension_metadata.py
+      - ReverseEngineering/Phase7/original-353-contract.json
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase5-full-package-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-full-package:
+    name: Build Host + Keyboard + Share + Widget + Voice Activity
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - name: Check out parity certification branch
+        uses: actions/checkout@v4
+
+      - name: Report runner and Xcode image
+        run: |
+          sw_vers
+          xcodebuild -version
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Verify Phase 5 extension metadata against original contract
+        run: python3 Tools/verify_phase5_extension_metadata.py
+
+      - name: Build four-extension unsigned package
+        run: bash ClawBase/ci_build_unsigned_full.sh
+
+      - name: Upload full-package logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ClawBase-3.0.1-2-full-package-logs-${{ github.run_attempt }}
+          path: artifacts/claw-base-full/logs
+
+      - name: Upload four-extension unsigned IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: ClawBase-3.0.1-2-full-unsigned-${{ github.run_attempt }}
+          path: artifacts/claw-base-full/ClawBase-3.0.1-2-full-unsigned.ipa

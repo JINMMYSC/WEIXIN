@@ -1,0 +1,160 @@
+name: ClawBaseFull
+settings:
+  base:
+    SWIFT_VERSION: 5.9
+    IPHONEOS_DEPLOYMENT_TARGET: 15.1
+    MARKETING_VERSION: 3.0.1
+    CURRENT_PROJECT_VERSION: 2
+    WT_APP_GROUP_ID: group.7518554
+    GENERATE_INFOPLIST_FILE: NO
+    TARGETED_DEVICE_FAMILY: "1,2"
+targets:
+  ClawBaseHost:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.1"
+    sources:
+      - path: Host/AppDelegate.swift
+      - path: Host/SceneDelegate.swift
+      - path: ../iOSApp/WTSettingsAppView.swift
+      - path: ../iOSApp/WTHostHomeParityView.swift
+      - path: ../iOSApp/WTHostVoiceCaptureView.swift
+      - path: ../iOSApp/WTHostPhase4HandoffView.swift
+      - path: ../iOSServices/WTHostSpeechRecognitionService.swift
+      - path: ../iOSServices/WTVoiceLiveActivityController.swift
+      - path: ../iOSShared/WTVoiceActivityAttributes.swift
+      - path: ../iOSShared/WTSemanticGlyph.swift
+      - path: ../Sources/WeTypeReplicaCore
+    dependencies:
+      - target: HamsterKeyboard
+        embed: true
+      - target: ClawBaseShare
+        embed: true
+      - target: ClawBaseWidget
+        embed: true
+      - target: ClawBaseVoiceActivity
+        embed: true
+      - sdk: Speech.framework
+      - sdk: AVFoundation.framework
+      - sdk: PhotosUI.framework
+      - sdk: UniformTypeIdentifiers.framework
+      - sdk: ActivityKit.framework
+    entitlements:
+      path: Host/Host.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517
+        PRODUCT_NAME: ClawBaseHost
+        INFOPLIST_FILE: Host/Info.plist
+        "EXCLUDED_ARCHS[sdk=iphonesimulator*]": arm64
+
+  HamsterKeyboard:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "15.1"
+    sources:
+      - path: Keyboard/HamsterKeyboardInputViewController.swift
+      - path: Keyboard/WTPhase2KeyboardRootView.swift
+      - path: Keyboard/WTPhase3KeyboardSurface.swift
+      - path: Keyboard/WTPhase3AdapterSmokeSession.swift
+      - path: Keyboard/WTLibrimeRimeSession.swift
+      - path: Keyboard/WTLibrimeBridge.m
+      - path: Vendor/RimeSharedSupport
+        type: folder
+        buildPhase: resources
+      - path: ../Sources/WeTypeReplicaCore
+      - path: ../iOSShared/WTSemanticGlyph.swift
+      - path: ../iOSOverlay
+      - path: ../HamsterBridge
+      - path: ../iOSServices
+        excludes:
+          - WTHostSpeechRecognitionService.swift
+          - WTVoiceLiveActivityController.swift
+    dependencies:
+      - framework: Vendor/LibrimeKit/Frameworks/librime.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/boost_atomic.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/boost_filesystem.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/boost_regex.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/boost_system.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/libglog.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/libleveldb.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/libmarisa.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/libopencc.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/libyaml-cpp.xcframework
+        embed: false
+      - sdk: libc++.tbd
+      - sdk: CoreFoundation.framework
+    entitlements:
+      path: Keyboard/Keyboard.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517.123
+        PRODUCT_NAME: HamsterKeyboard
+        INFOPLIST_FILE: Keyboard/Info.plist
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SWIFT_OBJC_BRIDGING_HEADER: Keyboard/WTLibrimeBridge.h
+        HEADER_SEARCH_PATHS: "$(inherited) $(SRCROOT)/Vendor/LibrimeKit/Frameworks/librime.xcframework/ios-arm64/Headers"
+        "EXCLUDED_ARCHS[sdk=iphonesimulator*]": arm64
+
+  ClawBaseShare:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: ../Sources/WeTypeReplicaCore
+      - path: ../iOSShared
+      - path: ../iOSExtensions/WTQuickSendShareView.swift
+      - path: ../iOSExtensions/WTQuickSendShareViewController.swift
+      - path: ../iOSServices/WTBonjourTransferService.swift
+    entitlements:
+      path: ../XcodeIntegration/Entitlements/Share.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517.share
+        PRODUCT_NAME: ClawBaseShare
+        INFOPLIST_FILE: ../XcodeIntegration/Plists/Share-Info.plist
+        APPLICATION_EXTENSION_API_ONLY: YES
+
+  ClawBaseWidget:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: ../iOSShared
+      - path: ../iOSExtensions/WTVoiceWidgetView.swift
+      - path: ../iOSExtensions/WTControlCenterButtons.swift
+      - path: ../iOSExtensions/WTWidgetBundle.swift
+    entitlements:
+      path: ../XcodeIntegration/Entitlements/Widget.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517.widget
+        PRODUCT_NAME: ClawBaseWidget
+        INFOPLIST_FILE: ../XcodeIntegration/Plists/Widget-Info.plist
+        APPLICATION_EXTENSION_API_ONLY: YES
+
+  ClawBaseVoiceActivity:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "16.1"
+    sources:
+      - path: ../Sources/WeTypeReplicaCore
+      - path: ../iOSShared
+      - path: ../iOSExtensions/WTVoiceLiveActivityWidget.swift
+    entitlements:
+      path: ../XcodeIntegration/Entitlements/VoiceActivity.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517.voiceactivity
+        PRODUCT_NAME: ClawBaseVoiceActivity
+        INFOPLIST_FILE: ../XcodeIntegration/Plists/VoiceActivity-Info.plist
+        APPLICATION_EXTENSION_API_ONLY: YES
