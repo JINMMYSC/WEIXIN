@@ -4,13 +4,70 @@ struct WTPhase2KeyboardRootView: View {
     @ObservedObject var runtime: WTKeyboardRuntime
 
     var body: some View {
-        VStack(spacing: 0) {
-            WTCandidateBar(runtime: runtime)
-            WTKeyboardCanvasView(layout: keyboardLayout, runtime: runtime)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        Group {
+            if runtime.state.panel == .inputModeSwitcher {
+                phase3InputModeSwitcher
+            } else {
+                VStack(spacing: 0) {
+                    WTCandidateBar(runtime: runtime)
+                    WTKeyboardCanvasView(layout: keyboardLayout, runtime: runtime)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(WTThemeColor353.keyboardBackground)
+    }
+
+    private var phase3InputModeSwitcher: some View {
+        VStack(spacing: 12) {
+            HStack {
+                Text("输入方式")
+                    .font(.headline)
+                Spacer()
+                Button("返回") {
+                    runtime.state.returnToKeyboard()
+                }
+                .buttonStyle(.plain)
+            }
+
+            HStack(spacing: 10) {
+                modeButton("九宫格拼音", .chinesePinyin9)
+                modeButton("26键拼音", .chinesePinyin26)
+            }
+            HStack(spacing: 10) {
+                modeButton("双拼", .doublePinyin)
+                modeButton("五笔86", .wubi)
+            }
+            HStack(spacing: 10) {
+                modeButton("笔画", .stroke)
+                modeButton("英文", .english26)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(14)
+    }
+
+    private func modeButton(_ title: String, _ mode: WTInputMode) -> some View {
+        Button {
+            runtime.chooseInputMode(mode)
+        } label: {
+            HStack(spacing: 8) {
+                Text(title)
+                    .font(.system(size: 16, weight: .medium))
+                Spacer(minLength: 4)
+                if runtime.state.inputMode == mode {
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 13, weight: .semibold))
+                }
+            }
+            .foregroundStyle(WTThemeColor353.primaryText)
+            .padding(.horizontal, 12)
+            .frame(maxWidth: .infinity, minHeight: 48)
+            .background(WTThemeColor353.normalKey)
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        }
+        .buttonStyle(.plain)
     }
 
     private var keyboardLayout: WTKeyboardLayout {
