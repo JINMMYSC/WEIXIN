@@ -8,6 +8,7 @@ public struct WTControlCenterView: View {
     public init(runtime: WTKeyboardRuntime) { self.runtime = runtime }
 
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 12), count: 4)
+    private let simplifiedPreferenceKey = "wt.script.simplified"
 
     public var body: some View {
         VStack(spacing: 0) {
@@ -164,9 +165,9 @@ public struct WTControlCenterView: View {
             runtime.state.back()
         case .traditional:
             let defaults = UserDefaults(suiteName: "group.7518554")
-            let current = (defaults?.object(forKey: WTSharedPreferenceKey.scriptSimplified) as? Bool) ?? true
+            let current = (defaults?.object(forKey: simplifiedPreferenceKey) as? Bool) ?? true
             let next = !current
-            defaults?.set(next, forKey: WTSharedPreferenceKey.scriptSimplified)
+            defaults?.set(next, forKey: simplifiedPreferenceKey)
             NotificationCenter.default.post(
                 name: Notification.Name("WTPhase3SimplifiedChanged"),
                 object: NSNumber(value: next)
