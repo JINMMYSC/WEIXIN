@@ -1,12 +1,14 @@
 import SwiftUI
 
-/// Compatibility wrapper retained so the existing ClawBase controller and verifier keep a stable
-/// root-view type while Phase 3 routes keyboard, emoji and input-mode surfaces through one shell.
-/// The measured surface still owns `WTLayouts353Resolved.t9Pinyin` and `WTCandidateBar(runtime: runtime)`.
+/// Compatibility wrapper retained so the ClawBase controller keeps its stable root type.
+/// Phase 3 now renders through the complete V14 panel router: the extracted keyboard geometry,
+/// candidate bar, Emoji, language switcher, number/symbol surfaces and the already migrated
+/// keyboard-control panels all share one observable runtime instead of silently falling back to
+/// the keyboard when a function key changes `state.panel`.
 struct WTPhase2KeyboardRootView: View {
     @ObservedObject var runtime: WTKeyboardRuntime
 
     var body: some View {
-        WTPhase3KeyboardSurface(runtime: runtime)
+        WTPanelRootView(runtime: runtime)
     }
 }
