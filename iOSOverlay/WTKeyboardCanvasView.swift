@@ -19,8 +19,10 @@ public struct WTKeyboardCanvasView: View {
             let contentHeight = layout.baseSize.height * sy
             let originX = (proxy.size.width - contentWidth) / 2 + proxy.size.width * runtime.keyboardAdjustment.horizontalOffset
             let originY = (proxy.size.height - contentHeight) / 2 + proxy.size.height * runtime.keyboardAdjustment.verticalOffset
+
             ZStack(alignment: .topLeading) {
                 WTThemeColor353.keyboardBackground
+
                 ForEach(layout.items, id: \.id) { item in
                     if let r = item.rect {
                         WTKeyCap(
@@ -40,6 +42,7 @@ public struct WTKeyboardCanvasView: View {
                         .zIndex(keyPopup?.keyID == item.id ? 40 : 0)
                     }
                 }
+
                 if let popup = keyPopup {
                     let keyWidth = popup.sourceRect.width * sx
                     let keyHeight = popup.sourceRect.height * sy
@@ -55,17 +58,18 @@ public struct WTKeyboardCanvasView: View {
                         .zIndex(45)
                         .allowsHitTesting(false)
                 }
+
                 if let popup = runtime.longPressPopup, let rect = popup.sourceRect {
                     WTLongPressPopupView(runtime: runtime, popup: popup)
                         .position(
-                            x: min(max(originX + (rect.x + rect.width / 2) * sx, 90), proxy.size.width - 90),
-                            y: originY + (rect.y - 26) * sy
+                            x: min(max(originX + (rect.x + rect.width / 2) * sx, 145), proxy.size.width - 145),
+                            y: originY + (rect.y - 28) * sy
                         )
                         .zIndex(50)
                 }
             }
         }
-        // Intentionally not clipped: the measured key popup rises above the 224pt key canvas.
+        // The original 3.5.3 key popup rises above the 224pt key canvas.
     }
 }
 
@@ -82,34 +86,39 @@ private struct WTKeyCap: View {
     @GestureState private var pressing = false
     @Environment(\.colorScheme) private var colorScheme
 
-    private var styleValues: [String: String] {
-        WTStyleCatalog353.values(for: item.style)
-    }
+    private var styleValues: [String: String] { WTStyleCatalog353.values(for: item.style) }
 
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: runtime.visualCalibration.keyCornerRadius, style: .continuous)
+            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                 .fill(backgroundColor(pressed: pressing))
                 .overlay(
-                    RoundedRectangle(cornerRadius: runtime.visualCalibration.keyCornerRadius, style: .continuous)
-                        .stroke(borderColor, lineWidth: 0.35)
+                    RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                        .stroke(borderColor, lineWidth: punctuationStripKey ? 0.15 : 0.35)
                 )
-                .shadow(color: shadowColor, radius: 0.5, y: 1)
-            VStack(spacing: 0) {
-                if isEmojiKey {
-                    WTToolIconView(tool: .emoji, tint: textColor)
-                } else {
+                .shadow(color: punctuationStripKey ? Color.clear : shadowColor, radius: 0.5, y: 1)
+
+            if isDeleteKey {
+                WTBasicGlyphView(.delete, tint: textColor, size: 25, lineWidth: 1.7)
+            } else if isShiftKey {
+                WTBasicGlyphView(.shift, tint: textColor, size: 26, lineWidth: 1.7)
+            } else if isLanguageKey {
+                languageLabel
+            } else if isEmojiKey {
+                WTToolIconView(tool: .emoji, tint: textColor)
+            } else {
+                VStack(spacing: 0) {
                     Text(displayTitle)
                         .font(.system(size: fontSize(item) * runtime.fontScale, weight: fontWeight))
                         .foregroundStyle(textColor)
                         .minimumScaleFactor(0.55)
                         .lineLimit(1)
-                }
-                if let subtitle = subtitleText, !subtitle.isEmpty, !isEmojiKey {
-                    Text(subtitle)
-                        .font(.system(size: subtitleFontSize))
-                        .foregroundStyle(secondaryTextColor)
-                        .lineLimit(1)
+                    if let subtitle = subtitleText, !subtitle.isEmpty {
+                        Text(subtitle)
+                            .font(.system(size: subtitleFontSize))
+                            .foregroundStyle(secondaryTextColor)
+                            .lineLimit(1)
+                    }
                 }
             }
         }
@@ -120,10 +129,32 @@ private struct WTKeyCap: View {
                 .onEnded { _ in
                     onTapPopupChanged(false, displayTitle)
                     runtime.performKeyFeedback(isDeleteKey)
-                    runtime.handle(item, gesture: .longPress)
+                    if item.id == "KEY_," {
+                        runtime.longPressPopup = .init(
+                            keyID: item.id,
+                            items: ["换行", "。", "？", "！", "@", "…"],
+                            defaultIndex: 1,
+                            sourceRect: item.rect
+                        )
+                    } else {
+                        runtime.handle(item, gesture: .longPress)
+                    }
                 }
         )
-        .accessibilityLabel(displayTitle)
+        .accessibilityLabel(isLanguageKey ? languageMarker + "英" : displayTitle)
+    }
+
+    private var languageLabel: some View {
+        ZStack {
+            Text(languageMarker)
+                .font(.system(size: 15, weight: .medium))
+                .foregroundStyle(textColor)
+                .offset(x: -5, y: -4)
+            Text("英")
+                .font(.system(size: 10, weight: .regular))
+                .foregroundStyle(secondaryTextColor)
+                .offset(x: 7, y: 7)
+        }
     }
 
     private var dragGesture: some Gesture {
@@ -150,21 +181,30 @@ private struct WTKeyCap: View {
     }
 
     private var shouldShowTapPopup: Bool {
-        guard (item.style ?? "").contains("T26_LETTER") else { return false }
+        guard (item.style ?? "").contains("T26_LETTER"), !punctuationStripKey else { return false }
         switch WTKeyActionResolver.action(for: item, gesture: .tap, state: runtime.state) {
         case .engineInput(let value), .directText(let value): return value.count == 1
         default: return false
         }
     }
 
-    private var isDeleteKey: Bool {
-        item.function == "delete" || item.id.uppercased().contains("DEL") || item.id.uppercased().contains("BACKSPACE")
+    private var cornerRadius: CGFloat {
+        punctuationStripKey ? 4 : CGFloat(runtime.visualCalibration.keyCornerRadius)
     }
 
+    private var punctuationStripKey: Bool { item.id.hasPrefix("WT353_T9_PUNCT_") }
+    private var isDeleteKey: Bool { item.function == "delete" || item.id.uppercased().contains("DEL") || item.id.uppercased().contains("BACKSPACE") }
+    private var isShiftKey: Bool { item.id == "KEY_SHIFT" || item.function == "shift" }
     private var isEmojiKey: Bool { item.function == "emoji" }
+    private var isLanguageKey: Bool { item.id == "KEY_CHANGE" || item.id == "KEY_ABC" || (item.style?.contains("STYLE_LANGSWITCH") == true) }
+    private var isReturnKey: Bool { item.id == "KEY_RETURN" || item.function == "return" || item.function == "newline" }
 
-    private var isReturnKey: Bool {
-        item.id == "KEY_RETURN" || item.function == "return" || item.function == "newline"
+    private var languageMarker: String {
+        switch runtime.state.inputMode {
+        case .doublePinyin: return "双"
+        case .wubi: return "五"
+        default: return "中"
+        }
     }
 
     private var displayTitle: String {
@@ -209,17 +249,9 @@ private struct WTKeyCap: View {
         return extractedColor(for: "TINT", fallback: fallback)
     }
 
-    private var secondaryTextColor: Color {
-        extractedColor(for: "STINT", fallback: WTThemeColor353.secondaryText)
-    }
-
-    private var borderColor: Color {
-        extractedColor(for: "BORDER", fallback: isGray ? WTThemeColor353.grayBorder : WTThemeColor353.normalBorder)
-    }
-
-    private var shadowColor: Color {
-        extractedColor(for: "SHADOW", fallback: WTThemeColor353.keyShadow)
-    }
+    private var secondaryTextColor: Color { extractedColor(for: "STINT", fallback: WTThemeColor353.secondaryText) }
+    private var borderColor: Color { extractedColor(for: "BORDER", fallback: isGray ? WTThemeColor353.grayBorder : WTThemeColor353.normalBorder) }
+    private var shadowColor: Color { extractedColor(for: "SHADOW", fallback: WTThemeColor353.keyShadow) }
 
     private var subtitleText: String? {
         guard let up = WTKeyActionResolver.variant(item.upInput, state: runtime.state), !up.isEmpty else { return nil }
@@ -227,9 +259,7 @@ private struct WTKeyCap: View {
     }
 
     private var subtitleFontSize: CGFloat {
-        if let raw = item.upFont ?? styleValues["UPFONT"], let size = numericFontSize(raw, stateAware: true) {
-            return size
-        }
+        if let raw = item.upFont ?? styleValues["UPFONT"], let size = numericFontSize(raw, stateAware: true) { return size }
         return CGFloat(WTTheme353.keySubtitleFontSize)
     }
 
@@ -248,24 +278,17 @@ private struct WTKeyCap: View {
 
     private func numericFontSize(_ raw: String, stateAware: Bool) -> CGFloat? {
         let selected = stateAware ? (WTKeyActionResolver.variant(raw, state: runtime.state) ?? raw) : raw
-        let components = selected.split(separator: ",").map(String.init)
-        for component in components.reversed() {
+        for component in selected.split(separator: ",").map(String.init).reversed() {
             let numeric = component.filter { $0.isNumber || $0 == "." }
             if let value = Double(numeric), value > 0 { return CGFloat(value) }
         }
         return nil
     }
 
-    /// style.ini mostly stores a light,dark pair directly (for example
-    /// `#FFFFFF,#BBBBBB66`). Rule-driven bracket arrays are mode/state expressions rather than
-    /// appearance pairs; those deliberately fall back to the existing state machine.
-    private func extractedColor(for key: String, fallback: Color) -> Color {
-        extractedColorIfSimple(for: key) ?? fallback
-    }
+    private func extractedColor(for key: String, fallback: Color) -> Color { extractedColorIfSimple(for: key) ?? fallback }
 
     private func extractedColorIfSimple(for key: String) -> Color? {
-        guard let raw = styleValues[key]?.trimmingCharacters(in: .whitespacesAndNewlines),
-              !raw.isEmpty, !raw.hasPrefix("[") else { return nil }
+        guard let raw = styleValues[key]?.trimmingCharacters(in: .whitespacesAndNewlines), !raw.isEmpty, !raw.hasPrefix("[") else { return nil }
         let parts = raw.split(separator: ",", omittingEmptySubsequences: false)
             .map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { $0.hasPrefix("#") }
@@ -281,10 +304,7 @@ private struct WTKeyTapPopupView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
                 .fill(WTChrome353.elevatedSurface)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .stroke(WTThemeColor353.normalBorder, lineWidth: 0.35)
-                )
+                .overlay(RoundedRectangle(cornerRadius: 8, style: .continuous).stroke(WTThemeColor353.normalBorder, lineWidth: 0.35))
                 .shadow(color: WTThemeColor353.keyShadow, radius: 2.2, y: 1.4)
             Text(title)
                 .font(.system(size: 29, weight: .regular))
@@ -298,21 +318,31 @@ private struct WTKeyTapPopupView: View {
 private struct WTLongPressPopupView: View {
     @ObservedObject var runtime: WTKeyboardRuntime
     let popup: WTLongPressPopupState
+
     var body: some View {
         HStack(spacing: 0) {
             ForEach(Array(popup.items.enumerated()), id: \.offset) { index, text in
-                Button { runtime.selectLongPressText(text) } label: {
+                Button {
+                    if text == "换行" {
+                        runtime.longPressPopup = nil
+                        runtime.submitReturn()
+                        runtime.refreshIMEContext()
+                    } else {
+                        runtime.selectLongPressText(text)
+                    }
+                } label: {
                     Text(text)
-                        .font(.system(size: 22))
-                        .foregroundStyle(.primary)
-                        .frame(width: 36, height: 44)
-                        .background(index == popup.defaultIndex ? Color.secondary.opacity(0.18) : Color.clear)
+                        .font(.system(size: 18, weight: .regular))
+                        .foregroundStyle(index == popup.defaultIndex ? Color.white : WTChrome353.primaryText)
+                        .frame(width: text == "换行" ? 58 : 42, height: 50)
+                        .background(index == popup.defaultIndex ? WTChrome353.accent : Color.clear)
                 }
+                .buttonStyle(.plain)
             }
         }
         .padding(.horizontal, 4)
         .background(WTChrome353.elevatedSurface)
-        .clipShape(RoundedRectangle(cornerRadius: runtime.visualCalibration.panelCornerRadius, style: .continuous))
-        .shadow(radius: 4, y: 2)
+        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .shadow(color: WTThemeColor353.keyShadow, radius: 4, y: 2)
     }
 }

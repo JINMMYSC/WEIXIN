@@ -3,6 +3,7 @@ import SwiftUI
 public enum WTBasicGlyph: Sendable {
     case chevronLeft, chevronRight, chevronUp, chevronDown
     case plus, minus, close, more, check, search
+    case shift, delete
 }
 
 /// Small independently drawn chrome glyphs. These replace generic SF Symbol placeholders in
@@ -36,12 +37,12 @@ public struct WTBasicGlyphView: View {
             case .chevronDown:
                 path.move(to: point(0.22, 0.38)); path.addLine(to: point(0.50, 0.64)); path.addLine(to: point(0.78, 0.38))
             case .plus:
-                path.move(to: point(0.50, 0.22)); path.addLine(to: point(0.50, 0.78));
+                path.move(to: point(0.50, 0.22)); path.addLine(to: point(0.50, 0.78))
                 path.move(to: point(0.22, 0.50)); path.addLine(to: point(0.78, 0.50))
             case .minus:
                 path.move(to: point(0.22, 0.50)); path.addLine(to: point(0.78, 0.50))
             case .close:
-                path.move(to: point(0.27, 0.27)); path.addLine(to: point(0.73, 0.73));
+                path.move(to: point(0.27, 0.27)); path.addLine(to: point(0.73, 0.73))
                 path.move(to: point(0.73, 0.27)); path.addLine(to: point(0.27, 0.73))
             case .more:
                 for x in [CGFloat(0.27), 0.50, 0.73] {
@@ -53,6 +54,26 @@ public struct WTBasicGlyphView: View {
             case .search:
                 path.addEllipse(in: CGRect(x: point(0.18, 0.18).x, y: point(0.18, 0.18).y, width: s * 0.48, height: s * 0.48))
                 path.move(to: point(0.62, 0.62)); path.addLine(to: point(0.82, 0.82))
+            case .shift:
+                path.move(to: point(0.18, 0.52))
+                path.addLine(to: point(0.50, 0.20))
+                path.addLine(to: point(0.82, 0.52))
+                path.addLine(to: point(0.64, 0.52))
+                path.addLine(to: point(0.64, 0.80))
+                path.addLine(to: point(0.36, 0.80))
+                path.addLine(to: point(0.36, 0.52))
+                path.closeSubpath()
+            case .delete:
+                path.move(to: point(0.18, 0.50))
+                path.addLine(to: point(0.36, 0.28))
+                path.addLine(to: point(0.82, 0.28))
+                path.addQuadCurve(to: point(0.88, 0.34), control: point(0.88, 0.28))
+                path.addLine(to: point(0.88, 0.66))
+                path.addQuadCurve(to: point(0.82, 0.72), control: point(0.88, 0.72))
+                path.addLine(to: point(0.36, 0.72))
+                path.closeSubpath()
+                path.move(to: point(0.52, 0.40)); path.addLine(to: point(0.72, 0.60))
+                path.move(to: point(0.72, 0.40)); path.addLine(to: point(0.52, 0.60))
             }
             context.stroke(path, with: .color(tint), style: StrokeStyle(lineWidth: lineWidth, lineCap: .round, lineJoin: .round))
         }

@@ -11,9 +11,9 @@ public enum WT353RuntimeLayoutGeometry {
         switch mode {
         case .chinesePinyin26, .english26, .doublePinyin, .wubi:
             return resolvedT26(layout)
-        case .chinesePinyin9:
+        case .chinesePinyin9, .stroke:
             return resolvedT9(layout)
-        case .stroke, .handwriting:
+        case .handwriting:
             return layout
         }
     }

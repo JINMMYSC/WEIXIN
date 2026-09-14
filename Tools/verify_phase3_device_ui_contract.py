@@ -18,6 +18,8 @@ def main() -> int:
     geometry = text("Sources/WeTypeReplicaCore/WT353RuntimeLayoutGeometry.swift")
     panel = text("iOSOverlay/WTPanelRootView.swift")
     candidate = text("iOSOverlay/WTCandidateBar.swift")
+    canvas = text("iOSOverlay/WTKeyboardCanvasView.swift")
+    glyph = text("iOSOverlay/WTBasicGlyphView.swift")
 
     for token in (
         '"KEY_EMOTION", "KEY_SWITCH", "KEY_At"',
@@ -25,10 +27,12 @@ def main() -> int:
         '"KEY_SPACE": WTRect(x: 127, y: 173, width: 147, height: 46)',
         '"KEY_CHANGE": WTRect(x: 280, y: 173, width: 46, height: 46)',
         '"KEY_RETURN": WTRect(x: 332, y: 173, width: 77, height: 46)',
+        'case .chinesePinyin9, .stroke:',
         '"VIEW_LIST", "KEY_SWITCH", "KEY_EMOTION"',
         '"KEY_SPACE": WTRect(x: 136, y: 171, width: 142, height: 50)',
         '"KEY_RETURN": WTRect(x: 341, y: 115, width: 68, height: 106)',
         '["，", "。", "！", "？"]',
+        'style: "STYLE_GRAY"',
     ):
         require(token in geometry, f"3.5.3 runtime geometry missing: {token}")
 
@@ -48,7 +52,18 @@ def main() -> int:
     require("index == 0 ? WTChrome353.elevatedSurface" in candidate,
             "first candidate selected card missing")
 
-    print("Phase 3 device-visible UI contract: PASS (resolved T26/T9 geometry + idle/candidate chrome)")
+    for token in (
+        'items: ["换行", "。", "？", "！", "@", "…"]',
+        'case .doublePinyin: return "双"',
+        'case .wubi: return "五"',
+        'WTBasicGlyphView(.delete',
+        'WTBasicGlyphView(.shift',
+        'runtime.submitReturn()',
+    ):
+        require(token in canvas, f"device-visible key chrome missing: {token}")
+    require("case shift, delete" in glyph, "clean-room shift/delete glyphs missing")
+
+    print("Phase 3 device-visible UI contract: PASS (resolved T26/T9/stroke geometry + candidate/idle chrome + key glyphs)")
     return 0
 
 
