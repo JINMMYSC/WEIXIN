@@ -15,7 +15,7 @@ concurrency:
 jobs:
   sign:
     name: Build, dual-profile sign, validate ClawBase IPA
-    runs-on: macos-15
+    runs-on: macos-14
     timeout-minutes: 45
     env:
       WT_SIGNING_P12_BASE64: ${{ secrets.WT_SIGNING_P12_BASE64 }}
