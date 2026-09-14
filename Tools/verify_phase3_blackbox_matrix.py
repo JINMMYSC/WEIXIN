@@ -32,9 +32,16 @@ def main() -> int:
         "inspect_composition", "inspect_candidates", "page_next", "page_previous",
         "select_0", "inspect_commit", "backspace", "space", "return", "reset",
         "set_simplified", "set_traditional", "enable_fuzzy_zh_z", "enable_fuzzy_l_n",
-        "learn_user_phrase",
+        "learn_user_phrase", "set_wubi86", "set_wubi98",
     ):
         require(action in all_actions, f"missing black-box action coverage: {action}")
+
+    wubi86 = [case for case in cases if "set_wubi86" in case.actions]
+    wubi98 = [case for case in cases if "set_wubi98" in case.actions]
+    require(len(wubi86) >= 1, "Wubi86 must have an explicit schema-selection stimulus")
+    require(len(wubi98) >= 1, "Wubi98 must have an explicit schema-selection stimulus")
+    require(all(case.reference_required for case in wubi86 + wubi98),
+            "86/98 Wubi parity cases must require real WeChat reference observations")
 
     comparator = (ROOT / "Tools" / "compare_phase3_blackbox.py").read_text(encoding="utf-8")
     require("case.case_id for case in cases" in comparator,
