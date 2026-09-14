@@ -1,0 +1,213 @@
+name: Phase 13 Final 3.5.3 IPA CI
+
+on:
+  push:
+    branches:
+      - work/v14-phase13-static-delta
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase13-final-ipa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  final:
+    name: Patch, verify, build full topology, sign installable IPA
+    runs-on: macos-15
+    timeout-minutes: 60
+    env:
+      WT_SIGNING_P12_BASE64: ${{ secrets.WT_SIGNING_P12_BASE64 }}
+      WT_SIGNING_P12_PASSWORD: ${{ secrets.WT_SIGNING_P12_PASSWORD }}
+      WT_HOST_PROFILE_BASE64: ${{ secrets.WT_HOST_PROFILE_BASE64 }}
+      WT_KEYBOARD_PROFILE_BASE64: ${{ secrets.WT_KEYBOARD_PROFILE_BASE64 }}
+      WT_SHARE_PROFILE_BASE64: ${{ secrets.WT_SHARE_PROFILE_BASE64 }}
+      WT_WIDGET_PROFILE_BASE64: ${{ secrets.WT_WIDGET_PROFILE_BASE64 }}
+      WT_VOICE_ACTIVITY_PROFILE_BASE64: ${{ secrets.WT_VOICE_ACTIVITY_PROFILE_BASE64 }}
+
+    steps:
+      - name: Check out Phase 13 branch
+        uses: actions/checkout@v4
+
+      - name: Report runner and Xcode image
+        run: |
+          sw_vers
+          xcodebuild -version
+          swift --version
+          uname -m
+
+      - name: Validate signing material presence
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          [[ -n "$WT_SIGNING_P12_BASE64" ]] || { echo "Missing required signing identity" >&2; exit 1; }
+          [[ -n "$WT_SIGNING_P12_PASSWORD" ]] || { echo "Missing required signing password" >&2; exit 1; }
+          [[ -n "$WT_HOST_PROFILE_BASE64" ]] || { echo "Missing required Host profile" >&2; exit 1; }
+          [[ -n "$WT_KEYBOARD_PROFILE_BASE64" ]] || { echo "Missing required Keyboard profile" >&2; exit 1; }
+          count=0
+          for v in "$WT_SHARE_PROFILE_BASE64" "$WT_WIDGET_PROFILE_BASE64" "$WT_VOICE_ACTIVITY_PROFILE_BASE64"; do
+            [[ -n "$v" ]] && count=$((count + 1))
+          done
+          [[ "$count" == "0" || "$count" == "3" ]] || { echo "Share/Widget/VoiceActivity profiles must be supplied as one complete set" >&2; exit 1; }
+          if [[ "$count" == "3" ]]; then
+            echo "Full four-extension signing profiles: PRESENT"
+          else
+            echo "Full four-extension signing profiles: NOT PRESENT; signed artifact will use validated Host+Keyboard engineering mode"
+          fi
+
+      - name: Install XcodeGen
+        run: |
+          if ! command -v xcodegen >/dev/null 2>&1; then brew install xcodegen; fi
+
+      - name: Apply Phase 13 release source refinements
+        run: python3 Tools/apply_phase13_release_patch.py
+
+      - name: Verify Phase 13 final static and release contract
+        run: python3 Tools/verify_phase13_final.py
+
+      - name: Verify Phase 3 black-box matrix
+        run: python3 Tools/verify_phase3_blackbox_matrix.py
+      - name: Verify Phase 3 functional completion
+        run: python3 Tools/verify_phase3_completion.py
+      - name: Verify Phase 3 segmentation capability
+        run: python3 Tools/verify_phase3_segmentation_contract.py
+      - name: Verify Phase 3 Wubi
+        run: python3 Tools/verify_phase3_wubi_contract.py
+      - name: Verify Phase 3 stroke
+        run: python3 Tools/verify_phase3_stroke_contract.py
+      - name: Verify Phase 3 T9 and candidate chain
+        run: python3 Tools/verify_phase3_input_chain.py
+      - name: Verify Host settings surface
+        run: python3 Tools/verify_phase3_host_surface.py
+      - name: Validate extracted layout names
+        run: python3 Tools/validate_phase3_layout_names.py
+      - name: Verify key style rendering contract
+        run: python3 Tools/verify_ui_style_tokens.py
+      - name: Verify 79-case UI structural coverage
+        run: python3 Tools/verify_ui_79_alignment.py
+      - name: Verify device-visible 3.5.3 geometry
+        run: python3 Tools/verify_phase3_device_ui_contract.py
+      - name: Verify Phase 4 panels
+        run: python3 Tools/verify_phase4_completion.py
+      - name: Verify Phase 5 extensions/App Group/memory
+        run: python3 Tools/verify_phase5_completion.py
+      - name: Report Phase 6 same-device evidence
+        run: python3 Tools/verify_phase6_evidence.py --json artifacts/phase6/evidence-report.json
+      - name: Verify Phase 7 engineering stability
+        run: python3 Tools/verify_phase7_release.py
+      - name: Verify observed 3.5.3 SetupMain
+        run: python3 Tools/verify_phase9_host_parity.py
+      - name: Verify Phase 11 fail-closed reference tooling
+        run: |
+          python3 -m py_compile Tools/analyze_phase11_ime_delta.py
+          python3 Tools/phase3_capture_template.py --kind reference --output artifacts/phase11/reference-template.json
+          python3 Tools/phase3_capture_template.py --kind actual --output artifacts/phase11/replica-template.json
+          python3 Tools/analyze_phase11_ime_delta.py artifacts/phase11/reference-template.json artifacts/phase11/replica-template.json --output artifacts/phase11/delta.json
+          python3 - <<'PY'
+          import json
+          p=json.load(open('artifacts/phase11/delta.json'))
+          assert p['counts']['uncaptured_reference'] > 0
+          assert p['strict_ready'] is False
+          print('Phase 11 reference pipeline: PASS (uncaptured original behavior is never fabricated)')
+          PY
+
+      - name: Run Core, gesture and replay Swift tests
+        run: swift test --parallel
+
+      - name: Build and validate unsigned full four-extension package
+        run: |
+          chmod +x ClawBase/ci_build_unsigned.sh ClawBase/ci_prepare_librimekit.sh
+          ClawBase/ci_build_unsigned.sh
+
+      - name: Upload full four-extension unsigned topology IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: WeChatInput-Replica-3.5.3-Phase13-full-unsigned-${{ github.run_attempt }}
+          path: artifacts/claw-base/ClawBase-3.5.3-3.5.3-full-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Prepare ephemeral signing identity and profiles
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          SIGNING_DIR="$RUNNER_TEMP/clawbase-signing"
+          KEYCHAIN_PATH="$RUNNER_TEMP/clawbase-signing.keychain-db"
+          KEYCHAIN_PASSWORD="$(openssl rand -hex 24)"
+          rm -rf "$SIGNING_DIR" "$KEYCHAIN_PATH"
+          mkdir -p "$SIGNING_DIR"
+          chmod 700 "$SIGNING_DIR"
+          printf '%s' "$WT_SIGNING_P12_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/signing.p12"
+          printf '%s' "$WT_HOST_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/host.mobileprovision"
+          printf '%s' "$WT_KEYBOARD_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/keyboard.mobileprovision"
+          chmod 600 "$SIGNING_DIR/signing.p12" "$SIGNING_DIR/host.mobileprovision" "$SIGNING_DIR/keyboard.mobileprovision"
+
+          extension_count=0
+          for v in "$WT_SHARE_PROFILE_BASE64" "$WT_WIDGET_PROFILE_BASE64" "$WT_VOICE_ACTIVITY_PROFILE_BASE64"; do
+            [[ -n "$v" ]] && extension_count=$((extension_count + 1))
+          done
+          if [[ "$extension_count" == "3" ]]; then
+            printf '%s' "$WT_SHARE_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/share.mobileprovision"
+            printf '%s' "$WT_WIDGET_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/widget.mobileprovision"
+            printf '%s' "$WT_VOICE_ACTIVITY_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/voiceactivity.mobileprovision"
+            chmod 600 "$SIGNING_DIR/share.mobileprovision" "$SIGNING_DIR/widget.mobileprovision" "$SIGNING_DIR/voiceactivity.mobileprovision"
+            echo "WT_SHARE_PROFILE_PATH=$SIGNING_DIR/share.mobileprovision" >> "$GITHUB_ENV"
+            echo "WT_WIDGET_PROFILE_PATH=$SIGNING_DIR/widget.mobileprovision" >> "$GITHUB_ENV"
+            echo "WT_VOICE_ACTIVITY_PROFILE_PATH=$SIGNING_DIR/voiceactivity.mobileprovision" >> "$GITHUB_ENV"
+            echo "WT_REQUIRE_FULL_PACKAGE=1" >> "$GITHUB_ENV"
+          else
+            echo "WT_REQUIRE_FULL_PACKAGE=0" >> "$GITHUB_ENV"
+          fi
+
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security import "$SIGNING_DIR/signing.p12" -k "$KEYCHAIN_PATH" -P "$WT_SIGNING_P12_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH" >/dev/null
+          security list-keychains -d user -s "$KEYCHAIN_PATH"
+          SIGNING_IDENTITY="$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" | awk '/[0-9A-Fa-f]{40}/ {print $2; exit}')"
+          [[ -n "$SIGNING_IDENTITY" ]] || { echo "No usable codesigning identity was imported" >&2; exit 1; }
+          echo "WT_SIGNING_IDENTITY=$SIGNING_IDENTITY" >> "$GITHUB_ENV"
+          echo "WT_SIGNING_DIR=$SIGNING_DIR" >> "$GITHUB_ENV"
+          echo "WT_KEYCHAIN_PATH=$KEYCHAIN_PATH" >> "$GITHUB_ENV"
+          echo "WT_HOST_PROFILE_PATH=$SIGNING_DIR/host.mobileprovision" >> "$GITHUB_ENV"
+          echo "WT_KEYBOARD_PROFILE_PATH=$SIGNING_DIR/keyboard.mobileprovision" >> "$GITHUB_ENV"
+
+      - name: Sign and validate installable IPA
+        shell: bash
+        run: |
+          chmod +x ClawBase/ci_sign_and_validate.sh
+          ClawBase/ci_sign_and_validate.sh
+
+      - name: Upload signed installable IPA
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: WeChatInput-Replica-3.5.3-Phase13-signed-${{ github.run_attempt }}
+          path: artifacts/claw-base/ClawBase-3.5.3-3.5.3-signed.ipa
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload validation logs and evidence reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: WeChatInput-Replica-3.5.3-Phase13-validation-${{ github.run_attempt }}
+          path: |
+            artifacts/claw-base/logs/
+            artifacts/phase6/evidence-report.json
+            artifacts/phase11/
+            artifacts/phase13/final-readiness.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Destroy ephemeral signing material
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          if [[ -n "${WT_KEYCHAIN_PATH:-}" ]]; then security delete-keychain "$WT_KEYCHAIN_PATH" 2>/dev/null || true; fi
+          if [[ -n "${WT_SIGNING_DIR:-}" ]]; then rm -rf "$WT_SIGNING_DIR"; else rm -rf "$RUNNER_TEMP/clawbase-signing"; fi
+          rm -f "$RUNNER_TEMP/clawbase-signing.keychain-db"
