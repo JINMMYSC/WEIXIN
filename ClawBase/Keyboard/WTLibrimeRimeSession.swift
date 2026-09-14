@@ -3,9 +3,15 @@ import Foundation
 /// Real Phase 3 librime session used by Release builds.
 final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     private static let appGroupID = "group.7518554"
-    private static let simplifiedKey = "phase3.simplifiedChinese"
-    private static let fuzzyRetroflexKey = "phase3.fuzzy.retroflexInitials"
-    private static let fuzzyNasalLateralKey = "phase3.fuzzy.nasalLateral"
+    private static let simplifiedKey = "wt.script.simplified"
+    private static let legacySimplifiedKey = "phase3.simplifiedChinese"
+    private static let fuzzyMasterKey = "wt.pinyin.blur"
+    private static let fuzzyZZhKey = "wt.fuzzy.z_zh"
+    private static let fuzzyCChKey = "wt.fuzzy.c_ch"
+    private static let fuzzySShKey = "wt.fuzzy.s_sh"
+    private static let fuzzyNLKey = "wt.fuzzy.n_l"
+    private static let legacyFuzzyRetroflexKey = "phase3.fuzzy.retroflexInitials"
+    private static let legacyFuzzyNasalLateralKey = "phase3.fuzzy.nasalLateral"
 
     /// Rime deploys schemas listed by default.yaml plus the user's deterministic overlay.
     /// All entries here are CLAW-owned schema wrappers or exact pinned public Rime schemas.
@@ -34,9 +40,15 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     init() {
         let preferences = UserDefaults(suiteName: Self.appGroupID)
         self.preferences = preferences
-        self.simplifiedChinese = (preferences?.object(forKey: Self.simplifiedKey) as? Bool) ?? true
-        self.fuzzyRetroflexInitials = preferences?.bool(forKey: Self.fuzzyRetroflexKey) ?? false
-        self.fuzzyNasalLateral = preferences?.bool(forKey: Self.fuzzyNasalLateralKey) ?? false
+        self.simplifiedChinese = Self.boolPreference(
+            preferences,
+            primary: Self.simplifiedKey,
+            fallback: Self.legacySimplifiedKey,
+            defaultValue: true
+        )
+        let fuzzy = Self.loadFuzzyPreferences(preferences)
+        self.fuzzyRetroflexInitials = fuzzy.retroflex
+        self.fuzzyNasalLateral = fuzzy.nasalLateral
 
         let fileManager = FileManager.default
         let bundle = Bundle.main
@@ -97,6 +109,7 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
 
     func wtApplyModeDescriptor(_ descriptor: WTRimeModeDescriptor, logicalMode mode: WTInputMode) {
         logicalMode = mode
+        reloadSharedPreferences()
         bridge.reset()
 
         if let requested = descriptor.schemaID, !requested.isEmpty {
@@ -121,18 +134,27 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     func wtSetSimplifiedChinese(_ simplified: Bool) {
         simplifiedChinese = simplified
         preferences?.set(simplified, forKey: Self.simplifiedKey)
+        preferences?.set(simplified, forKey: Self.legacySimplifiedKey)
         applyScriptPreference(for: logicalMode)
         refresh()
     }
 
     func wtSetFuzzyPinyin(_ option: WTFuzzyPinyinOption, enabled: Bool) {
+        preferences?.set(true, forKey: Self.fuzzyMasterKey)
         switch option {
         case .retroflexInitials:
             fuzzyRetroflexInitials = enabled
-            preferences?.set(enabled, forKey: Self.fuzzyRetroflexKey)
+            preferences?.set(enabled, forKey: Self.legacyFuzzyRetroflexKey)
+            // The adapter-level option represents the three WeType retroflex toggles as one
+            // black-box action. The Host settings can still persist the three keys independently;
+            // loadFuzzyPreferences() ORs them for the currently supported public-Rime profile.
+            preferences?.set(enabled, forKey: Self.fuzzyZZhKey)
+            preferences?.set(enabled, forKey: Self.fuzzyCChKey)
+            preferences?.set(enabled, forKey: Self.fuzzySShKey)
         case .nasalLateral:
             fuzzyNasalLateral = enabled
-            preferences?.set(enabled, forKey: Self.fuzzyNasalLateralKey)
+            preferences?.set(enabled, forKey: Self.legacyFuzzyNasalLateralKey)
+            preferences?.set(enabled, forKey: Self.fuzzyNLKey)
         }
         guard logicalMode == .chinesePinyin26 else { return }
         bridge.reset()
@@ -170,6 +192,18 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         snapshotStorage = bridge.snapshot()
     }
 
+    private func reloadSharedPreferences() {
+        simplifiedChinese = Self.boolPreference(
+            preferences,
+            primary: Self.simplifiedKey,
+            fallback: Self.legacySimplifiedKey,
+            defaultValue: simplifiedChinese
+        )
+        let fuzzy = Self.loadFuzzyPreferences(preferences)
+        fuzzyRetroflexInitials = fuzzy.retroflex
+        fuzzyNasalLateral = fuzzy.nasalLateral
+    }
+
     private func normalizedInput(_ input: String) -> String {
         guard logicalMode == .chinesePinyin9 else { return input.lowercased() }
         if let digit = Self.t9GroupToDigit[input.uppercased()] { return digit }
@@ -195,6 +229,31 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         case .english26, .wubi, .stroke, .handwriting:
             break
         }
+    }
+
+    private static func boolPreference(
+        _ defaults: UserDefaults?,
+        primary: String,
+        fallback: String,
+        defaultValue: Bool
+    ) -> Bool {
+        if let value = defaults?.object(forKey: primary) as? Bool { return value }
+        if let value = defaults?.object(forKey: fallback) as? Bool { return value }
+        return defaultValue
+    }
+
+    private static func loadFuzzyPreferences(_ defaults: UserDefaults?) -> (retroflex: Bool, nasalLateral: Bool) {
+        let master = defaults?.object(forKey: fuzzyMasterKey) as? Bool
+        let configuredRetroflex = [fuzzyZZhKey, fuzzyCChKey, fuzzySShKey]
+            .contains { defaults?.object(forKey: $0) as? Bool == true }
+        let configuredNL = defaults?.object(forKey: fuzzyNLKey) as? Bool == true
+        let legacyRetroflex = defaults?.object(forKey: legacyFuzzyRetroflexKey) as? Bool ?? false
+        let legacyNL = defaults?.object(forKey: legacyFuzzyNasalLateralKey) as? Bool ?? false
+        let enabledByMaster = master ?? true
+        return (
+            enabledByMaster && (configuredRetroflex || legacyRetroflex),
+            enabledByMaster && (configuredNL || legacyNL)
+        )
     }
 
     private static func stagePhase3DefaultCustomization(in userURL: URL) {
