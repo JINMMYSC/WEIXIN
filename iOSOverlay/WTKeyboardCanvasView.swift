@@ -85,6 +85,10 @@ private struct WTKeyCap: View {
     let onTapPopupChanged: (Bool, String) -> Void
     @GestureState private var pressing = false
     @Environment(\.colorScheme) private var colorScheme
+    @State private var deleteGestureActive = false
+    @State private var deleteDeletedSteps = 0
+    @State private var deleteClearArmed = false
+    @State private var deleteRepeatTask: Task<Void, Never>?
 
     private var styleValues: [String: String] { WTStyleCatalog353.values(for: item.style) }
 
@@ -121,6 +125,24 @@ private struct WTKeyCap: View {
                     }
                 }
             }
+
+            if isDeleteKey && deleteClearArmed {
+                HStack(spacing: 6) {
+                    WTBasicGlyphView(.delete, tint: WTChrome353.primaryText, size: 15, lineWidth: 1.4)
+                    Text("上滑清空")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(WTChrome353.primaryText)
+                }
+                .padding(.horizontal, 10)
+                .frame(height: 34)
+                .background(WTChrome353.elevatedSurface)
+                .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+                .shadow(color: WTThemeColor353.keyShadow, radius: 2.5, y: 1.5)
+                .offset(x: -42, y: -49)
+                .transition(.opacity.combined(with: .scale(scale: 0.96, anchor: .bottomTrailing)))
+                .zIndex(90)
+                .allowsHitTesting(false)
+            }
         }
         .contentShape(Rectangle())
         .gesture(dragGesture)
@@ -128,7 +150,12 @@ private struct WTKeyCap: View {
             LongPressGesture(minimumDuration: 0.36, maximumDistance: 14)
                 .onEnded { _ in
                     onTapPopupChanged(false, displayTitle)
-                    runtime.performKeyFeedback(isDeleteKey)
+                    if isDeleteKey {
+                        beginDeleteGestureIfNeeded()
+                        startRapidDelete()
+                        return
+                    }
+                    runtime.performKeyFeedback(false)
                     if item.id == "KEY_," {
                         runtime.longPressPopup = .init(
                             keyID: item.id,
@@ -141,6 +168,7 @@ private struct WTKeyCap: View {
                     }
                 }
         )
+        .onDisappear { stopRapidDelete() }
         .accessibilityLabel(isLanguageKey ? languageMarker + "英" : displayTitle)
     }
 
@@ -160,14 +188,25 @@ private struct WTKeyCap: View {
     private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 0)
             .updating($pressing) { _, state, _ in state = true }
-            .onChanged { _ in
+            .onChanged { value in
+                if isDeleteKey {
+                    beginDeleteGestureIfNeeded()
+                    updateDeleteGesture(value)
+                    return
+                }
                 guard shouldShowTapPopup, runtime.longPressPopup?.keyID != item.id else { return }
                 onTapPopupChanged(true, displayTitle)
             }
             .onEnded { value in
                 onTapPopupChanged(false, displayTitle)
                 if runtime.longPressPopup?.keyID == item.id { return }
-                runtime.performKeyFeedback(isDeleteKey)
+
+                if isDeleteKey {
+                    finishDeleteGesture(value)
+                    return
+                }
+
+                runtime.performKeyFeedback(false)
                 let dx = value.translation.width
                 let dy = value.translation.height
                 if abs(dy) > abs(dx), dy < -18 {
@@ -178,6 +217,88 @@ private struct WTKeyCap: View {
                     runtime.handle(item, gesture: .tap)
                 }
             }
+    }
+
+    private func beginDeleteGestureIfNeeded() {
+        guard !deleteGestureActive else { return }
+        deleteGestureActive = true
+        deleteDeletedSteps = 0
+        deleteClearArmed = false
+        WTDeleteGestureBridge.begin(runtime)
+    }
+
+    private func updateDeleteGesture(_ value: DragGesture.Value) {
+        let dx = value.translation.width
+        let dy = value.translation.height
+        let clear = dy < -28 && abs(dy) > abs(dx) * 0.72
+        if clear != deleteClearArmed {
+            withAnimation(.easeOut(duration: 0.10)) { deleteClearArmed = clear }
+        }
+        guard !clear else { return }
+
+        // The 3.5.3 tutorial demonstrates distance-based deletion with rightward restoration.
+        // One step per ~22pt makes the behavior deterministic across device scale because SwiftUI
+        // reports gesture translation in points.
+        let targetSteps: Int
+        if dx < -10, abs(dx) >= abs(dy) {
+            targetSteps = min(24, max(0, Int((-dx - 10) / 22) + 1))
+        } else if abs(dx) >= abs(dy) {
+            targetSteps = 0
+        } else {
+            targetSteps = deleteDeletedSteps
+        }
+
+        while deleteDeletedSteps < targetSteps {
+            WTDeleteGestureBridge.deleteStep(runtime)
+            runtime.performKeyFeedback(true)
+            deleteDeletedSteps += 1
+        }
+        while deleteDeletedSteps > targetSteps {
+            WTDeleteGestureBridge.restoreStep(runtime)
+            runtime.performKeyFeedback(false)
+            deleteDeletedSteps -= 1
+        }
+    }
+
+    private func finishDeleteGesture(_ value: DragGesture.Value) {
+        stopRapidDelete()
+        let dx = value.translation.width
+        let dy = value.translation.height
+        let shouldClear = deleteClearArmed || (dy < -28 && abs(dy) > abs(dx) * 0.72)
+
+        if shouldClear {
+            WTDeleteGestureBridge.clear(runtime)
+            runtime.performKeyFeedback(true)
+        } else if deleteDeletedSteps == 0 && abs(dx) < 10 && abs(dy) < 10 {
+            runtime.performKeyFeedback(true)
+            runtime.handle(item, gesture: .tap)
+        }
+
+        WTDeleteGestureBridge.end(runtime)
+        deleteGestureActive = false
+        deleteDeletedSteps = 0
+        deleteClearArmed = false
+    }
+
+    private func startRapidDelete() {
+        stopRapidDelete()
+        runtime.performKeyFeedback(true)
+        WTDeleteGestureBridge.deleteStep(runtime)
+        deleteDeletedSteps += 1
+        deleteRepeatTask = Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 110_000_000)
+            while !Task.isCancelled {
+                WTDeleteGestureBridge.deleteStep(runtime)
+                runtime.performKeyFeedback(true)
+                deleteDeletedSteps += 1
+                try? await Task.sleep(nanoseconds: 78_000_000)
+            }
+        }
+    }
+
+    private func stopRapidDelete() {
+        deleteRepeatTask?.cancel()
+        deleteRepeatTask = nil
     }
 
     private var shouldShowTapPopup: Bool {
