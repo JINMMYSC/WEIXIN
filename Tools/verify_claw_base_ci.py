@@ -11,6 +11,13 @@ KEYBOARD_ENTITLEMENTS = ROOT / "ClawBase" / "Keyboard" / "Keyboard.entitlements"
 CONTROLLER = ROOT / "ClawBase" / "Keyboard" / "HamsterKeyboardInputViewController.swift"
 PHASE2_ROOT = ROOT / "ClawBase" / "Keyboard" / "WTPhase2KeyboardRootView.swift"
 PHASE3_SMOKE = ROOT / "ClawBase" / "Keyboard" / "WTPhase3AdapterSmokeSession.swift"
+REAL_SESSION = ROOT / "ClawBase" / "Keyboard" / "WTLibrimeRimeSession.swift"
+REAL_BRIDGE_H = ROOT / "ClawBase" / "Keyboard" / "WTLibrimeBridge.h"
+REAL_BRIDGE_M = ROOT / "ClawBase" / "Keyboard" / "WTLibrimeBridge.m"
+PIN_SCRIPT = ROOT / "ClawBase" / "ci_prepare_librimekit.sh"
+PINYIN26_SCHEMA = ROOT / "ClawBase" / "RimeSchemas" / "claw_pinyin26.schema.yaml"
+PINYIN9_SCHEMA = ROOT / "ClawBase" / "RimeSchemas" / "claw_pinyin9.schema.yaml"
+BACKEND_PROFILE = ROOT / "Sources" / "WeTypeReplicaCore" / "InputModeBackendProfile.swift"
 ADAPTER = ROOT / "HamsterBridge" / "WTHamsterRimeSessionAdapter.swift"
 ADAPTER_TEMPLATE = ROOT / "HamsterBridge" / "WTHamsterAdapterTemplate.swift"
 BUILD_SCRIPT = ROOT / "ClawBase" / "ci_build_unsigned.sh"
@@ -38,6 +45,13 @@ def main() -> int:
         CONTROLLER,
         PHASE2_ROOT,
         PHASE3_SMOKE,
+        REAL_SESSION,
+        REAL_BRIDGE_H,
+        REAL_BRIDGE_M,
+        PIN_SCRIPT,
+        PINYIN26_SCHEMA,
+        PINYIN9_SCHEMA,
+        BACKEND_PROFILE,
         ADAPTER,
         ADAPTER_TEMPLATE,
         KEYBOARD_PLIST,
@@ -53,7 +67,10 @@ def main() -> int:
     controller = CONTROLLER.read_text(encoding="utf-8")
     phase2_root = PHASE2_ROOT.read_text(encoding="utf-8")
     phase3_smoke = PHASE3_SMOKE.read_text(encoding="utf-8")
-    adapter = ADAPTER.read_text(encoding="utf-8")
+    real_session = REAL_SESSION.read_text(encoding="utf-8")
+    real_bridge = REAL_BRIDGE_M.read_text(encoding="utf-8")
+    pin_script = PIN_SCRIPT.read_text(encoding="utf-8")
+    backend_profile = BACKEND_PROFILE.read_text(encoding="utf-8")
     build_script = BUILD_SCRIPT.read_text(encoding="utf-8")
     sign_script = SIGN_SCRIPT.read_text(encoding="utf-8")
     workflow = WORKFLOW.read_text(encoding="utf-8")
@@ -68,10 +85,13 @@ def main() -> int:
     require(project.count("type: application") == 1, "expected one Host target")
     require(project.count("type: app-extension") == 1, "expected one Keyboard target")
 
-    # Phase 2 T9 migration plus Phase 3 adapter-smoke path.
+    # Phase 2 UI plus Phase 3 real-engine boundary.
     expected_sources = (
         "Keyboard/WTPhase2KeyboardRootView.swift",
         "Keyboard/WTPhase3AdapterSmokeSession.swift",
+        "Keyboard/WTLibrimeRimeSession.swift",
+        "Keyboard/WTLibrimeBridge.m",
+        "Vendor/RimeSharedSupport",
         "../Sources/WeTypeReplicaCore",
         "../HamsterBridge/WTHamsterRimeSessionAdapter.swift",
         "../HamsterBridge/WTHamsterAdapterTemplate.swift",
@@ -82,21 +102,54 @@ def main() -> int:
     for source in expected_sources:
         require(source in project, f"T9/Phase 3 source missing: {source}")
 
+    for framework in (
+        "librime.xcframework",
+        "boost_atomic.xcframework",
+        "boost_filesystem.xcframework",
+        "boost_regex.xcframework",
+        "boost_system.xcframework",
+        "libglog.xcframework",
+        "libleveldb.xcframework",
+        "libmarisa.xcframework",
+        "libopencc.xcframework",
+        "libyaml-cpp.xcframework",
+    ):
+        require(framework in project, f"real librime link dependency missing: {framework}")
+    require("SWIFT_OBJC_BRIDGING_HEADER: Keyboard/WTLibrimeBridge.h" in project, "real bridge header missing")
+    require("libc++.tbd" in project and "CoreFoundation.framework" in project, "librime system link dependencies missing")
+
     for forbidden in ("iOSServices", "WTKeyboardInputViewController.swift", "WTPanelRootView.swift", "iOSApp"):
         require(forbidden not in project, f"later-phase dependency leaked into T9/Phase 3 slice: {forbidden}")
 
-    require("WTPhase3AdapterSmokeSession()" in controller, "adapter smoke session must own the Phase 3 boundary")
-    require("WTHamsterRimeSessionAdapter(session: phase3Session)" in controller, "controller must drive WTIMEEngine through Hamster adapter")
-    require("inputMode: initialMode" in controller and ".chinesePinyin9" in controller, "T9 must be the default real-device smoke layout")
+    require("#if DEBUG" in controller and "WTPhase3AdapterSmokeSession()" in controller, "Debug smoke session must remain")
+    require("#else\n        return WTLibrimeRimeSession()" in controller, "Release must construct the real librime session")
+    require("backendProfile: .phase3PublicLibrime" in controller, "Release adapter must use the public Phase 3 schema map")
+    require("inputMode: initialMode" in controller and ".chinesePinyin9" in controller, "T9 must remain the default real-device layout")
     require("WTPhase3AdapterSmokeSession.selfTest()" in controller, "Debug adapter/T9 self-test missing")
     require("WTPreviewIMEEngine()" not in controller, "controller must not bypass the Phase 3 adapter")
     require("WTLayouts353Resolved.t9Pinyin" in phase2_root, "measured V14 T9 layout missing")
-    require("WTLayouts353Resolved.t26Pinyin" in phase2_root, "T26 fallback layout missing")
-    require("WTLayouts353Resolved.t26En" in phase2_root, "English fallback layout missing")
     require("WTCandidateBar(runtime: runtime)" in phase2_root, "candidate bar missing")
     require("64426" in phase3_smoke and "你好" in phase3_smoke, "T9 nihao smoke case missing")
     require("WTHamsterRimeSessionProtocol" in phase3_smoke, "smoke session must implement Hamster Rime protocol")
-    require("public final class WTHamsterRimeSessionAdapter: WTIMEEngine" in adapter, "typed Hamster adapter missing")
+    require("group.7518554" in real_session, "real session must persist Rime user data in App Group")
+    require("bridge.selectSchema" in real_session and "bridge.setOption" in real_session, "real session schema/option bridge missing")
+    require("t9GroupToDigit" in real_session, "real T9 key normalization missing")
+    require("RimeCreateSession" in real_bridge and "RimeGetContext" in real_bridge and "rime_get_api" in real_bridge, "real C API bridge incomplete")
+    require("RimeProcessKey" in real_bridge and "RimeGetCommit" in real_bridge and "RimeClearComposition" in real_bridge, "real input/commit/reset chain incomplete")
+    require("phase3PublicLibrime" in backend_profile, "public production backend profile missing")
+    require('schemaID: "claw_pinyin26"' in backend_profile, "real full-pinyin schema mapping missing")
+    require('schemaID: "claw_pinyin9"' in backend_profile, "real T9 schema mapping missing")
+    require("public final class WTHamsterRimeSessionAdapter: WTIMEEngine" in ADAPTER.read_text(encoding="utf-8"), "typed Hamster adapter missing")
+
+    # Public dependency pin is exact and reproducible.
+    require("d1a4c26aaa6dc2e081f7933ec852fc3732321efa" in pin_script, "LibrimeKit commit pin missing")
+    require("08dd95f5d9282346f0d4a3e8fc6b20811dc3d063" in pin_script, "librime submodule commit pin missing")
+    require("082425ea0684bca36474415d4a0e8db9b016487e" in pin_script, "rime-prelude pin missing")
+    require("56b934b099dfbeab842320f13aa8b461a6ab3e42" in pin_script, "rime-luna-pinyin pin missing")
+    require('FRAMEWORKS_BYTES="24815214"' in pin_script, "Frameworks.tgz size pin missing")
+    require("luna_pinyin.dict.yaml" in pin_script, "public pinyin dictionary staging missing")
+    require("ci_prepare_librimekit.sh" in build_script, "unsigned build must prepare pinned real engine dependencies")
+    require("RimeSharedSupport" in build_script and "claw_pinyin9.schema.yaml" in build_script, "built resource validation missing")
 
     host_plist = load_plist(HOST_PLIST)
     keyboard_plist = load_plist(KEYBOARD_PLIST)
@@ -164,7 +217,7 @@ def main() -> int:
     ):
         require(secret in workflow, f"workflow omits signing secret reference: {secret}")
 
-    print("ClawBase T9 + Phase 3 adapter-smoke verifier passed")
+    print("ClawBase T9 + Phase 3 real-librime verifier passed")
     return 0
 
 

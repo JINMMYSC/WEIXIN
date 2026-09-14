@@ -24,7 +24,7 @@ jobs:
       WT_KEYBOARD_PROFILE_BASE64: ${{ secrets.WT_KEYBOARD_PROFILE_BASE64 }}
 
     steps:
-      - name: Check out T9 plus Phase 3 bridge branch
+      - name: Check out T9 plus Phase 3 real-engine branch
         uses: actions/checkout@v4
 
       - name: Validate signing secret presence
@@ -42,19 +42,13 @@ jobs:
             brew install xcodegen
           fi
 
-      - name: Verify ClawBase T9 and Phase 3 adapter contract
+      - name: Verify ClawBase T9 and Phase 3 real-engine contract
         run: python3 Tools/verify_claw_base_ci.py
 
-      - name: Build unsigned ClawBase package
+      - name: Build unsigned ClawBase package with pinned librime
         run: |
-          chmod +x ClawBase/ci_build_unsigned.sh
+          chmod +x ClawBase/ci_build_unsigned.sh ClawBase/ci_prepare_librimekit.sh
           ClawBase/ci_build_unsigned.sh
-
-      - name: Probe pinned public LibrimeKit frameworks
-        shell: bash
-        run: |
-          chmod +x ClawBase/ci_probe_librimekit.sh
-          ClawBase/ci_probe_librimekit.sh
 
       - name: Prepare ephemeral signing identity and profiles
         shell: bash

@@ -29,6 +29,7 @@ plist_value() {
 }
 
 run_logged environment bash -c 'xcodebuild -version; swift --version; xcodegen --version'
+run_logged phase3-dependencies "$PROJECT_DIR/ci_prepare_librimekit.sh"
 
 (
   cd "$PROJECT_DIR"
@@ -66,11 +67,17 @@ APP_PATH="$DEVICE_DERIVED_DATA/Build/Products/Release-iphoneos/ClawBaseHost.app"
 KEYBOARD_PATH="$APP_PATH/PlugIns/HamsterKeyboard.appex"
 HOST_INFO="$APP_PATH/Info.plist"
 KEYBOARD_INFO="$KEYBOARD_PATH/Info.plist"
+RIME_RESOURCES="$KEYBOARD_PATH/RimeSharedSupport"
 
 [[ -d "$APP_PATH" ]] || fail "Host app missing at $APP_PATH"
 [[ -d "$KEYBOARD_PATH" ]] || fail "Keyboard extension missing at $KEYBOARD_PATH"
 [[ -f "$HOST_INFO" ]] || fail "Host Info.plist missing"
 [[ -f "$KEYBOARD_INFO" ]] || fail "Keyboard Info.plist missing"
+[[ -d "$RIME_RESOURCES" ]] || fail "RimeSharedSupport resources missing from Keyboard extension"
+[[ -f "$RIME_RESOURCES/claw_pinyin26.schema.yaml" ]] || fail "claw_pinyin26 schema missing"
+[[ -f "$RIME_RESOURCES/claw_pinyin9.schema.yaml" ]] || fail "claw_pinyin9 schema missing"
+[[ -f "$RIME_RESOURCES/luna_pinyin.dict.yaml" ]] || fail "pinned Luna Pinyin dictionary missing"
+[[ -f "$RIME_RESOURCES/CLAW_PHASE3_PROVENANCE.txt" ]] || fail "Phase 3 provenance file missing"
 
 host_bundle_id="$(plist_value "$HOST_INFO" CFBundleIdentifier)"
 keyboard_bundle_id="$(plist_value "$KEYBOARD_INFO" CFBundleIdentifier)"
@@ -120,6 +127,7 @@ ditto "$APP_PATH" "$UNSIGNED_DIR/Payload/ClawBaseHost.app"
   echo "Version/build: $host_version ($host_build)"
   echo "Keyboard extension point: $keyboard_extension_point"
   echo "Keyboard principal class: $keyboard_principal_class"
+  echo "Phase 3 real librime resources: PASS"
   echo "Embedded extension count: $extension_count"
   echo "Unsigned IPA: $IPA_PATH"
   echo "Unsigned IPA SHA-256: $(/usr/bin/shasum -a 256 "$IPA_PATH" | /usr/bin/awk '{print $1}')"

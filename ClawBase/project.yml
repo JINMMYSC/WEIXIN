@@ -26,6 +26,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517
         PRODUCT_NAME: ClawBaseHost
         INFOPLIST_FILE: Host/Info.plist
+        "EXCLUDED_ARCHS[sdk=iphonesimulator*]": arm64
   HamsterKeyboard:
     type: app-extension
     platform: iOS
@@ -34,6 +35,11 @@ targets:
       - path: Keyboard/HamsterKeyboardInputViewController.swift
       - path: Keyboard/WTPhase2KeyboardRootView.swift
       - path: Keyboard/WTPhase3AdapterSmokeSession.swift
+      - path: Keyboard/WTLibrimeRimeSession.swift
+      - path: Keyboard/WTLibrimeBridge.m
+      - path: Vendor/RimeSharedSupport
+        type: folder
+        buildPhase: resources
       - path: ../Sources/WeTypeReplicaCore
       - path: ../HamsterBridge/WTHamsterRimeSessionAdapter.swift
       - path: ../HamsterBridge/WTHamsterAdapterTemplate.swift
@@ -44,6 +50,29 @@ targets:
       - path: ../iOSOverlay/WTThemeColor353.swift
       - path: ../iOSOverlay/WTChrome.swift
       - path: ../iOSOverlay/WTBasicGlyphView.swift
+    dependencies:
+      - framework: Vendor/LibrimeKit/Frameworks/librime.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/boost_atomic.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/boost_filesystem.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/boost_regex.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/boost_system.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/libglog.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/libleveldb.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/libmarisa.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/libopencc.xcframework
+        embed: false
+      - framework: Vendor/LibrimeKit/Frameworks/libyaml-cpp.xcframework
+        embed: false
+      - sdk: libc++.tbd
+      - sdk: CoreFoundation.framework
     entitlements:
       path: Keyboard/Keyboard.entitlements
     settings:
@@ -52,3 +81,6 @@ targets:
         PRODUCT_NAME: HamsterKeyboard
         INFOPLIST_FILE: Keyboard/Info.plist
         APPLICATION_EXTENSION_API_ONLY: YES
+        SWIFT_OBJC_BRIDGING_HEADER: Keyboard/WTLibrimeBridge.h
+        HEADER_SEARCH_PATHS: "$(inherited) $(SRCROOT)/Vendor/LibrimeKit/Frameworks/librime.xcframework/ios-arm64/Headers"
+        "EXCLUDED_ARCHS[sdk=iphonesimulator*]": arm64
