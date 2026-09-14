@@ -9,6 +9,22 @@ public struct WTCandidate: Codable, Hashable, Sendable {
     }
 }
 
+public struct WTIMECompositionState: Codable, Equatable, Sendable {
+    public var length: Int
+    public var cursorPosition: Int
+    public var selectionStart: Int
+    public var selectionEnd: Int
+
+    public init(length: Int = 0, cursorPosition: Int = 0, selectionStart: Int = 0, selectionEnd: Int = 0) {
+        self.length = max(0, length)
+        self.cursorPosition = max(0, cursorPosition)
+        self.selectionStart = max(0, selectionStart)
+        self.selectionEnd = max(0, selectionEnd)
+    }
+
+    public var hasSelection: Bool { selectionEnd > selectionStart }
+    public static let empty = WTIMECompositionState()
+}
 
 public enum WTCandidatePageDirection: String, Codable, Sendable {
     case previous
@@ -33,17 +49,20 @@ public struct WTCandidatePageState: Codable, Equatable, Sendable {
 
 public struct WTIMEContext: Codable, Equatable, Sendable {
     public var composition: String
+    public var compositionState: WTIMECompositionState
     public var candidates: [WTCandidate]
     public var isComposing: Bool
     public var candidatePage: WTCandidatePageState
 
     public init(
         composition: String = "",
+        compositionState: WTIMECompositionState = .empty,
         candidates: [WTCandidate] = [],
         isComposing: Bool = false,
         candidatePage: WTCandidatePageState = .singlePage
     ) {
         self.composition = composition
+        self.compositionState = compositionState
         self.candidates = candidates
         self.isComposing = isComposing
         self.candidatePage = candidatePage
@@ -101,8 +120,8 @@ public final class WTClosureIMEEngine: WTIMEEngine {
         self.commitHandler = drainCommit
         self.modeHandler = setInputMode
         self.pageHandler = moveCandidatePage
-        self.selectHandler = selectCandidate
-        self.deleteHandler = deleteBackward
+        self.selectHandler = selectHandler
+        self.deleteHandler = deleteHandler
         self.resetHandler = reset
     }
 
@@ -179,108 +198,25 @@ public final class WTKeyboardCoordinator {
         if let first = engine.selectCandidate(at: 0) { document?.insertText(first) }
     }
 
-    @discardableResult
-    public func moveCandidatePage(_ direction: WTCandidatePageDirection) -> Bool {
-        engine.moveCandidatePage(direction)
-    }
-
-    public func chooseCandidate(_ index: Int) {
-        if let committed = engine.selectCandidate(at: index) {
-            document?.insertText(committed)
-        }
-    }
-
-    public func deleteBackward() {
-        if engine.context.isComposing {
-            engine.deleteBackward()
-            if let committed = engine.drainCommit(), !committed.isEmpty { document?.insertText(committed) }
-        } else {
-            document?.deleteBackward()
-        }
-    }
-
     public func returnKey() {
-        if engine.context.isComposing, let first = engine.selectCandidate(at: 0) {
-            document?.insertText(first)
+        if engine.context.isComposing {
+            if let first = engine.selectCandidate(at: 0), !first.isEmpty { document?.insertText(first) }
+            else { engine.reset() }
         } else {
             document?.insertReturn()
         }
     }
 
-    public func present(_ panel: WTPanel) { state.present(panel) }
-    public func back() { state.back() }
-    public func switchMode(_ mode: WTInputMode) {
-        state.switchInputMode(to: mode)
-        engine.setInputMode(mode)
-    }
-    public func toggleLanguage() {
-        state.toggleLanguage()
-        engine.setInputMode(state.inputMode)
-    }
-    public func cycleShift() { state.cycleShift() }
-}
-
-/// A deterministic, tiny engine used only for local/CI visual and interaction smoke tests.
-/// It is not a production Chinese IME and is never intended to replace Hamster/librime.
-public final class WTPreviewIMEEngine: WTIMEEngine {
-    private var compositionStorage = ""
-    private var candidatesStorage: [WTCandidate] = []
-
-    public init() {}
-
-    public var context: WTIMEContext {
-        .init(
-            composition: compositionStorage,
-            candidates: candidatesStorage,
-            isComposing: !compositionStorage.isEmpty
-        )
-    }
-
-    @discardableResult public func process(_ input: String) -> Bool {
-        guard !input.isEmpty else { return false }
-        let accepted = input.allSatisfy { $0.isLetter || $0.isNumber || $0 == "'" }
-        guard accepted else { return false }
-        compositionStorage.append(contentsOf: input.lowercased())
-        rebuildCandidates()
-        return true
-    }
-
-    public func selectCandidate(at index: Int) -> String? {
-        guard candidatesStorage.indices.contains(index) else { return nil }
-        let value = candidatesStorage[index].text
-        reset()
-        return value
-    }
-
     public func deleteBackward() {
-        guard !compositionStorage.isEmpty else { return }
-        compositionStorage.removeLast()
-        rebuildCandidates()
+        if engine.context.isComposing { engine.deleteBackward() }
+        else { document?.deleteBackward() }
     }
 
-    public func reset() {
-        compositionStorage = ""
-        candidatesStorage = []
-    }
-
-    private func rebuildCandidates() {
-        guard !compositionStorage.isEmpty else { candidatesStorage = []; return }
-        let raw = compositionStorage
-        var values: [String] = [raw, raw.capitalized, raw.uppercased()]
-        if let mapped = Self.smokeLexicon[raw] { values.insert(contentsOf: mapped, at: 0) }
-        var seen = Set<String>()
-        candidatesStorage = values.compactMap { value in
-            guard seen.insert(value).inserted else { return nil }
-            return WTCandidate(text: value, comment: "preview")
+    public func selectCandidate(at index: Int) {
+        if let committed = engine.selectCandidate(at: index), !committed.isEmpty {
+            document?.insertText(committed)
         }
     }
 
-    private static let smokeLexicon: [String: [String]] = [
-        "ni": ["你", "呢"],
-        "hao": ["好", "号"],
-        "nihao": ["你好"],
-        "wo": ["我"],
-        "shi": ["是", "时"],
-        "weixin": ["微信"]
-    ]
+    public func reset() { engine.reset() }
 }

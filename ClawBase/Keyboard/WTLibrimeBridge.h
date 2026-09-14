@@ -15,12 +15,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign, readonly) NSInteger pageNumber;
 @property(nonatomic, assign, readonly) NSInteger pageSize;
 @property(nonatomic, assign, readonly) BOOL lastPage;
+@property(nonatomic, assign, readonly) NSInteger compositionLength;
+@property(nonatomic, assign, readonly) NSInteger cursorPosition;
+@property(nonatomic, assign, readonly) NSInteger selectionStart;
+@property(nonatomic, assign, readonly) NSInteger selectionEnd;
 - (instancetype)initWithComposition:(NSString *)composition
                          candidates:(NSArray<WTLibrimeCandidateRecord *> *)candidates
                           composing:(BOOL)composing
                          pageNumber:(NSInteger)pageNumber
                            pageSize:(NSInteger)pageSize
-                           lastPage:(BOOL)lastPage;
+                           lastPage:(BOOL)lastPage
+                  compositionLength:(NSInteger)compositionLength
+                     cursorPosition:(NSInteger)cursorPosition
+                     selectionStart:(NSInteger)selectionStart
+                       selectionEnd:(NSInteger)selectionEnd;
 @end
 
 @interface WTLibrimeBridge : NSObject

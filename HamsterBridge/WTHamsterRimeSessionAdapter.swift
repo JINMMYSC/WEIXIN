@@ -6,6 +6,8 @@ import Foundation
 public protocol WTHamsterRimeSessionProtocol: AnyObject {
     /// Current composition/preedit text shown above candidates.
     var wtComposition: String { get }
+    /// Cursor/selection metadata from librime's RimeComposition structure.
+    var wtCompositionState: WTIMECompositionState { get }
     /// Current visible Rime candidates in source order.
     var wtCandidates: [WTCandidate] { get }
     /// Whether Rime currently owns a composition.
@@ -33,8 +35,10 @@ public protocol WTHamsterRimeSessionProtocol: AnyObject {
     func wtReset()
 }
 
-
 public extension WTHamsterRimeSessionProtocol {
+    var wtCompositionState: WTIMECompositionState {
+        WTIMECompositionState(length: wtComposition.count, cursorPosition: wtComposition.count)
+    }
     var wtCandidatePageState: WTCandidatePageState { .singlePage }
     func wtApplyModeDescriptor(_ descriptor: WTRimeModeDescriptor, logicalMode: WTInputMode) { wtSetInputMode(logicalMode) }
     @discardableResult func wtMoveCandidatePage(_ direction: WTCandidatePageDirection) -> Bool { false }
@@ -53,6 +57,7 @@ public final class WTHamsterRimeSessionAdapter: WTIMEEngine {
         guard let session else { return .init(composition: "", candidates: [], isComposing: false) }
         return .init(
             composition: session.wtComposition,
+            compositionState: session.wtCompositionState,
             candidates: session.wtCandidates,
             isComposing: session.wtIsComposing,
             candidatePage: session.wtCandidatePageState

@@ -27,6 +27,14 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     }
 
     var wtComposition: String { snapshotStorage.composition }
+    var wtCompositionState: WTIMECompositionState {
+        WTIMECompositionState(
+            length: snapshotStorage.compositionLength,
+            cursorPosition: snapshotStorage.cursorPosition,
+            selectionStart: snapshotStorage.selectionStart,
+            selectionEnd: snapshotStorage.selectionEnd
+        )
+    }
     var wtCandidates: [WTCandidate] {
         snapshotStorage.candidates.map { record in
             WTCandidate(text: record.text, comment: record.comment.isEmpty ? nil : record.comment)

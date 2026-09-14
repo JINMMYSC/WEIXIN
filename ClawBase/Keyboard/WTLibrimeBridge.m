@@ -21,7 +21,11 @@ static const int WTKeyPageDown = 0xff56;
                           composing:(BOOL)composing
                          pageNumber:(NSInteger)pageNumber
                            pageSize:(NSInteger)pageSize
-                           lastPage:(BOOL)lastPage {
+                           lastPage:(BOOL)lastPage
+                  compositionLength:(NSInteger)compositionLength
+                     cursorPosition:(NSInteger)cursorPosition
+                     selectionStart:(NSInteger)selectionStart
+                       selectionEnd:(NSInteger)selectionEnd {
   if ((self = [super init])) {
     _composition = [composition copy];
     _candidates = [candidates copy];
@@ -29,6 +33,10 @@ static const int WTKeyPageDown = 0xff56;
     _pageNumber = pageNumber;
     _pageSize = pageSize;
     _lastPage = lastPage;
+    _compositionLength = compositionLength;
+    _cursorPosition = cursorPosition;
+    _selectionStart = selectionStart;
+    _selectionEnd = selectionEnd;
   }
   return self;
 }
@@ -118,25 +126,24 @@ static const int WTKeyPageDown = 0xff56;
   return [NSString stringWithUTF8String:buffer] ?: @"";
 }
 
+- (WTLibrimeContextSnapshot *)emptySnapshot {
+  return [[WTLibrimeContextSnapshot alloc] initWithComposition:@""
+                                                   candidates:@[]
+                                                    composing:NO
+                                                   pageNumber:0
+                                                     pageSize:0
+                                                     lastPage:YES
+                                            compositionLength:0
+                                               cursorPosition:0
+                                               selectionStart:0
+                                                 selectionEnd:0];
+}
+
 - (WTLibrimeContextSnapshot *)snapshot {
-  if (!_ready) {
-    return [[WTLibrimeContextSnapshot alloc] initWithComposition:@""
-                                                     candidates:@[]
-                                                      composing:NO
-                                                     pageNumber:0
-                                                       pageSize:0
-                                                       lastPage:YES];
-  }
+  if (!_ready) return [self emptySnapshot];
 
   RIME_STRUCT(RimeContext, context);
-  if (!RimeGetContext(_sessionID, &context)) {
-    return [[WTLibrimeContextSnapshot alloc] initWithComposition:@""
-                                                     candidates:@[]
-                                                      composing:NO
-                                                     pageNumber:0
-                                                       pageSize:0
-                                                       lastPage:YES];
-  }
+  if (!RimeGetContext(_sessionID, &context)) return [self emptySnapshot];
 
   NSString *composition = context.composition.preedit
       ? [NSString stringWithUTF8String:context.composition.preedit]
@@ -155,7 +162,11 @@ static const int WTKeyPageDown = 0xff56;
   NSInteger pageNumber = MAX(0, context.menu.page_no);
   NSInteger pageSize = MAX(0, context.menu.page_size);
   BOOL lastPage = context.menu.is_last_page != 0;
-  BOOL composing = composition.length > 0;
+  NSInteger compositionLength = MAX(0, context.composition.length);
+  NSInteger cursorPosition = MAX(0, context.composition.cursor_pos);
+  NSInteger selectionStart = MAX(0, context.composition.sel_start);
+  NSInteger selectionEnd = MAX(0, context.composition.sel_end);
+  BOOL composing = compositionLength > 0 || composition.length > 0;
   RimeFreeContext(&context);
 
   return [[WTLibrimeContextSnapshot alloc] initWithComposition:composition ?: @""
@@ -163,7 +174,11 @@ static const int WTKeyPageDown = 0xff56;
                                                     composing:composing
                                                    pageNumber:pageNumber
                                                      pageSize:pageSize
-                                                     lastPage:lastPage];
+                                                     lastPage:lastPage
+                                            compositionLength:compositionLength
+                                               cursorPosition:cursorPosition
+                                               selectionStart:selectionStart
+                                                 selectionEnd:selectionEnd];
 }
 
 - (BOOL)processText:(NSString *)text {
