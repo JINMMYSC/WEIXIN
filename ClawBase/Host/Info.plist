@@ -3,9 +3,23 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleDevelopmentRegion</key>
-    <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <string>zh_CN</string>
     <key>CFBundleDisplayName</key>
     <string>微信输入法</string>
+    <key>CFBundleDocumentTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeName</key>
+            <string>All Files</string>
+            <key>LSHandlerRank</key>
+            <string>Alternate</string>
+            <key>LSItemContentTypes</key>
+            <array>
+                <string>public.data</string>
+                <string>public.content</string>
+            </array>
+        </dict>
+    </array>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -13,7 +27,7 @@
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>$(PRODUCT_NAME)</string>
+    <string>微信输入法</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
@@ -23,8 +37,10 @@
     <key>CFBundleURLTypes</key>
     <array>
         <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
             <key>CFBundleURLName</key>
-            <string>app.lgm.7517.wetype</string>
+            <string>wxkb</string>
             <key>CFBundleURLSchemes</key>
             <array>
                 <string>wetype</string>
@@ -32,18 +48,30 @@
             </array>
         </dict>
     </array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>wxkbdev</string>
+        <string>itms-apps</string>
+        <string>itms-beta</string>
+        <string>weread</string>
+        <string>tencentmsdk1104466820</string>
+        <string>pubgmhd1106467070</string>
+        <string>shareddocuments</string>
+    </array>
+    <key>LSSupportsOpeningDocumentsInPlace</key>
+    <true/>
     <key>NSCameraUsageDescription</key>
-    <string>用于迁移助手扫码和设备配对。</string>
+    <string>用于扫描二维码</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>用于语音输入时录制你的语音。</string>
+    <string>用于录制音频进行语音转文字</string>
     <key>NSSpeechRecognitionUsageDescription</key>
-    <string>用于将语音转换为文字并返回输入法。</string>
+    <string>用于将语音转换为文字并返回输入法</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>用于从主应用选择图片并发送到输入法共享待发送区。</string>
+    <string>用于读取用户选择或主动分享的照片，并保存图片到相册</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>用于保存由输入法接收或生成的图片和视频。</string>
+    <string>用于保存图片到相册</string>
     <key>NSLocalNetworkUsageDescription</key>
-    <string>用于隔空传送和多设备功能发现同一局域网中的设备。</string>
+    <string>需要使用本地网络来发现和连接附近设备以传输文件</string>
     <key>NSBonjourServices</key>
     <array>
         <string>_wtreplica._tcp</string>
@@ -69,6 +97,8 @@
             <key>UIWindowSceneSessionRoleApplication</key>
             <array>
                 <dict>
+                    <key>UISceneClassName</key>
+                    <string>UIWindowScene</string>
                     <key>UISceneConfigurationName</key>
                     <string>Default Configuration</string>
                     <key>UISceneDelegateClassName</key>
@@ -77,5 +107,22 @@
             </array>
         </dict>
     </dict>
+    <key>UIDesignRequiresCompatibility</key>
+    <true/>
+    <key>UIFileSharingEnabled</key>
+    <true/>
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+    </array>
 </dict>
 </plist>
