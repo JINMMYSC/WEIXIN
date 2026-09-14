@@ -15,6 +15,7 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     private static let fuzzyEnEngKey = "wt.fuzzy.en_eng"
     private static let fuzzyInIngKey = "wt.fuzzy.in_ing"
     private static let doubleSchemeKey = "wt.double.scheme"
+    private static let wubiMixKey = "wt.wubi.mix"
     private static let legacyFuzzyRetroflexKey = "phase3.fuzzy.retroflexInitials"
     private static let legacyFuzzyNasalLateralKey = "phase3.fuzzy.nasalLateral"
 
@@ -28,6 +29,8 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         - schema: double_pinyin_mspy
         - schema: claw_double_pinyin_sogou
         - schema: wubi86
+        - schema: wubi_pinyin
+        - schema: wubi_trad
         - schema: stroke
         - schema: pinyin_simp
     """
@@ -163,6 +166,12 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         simplifiedChinese = simplified
         preferences?.set(simplified, forKey: Self.simplifiedKey)
         preferences?.set(simplified, forKey: Self.legacySimplifiedKey)
+        if logicalMode == .wubi {
+            bridge.reset()
+            let schemaID = effectiveSchemaID(baseSchemaID: "wubi86", mode: .wubi)
+            if !bridge.selectSchema(schemaID) { _ = bridge.selectSchema("wubi86") }
+            bridge.setOption("ascii_mode", value: false)
+        }
         applyScriptPreference(for: logicalMode)
         refresh()
     }
@@ -272,6 +281,11 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         if mode == .doublePinyin, baseSchemaID == "double_pinyin" {
             return Self.doublePinyinSchemaID(preferences?.string(forKey: Self.doubleSchemeKey))
         }
+        if mode == .wubi, baseSchemaID == "wubi86" {
+            if !simplifiedChinese { return "wubi_trad" }
+            let mixed = (preferences?.object(forKey: Self.wubiMixKey) as? Bool) ?? true
+            return mixed ? "wubi_pinyin" : "wubi86"
+        }
         return baseSchemaID
     }
 
@@ -291,7 +305,9 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
             bridge.setOption("zh_hans", value: simplifiedChinese)
         case .doublePinyin:
             bridge.setOption("simplification", value: simplifiedChinese)
-        case .english26, .wubi, .stroke, .handwriting:
+        case .wubi:
+            bridge.setOption("zh_trad", value: !simplifiedChinese)
+        case .english26, .stroke, .handwriting:
             break
         }
     }
@@ -353,7 +369,7 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         case .doublePinyin:
             return ["double_pinyin_flypy", "double_pinyin", "pinyin_simp"]
         case .wubi:
-            return ["wubi86"]
+            return ["wubi_pinyin", "wubi_trad", "wubi86"]
         case .stroke:
             return ["stroke"]
         case .chinesePinyin9, .handwriting:

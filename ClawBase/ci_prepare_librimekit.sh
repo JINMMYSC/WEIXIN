@@ -161,6 +161,8 @@ required_rime_files=(
   claw_double_pinyin_sogou.schema.yaml
   wubi86.schema.yaml
   wubi86.dict.yaml
+  wubi_pinyin.schema.yaml
+  wubi_trad.schema.yaml
   stroke.schema.yaml
   stroke.dict.yaml
   pinyin_simp.schema.yaml

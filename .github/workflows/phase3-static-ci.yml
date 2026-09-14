@@ -1,0 +1,50 @@
+name: Phase 3 Static Verification
+
+on:
+  push:
+    branches:
+      - work/v14-clawbase-t9-rime
+      - work/v14-p3-*
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase3-static-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Phase 3 contract, matrix and UI gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Report Python environment
+        run: |
+          python3 --version
+          uname -a
+
+      - name: Verify ClawBase Phase 3 contract
+        run: python3 Tools/verify_claw_base_ci.py
+
+      - name: Verify 120-case black-box matrix
+        run: python3 Tools/verify_phase3_blackbox_matrix.py
+
+      - name: Verify Phase 3 functional completion contract
+        run: python3 Tools/verify_phase3_completion.py
+
+      - name: Verify Phase 3 Wubi contract
+        run: python3 Tools/verify_phase3_wubi_contract.py
+
+      - name: Verify Phase 3 stroke contract
+        run: python3 Tools/verify_phase3_stroke_contract.py
+
+      - name: Validate extracted Phase 3 layout names
+        run: python3 Tools/validate_phase3_layout_names.py
+
+      - name: Verify 79-case UI static alignment
+        run: python3 Tools/verify_ui_79_alignment.py
