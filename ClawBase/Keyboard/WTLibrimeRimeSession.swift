@@ -85,7 +85,7 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     }
 
     func wtSelectCandidate(at index: Int) -> String? {
-        let committed = bridge.selectCandidate(atIndex: index)
+        let committed = bridge.selectCandidate(at: index)
         refresh()
         return committed
     }

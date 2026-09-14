@@ -16,6 +16,7 @@ LIBRIME_COMMIT="08dd95f5d9282346f0d4a3e8fc6b20811dc3d063"
 LIBRIMEKIT_RELEASE="v0.1.0"
 FRAMEWORKS_URL="https://github.com/amorphobia/LibrimeKit/releases/download/${LIBRIMEKIT_RELEASE}/Frameworks.tgz"
 FRAMEWORKS_BYTES="24815214"
+FRAMEWORKS_SHA256="7b3d1d210c5a251a951685b722399c5eeb60f18a39a782a8850511edd12d0398"
 RIME_PRELUDE_REPOSITORY="https://github.com/rime/rime-prelude.git"
 RIME_PRELUDE_COMMIT="082425ea0684bca36474415d4a0e8db9b016487e"
 RIME_LUNA_REPOSITORY="https://github.com/rime/rime-luna-pinyin.git"
@@ -52,7 +53,10 @@ archive_bytes="$(/usr/bin/stat -f '%z' "$ARCHIVE")"
   exit 1
 }
 archive_sha="$(/usr/bin/shasum -a 256 "$ARCHIVE" | /usr/bin/awk '{print $1}')"
-# Keep the hash readable in CI even if log redaction happens to match a substring.
+[[ "$archive_sha" == "$FRAMEWORKS_SHA256" ]] || {
+  echo "PHASE3 DEPENDENCY ERROR: Frameworks.tgz SHA-256 mismatch" >&2
+  exit 1
+}
 archive_sha_grouped="$(printf '%s' "$archive_sha" | /usr/bin/sed 's/../&:/g; s/:$//')"
 
 echo "Phase 3 public dependency pin"
@@ -89,8 +93,6 @@ done
   exit 1
 }
 
-# LibrimeKit's public test SharedSupport already carries the OpenCC data files expected by
-# the static build. Overlay the pinned official Rime prelude and Luna Pinyin source data.
 cp -R "$LIBRIMEKIT_DIR/Tests/LibrimeKitTests/Resources/SharedSupport/." "$RIME_SHARED_DIR/"
 find "$PRELUDE_DIR" -maxdepth 1 -type f -name '*.yaml' -exec cp {} "$RIME_SHARED_DIR/" \;
 find "$LUNA_DIR" -maxdepth 1 -type f \( -name '*.yaml' -o -name '*.txt' \) -exec cp {} "$RIME_SHARED_DIR/" \;
