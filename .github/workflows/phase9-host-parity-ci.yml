@@ -22,6 +22,8 @@ jobs:
       - name: Install XcodeGen
         run: |
           if ! command -v xcodegen >/dev/null 2>&1; then brew install xcodegen; fi
+      - name: Verify observed 3.5.3 SetupMain contract
+        run: python3 Tools/verify_phase9_host_parity.py
       - name: Run core tests
         run: swift test --parallel
       - name: Build unsigned iOS products
