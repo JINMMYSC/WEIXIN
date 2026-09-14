@@ -32,12 +32,20 @@ struct WTPhase3KeyboardSurface: View {
     private var keyboardLayout: WTKeyboardLayout {
         switch runtime.state.panel {
         case .number:
-            return WTLayouts353Resolved.t26Number
+            switch runtime.state.inputMode {
+            case .chinesePinyin9, .stroke:
+                return WTLayouts353Resolved.t9Number
+            default:
+                return WTLayouts353Resolved.t9Number26
+            }
         case .symbols, .fullSymbols:
-            return WTLayouts353Resolved.t26Symbol
+            return runtime.state.inputMode == .english26
+                ? WTLayouts353Resolved.t26EnSymbol
+                : WTLayouts353Resolved.t26CnSymbol
         default:
             break
         }
+
         switch runtime.state.inputMode {
         case .chinesePinyin9:
             return WTLayouts353Resolved.t9Pinyin
@@ -47,7 +55,9 @@ struct WTPhase3KeyboardSurface: View {
             return WTLayouts353Resolved.t26Wubi
         case .stroke:
             return WTLayouts353Resolved.t9Stroke
-        case .chinesePinyin26, .doublePinyin, .handwriting:
+        case .handwriting:
+            return WTLayouts353Resolved.handwriting
+        case .chinesePinyin26, .doublePinyin:
             return WTLayouts353Resolved.t26Pinyin
         }
     }
