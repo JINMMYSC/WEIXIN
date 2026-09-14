@@ -45,12 +45,13 @@ targets:
         type: folder
         buildPhase: resources
       - path: ../Sources/WeTypeReplicaCore
-      - path: ../iOSShared
+      - path: ../iOSShared/WTSemanticGlyph.swift
       - path: ../iOSOverlay
       - path: ../HamsterBridge
       - path: ../iOSServices
         excludes:
           - WTHostSpeechRecognitionService.swift
+          - WTVoiceLiveActivityController.swift
     dependencies:
       - framework: Vendor/LibrimeKit/Frameworks/librime.xcframework
         embed: false
