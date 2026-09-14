@@ -57,6 +57,12 @@ jobs:
       - name: Verify Phase 3 functional completion
         run: python3 Tools/verify_phase3_completion.py
 
+      - name: Verify Phase 3 Wubi contract
+        run: python3 Tools/verify_phase3_wubi_contract.py
+
+      - name: Verify Phase 3 stroke contract
+        run: python3 Tools/verify_phase3_stroke_contract.py
+
       - name: Validate extracted Phase 3 layout names
         run: python3 Tools/validate_phase3_layout_names.py
 
