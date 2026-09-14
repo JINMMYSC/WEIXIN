@@ -16,6 +16,10 @@ targets:
     sources:
       - path: Host/AppDelegate.swift
       - path: Host/SceneDelegate.swift
+      - path: Host/LaunchScreen.storyboard
+      - path: Host/Settings.bundle
+        type: folder
+        buildPhase: resources
       - path: ../iOSApp/WTSettingsAppView.swift
       - path: ../iOSApp/WTHostSettings353View.swift
       - path: ../iOSApp/WTHostVoiceCaptureView.swift
