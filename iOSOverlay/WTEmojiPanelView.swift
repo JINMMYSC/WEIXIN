@@ -14,7 +14,7 @@ private enum WTEmojiContentMode: String, CaseIterable {
 
 public struct WTEmojiPanelView: View {
     @ObservedObject var runtime: WTKeyboardRuntime
-    @State private var selected = "recent"
+    @State private var selected: String
     @State private var contentMode: WTEmojiContentMode = .emoji
 
     private let categories: [WTEmojiCategory] = [
@@ -27,7 +27,10 @@ public struct WTEmojiPanelView: View {
         .init(id: "symbols", icon: "heart", values: Array("❤️🧡💛💚💙💜🖤🤍🤎💔❣️💕💞💓💗💖💘💝💟✨⭐️🌟💫🔥💥💯✅❌⭕️❗️❓⚠️♻️".map(String.init)))
     ]
 
-    public init(runtime: WTKeyboardRuntime) { self.runtime = runtime }
+    public init(runtime: WTKeyboardRuntime) {
+        self.runtime = runtime
+        _selected = State(initialValue: runtime.recentEmoji.isEmpty ? "faces" : "recent")
+    }
 
     private var values: [String] {
         if selected == "recent" { return runtime.recentEmoji }
@@ -87,16 +90,11 @@ public struct WTEmojiPanelView: View {
     }
 
     private var servicePlaceholder: some View {
-        VStack(spacing: 10) {
-            WTEmptyPanelState(
-                systemName: contentMode == .gif ? "photo.stack" : "face.smiling.inverse",
-                title: contentMode.rawValue,
-                subtitle: "表情包/GIF 的搜索、预览和发送界面已经独立实现。"
-            )
-            Button("打开\(contentMode.rawValue)") { runtime.state.present(.stickers) }
-                .buttonStyle(WTGreenPillButtonStyle())
-                .padding(.bottom, 10)
-        }
+        WTEmptyPanelState(
+            systemName: contentMode == .gif ? "photo.stack" : "face.smiling.inverse",
+            title: contentMode.rawValue,
+            subtitle: "当前 Phase 3 只启用本地表情；在线表情包与 GIF 不伪装成已完成服务。"
+        )
     }
 
     private func categoryButton(id: String, system: String) -> some View {
