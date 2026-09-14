@@ -130,6 +130,7 @@ copy_root_rime_data "$STROKE_DIR"
 copy_root_rime_data "$PINYIN_SIMP_DIR"
 cp "$ROOT_DIR/ClawBase/RimeSchemas/claw_pinyin26.schema.yaml" "$RIME_SHARED_DIR/"
 cp "$ROOT_DIR/ClawBase/RimeSchemas/claw_pinyin9.schema.yaml" "$RIME_SHARED_DIR/"
+python3 "$ROOT_DIR/ClawBase/RimeSchemas/generate_fuzzy_variants.py" "$RIME_SHARED_DIR"
 
 cat > "$RIME_SHARED_DIR/CLAW_PHASE3_PROVENANCE.txt" <<EOF
 LibrimeKit=$LIBRIMEKIT_COMMIT
@@ -150,6 +151,9 @@ required_rime_files=(
   symbols.yaml
   luna_pinyin.dict.yaml
   claw_pinyin26.schema.yaml
+  claw_pinyin26_fuzzy_zhz.schema.yaml
+  claw_pinyin26_fuzzy_ln.schema.yaml
+  claw_pinyin26_fuzzy_all.schema.yaml
   claw_pinyin9.schema.yaml
   double_pinyin.schema.yaml
   wubi86.schema.yaml
