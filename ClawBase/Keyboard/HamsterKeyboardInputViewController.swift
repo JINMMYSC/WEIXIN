@@ -2,6 +2,9 @@ import UIKit
 import SwiftUI
 
 final class HamsterKeyboardInputViewController: UIInputViewController {
+    private static let appGroupID = "group.7518554"
+    private static let recentEmojiKey = "phase3.recentEmoji"
+
     private lazy var phase3Session: WTHamsterRimeSessionProtocol = {
         #if DEBUG
         return WTPhase3AdapterSmokeSession()
@@ -27,7 +30,11 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
 
         let initialMode: WTInputMode = .chinesePinyin9
         engine.setInputMode(initialMode)
-        let runtime = WTKeyboardRuntime(state: WTKeyboardState(inputMode: initialMode))
+        let recents = UserDefaults(suiteName: Self.appGroupID)?.stringArray(forKey: Self.recentEmojiKey) ?? []
+        let runtime = WTKeyboardRuntime(
+            state: WTKeyboardState(inputMode: initialMode),
+            recentEmoji: Array(recents.prefix(48))
+        )
         runtime.toolbarEnabled = false
         wireRuntime(runtime)
         self.runtime = runtime
@@ -64,7 +71,11 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     }
 
     private func installKeyboardHeightConstraint() {
-        let constraint = view.heightAnchor.constraint(equalToConstant: 268)
+        // The extracted WeType 3.5.3 canvas is exactly 414x224.  During composition the
+        // candidate area is 18pt preedit + 40pt candidates, so 282pt avoids the previous
+        // vertical squeeze that distorted all key rectangles while typing.
+        let measuredHeight = WTTheme353.keyboardHeight + WTTheme353.compositionHeight + WTTheme353.candidateCompactHeight
+        let constraint = view.heightAnchor.constraint(equalToConstant: CGFloat(measuredHeight))
         constraint.priority = UILayoutPriority(999)
         constraint.isActive = true
         heightConstraint = constraint
@@ -93,6 +104,15 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     private func wireRuntime(_ runtime: WTKeyboardRuntime) {
         runtime.insertText = { [weak self] text in
             self?.textDocumentProxy.insertText(text)
+        }
+
+        runtime.recordEmoji = { symbol in
+            let defaults = UserDefaults(suiteName: Self.appGroupID)
+            var items = defaults?.stringArray(forKey: Self.recentEmojiKey) ?? []
+            items.removeAll { $0 == symbol }
+            items.insert(symbol, at: 0)
+            if items.count > 48 { items.removeLast(items.count - 48) }
+            defaults?.set(items, forKey: Self.recentEmojiKey)
         }
 
         runtime.commitDirectText = { [weak self] text in
