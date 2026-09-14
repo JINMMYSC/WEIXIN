@@ -36,6 +36,17 @@ def main() -> int:
     ):
         require(action in all_actions, f"missing black-box action coverage: {action}")
 
+    comparator = (ROOT / "Tools" / "compare_phase3_blackbox.py").read_text(encoding="utf-8")
+    require("case.case_id for case in cases" in comparator,
+            "black-box comparator must consume BlackBoxCase dataclasses correctly")
+    require("captured_on_real_device" in comparator and "required_fields(case)" in comparator,
+            "black-box comparator must fail closed on provenance and required observation fields")
+    capture_template = (ROOT / "Tools" / "phase3_capture_template.py").read_text(encoding="utf-8")
+    require('"captured_on_real_device": False' in capture_template,
+            "capture worksheet must never pre-mark reference data as real")
+    require("No expected output is prefilled" in capture_template,
+            "capture worksheet must not fabricate WeChat expected output")
+
     observed_count = 0
     if OBSERVATIONS.is_file():
         payload = json.loads(OBSERVATIONS.read_text(encoding="utf-8"))
