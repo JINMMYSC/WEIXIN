@@ -74,7 +74,11 @@ public enum WTRawArrayParser {
            ((s.first == "'" && s.last == "'") || (s.first == "\"" && s.last == "\"")) {
             s.removeFirst(); s.removeLast()
         }
-        return s.replacingOccurrences(of: "\\'", with: "'")
+        s = s.replacingOccurrences(of: "\\'", with: "'")
+        // Some migrated 3.5.3 layouts encode an absent value literally as `null`.
+        // Treat that as an empty sentinel instead of ever rendering/committing the word "null".
+        if s.caseInsensitiveCompare("null") == .orderedSame { return "" }
+        return s
     }
 }
 
@@ -114,6 +118,24 @@ public enum WTKeyActionResolver {
             break
         }
 
+        // The migrated V14 stroke canvas stores visual placeholders in `input` (for example
+        // `(b)`, `PQRS`, and `null`). The public Rime stroke schema is explicit: h/s/p/n/z
+        // represent horizontal/vertical/left-falling/dot-or-right-falling/turning strokes.
+        // Translate only the five real stroke keys here and never leak migration sentinels into Rime.
+        if state.inputMode == .stroke {
+            switch item.id {
+            case "KEY_1": return .engineInput("h")
+            case "KEY_2": return .engineInput("s")
+            case "KEY_3": return .engineInput("p")
+            case "KEY_4": return .engineInput("n")
+            case "KEY_5": return .engineInput("z")
+            case "KEY_6": return .none          // wildcard UI exists in V14, but public rime-stroke has no wildcard key contract
+            case "KEY_7", "KEY_9": return .none // migrated placeholders; intentionally suppressed
+            case "KEY_8": return .directText("，")
+            default: break
+            }
+        }
+
         // Some 3.5.3 keys express their behavior entirely through style rules.
         if item.id == "KEY_CHANGE" || item.id == "KEY_ABC" || (item.style?.contains("STYLE_LANGSWITCH") == true) {
             return .function("langswitch")
@@ -145,6 +167,9 @@ public enum WTKeyActionResolver {
             case .once: return "⇧"
             case .locked: return "⇪"
             }
+        }
+        if state.inputMode == .stroke, item.id == "KEY_7" || item.id == "KEY_9" {
+            return ""
         }
         if let input = variant(item.input, state: state), !input.isEmpty, input.count <= 8 {
             return applyShift(input, state: state)
