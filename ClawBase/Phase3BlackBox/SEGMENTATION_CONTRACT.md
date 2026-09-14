@@ -10,7 +10,7 @@ The public C API exposed by that revision provides `RimeComposition` with:
 - `sel_end`
 - `preedit`
 
-It does **not** expose the engine's internal `Composition` segment list through `RimeContext`.
+It does **not** expose the engine's internal `Composition` segment list through `RimeContext`. In other words, this pinned public C API does not expose explicit internal segmentation boundaries.
 
 Therefore the production bridge currently exposes only real public composition metadata: preedit text, composition length, cursor position and selection start/end. These values must never be described as explicit Rime segment boundaries.
 
