@@ -11,8 +11,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
-
-        let host = UIHostingController(rootView: WTSettingsAppView())
+        let host = UIHostingController(rootView: WTHostSettings353View())
         host.view.backgroundColor = .systemBackground
 
         let window = UIWindow(windowScene: windowScene)
@@ -33,14 +32,10 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func openPhase4Route(_ url: URL) {
         guard url.scheme?.lowercased() == "wtreplica" else { return }
         switch url.host?.lowercased() {
-        case "voice":
-            openVoice(url)
-        case "quick-send":
-            presentRoute(.quickSend)
-        case "picture":
-            presentRoute(.picture)
-        default:
-            break
+        case "voice": openVoice(url)
+        case "quick-send": presentRoute(.quickSend)
+        case "picture": presentRoute(.picture)
+        default: break
         }
     }
 
