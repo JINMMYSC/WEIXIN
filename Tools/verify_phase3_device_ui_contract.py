@@ -20,6 +20,9 @@ def main() -> int:
     candidate = text("iOSOverlay/WTCandidateBar.swift")
     canvas = text("iOSOverlay/WTKeyboardCanvasView.swift")
     glyph = text("iOSOverlay/WTBasicGlyphView.swift")
+    delete_bridge = text("iOSOverlay/WTDeleteGestureBridge.swift")
+    one_hand = text("iOSOverlay/WTOneHandedShell.swift")
+    controller = text("ClawBase/Keyboard/HamsterKeyboardInputViewController.swift")
 
     for token in (
         '"KEY_EMOTION", "KEY_SWITCH", "KEY_At"',
@@ -59,11 +62,57 @@ def main() -> int:
         'WTBasicGlyphView(.delete',
         'WTBasicGlyphView(.shift',
         'runtime.submitReturn()',
+        'Text("上滑清空")',
+        'WTDeleteGestureBridge.deleteStep(runtime)',
+        'WTDeleteGestureBridge.restoreStep(runtime)',
+        'WTDeleteGestureBridge.clear(runtime)',
+        'startRapidDelete()',
+        'beginLongPressGlideIfPossible()',
+        'updateLongPressGlide(value)',
+        'finishLongPressGlide()',
+        'value.translation.width / 33',
+        'frame(width: text == "换行" ? 56 : 33, height: 58)',
+        'showsLeftSingleHandShortcut',
+        'showsRightSingleHandShortcut',
+        'singleHandButton(.left)',
+        'singleHandButton(.right)',
+        'runtime.toggleOneHanded(side)',
     ):
-        require(token in canvas, f"device-visible key chrome missing: {token}")
+        require(token in canvas, f"device-visible key chrome/gesture missing: {token}")
     require("case shift, delete" in glyph, "clean-room shift/delete glyphs missing")
 
-    print("Phase 3 device-visible UI contract: PASS (resolved T26/T9/stroke geometry + candidate/idle chrome + key glyphs)")
+    for token in (
+        "public let begin: () -> Void",
+        "public let deleteStep: () -> Void",
+        "public let restoreStep: () -> Void",
+        "public let clear: () -> Void",
+        "callbacks[ObjectIdentifier(runtime)]",
+    ):
+        require(token in delete_bridge, f"delete gesture bridge missing: {token}")
+
+    for token in (
+        "deleteGestureRestoreBuffer",
+        "documentContextBeforeInput",
+        "performDeleteGestureStep()",
+        "performDeleteGestureRestoreStep()",
+        "performDeleteGestureClear()",
+        "WTDeleteGestureBridge.bind(",
+        "WTDeleteGestureBridge.unbind(",
+        "engine.reset()",
+        "WTPhase5SharedRuntime.markActive(.keyboard)",
+        "WTPhase5SharedRuntime.noteMemoryWarning()",
+    ):
+        require(token in controller, f"delete/Phase5 controller contract missing: {token}")
+
+    for token in (
+        "min(82, proxy.size.width * 0.20)",
+        'Text(mode == .right ? "左手模式" : "右手模式")',
+        'Text("全尺寸")',
+        "WTThemeColor353.keyboardBackground",
+    ):
+        require(token in one_hand, f"3.5.3 one-hand rail missing: {token}")
+
+    print("Phase 3 device-visible UI contract: PASS (3.5.3 geometry + delete hold/drag/restore/clear + 33pt long-press glide + one-hand shortcuts/rail)")
     return 0
 
 

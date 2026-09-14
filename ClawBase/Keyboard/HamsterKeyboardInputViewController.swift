@@ -24,9 +24,11 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     private var hostingController: UIHostingController<WTPhase2KeyboardRootView>?
     private var heightConstraint: NSLayoutConstraint?
     private var phase3ObserverTokens: [NSObjectProtocol] = []
+    private var deleteGestureRestoreBuffer: [Character] = []
 
     deinit {
         for token in phase3ObserverTokens { NotificationCenter.default.removeObserver(token) }
+        if let runtime { WTDeleteGestureBridge.unbind(runtime: runtime) }
     }
 
     override func viewDidLoad() {
@@ -43,6 +45,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
         engine.setInputMode(initialMode)
         let runtime = WTKeyboardRuntime(state: WTKeyboardState(inputMode: initialMode))
         wireRuntime(runtime)
+        bindDeleteGestureParity(runtime)
         registerPhase3SettingObservers()
         self.runtime = runtime
 
@@ -85,6 +88,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     override func textWillChange(_ textInput: UITextInput?) {
         super.textWillChange(textInput)
         engine.reset()
+        deleteGestureRestoreBuffer.removeAll(keepingCapacity: true)
         runtime?.composition = ""
         runtime?.candidates = []
         runtime?.candidateSourceIndexes = []
@@ -103,6 +107,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     override func didReceiveMemoryWarning() {
         serviceBinder?.persistSessionState()
         phase3Engine.syncUserData()
+        deleteGestureRestoreBuffer.removeAll(keepingCapacity: false)
         runtime?.releaseTransientCaches()
         WTPhase5SharedRuntime.noteMemoryWarning()
         _ = WTPhase5SharedRuntime.pruneTransientFiles(olderThan: 60 * 60, maxFilesPerDirectory: 8)
@@ -236,6 +241,55 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
             self?.engine.setInputMode(mode)
             self?.refreshFromEngine()
         }
+    }
+
+    private func bindDeleteGestureParity(_ runtime: WTKeyboardRuntime) {
+        WTDeleteGestureBridge.bind(
+            runtime: runtime,
+            callbacks: .init(
+                begin: { [weak self] in self?.deleteGestureRestoreBuffer.removeAll(keepingCapacity: true) },
+                deleteStep: { [weak self] in self?.performDeleteGestureStep() },
+                restoreStep: { [weak self] in self?.performDeleteGestureRestoreStep() },
+                clear: { [weak self] in self?.performDeleteGestureClear() },
+                end: { }
+            )
+        )
+    }
+
+    private func performDeleteGestureStep() {
+        if engine.context.isComposing {
+            engine.deleteBackward()
+            if let committed = engine.drainCommit(), !committed.isEmpty {
+                textDocumentProxy.insertText(committed)
+            }
+        } else {
+            if let before = textDocumentProxy.documentContextBeforeInput, let character = before.last {
+                deleteGestureRestoreBuffer.insert(character, at: 0)
+            }
+            textDocumentProxy.deleteBackward()
+        }
+        refreshFromEngine()
+    }
+
+    private func performDeleteGestureRestoreStep() {
+        guard !engine.context.isComposing, !deleteGestureRestoreBuffer.isEmpty else { return }
+        let character = deleteGestureRestoreBuffer.removeFirst()
+        textDocumentProxy.insertText(String(character))
+        refreshFromEngine()
+    }
+
+    private func performDeleteGestureClear() {
+        engine.reset()
+        deleteGestureRestoreBuffer.removeAll(keepingCapacity: true)
+
+        var deleted = 0
+        while deleted < 2048,
+              let before = textDocumentProxy.documentContextBeforeInput,
+              !before.isEmpty {
+            textDocumentProxy.deleteBackward()
+            deleted += 1
+        }
+        refreshFromEngine()
     }
 
     private func refreshFromEngine() {

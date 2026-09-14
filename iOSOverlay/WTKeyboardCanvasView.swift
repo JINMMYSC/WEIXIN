@@ -85,6 +85,14 @@ private struct WTKeyCap: View {
     let onTapPopupChanged: (Bool, String) -> Void
     @GestureState private var pressing = false
     @Environment(\.colorScheme) private var colorScheme
+    @State private var deleteGestureActive = false
+    @State private var deleteGestureDidMutate = false
+    @State private var deleteDeletedSteps = 0
+    @State private var deleteClearArmed = false
+    @State private var deleteRepeatTask: Task<Void, Never>?
+    @State private var longPressGlideActive = false
+    @State private var longPressGlideOriginIndex = 0
+    @State private var longPressGlideSelectedIndex: Int?
 
     private var styleValues: [String: String] { WTStyleCatalog353.values(for: item.style) }
 
@@ -121,6 +129,24 @@ private struct WTKeyCap: View {
                     }
                 }
             }
+
+            if isDeleteKey && deleteClearArmed {
+                HStack(spacing: 6) {
+                    WTBasicGlyphView(.delete, tint: WTChrome353.primaryText, size: 15, lineWidth: 1.4)
+                    Text("上滑清空")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(WTChrome353.primaryText)
+                }
+                .padding(.horizontal, 10)
+                .frame(height: 34)
+                .background(WTChrome353.elevatedSurface)
+                .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+                .shadow(color: WTThemeColor353.keyShadow, radius: 2.5, y: 1.5)
+                .offset(x: -42, y: -49)
+                .transition(.opacity.combined(with: .scale(scale: 0.96, anchor: .bottomTrailing)))
+                .zIndex(90)
+                .allowsHitTesting(false)
+            }
         }
         .contentShape(Rectangle())
         .gesture(dragGesture)
@@ -128,7 +154,12 @@ private struct WTKeyCap: View {
             LongPressGesture(minimumDuration: 0.36, maximumDistance: 14)
                 .onEnded { _ in
                     onTapPopupChanged(false, displayTitle)
-                    runtime.performKeyFeedback(isDeleteKey)
+                    if isDeleteKey {
+                        beginDeleteGestureIfNeeded()
+                        startRapidDelete()
+                        return
+                    }
+                    runtime.performKeyFeedback(false)
                     if item.id == "KEY_," {
                         runtime.longPressPopup = .init(
                             keyID: item.id,
@@ -139,8 +170,13 @@ private struct WTKeyCap: View {
                     } else {
                         runtime.handle(item, gesture: .longPress)
                     }
+                    beginLongPressGlideIfPossible()
                 }
         )
+        .onDisappear {
+            stopRapidDelete()
+            longPressGlideActive = false
+        }
         .accessibilityLabel(isLanguageKey ? languageMarker + "英" : displayTitle)
     }
 
@@ -160,14 +196,33 @@ private struct WTKeyCap: View {
     private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 0)
             .updating($pressing) { _, state, _ in state = true }
-            .onChanged { _ in
+            .onChanged { value in
+                if isDeleteKey {
+                    beginDeleteGestureIfNeeded()
+                    updateDeleteGesture(value)
+                    return
+                }
+                if longPressGlideActive, runtime.longPressPopup?.keyID == item.id {
+                    updateLongPressGlide(value)
+                    return
+                }
                 guard shouldShowTapPopup, runtime.longPressPopup?.keyID != item.id else { return }
                 onTapPopupChanged(true, displayTitle)
             }
             .onEnded { value in
                 onTapPopupChanged(false, displayTitle)
+
+                if isDeleteKey {
+                    finishDeleteGesture(value)
+                    return
+                }
+                if longPressGlideActive, runtime.longPressPopup?.keyID == item.id {
+                    finishLongPressGlide()
+                    return
+                }
                 if runtime.longPressPopup?.keyID == item.id { return }
-                runtime.performKeyFeedback(isDeleteKey)
+
+                runtime.performKeyFeedback(false)
                 let dx = value.translation.width
                 let dy = value.translation.height
                 if abs(dy) > abs(dx), dy < -18 {
@@ -178,6 +233,136 @@ private struct WTKeyCap: View {
                     runtime.handle(item, gesture: .tap)
                 }
             }
+    }
+
+    private func beginLongPressGlideIfPossible() {
+        guard let popup = runtime.longPressPopup,
+              popup.keyID == item.id,
+              !popup.items.isEmpty else { return }
+        longPressGlideActive = true
+        longPressGlideOriginIndex = min(max(popup.defaultIndex ?? 0, 0), popup.items.count - 1)
+        longPressGlideSelectedIndex = longPressGlideOriginIndex
+    }
+
+    private func updateLongPressGlide(_ value: DragGesture.Value) {
+        guard let popup = runtime.longPressPopup,
+              popup.keyID == item.id,
+              !popup.items.isEmpty else { return }
+        let delta = Int((value.translation.width / 33).rounded())
+        let index = min(max(longPressGlideOriginIndex + delta, 0), popup.items.count - 1)
+        guard index != longPressGlideSelectedIndex else { return }
+        longPressGlideSelectedIndex = index
+        runtime.performKeyFeedback(false)
+        runtime.longPressPopup = .init(
+            keyID: popup.keyID,
+            items: popup.items,
+            defaultIndex: index,
+            sourceRect: popup.sourceRect
+        )
+    }
+
+    private func finishLongPressGlide() {
+        defer {
+            longPressGlideActive = false
+            longPressGlideSelectedIndex = nil
+        }
+        guard let popup = runtime.longPressPopup,
+              popup.keyID == item.id,
+              !popup.items.isEmpty else { return }
+        let index = min(max(longPressGlideSelectedIndex ?? longPressGlideOriginIndex, 0), popup.items.count - 1)
+        let text = popup.items[index]
+        if text == "换行" {
+            runtime.longPressPopup = nil
+            runtime.submitReturn()
+            runtime.refreshIMEContext()
+        } else {
+            runtime.selectLongPressText(text)
+        }
+    }
+
+    private func beginDeleteGestureIfNeeded() {
+        guard !deleteGestureActive else { return }
+        deleteGestureActive = true
+        deleteGestureDidMutate = false
+        deleteDeletedSteps = 0
+        deleteClearArmed = false
+        WTDeleteGestureBridge.begin(runtime)
+    }
+
+    private func updateDeleteGesture(_ value: DragGesture.Value) {
+        let dx = value.translation.width
+        let dy = value.translation.height
+        let clear = dy < -28 && abs(dy) > abs(dx) * 0.72
+        if clear != deleteClearArmed {
+            withAnimation(.easeOut(duration: 0.10)) { deleteClearArmed = clear }
+        }
+        guard !clear else { return }
+
+        let targetSteps: Int
+        if dx < -10, abs(dx) >= abs(dy) {
+            targetSteps = min(24, max(0, Int((-dx - 10) / 22) + 1))
+        } else if abs(dx) >= abs(dy) {
+            targetSteps = 0
+        } else {
+            targetSteps = deleteDeletedSteps
+        }
+
+        while deleteDeletedSteps < targetSteps {
+            WTDeleteGestureBridge.deleteStep(runtime)
+            runtime.performKeyFeedback(true)
+            deleteDeletedSteps += 1
+            deleteGestureDidMutate = true
+        }
+        while deleteDeletedSteps > targetSteps {
+            WTDeleteGestureBridge.restoreStep(runtime)
+            runtime.performKeyFeedback(false)
+            deleteDeletedSteps -= 1
+            deleteGestureDidMutate = true
+        }
+    }
+
+    private func finishDeleteGesture(_ value: DragGesture.Value) {
+        stopRapidDelete()
+        let dx = value.translation.width
+        let dy = value.translation.height
+        let shouldClear = deleteClearArmed || (dy < -28 && abs(dy) > abs(dx) * 0.72)
+
+        if shouldClear {
+            deleteGestureDidMutate = true
+            WTDeleteGestureBridge.clear(runtime)
+            runtime.performKeyFeedback(true)
+        } else if !deleteGestureDidMutate && deleteDeletedSteps == 0 && abs(dx) < 10 && abs(dy) < 10 {
+            runtime.performKeyFeedback(true)
+            runtime.handle(item, gesture: .tap)
+        }
+
+        WTDeleteGestureBridge.end(runtime)
+        deleteGestureActive = false
+        deleteGestureDidMutate = false
+        deleteDeletedSteps = 0
+        deleteClearArmed = false
+    }
+
+    private func startRapidDelete() {
+        stopRapidDelete()
+        deleteGestureDidMutate = true
+        runtime.performKeyFeedback(true)
+        WTDeleteGestureBridge.deleteStep(runtime)
+        deleteDeletedSteps += 1
+        deleteRepeatTask = Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 110_000_000)
+            while !Task.isCancelled {
+                WTDeleteGestureBridge.deleteStep(runtime)
+                runtime.performKeyFeedback(true)
+                deleteDeletedSteps += 1
+                try? await Task.sleep(nanoseconds: 78_000_000)
+            }
+        }
+    }
+
+    private func stopRapidDelete() {
+        deleteRepeatTask?.cancel()
+        deleteRepeatTask = nil
     }
 
     private var shouldShowTapPopup: Bool {
@@ -321,28 +506,74 @@ private struct WTLongPressPopupView: View {
 
     var body: some View {
         HStack(spacing: 0) {
+            if showsLeftSingleHandShortcut { singleHandButton(.left) }
+
             ForEach(Array(popup.items.enumerated()), id: \.offset) { index, text in
-                Button {
-                    if text == "换行" {
-                        runtime.longPressPopup = nil
-                        runtime.submitReturn()
-                        runtime.refreshIMEContext()
-                    } else {
-                        runtime.selectLongPressText(text)
-                    }
-                } label: {
+                Button { commit(text) } label: {
                     Text(text)
                         .font(.system(size: 18, weight: .regular))
                         .foregroundStyle(index == popup.defaultIndex ? Color.white : WTChrome353.primaryText)
-                        .frame(width: text == "换行" ? 58 : 42, height: 50)
-                        .background(index == popup.defaultIndex ? WTChrome353.accent : Color.clear)
+                        .frame(width: text == "换行" ? 56 : 33, height: 58)
+                        .background {
+                            RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                .fill(index == popup.defaultIndex ? WTChrome353.accent : Color.clear)
+                                .padding(.vertical, 4)
+                        }
                 }
                 .buttonStyle(.plain)
             }
+
+            if showsRightSingleHandShortcut { singleHandButton(.right) }
         }
         .padding(.horizontal, 4)
         .background(WTChrome353.elevatedSurface)
         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
         .shadow(color: WTThemeColor353.keyShadow, radius: 4, y: 2)
+    }
+
+    private var letterOnlyPopup: Bool {
+        guard popup.items.count >= 2 else { return false }
+        return popup.items.allSatisfy { value in
+            value.count == 1 && value.unicodeScalars.allSatisfy { CharacterSet.letters.contains($0) }
+        }
+    }
+
+    private var sourceCenterX: Double {
+        guard let rect = popup.sourceRect else { return 207 }
+        return rect.x + rect.width / 2
+    }
+
+    private var showsLeftSingleHandShortcut: Bool {
+        letterOnlyPopup && sourceCenterX >= 138
+    }
+
+    private var showsRightSingleHandShortcut: Bool {
+        letterOnlyPopup && sourceCenterX <= 276
+    }
+
+    @ViewBuilder private func singleHandButton(_ side: WTOneHandedMode) -> some View {
+        Rectangle()
+            .fill(WTThemeColor353.normalBorder)
+            .frame(width: 0.5, height: 36)
+        Button {
+            runtime.longPressPopup = nil
+            runtime.toggleOneHanded(side)
+        } label: {
+            WTSemanticGlyph(name: side == .left ? "keyboard.arrow.left" : "keyboard.arrow.right")
+                .foregroundStyle(WTChrome353.primaryText)
+                .frame(width: 48, height: 58)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(side == .left ? "左手模式" : "右手模式")
+    }
+
+    private func commit(_ text: String) {
+        if text == "换行" {
+            runtime.longPressPopup = nil
+            runtime.submitReturn()
+            runtime.refreshIMEContext()
+        } else {
+            runtime.selectLongPressText(text)
+        }
     }
 }
