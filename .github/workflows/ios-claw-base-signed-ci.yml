@@ -6,6 +6,7 @@ on:
       - work/v14-clawbase-t9-rime
       - work/v14-clawbase-phase4
       - work/v14-phase1-7-final
+      - work/v14-phase8-package-parity
   workflow_dispatch:
 
 permissions:
@@ -17,7 +18,7 @@ concurrency:
 
 jobs:
   sign:
-    name: Build all targets, dual-profile sign, validate engineering IPA
+    name: Build all targets, sign available package profile set, validate IPA
     runs-on: macos-15
     timeout-minutes: 55
     env:
@@ -25,6 +26,9 @@ jobs:
       WT_SIGNING_P12_PASSWORD: ${{ secrets.WT_SIGNING_P12_PASSWORD }}
       WT_HOST_PROFILE_BASE64: ${{ secrets.WT_HOST_PROFILE_BASE64 }}
       WT_KEYBOARD_PROFILE_BASE64: ${{ secrets.WT_KEYBOARD_PROFILE_BASE64 }}
+      WT_SHARE_PROFILE_BASE64: ${{ secrets.WT_SHARE_PROFILE_BASE64 }}
+      WT_WIDGET_PROFILE_BASE64: ${{ secrets.WT_WIDGET_PROFILE_BASE64 }}
+      WT_VOICE_ACTIVITY_PROFILE_BASE64: ${{ secrets.WT_VOICE_ACTIVITY_PROFILE_BASE64 }}
 
     steps:
       - name: Check out active ClawBase branch
@@ -37,7 +41,7 @@ jobs:
           swift --version
           uname -m
 
-      - name: Validate signing secret presence
+      - name: Validate required signing secret presence
         shell: bash
         run: |
           set -Eeuo pipefail
@@ -45,65 +49,55 @@ jobs:
           [[ -n "$WT_SIGNING_P12_PASSWORD" ]] || { echo "Missing required secret: WT_SIGNING_P12_PASSWORD" >&2; exit 1; }
           [[ -n "$WT_HOST_PROFILE_BASE64" ]] || { echo "Missing required secret: WT_HOST_PROFILE_BASE64" >&2; exit 1; }
           [[ -n "$WT_KEYBOARD_PROFILE_BASE64" ]] || { echo "Missing required secret: WT_KEYBOARD_PROFILE_BASE64" >&2; exit 1; }
+          count=0
+          for v in "$WT_SHARE_PROFILE_BASE64" "$WT_WIDGET_PROFILE_BASE64" "$WT_VOICE_ACTIVITY_PROFILE_BASE64"; do [[ -n "$v" ]] && count=$((count + 1)); done
+          [[ "$count" == "0" || "$count" == "3" ]] || { echo "Extension provisioning secrets must be supplied as a complete Share/Widget/VoiceActivity set" >&2; exit 1; }
+          if [[ "$count" == "0" ]]; then
+            echo "Full package profiles are not configured; CI will keep the installable Host+Keyboard engineering IPA while still validating four-extension unsigned embedding."
+          else
+            echo "Full package profiles detected; CI will require and sign all four extensions."
+          fi
 
       - name: Install XcodeGen
         run: |
-          if ! command -v xcodegen >/dev/null 2>&1; then
-            brew install xcodegen
-          fi
+          if ! command -v xcodegen >/dev/null 2>&1; then brew install xcodegen; fi
 
       - name: Verify Phase 1 install/signing identity contract
         run: python3 Tools/verify_claw_base_ci.py
-
       - name: Verify Phase 3 black-box matrix
         run: python3 Tools/verify_phase3_blackbox_matrix.py
-
       - name: Verify Phase 3 functional completion
         run: python3 Tools/verify_phase3_completion.py
-
       - name: Verify Phase 3 segmentation capability contract
         run: python3 Tools/verify_phase3_segmentation_contract.py
-
       - name: Verify Phase 3 Wubi contract
         run: python3 Tools/verify_phase3_wubi_contract.py
-
       - name: Verify Phase 3 stroke contract
         run: python3 Tools/verify_phase3_stroke_contract.py
-
       - name: Verify Phase 3 T9 and candidate input chain
         run: python3 Tools/verify_phase3_input_chain.py
-
       - name: Verify Phase 3 Host settings surface
         run: python3 Tools/verify_phase3_host_surface.py
-
       - name: Validate extracted Phase 2/3 layout names
         run: python3 Tools/validate_phase3_layout_names.py
-
       - name: Verify extracted key style rendering
         run: python3 Tools/verify_ui_style_tokens.py
-
       - name: Verify 79-case UI structural coverage
         run: python3 Tools/verify_ui_79_alignment.py
-
       - name: Verify device-visible 3.5.3 runtime geometry
         run: python3 Tools/verify_phase3_device_ui_contract.py
-
       - name: Verify Phase 4 panel completion contract
         run: python3 Tools/verify_phase4_completion.py
-
       - name: Verify Phase 5 Host/system-extension/App Group/memory contract
         run: python3 Tools/verify_phase5_completion.py
-
       - name: Report Phase 6 same-device parity evidence
         run: python3 Tools/verify_phase6_evidence.py --json artifacts/phase6/evidence-report.json
-
       - name: Verify Phase 7 engineering stability/release contract
         run: python3 Tools/verify_phase7_release.py
-
       - name: Run Core and replay Swift tests
         run: swift test --parallel
 
-      - name: Build unsigned Host, Keyboard and Phase 5 system-extension targets
+      - name: Build unsigned Host plus all four embedded extensions
         run: |
           chmod +x ClawBase/ci_build_unsigned.sh ClawBase/ci_prepare_librimekit.sh
           ClawBase/ci_build_unsigned.sh
@@ -115,7 +109,6 @@ jobs:
           SIGNING_DIR="$RUNNER_TEMP/clawbase-signing"
           KEYCHAIN_PATH="$RUNNER_TEMP/clawbase-signing.keychain-db"
           KEYCHAIN_PASSWORD="$(openssl rand -hex 24)"
-
           rm -rf "$SIGNING_DIR" "$KEYCHAIN_PATH"
           mkdir -p "$SIGNING_DIR"
           chmod 700 "$SIGNING_DIR"
@@ -125,52 +118,57 @@ jobs:
           printf '%s' "$WT_KEYBOARD_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/keyboard.mobileprovision"
           chmod 600 "$SIGNING_DIR/signing.p12" "$SIGNING_DIR/host.mobileprovision" "$SIGNING_DIR/keyboard.mobileprovision"
 
+          extension_count=0
+          for v in "$WT_SHARE_PROFILE_BASE64" "$WT_WIDGET_PROFILE_BASE64" "$WT_VOICE_ACTIVITY_PROFILE_BASE64"; do [[ -n "$v" ]] && extension_count=$((extension_count + 1)); done
+          if [[ "$extension_count" == "3" ]]; then
+            printf '%s' "$WT_SHARE_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/share.mobileprovision"
+            printf '%s' "$WT_WIDGET_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/widget.mobileprovision"
+            printf '%s' "$WT_VOICE_ACTIVITY_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/voiceactivity.mobileprovision"
+            chmod 600 "$SIGNING_DIR/share.mobileprovision" "$SIGNING_DIR/widget.mobileprovision" "$SIGNING_DIR/voiceactivity.mobileprovision"
+            echo "WT_SHARE_PROFILE_PATH=$SIGNING_DIR/share.mobileprovision" >> "$GITHUB_ENV"
+            echo "WT_WIDGET_PROFILE_PATH=$SIGNING_DIR/widget.mobileprovision" >> "$GITHUB_ENV"
+            echo "WT_VOICE_ACTIVITY_PROFILE_PATH=$SIGNING_DIR/voiceactivity.mobileprovision" >> "$GITHUB_ENV"
+            echo "WT_REQUIRE_FULL_PACKAGE=1" >> "$GITHUB_ENV"
+          else
+            echo "WT_REQUIRE_FULL_PACKAGE=0" >> "$GITHUB_ENV"
+          fi
+
           security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-          security import "$SIGNING_DIR/signing.p12" \
-            -k "$KEYCHAIN_PATH" \
-            -P "$WT_SIGNING_P12_PASSWORD" \
-            -T /usr/bin/codesign \
-            -T /usr/bin/security
-          security set-key-partition-list \
-            -S apple-tool:,apple:,codesign: \
-            -s \
-            -k "$KEYCHAIN_PASSWORD" \
-            "$KEYCHAIN_PATH" >/dev/null
+          security import "$SIGNING_DIR/signing.p12" -k "$KEYCHAIN_PATH" -P "$WT_SIGNING_P12_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH" >/dev/null
           security list-keychains -d user -s "$KEYCHAIN_PATH"
-
           SIGNING_IDENTITY="$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" | awk '/[0-9A-Fa-f]{40}/ {print $2; exit}')"
           [[ -n "$SIGNING_IDENTITY" ]] || { echo "No usable codesigning identity was imported" >&2; exit 1; }
-
           echo "WT_SIGNING_IDENTITY=$SIGNING_IDENTITY" >> "$GITHUB_ENV"
           echo "WT_SIGNING_DIR=$SIGNING_DIR" >> "$GITHUB_ENV"
           echo "WT_KEYCHAIN_PATH=$KEYCHAIN_PATH" >> "$GITHUB_ENV"
+          echo "WT_HOST_PROFILE_PATH=$SIGNING_DIR/host.mobileprovision" >> "$GITHUB_ENV"
+          echo "WT_KEYBOARD_PROFILE_PATH=$SIGNING_DIR/keyboard.mobileprovision" >> "$GITHUB_ENV"
 
-      - name: Sign and validate ClawBase Host plus Keyboard
+      - name: Sign and validate package
         shell: bash
         run: |
           chmod +x ClawBase/ci_sign_and_validate.sh
-          WT_HOST_PROFILE_PATH="$WT_SIGNING_DIR/host.mobileprovision" \
-          WT_KEYBOARD_PROFILE_PATH="$WT_SIGNING_DIR/keyboard.mobileprovision" \
           ClawBase/ci_sign_and_validate.sh
 
-      - name: Upload Phase 1-7 CI logs and evidence report
+      - name: Upload CI logs and evidence report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ClawBase-3.0.1-2-phase1-7-logs-${{ github.run_attempt }}
+          name: ClawBase-3.0.1-2-phase8-logs-${{ github.run_attempt }}
           path: |
             artifacts/claw-base/logs/
             artifacts/phase6/evidence-report.json
           if-no-files-found: warn
           retention-days: 30
 
-      - name: Upload signed engineering IPA
+      - name: Upload signed IPA
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: ClawBase-3.0.1-2-phase1-7-engineering-signed-${{ github.run_attempt }}
+          name: ClawBase-3.0.1-2-phase8-signed-${{ github.run_attempt }}
           path: artifacts/claw-base/ClawBase-3.0.1-2-signed.ipa
           if-no-files-found: error
           retention-days: 30
@@ -180,12 +178,6 @@ jobs:
         shell: bash
         run: |
           set +e
-          if [[ -n "${WT_KEYCHAIN_PATH:-}" ]]; then
-            security delete-keychain "$WT_KEYCHAIN_PATH" 2>/dev/null || true
-          fi
-          if [[ -n "${WT_SIGNING_DIR:-}" ]]; then
-            rm -rf "$WT_SIGNING_DIR"
-          else
-            rm -rf "$RUNNER_TEMP/clawbase-signing"
-          fi
+          if [[ -n "${WT_KEYCHAIN_PATH:-}" ]]; then security delete-keychain "$WT_KEYCHAIN_PATH" 2>/dev/null || true; fi
+          if [[ -n "${WT_SIGNING_DIR:-}" ]]; then rm -rf "$WT_SIGNING_DIR"; else rm -rf "$RUNNER_TEMP/clawbase-signing"; fi
           rm -f "$RUNNER_TEMP/clawbase-signing.keychain-db"
