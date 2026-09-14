@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "product": "WeChat IME 3.5.3",
+  "ipa_sha256": "2336aa34f2c64ec7a6e33b5fd2bbb4b3635baaf799ea6706d362a404144f36bf",
+  "ipa_size": 263171846,
+  "host": {
+    "bundle_id": "com.tencent.wetype",
+    "short_version": "3.5.3",
+    "build": "3.5.3",
+    "minimum_os": "15.1"
+  },
+  "extensions": {
+    "wxkb_plugin.appex": {
+      "bundle_id": "com.tencent.wetype.keyboard",
+      "short_version": "3.5.3",
+      "build": "736",
+      "minimum_os": "15.1",
+      "extension_point": "com.apple.keyboard-service",
+      "principal_class": "WBInputViewController",
+      "attributes": {
+        "IsASCIICapable": true,
+        "PrefersRightToLeft": false,
+        "PrimaryLanguage": "zh-Hans",
+        "RequestsOpenAccess": true
+      }
+    },
+    "WXKBShareExtension.appex": {
+      "bundle_id": "com.tencent.wetype.shareExtension",
+      "short_version": "3.5.3",
+      "build": "736",
+      "minimum_os": "16.0",
+      "extension_point": "com.apple.share-services",
+      "principal_class": "WXKBShareExtension.WXKBShareRequestHandler",
+      "display_name": "隔空传送",
+      "activation_rule": "SUBQUERY(extensionItems, $extensionItem, SUBQUERY($extensionItem.attachments, $attachment, ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO \"public.item\" AND (NONE $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO \"public.directory\" OR ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO \"com.apple.package\") AND (NONE $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO \"public.url\" OR ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO \"public.file-url\")).@count == $extensionItem.attachments.@count).@count > 0"
+    },
+    "WBVoiceInputWidgetExtension.appex": {
+      "bundle_id": "com.tencent.wetype.liveActivity",
+      "short_version": "3.5.3",
+      "build": "736",
+      "minimum_os": "16.1",
+      "extension_point": "com.apple.widgetkit-extension",
+      "display_name": "WBVoiceInputWidget",
+      "supports_live_activities": true
+    },
+    "widgetExtension.appex": {
+      "bundle_id": "com.tencent.wetype.widget",
+      "short_version": "3.5.3",
+      "build": "736",
+      "minimum_os": "17.0",
+      "extension_point": "com.apple.widgetkit-extension",
+      "display_name": "widget",
+      "app_group_key": "WXKBAppGroupIdentifier"
+    }
+  },
+  "keyboard_layout_files": {
+    "full_symbol.ini": {"size": 150, "sha256": "58a802bc0d313f4d9a79384d02aeebf53e452ff981917024266d1144657f23e0"},
+    "full_symbol2.ini": {"size": 1922, "sha256": "4fa5e4915d3294ea5c8f09dee73da2a2340992f3f2d4865f885238039f9cd4b9"},
+    "handwriting.ini": {"size": 831, "sha256": "ff93fbcd12c2b32d0e0a8529dffed6fc754cb47601267f9b6845869fa163477b"},
+    "style.ini": {"size": 3443, "sha256": "3313c5867e6faba9dda3f56dca377afb5b3bfe11b6aa2dbe348e4d5198653d76"},
+    "t26_cn_symbol.ini": {"size": 2915, "sha256": "d123fb094dff3d592b2e0f8fe66715fbe985ff6c997ecc0d679d60b99eb439c9"},
+    "t26_en.ini": {"size": 347, "sha256": "4f6f3fe3d5f6e3a78c006ad57fa50f63dc2bfb55157a57dbb02ab164dcb83b3e"},
+    "t26_en_symbol.ini": {"size": 966, "sha256": "1d8d3619ec7242ed14e94e6ff27395eba814a3206257eda15b035b5768778931"},
+    "t26_inner_hw.ini": {"size": 66, "sha256": "28816bcd1a2a4e0d79409a5ad4131fe96fb3e387b0bf0d2b1dde748aeab94c14"},
+    "t26_pinyin.ini": {"size": 3123, "sha256": "a398c4fd2f9c8387f11981adb5b17781aebea83a2f9b92cb770a68c64c235016"},
+    "t26_wubi.ini": {"size": 112, "sha256": "f7dabc66ac41791e30c90862c3616dab99910291823602391bf99ff18444ebea"},
+    "t9_inner_hw.ini": {"size": 151, "sha256": "ff79a0d9f3de5ffaa69825ba54f99a53c4fd750013642ac02c05991a1ff8238a"},
+    "t9_number.ini": {"size": 1070, "sha256": "4a53ccd876c5f3f4285429f93e836bc7dd7311d4b7b5e49a1a3c743409f726a6"},
+    "t9_number_26.ini": {"size": 134, "sha256": "dbbe43b61c5bdbf79b48d4c051e29afe2aa3ce281a6e92529d2f4450cd1899d6"},
+    "t9_pinyin.ini": {"size": 1542, "sha256": "4be0632f232cec100525eb65b71d3702684cdc434dfc9cdfe572222e4db47a93"},
+    "t9_stroke.ini": {"size": 581, "sha256": "6305494936cd15a1c83c97c2a55f2f1d7321c6169dcdc23965fc1d27afb13153"}
+  }
+}
