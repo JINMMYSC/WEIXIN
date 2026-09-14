@@ -104,6 +104,8 @@ def behavior_cases() -> list[BlackBoxCase]:
         ("behavior-018", "chinesePinyin26", "zongguo", ("enable_fuzzy_zh_z", "type", "inspect_candidates"), "fuzzy_zh_z"),
         ("behavior-019", "chinesePinyin26", "lan", ("enable_fuzzy_l_n", "type", "inspect_candidates"), "fuzzy_l_n"),
         ("behavior-020", "chinesePinyin26", "clawtalk", ("learn_user_phrase", "reset", "type", "inspect_candidates"), "user_dictionary"),
+        ("behavior-021", "wubi", "wgkq", ("set_wubi86", "type", "inspect_candidates", "select_0", "inspect_commit"), "wubi86_schema"),
+        ("behavior-022", "wubi", "aa", ("set_wubi98", "type", "inspect_candidates", "select_0", "inspect_commit"), "wubi98_schema"),
     )
     return [BlackBoxCase(*spec) for spec in specs]
 
