@@ -70,9 +70,10 @@ def main() -> int:
         'updateLongPressGlide(value)',
         'finishLongPressGlide()',
         'value.translation.width / 33',
-        'showsHandwritingShortcut',
-        'runtime.state.present(.handwriting)',
-        'WTSemanticGlyph(name: "hand.draw")',
+        'showsLeftSingleHandShortcut',
+        'showsRightSingleHandShortcut',
+        'runtime.toggleOneHanded(side)',
+        'WTSemanticGlyph(name: side == .left ? "keyboard.arrow.left" : "keyboard.arrow.right")',
     ):
         require(token in canvas, f"device-visible key chrome/gesture missing: {token}")
     require("case shift, delete" in glyph, "clean-room shift/delete glyphs missing")
@@ -97,7 +98,7 @@ def main() -> int:
     ):
         require(token in controller, f"delete gesture controller contract missing: {token}")
 
-    print("Phase 3 device-visible UI contract: PASS (resolved T26/T9/stroke geometry + candidate/idle chrome + key glyphs + delete hold/drag/restore/clear + long-press glide/handwriting shortcut)")
+    print("Phase 3 device-visible UI contract: PASS (resolved T26/T9/stroke geometry + candidate/idle chrome + key glyphs + delete hold/drag/restore/clear + long-press glide/one-hand shortcuts)")
     return 0
 
 
