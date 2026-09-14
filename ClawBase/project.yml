@@ -17,11 +17,21 @@ targets:
       - path: Host/AppDelegate.swift
       - path: Host/SceneDelegate.swift
       - path: ../iOSApp/WTSettingsAppView.swift
+      - path: ../iOSApp/WTHostVoiceCaptureView.swift
+      - path: ../iOSApp/WTHostPhase4HandoffView.swift
+      - path: ../iOSServices/WTHostSpeechRecognitionService.swift
+      - path: ../iOSServices/WTVoiceLiveActivityController.swift
+      - path: ../iOSShared/WTVoiceActivityAttributes.swift
       - path: ../iOSShared/WTSemanticGlyph.swift
       - path: ../Sources/WeTypeReplicaCore
     dependencies:
       - target: HamsterKeyboard
         embed: true
+      - sdk: Speech.framework
+      - sdk: AVFoundation.framework
+      - sdk: PhotosUI.framework
+      - sdk: UniformTypeIdentifiers.framework
+      - sdk: ActivityKit.framework
     entitlements:
       path: Host/Host.entitlements
     settings:

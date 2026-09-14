@@ -41,11 +41,17 @@ public struct WTEmojiPanelView: View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
                 ForEach(WTEmojiContentMode.allCases, id: \.self) { mode in
-                    Button { contentMode = mode } label: {
+                    Button {
+                        contentMode = mode
+                        if mode != .emoji { runtime.state.present(.stickers) }
+                    } label: {
                         Text(mode.rawValue)
                             .font(.system(size: 13, weight: contentMode == mode ? .semibold : .regular))
                             .foregroundStyle(contentMode == mode ? WTChrome353.accent : Color.primary)
                             .frame(maxWidth: .infinity, minHeight: 34)
+                            .overlay(alignment: .bottom) {
+                                if contentMode == mode { Capsule().fill(WTChrome353.accent).frame(width: 24, height: 2) }
+                            }
                     }
                     .buttonStyle(.plain)
                 }
@@ -53,7 +59,7 @@ public struct WTEmojiPanelView: View {
             .background(WTChrome353.surface)
             .overlay(alignment: .bottom) { Rectangle().fill(WTChrome353.separator).frame(height: 0.5) }
 
-            if contentMode == .emoji { emojiGrid } else { servicePlaceholder }
+            emojiGrid
 
             Divider()
             HStack(spacing: 0) {
@@ -74,38 +80,23 @@ public struct WTEmojiPanelView: View {
         .background(WTChrome353.surface)
     }
 
-    private var emojiGrid: some View {
-        ScrollView {
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 8), spacing: 5) {
-                ForEach(Array(values.enumerated()), id: \.offset) { _, symbol in
-                    Button { runtime.chooseEmoji(symbol) } label: {
-                        Text(symbol).font(.system(size: 29)).frame(maxWidth: .infinity, minHeight: 39)
+    @ViewBuilder private var emojiGrid: some View {
+        if values.isEmpty && selected == "recent" {
+            WTPhase4PanelStateView(state: .empty, emptyTitle: "暂无最近使用", emptySubtitle: "使用过的 Emoji 会显示在这里。")
+        } else {
+            ScrollView {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 8), spacing: 5) {
+                    ForEach(Array(values.enumerated()), id: \.offset) { _, symbol in
+                        Button { runtime.chooseEmoji(symbol) } label: {
+                            Text(symbol).font(.system(size: 29)).frame(maxWidth: .infinity, minHeight: 39)
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
                 }
+                .padding(.horizontal, 6)
+                .padding(.vertical, 6)
             }
-            .padding(.horizontal, 6)
-            .padding(.vertical, 6)
         }
-    }
-
-    private var servicePlaceholder: some View {
-        VStack(spacing: 8) {
-            Spacer(minLength: 0)
-            WTSemanticGlyph(name: contentMode == .gif ? "photo.stack" : "face.smiling")
-                .font(.system(size: 26))
-                .foregroundStyle(.secondary)
-            Text(contentMode.rawValue)
-                .font(.system(size: 13, weight: .semibold))
-            Text("当前 Phase 3 只启用本地表情；在线表情包与 GIF 不伪装成已完成服务。")
-                .font(.system(size: 11))
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 24)
-            Spacer(minLength: 0)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(WTChrome353.surface)
     }
 
     private func categoryButton(id: String, system: String) -> some View {

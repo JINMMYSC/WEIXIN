@@ -20,6 +20,25 @@
     <string>$(MARKETING_VERSION)</string>
     <key>CFBundleVersion</key>
     <string>$(CURRENT_PROJECT_VERSION)</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>app.lgm.7517.phase4</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>wtreplica</string>
+            </array>
+        </dict>
+    </array>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>用于语音输入时录制你的语音。</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>用于将语音转换为文字并返回输入法。</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>用于从主应用选择图片并发送到输入法共享待发送区。</string>
+    <key>NSSupportsLiveActivities</key>
+    <true/>
     <key>WTAppGroupIdentifier</key>
     <string>$(WT_APP_GROUP_ID)</string>
     <key>ITSAppUsesNonExemptEncryption</key>
