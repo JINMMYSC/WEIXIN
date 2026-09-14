@@ -47,7 +47,7 @@ public enum WT353RuntimeLayoutGeometry {
                 input: symbol,
                 title: symbol,
                 function: "funcQuote",
-                style: "STYLE_T26_LETTER"
+                style: "STYLE_GRAY"
             )
         }
         return WTKeyboardLayout(name: base.name, baseSize: base.baseSize, items: base.items + punctuation)
