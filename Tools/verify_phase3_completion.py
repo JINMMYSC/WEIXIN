@@ -16,7 +16,9 @@ def text(path: str) -> str:
 
 def main() -> int:
     project = text("ClawBase/project.yml")
-    surface = text("ClawBase/Keyboard/WTPhase3KeyboardSurface.swift")
+    root = text("ClawBase/Keyboard/WTPhase2KeyboardRootView.swift")
+    panel_root = text("iOSOverlay/WTPanelRootView.swift")
+    runtime = text("iOSOverlay/WTKeyboardRuntime.swift")
     controller = text("ClawBase/Keyboard/HamsterKeyboardInputViewController.swift")
     session = text("ClawBase/Keyboard/WTLibrimeRimeSession.swift")
     adapter = text("HamsterBridge/WTHamsterRimeSessionAdapter.swift")
@@ -26,20 +28,25 @@ def main() -> int:
     pinyin26 = text("ClawBase/RimeSchemas/claw_pinyin26.schema.yaml")
     pinyin9 = text("ClawBase/RimeSchemas/claw_pinyin9.schema.yaml")
 
-    for source in (
-        "Keyboard/WTPhase3KeyboardSurface.swift",
-        "../iOSOverlay/WTEmojiPanelView.swift",
-        "../iOSOverlay/WTInputModeSwitcherView.swift",
-        "../iOSOverlay/WTCleanRoomIconView.swift",
+    for source in ("../iOSShared", "../iOSOverlay", "../HamsterBridge", "../iOSServices"):
+        require(source in project, f"missing complete migrated keyboard source group: {source}")
+    require("WTPanelRootView(runtime: runtime)" in root,
+            "ClawBase live root must use the complete V14 panel router")
+    for token in (
+        "case .emoji:",
+        "WTEmojiPanelView(runtime: runtime)",
+        "case .inputModeSwitcher:",
+        "WTInputModeSwitcherView(runtime: runtime)",
+        "case .number:",
+        "case .symbols:",
+        "WTLayouts353Resolved.t26Pinyin",
+        "WTLayouts353Resolved.t9Pinyin",
+        "WTLayouts353Resolved.t26Wubi",
+        "WTLayouts353Resolved.t9Stroke",
     ):
-        require(source in project, f"missing Phase 3 UI source: {source}")
-
-    require("case .emoji:" in surface and "WTEmojiPanelView(runtime: runtime)" in surface,
-            "emoji panel is not routed from the live keyboard root")
-    require("case .inputModeSwitcher:" in surface and "WTInputModeSwitcherView(runtime: runtime)" in surface,
-            "input-mode panel is not routed from the live keyboard root")
-    require("frame(height: CGFloat(keyboardLayout.baseSize.height))" in surface,
-            "measured keyboard height is not preserved")
+        require(token in panel_root, f"complete live panel router missing token: {token}")
+    require('case "emoji": state.present(.emoji)' in runtime,
+            "emoji key does not transition to the live emoji panel")
     require("WTTheme353.keyboardHeight + WTTheme353.compositionHeight + WTTheme353.candidateCompactHeight" in controller,
             "controller does not reserve the full measured keyboard+candidate height")
     require("phase3.recentEmoji" in controller and "runtime.recordEmoji" in controller,
