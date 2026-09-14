@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - work/v14-clawbase-t9-rime
+      - work/v14-clawbase-phase4
 
 permissions:
   contents: read
@@ -24,7 +25,7 @@ jobs:
       WT_KEYBOARD_PROFILE_BASE64: ${{ secrets.WT_KEYBOARD_PROFILE_BASE64 }}
 
     steps:
-      - name: Check out T9 plus Phase 3 real-engine branch
+      - name: Check out active ClawBase branch
         uses: actions/checkout@v4
 
       - name: Report runner and Xcode image
@@ -48,7 +49,7 @@ jobs:
             brew install xcodegen
           fi
 
-      - name: Verify ClawBase T9 and Phase 3 real-engine contract
+      - name: Verify ClawBase Phase 3 real-engine contract
         run: python3 Tools/verify_claw_base_ci.py
 
       - name: Verify Phase 3 black-box matrix
@@ -78,11 +79,14 @@ jobs:
       - name: Verify extracted key style rendering
         run: python3 Tools/verify_ui_style_tokens.py
 
-      - name: Verify 79-case UI static alignment
+      - name: Verify 79-case UI structural alignment
         run: python3 Tools/verify_ui_79_alignment.py
 
       - name: Verify device-visible 3.5.3 runtime geometry
         run: python3 Tools/verify_phase3_device_ui_contract.py
+
+      - name: Verify Phase 4 panel completion contract
+        run: python3 Tools/verify_phase4_completion.py
 
       - name: Build unsigned ClawBase package with pinned librime
         run: |
@@ -140,7 +144,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ClawBase-3.0.1-2-t9-phase3-logs-${{ github.run_attempt }}
+          name: ClawBase-3.0.1-2-phase4-logs-${{ github.run_attempt }}
           path: artifacts/claw-base/logs/
           if-no-files-found: warn
           retention-days: 30
@@ -149,7 +153,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: ClawBase-3.0.1-2-t9-phase3-signed-${{ github.run_attempt }}
+          name: ClawBase-3.0.1-2-phase4-signed-${{ github.run_attempt }}
           path: artifacts/claw-base/ClawBase-3.0.1-2-signed.ipa
           if-no-files-found: error
           retention-days: 30
