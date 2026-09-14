@@ -36,7 +36,7 @@ def main() -> int:
     controller = text("ClawBase/Keyboard/HamsterKeyboardInputViewController.swift")
     runtime = text("iOSOverlay/WTKeyboardRuntime.swift")
 
-    for token in ('name: "WeixinRebuild"', 'path: "Sources/WeTypeReplicaCore"', 'path: "Tests"'):
+    for token in ('name: "WeTypeReplicaCore"', 'path: "Sources/WeTypeReplicaCore"', 'path: "Tests/WeTypeReplicaCoreTests"'):
         require(token in package, f"SwiftPM Core/replay test entry missing: {token}")
 
     require("for scheme in ClawBaseShare ClawBaseWidget ClawBaseVoiceActivity" in build,
