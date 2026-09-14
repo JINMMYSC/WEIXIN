@@ -2,6 +2,15 @@ import SwiftUI
 
 public struct WTQuickSettingsView: View {
     @ObservedObject var runtime: WTKeyboardRuntime
+    @State private var simplifiedChinese = true
+    @State private var fuzzyRetroflex = false
+    @State private var fuzzyNL = false
+
+    private static let appGroupID = "group.7518554"
+    private static let simplifiedNotification = Notification.Name("WTPhase3SimplifiedChanged")
+    private static let fuzzyRetroflexNotification = Notification.Name("WTPhase3FuzzyRetroflexChanged")
+    private static let fuzzyNLNotification = Notification.Name("WTPhase3FuzzyNLChanged")
+
     public init(runtime: WTKeyboardRuntime) { self.runtime = runtime }
 
     public var body: some View {
@@ -9,6 +18,38 @@ public struct WTQuickSettingsView: View {
             WTPanelHeader(title: "快捷设置", onBack: { runtime.state.back() })
             ScrollView {
                 VStack(spacing: 8) {
+                    toggleRow("简体中文", system: "character.book.closed", isOn: Binding(
+                        get: { simplifiedChinese },
+                        set: { value in
+                            simplifiedChinese = value
+                            let defaults = UserDefaults(suiteName: Self.appGroupID)
+                            defaults?.set(value, forKey: "wt.script.simplified")
+                            NotificationCenter.default.post(name: Self.simplifiedNotification, object: NSNumber(value: value))
+                        }
+                    ))
+                    toggleRow("模糊音 z/zh · c/ch · s/sh", system: "textformat.abc", isOn: Binding(
+                        get: { fuzzyRetroflex },
+                        set: { value in
+                            fuzzyRetroflex = value
+                            let defaults = UserDefaults(suiteName: Self.appGroupID)
+                            defaults?.set(true, forKey: "wt.pinyin.blur")
+                            defaults?.set(value, forKey: "wt.fuzzy.z_zh")
+                            defaults?.set(value, forKey: "wt.fuzzy.c_ch")
+                            defaults?.set(value, forKey: "wt.fuzzy.s_sh")
+                            NotificationCenter.default.post(name: Self.fuzzyRetroflexNotification, object: NSNumber(value: value))
+                        }
+                    ))
+                    toggleRow("模糊音 n/l", system: "textformat.abc", isOn: Binding(
+                        get: { fuzzyNL },
+                        set: { value in
+                            fuzzyNL = value
+                            let defaults = UserDefaults(suiteName: Self.appGroupID)
+                            defaults?.set(true, forKey: "wt.pinyin.blur")
+                            defaults?.set(value, forKey: "wt.fuzzy.n_l")
+                            NotificationCenter.default.post(name: Self.fuzzyNLNotification, object: NSNumber(value: value))
+                        }
+                    ))
+
                     toggleRow("按键音", system: "speaker.wave.2", isOn: binding(\.keySoundEnabled))
                     toggleRow("按键振动", system: "iphone.radiowaves.left.and.right", isOn: binding(\.hapticEnabled))
                     toggleRow("智能标点", system: "textformat", isOn: binding(\.smartPunctuationEnabled))
@@ -38,6 +79,18 @@ public struct WTQuickSettingsView: View {
             }
         }
         .background(WTChrome353.panelBackground)
+        .onAppear(perform: loadPhase3Preferences)
+    }
+
+    private func loadPhase3Preferences() {
+        let defaults = UserDefaults(suiteName: Self.appGroupID)
+        simplifiedChinese = (defaults?.object(forKey: "wt.script.simplified") as? Bool) ?? true
+        let master = (defaults?.object(forKey: "wt.pinyin.blur") as? Bool) ?? true
+        let retroflex = ["wt.fuzzy.z_zh", "wt.fuzzy.c_ch", "wt.fuzzy.s_sh"].contains {
+            defaults?.object(forKey: $0) as? Bool == true
+        }
+        fuzzyRetroflex = master && retroflex
+        fuzzyNL = master && ((defaults?.object(forKey: "wt.fuzzy.n_l") as? Bool) ?? false)
     }
 
     private func binding(_ keyPath: WritableKeyPath<WTQuickSettingState, Bool>) -> Binding<Bool> {
