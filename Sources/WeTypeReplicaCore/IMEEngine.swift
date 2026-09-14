@@ -218,5 +218,22 @@ public final class WTKeyboardCoordinator {
         }
     }
 
+    /// Compatibility entry point kept for callers/tests that use the older coordinator naming.
+    public func chooseCandidate(_ index: Int) {
+        selectCandidate(at: index)
+    }
+
+    /// Keep coordinator state and the real backend schema in lockstep.
+    public func switchMode(_ mode: WTInputMode) {
+        state.switchInputMode(to: mode)
+        engine.setInputMode(mode)
+    }
+
+    /// Candidate paging belongs to the backend; composition must remain untouched by the coordinator.
+    @discardableResult
+    public func moveCandidatePage(_ direction: WTCandidatePageDirection) -> Bool {
+        engine.moveCandidatePage(direction)
+    }
+
     public func reset() { engine.reset() }
 }
