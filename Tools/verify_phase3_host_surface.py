@@ -15,16 +15,22 @@ def main() -> int:
     scene = (ROOT / "ClawBase/Host/SceneDelegate.swift").read_text(encoding="utf-8")
     info = (ROOT / "ClawBase/Host/Info.plist").read_text(encoding="utf-8")
     settings = (ROOT / "iOSApp/WTSettingsAppView.swift").read_text(encoding="utf-8")
+    setup_main_path = ROOT / "iOSApp/WTHostSettings353View.swift"
+    require(setup_main_path.is_file(), "observed 3.5.3 SetupMain renderer is missing")
+    setup_main = setup_main_path.read_text(encoding="utf-8")
 
     for path in (
         "../iOSApp/WTSettingsAppView.swift",
+        "../iOSApp/WTHostSettings353View.swift",
         "../iOSShared/WTSemanticGlyph.swift",
         "../Sources/WeTypeReplicaCore",
     ):
-        require(path in project, f"Host target lost required V14 source: {path}")
+        require(path in project, f"Host target lost required source: {path}")
 
-    require("UIHostingController(rootView: WTSettingsAppView())" in scene,
-            "ClawBase Host root must be the real V14 settings surface")
+    require("UIHostingController(rootView: WTHostSettings353View())" in scene,
+            "ClawBase Host root must use the observed 3.5.3 SetupMain renderer")
+    require("WTSettingsDetailView(destination: item.destination)" in setup_main,
+            "3.5.3 SetupMain must remain wired to the V14 detail settings controls")
     require("WTAppGroupIdentifier" in info and "$(WT_APP_GROUP_ID)" in info,
             "Host Info.plist must expose the shared App Group identifier")
 
@@ -36,8 +42,8 @@ def main() -> int:
     ):
         require(token in settings, f"Host App Group settings bridge missing: {token}")
 
-    # Phase 3 settings must be user reachable from the Host surface and use the exact
-    # keys consumed by the keyboard Release session.
+    # Phase 3 detail controls must remain reachable behind the observed 3.5.3 SetupMain root
+    # and use the exact preference keys consumed by the Release keyboard session.
     for token in (
         'case .pinyin:', 'case .fuzzyPinyin:', 'case .doublePinyin:', 'case .wubi:', 'case .stroke:',
         '"wt.pinyin.blur"', '"wt.fuzzy.z_zh"', '"wt.fuzzy.c_ch"', '"wt.fuzzy.s_sh"',
@@ -49,7 +55,7 @@ def main() -> int:
     ):
         require(token in settings, f"Host Phase 3 setting missing: {token}")
 
-    print("Phase 3 Host settings surface gate: PASS (App Group + Phase 3 controls)")
+    print("Phase 3 Host settings surface gate: PASS (3.5.3 SetupMain root + App Group + V14 detail controls)")
     return 0
 
 
