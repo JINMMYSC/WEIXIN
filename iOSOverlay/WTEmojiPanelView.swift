@@ -18,13 +18,13 @@ public struct WTEmojiPanelView: View {
     @State private var contentMode: WTEmojiContentMode = .emoji
 
     private let categories: [WTEmojiCategory] = [
-        .init(id: "faces", icon: "face.smiling", values: Array("😀😃😄😁😆🥹😅😂🤣🥲😊😇🙂🙃😉😌😍🥰😘😗😙😚😋😛😝😜🤪🤨🧐🤓😎🥸🤩🥳😏😒😞😔😟😕🙁☹️😣😖😫😩🥺😢😭😤😠😡🤬".map(String.init))),
-        .init(id: "gestures", icon: "hand.raised", values: Array("👍👎👌✌️🤞🫰🤟🤘🤙👈👉👆👇☝️👏🙌🫶🤲🤝🙏💪🫵✍️💅🤳".map(String.init))),
-        .init(id: "animals", icon: "pawprint", values: Array("🐶🐱🐭🐹🐰🦊🐻🐼🐻‍❄️🐨🐯🦁🐮🐷🐸🐵🐔🐧🐦🐤🦄🐝🦋🐌🐞🐢🐍🦎🦖🦕".map(String.init))),
-        .init(id: "food", icon: "fork.knife", values: Array("🍏🍎🍐🍊🍋🍌🍉🍇🍓🫐🍈🍒🍑🥭🍍🥥🥝🍅🥑🍆🥦🥬🥒🌶️🌽🥕🧄🧅🥔🍠".map(String.init))),
-        .init(id: "travel", icon: "car", values: Array("🚗🚕🚙🚌🚎🏎️🚓🚑🚒🚐🛻🚚🚛🚜🛵🏍️🚲🛴✈️🚀🚁⛵️🚤🚢🚆🚇🚉🏠🏢🏬🏥🏫".map(String.init))),
-        .init(id: "objects", icon: "lightbulb", values: Array("⌚️📱💻⌨️🖥️🖨️🖱️📷📹🎥📺📻⏰💡🔦🕯️💎🔧🔨🛠️🧰🔑🎁🎈🎉🎊📌📎✏️📝📚".map(String.init))),
-        .init(id: "symbols", icon: "heart", values: Array("❤️🧡💛💚💙💜🖤🤍🤎💔❣️💕💞💓💗💖💘💝💟✨⭐️🌟💫🔥💥💯✅❌⭕️❗️❓⚠️♻️".map(String.init)))
+        .init(id: "faces", icon: "face.smiling", values: ["😀","😃","😄","😁","😆","🥹","😅","😂","🤣","🥲","😊","😇","🙂","🙃","😉","😌","😍","🥰","😘","😗","😙","😚","😋","😛","😝","😜","🤪","🤨","🧐","🤓","😎","🥸","🤩","🥳","😏","😒","😞","😔","😟","😕","🙁","☹️","😣","😖","😫","😩","🥺","😢","😭","😤","😠","😡","🤬"]),
+        .init(id: "gestures", icon: "hand.raised", values: ["👍","👎","👌","✌️","🤞","🫰","🤟","🤘","🤙","👈","👉","👆","👇","☝️","👏","🙌","🫶","🤲","🤝","🙏","💪","🫵","✍️","💅","🤳"]),
+        .init(id: "animals", icon: "pawprint", values: ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐻‍❄️","🐨","🐯","🦁","🐮","🐷","🐸","🐵","🐔","🐧","🐦","🐤","🦄","🐝","🦋","🐌","🐞","🐢","🐍","🦎","🦖","🦕"]),
+        .init(id: "food", icon: "fork.knife", values: ["🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🫐","🍈","🍒","🍑","🥭","🍍","🥥","🥝","🍅","🥑","🍆","🥦","🥬","🥒","🌶️","🌽","🥕","🧄","🧅","🥔","🍠"]),
+        .init(id: "travel", icon: "car", values: ["🚗","🚕","🚙","🚌","🚎","🏎️","🚓","🚑","🚒","🚐","🛻","🚚","🚛","🚜","🛵","🏍️","🚲","🛴","✈️","🚀","🚁","⛵️","🚤","🚢","🚆","🚇","🚉","🏠","🏢","🏬","🏥","🏫"]),
+        .init(id: "objects", icon: "lightbulb", values: ["⌚️","📱","💻","⌨️","🖥️","🖨️","🖱️","📷","📹","🎥","📺","📻","⏰","💡","🔦","🕯️","💎","🔧","🔨","🛠️","🧰","🔑","🎁","🎈","🎉","🎊","📌","📎","✏️","📝","📚"]),
+        .init(id: "symbols", icon: "heart", values: ["❤️","🧡","💛","💚","💙","💜","🖤","🤍","🤎","💔","❣️","💕","💞","💓","💗","💖","💘","💝","💟","✨","⭐️","🌟","💫","🔥","💥","💯","✅","❌","⭕️","❗️","❓","⚠️","♻️"])
     ]
 
     public init(runtime: WTKeyboardRuntime) {
@@ -90,11 +90,22 @@ public struct WTEmojiPanelView: View {
     }
 
     private var servicePlaceholder: some View {
-        WTEmptyPanelState(
-            systemName: contentMode == .gif ? "photo.stack" : "face.smiling.inverse",
-            title: contentMode.rawValue,
-            subtitle: "当前 Phase 3 只启用本地表情；在线表情包与 GIF 不伪装成已完成服务。"
-        )
+        VStack(spacing: 8) {
+            Spacer(minLength: 0)
+            WTSemanticGlyph(name: contentMode == .gif ? "photo.stack" : "face.smiling")
+                .font(.system(size: 26))
+                .foregroundStyle(.secondary)
+            Text(contentMode.rawValue)
+                .font(.system(size: 13, weight: .semibold))
+            Text("当前 Phase 3 只启用本地表情；在线表情包与 GIF 不伪装成已完成服务。")
+                .font(.system(size: 11))
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 24)
+            Spacer(minLength: 0)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(WTChrome353.surface)
     }
 
     private func categoryButton(id: String, system: String) -> some View {
