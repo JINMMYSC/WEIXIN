@@ -20,6 +20,8 @@ def main() -> int:
     candidate = text("iOSOverlay/WTCandidateBar.swift")
     canvas = text("iOSOverlay/WTKeyboardCanvasView.swift")
     glyph = text("iOSOverlay/WTBasicGlyphView.swift")
+    delete_bridge = text("iOSOverlay/WTDeleteGestureBridge.swift")
+    controller = text("ClawBase/Keyboard/HamsterKeyboardInputViewController.swift")
 
     for token in (
         '"KEY_EMOTION", "KEY_SWITCH", "KEY_At"',
@@ -59,11 +61,36 @@ def main() -> int:
         'WTBasicGlyphView(.delete',
         'WTBasicGlyphView(.shift',
         'runtime.submitReturn()',
+        'Text("上滑清空")',
+        'WTDeleteGestureBridge.deleteStep(runtime)',
+        'WTDeleteGestureBridge.restoreStep(runtime)',
+        'WTDeleteGestureBridge.clear(runtime)',
+        'startRapidDelete()',
     ):
-        require(token in canvas, f"device-visible key chrome missing: {token}")
+        require(token in canvas, f"device-visible key chrome/gesture missing: {token}")
     require("case shift, delete" in glyph, "clean-room shift/delete glyphs missing")
 
-    print("Phase 3 device-visible UI contract: PASS (resolved T26/T9/stroke geometry + candidate/idle chrome + key glyphs)")
+    for token in (
+        "public let begin: () -> Void",
+        "public let deleteStep: () -> Void",
+        "public let restoreStep: () -> Void",
+        "public let clear: () -> Void",
+        "callbacks[ObjectIdentifier(runtime)]",
+    ):
+        require(token in delete_bridge, f"delete gesture bridge missing: {token}")
+
+    for token in (
+        "deleteGestureRestoreBuffer",
+        "documentContextBeforeInput",
+        "performDeleteGestureStep()",
+        "performDeleteGestureRestoreStep()",
+        "performDeleteGestureClear()",
+        "WTDeleteGestureBridge.bind(",
+        "engine.reset()",
+    ):
+        require(token in controller, f"delete gesture controller contract missing: {token}")
+
+    print("Phase 3 device-visible UI contract: PASS (resolved T26/T9/stroke geometry + candidate/idle chrome + key glyphs + delete hold/drag/restore/clear gestures)")
     return 0
 
 
