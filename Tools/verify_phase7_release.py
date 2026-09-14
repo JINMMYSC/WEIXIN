@@ -44,9 +44,19 @@ def main() -> int:
     require('-scheme "$scheme"' in build, "system-extension loop must build each selected scheme")
     require("-scheme ClawBaseHost" in build, "unsigned build must compile ClawBaseHost")
 
-    keyboard_first = sign.find("# SIGN_KEYBOARD_FIRST")
-    host_last = sign.find("# SIGN_HOST_LAST")
-    require(keyboard_first >= 0 and host_last > keyboard_first, "signing order must remain Keyboard-first / Host-last")
+    # The original script used marker comments. Phase 8 factors signing into sign_component(),
+    # so validate the executable call order instead: every embedded extension must be signed
+    # before the containing Host, and Host must be the final sign_component invocation.
+    host_call = sign.find('sign_component host "$SIGNED_APP"')
+    keyboard_call = sign.find('sign_component keyboard "$SIGNED_APP/${RELATIVE[keyboard]}"')
+    require(keyboard_call >= 0 and host_call > keyboard_call,
+            "signing order must remain Keyboard-first / Host-last")
+    for name in ("share", "widget", "voiceactivity"):
+        extension_call = sign.find(f'sign_component {name} "$SIGNED_APP/${{RELATIVE[{name}]}}"')
+        require(extension_call >= 0 and host_call > extension_call,
+                f"{name} must be signed before Host")
+    require(sign.rfind("sign_component ") == host_call,
+            "Host must remain the final signed bundle")
     for token in ("codesign --verify --strict", "codesign --verify --deep --strict", "EXPECTED_APP_GROUP", "embedded extension count"):
         require(token in sign, f"signed IPA validation missing: {token}")
 
