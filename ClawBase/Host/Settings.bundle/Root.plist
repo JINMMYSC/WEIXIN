@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>StringsTable</key>
+    <string>Root</string>
+    <key>PreferenceSpecifiers</key>
+    <array>
+        <dict>
+            <key>Type</key>
+            <string>PSGroupSpecifier</string>
+            <key>Title</key>
+            <string>💡如果此页面没有显示「键盘」
+①请从屏幕底部上滑进入多任务管理界面，找到系统「设置」并上滑退出
+②重新打开系统「设置」，下滑找到「微信输入法」。进入后再次点击「键盘」
+③启用「微信输入法」
+
+🌟允许完全访问可使你获得更丰富的输入体验，如：智能拼写、智能推荐、语音转文字、动态表情、拼写检查等。
+
+🔒我们遵照隐私政策，无论你是否开启完全访问，都会保护你的隐私和个人信息安全。</string>
+        </dict>
+    </array>
+</dict>
+</plist>
