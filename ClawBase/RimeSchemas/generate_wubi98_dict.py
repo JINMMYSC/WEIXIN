@@ -13,6 +13,19 @@ def fail(message: str) -> None:
     raise SystemExit(f"Wubi98 dictionary generation failed: {message}")
 
 
+def read_source_text(source: Path) -> str:
+    data = source.read_bytes()
+    if data.startswith((b"\xff\xfe", b"\xfe\xff")):
+        return data.decode("utf-16")
+    if data.startswith(b"\xef\xbb\xbf"):
+        return data.decode("utf-8-sig")
+    try:
+        return data.decode("utf-8")
+    except UnicodeDecodeError as error:
+        fail(f"unsupported source encoding at byte {error.start}; expected UTF-8 or BOM-marked UTF-16")
+    raise AssertionError("unreachable")
+
+
 def main() -> int:
     if len(sys.argv) != 3:
         fail("usage: generate_wubi98_dict.py <source-table> <output-dir>")
@@ -24,7 +37,7 @@ def main() -> int:
 
     rows: list[tuple[str, str]] = []
     seen: set[tuple[str, str]] = set()
-    for line_number, raw in enumerate(source.read_text(encoding="utf-8-sig").splitlines(), start=1):
+    for line_number, raw in enumerate(read_source_text(source).splitlines(), start=1):
         line = raw.strip("\r\n")
         if not line or line.startswith("#"):
             continue
