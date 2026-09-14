@@ -15,6 +15,7 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     private static let fuzzyEnEngKey = "wt.fuzzy.en_eng"
     private static let fuzzyInIngKey = "wt.fuzzy.in_ing"
     private static let doubleSchemeKey = "wt.double.scheme"
+    private static let wubiSchemeKey = "wt.wubi.scheme"
     private static let wubiMixKey = "wt.wubi.mix"
     private static let legacyFuzzyRetroflexKey = "phase3.fuzzy.retroflexInitials"
     private static let legacyFuzzyNasalLateralKey = "phase3.fuzzy.nasalLateral"
@@ -31,6 +32,7 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         - schema: wubi86
         - schema: wubi_pinyin
         - schema: wubi_trad
+        - schema: claw_wubi98
         - schema: stroke
         - schema: pinyin_simp
     """
@@ -282,6 +284,7 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
             return Self.doublePinyinSchemaID(preferences?.string(forKey: Self.doubleSchemeKey))
         }
         if mode == .wubi, baseSchemaID == "wubi86" {
+            if preferences?.string(forKey: Self.wubiSchemeKey) == "98 版" { return "claw_wubi98" }
             if !simplifiedChinese { return "wubi_trad" }
             let mixed = (preferences?.object(forKey: Self.wubiMixKey) as? Bool) ?? true
             return mixed ? "wubi_pinyin" : "wubi86"
