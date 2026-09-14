@@ -28,16 +28,28 @@ def main() -> int:
     require("WTAppGroupIdentifier" in info and "$(WT_APP_GROUP_ID)" in info,
             "Host Info.plist must expose the shared App Group identifier")
 
-    # Phase 3 settings must be user reachable from the Host surface.
+    for token in (
+        'Bundle.main.object(forInfoDictionaryKey: "WTAppGroupIdentifier")',
+        'UserDefaults(suiteName: group)',
+        'private var sharedSettingsDefaults: UserDefaults { sharedTransferDefaults }',
+        'let defaults = sharedSettingsDefaults',
+    ):
+        require(token in settings, f"Host App Group settings bridge missing: {token}")
+
+    # Phase 3 settings must be user reachable from the Host surface and use the exact
+    # keys consumed by the keyboard Release session.
     for token in (
         'case .pinyin:', 'case .fuzzyPinyin:', 'case .doublePinyin:', 'case .wubi:', 'case .stroke:',
         '"wt.pinyin.blur"', '"wt.fuzzy.z_zh"', '"wt.fuzzy.c_ch"', '"wt.fuzzy.s_sh"',
         '"wt.fuzzy.n_l"', '"wt.fuzzy.f_h"', '"wt.fuzzy.an_ang"', '"wt.fuzzy.en_eng"', '"wt.fuzzy.in_ing"',
-        '"wt.double.scheme"', '"wt.wubi.mix"',
+        '"wt.double.scheme"',
+        'stringStorage("wt.wubi.scheme", "86 版")', 'Text("98 版").tag("98 版")',
+        'appStorage("wt.wubi.mix", defaultValue: true)',
+        'appStorage("wt.stroke.wildcard", defaultValue: true)',
     ):
         require(token in settings, f"Host Phase 3 setting missing: {token}")
 
-    print("Phase 3 Host settings surface gate: PASS")
+    print("Phase 3 Host settings surface gate: PASS (App Group + Phase 3 controls)")
     return 0
 
 
