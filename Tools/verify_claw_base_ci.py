@@ -59,7 +59,8 @@ def main() -> int:
     sign_script = SIGN_SCRIPT.read_text(encoding="utf-8")
     workflow = WORKFLOW.read_text(encoding="utf-8")
 
-    # Frozen install identity.
+    # Frozen install identity. Phase 5 adds other app-extension targets, but there must still be
+    # exactly one keyboard-service target with the frozen keyboard bundle identity.
     for token in (
         "MARKETING_VERSION: 3.0.1", "CURRENT_PROJECT_VERSION: 2",
         "PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517\n",
@@ -68,7 +69,9 @@ def main() -> int:
     ):
         require(token in project, f"install identity drifted: {token}")
     require(project.count("type: application") == 1, "expected exactly one Host target")
-    require(project.count("type: app-extension") == 1, "expected exactly one Keyboard target")
+    require("HamsterKeyboard:\n    type: app-extension" in project, "Keyboard app-extension target missing")
+    require(project.count("PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517.123\n") == 1,
+            "expected exactly one frozen Keyboard bundle identity")
 
     # Current Phase 3 source topology. The old slice-only verifier intentionally no longer
     # forbids iOSApp/iOSServices/iOSOverlay: Phase 3 now depends on those migrated modules.
