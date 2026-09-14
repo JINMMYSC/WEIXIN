@@ -34,11 +34,14 @@ public struct WTPanelRootView: View {
             VStack(spacing: 0) {
                 if runtime.state.inputMode == .stroke { WTStrokeFilterView(runtime: runtime) }
                 WTKeyboardCanvasView(layout: keyboardLayout, runtime: runtime)
+                    .frame(height: CGFloat(keyboardLayout.baseSize.height))
             }
         case .number:
             WTKeyboardCanvasView(layout: numberLayout, runtime: runtime)
+                .frame(height: CGFloat(numberLayout.baseSize.height))
         case .symbols:
             WTKeyboardCanvasView(layout: symbolLayout, runtime: runtime)
+                .frame(height: CGFloat(symbolLayout.baseSize.height))
         case .emoji:
             WTEmojiPanelView(runtime: runtime)
         case .clipboard:
