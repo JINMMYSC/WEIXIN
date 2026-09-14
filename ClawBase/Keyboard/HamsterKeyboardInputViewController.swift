@@ -24,6 +24,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     private var hostingController: UIHostingController<WTPhase2KeyboardRootView>?
     private var heightConstraint: NSLayoutConstraint?
     private var phase3ObserverTokens: [NSObjectProtocol] = []
+    private var deleteGestureRestoreBuffer: [Character] = []
 
     deinit {
         for token in phase3ObserverTokens { NotificationCenter.default.removeObserver(token) }
@@ -41,6 +42,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
         engine.setInputMode(initialMode)
         let runtime = WTKeyboardRuntime(state: WTKeyboardState(inputMode: initialMode))
         wireRuntime(runtime)
+        bindDeleteGestureParity(runtime)
         registerPhase3SettingObservers()
         self.runtime = runtime
 
@@ -81,6 +83,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     override func textWillChange(_ textInput: UITextInput?) {
         super.textWillChange(textInput)
         engine.reset()
+        deleteGestureRestoreBuffer.removeAll(keepingCapacity: true)
         runtime?.composition = ""
         runtime?.candidates = []
         runtime?.candidateSourceIndexes = []
@@ -99,6 +102,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     override func didReceiveMemoryWarning() {
         serviceBinder?.persistSessionState()
         phase3Engine.syncUserData()
+        deleteGestureRestoreBuffer.removeAll(keepingCapacity: false)
         runtime?.releaseTransientCaches()
         super.didReceiveMemoryWarning()
     }
@@ -233,6 +237,62 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
             self?.engine.setInputMode(mode)
             self?.refreshFromEngine()
         }
+    }
+
+    /// WeType 3.5.3 exposes a stateful delete-key gesture: drag left to delete repeatedly,
+    /// drag back right during the same gesture to restore what was just removed, and drag up to
+    /// clear the current input.  The overlay recognizes the gesture; mutation stays here because
+    /// only UIInputViewController has the document proxy and real Rime session.
+    private func bindDeleteGestureParity(_ runtime: WTKeyboardRuntime) {
+        WTDeleteGestureBridge.bind(
+            runtime: runtime,
+            callbacks: .init(
+                begin: { [weak self] in self?.deleteGestureRestoreBuffer.removeAll(keepingCapacity: true) },
+                deleteStep: { [weak self] in self?.performDeleteGestureStep() },
+                restoreStep: { [weak self] in self?.performDeleteGestureRestoreStep() },
+                clear: { [weak self] in self?.performDeleteGestureClear() },
+                end: { }
+            )
+        )
+    }
+
+    private func performDeleteGestureStep() {
+        if engine.context.isComposing {
+            engine.deleteBackward()
+            if let committed = engine.drainCommit(), !committed.isEmpty {
+                textDocumentProxy.insertText(committed)
+            }
+        } else {
+            if let before = textDocumentProxy.documentContextBeforeInput, let character = before.last {
+                deleteGestureRestoreBuffer.insert(character, at: 0)
+            }
+            textDocumentProxy.deleteBackward()
+        }
+        refreshFromEngine()
+    }
+
+    private func performDeleteGestureRestoreStep() {
+        guard !engine.context.isComposing, !deleteGestureRestoreBuffer.isEmpty else { return }
+        let character = deleteGestureRestoreBuffer.removeFirst()
+        textDocumentProxy.insertText(String(character))
+        refreshFromEngine()
+    }
+
+    private func performDeleteGestureClear() {
+        engine.reset()
+        deleteGestureRestoreBuffer.removeAll(keepingCapacity: true)
+
+        // documentContextBeforeInput may be windowed by the host. Re-query after every deletion
+        // instead of assuming the first snapshot contains the whole field. The hard limit prevents
+        // a hostile host from keeping the loop alive indefinitely.
+        var deleted = 0
+        while deleted < 2048,
+              let before = textDocumentProxy.documentContextBeforeInput,
+              !before.isEmpty {
+            textDocumentProxy.deleteBackward()
+            deleted += 1
+        }
+        refreshFromEngine()
     }
 
     private func refreshFromEngine() {
