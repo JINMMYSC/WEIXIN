@@ -1,10 +1,13 @@
 import Foundation
 
 public enum WTFuzzyPinyinOption: String, Codable, Sendable, CaseIterable {
-    /// Retroflex/non-retroflex initials: zh/z, ch/c, sh/s.
+    /// z/zh, c/ch and s/sh are kept as one compatibility switch for legacy callers.
     case retroflexInitials
-    /// Nasal/lateral initials: n/l.
     case nasalLateral
+    case fH
+    case anAng
+    case enEng
+    case inIng
 }
 
 /// Declarative backend mapping used at the Hamster/librime integration boundary.
