@@ -78,6 +78,7 @@ targets:
     sources:
       - path: ../iOSShared
       - path: ../iOSExtensions/WTVoiceWidgetView.swift
+      - path: ../iOSExtensions/WTControlCenterButtons.swift
       - path: ../iOSExtensions/WTWidgetBundle.swift
     entitlements:
       path: Entitlements/Widget.entitlements

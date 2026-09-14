@@ -3,10 +3,12 @@ set -Eeuo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 PROJECT_DIR="$ROOT_DIR/ClawBase"
+SYSTEM_PROJECT_DIR="$ROOT_DIR/XcodeIntegration"
 ARTIFACTS_DIR="$ROOT_DIR/artifacts/claw-base"
 LOG_DIR="$ARTIFACTS_DIR/logs"
 SIM_DERIVED_DATA="$ARTIFACTS_DIR/DerivedData-Simulator"
 DEVICE_DERIVED_DATA="$ARTIFACTS_DIR/DerivedData-Device"
+SYSTEM_EXT_DERIVED_DATA="$ARTIFACTS_DIR/DerivedData-SystemExtensions"
 UNSIGNED_DIR="$ARTIFACTS_DIR/unsigned"
 IPA_PATH="$ARTIFACTS_DIR/ClawBase-3.0.1-2-unsigned.ipa"
 
@@ -62,6 +64,29 @@ run_logged device-ClawBaseHost \
     CODE_SIGN_IDENTITY= \
     DEVELOPMENT_TEAM= \
     build
+
+# Phase 5 compile-only system-extension regression. These targets are intentionally NOT embedded
+# into the ClawBase release until their distinct provisioning profiles are supplied. Building them
+# here prevents Share/Widget/Voice Activity source from being treated as a source-inventory-only PASS.
+(
+  cd "$SYSTEM_PROJECT_DIR"
+  run_logged xcodegen-system-extensions xcodegen generate --spec project.yml
+)
+for scheme in WeTypeReplicaShare WeTypeReplicaWidget WeTypeReplicaVoiceActivity; do
+  run_logged "device-$scheme" \
+    xcodebuild \
+      -project "$SYSTEM_PROJECT_DIR/WeTypeReplica.xcodeproj" \
+      -scheme "$scheme" \
+      -configuration Release \
+      -sdk iphoneos \
+      -destination 'generic/platform=iOS' \
+      -derivedDataPath "$SYSTEM_EXT_DERIVED_DATA/$scheme" \
+      CODE_SIGNING_ALLOWED=NO \
+      CODE_SIGNING_REQUIRED=NO \
+      CODE_SIGN_IDENTITY= \
+      DEVELOPMENT_TEAM= \
+      build
+done
 
 APP_PATH="$DEVICE_DERIVED_DATA/Build/Products/Release-iphoneos/ClawBaseHost.app"
 KEYBOARD_PATH="$APP_PATH/PlugIns/HamsterKeyboard.appex"
@@ -128,6 +153,7 @@ ditto "$APP_PATH" "$UNSIGNED_DIR/Payload/ClawBaseHost.app"
   echo "Keyboard extension point: $keyboard_extension_point"
   echo "Keyboard principal class: $keyboard_principal_class"
   echo "Phase 3 real librime resources: PASS"
+  echo "Phase 5 Share/Widget/Voice Activity compile-only targets: PASS"
   echo "Embedded extension count: $extension_count"
   echo "Unsigned IPA: $IPA_PATH"
   echo "Unsigned IPA SHA-256: $(/usr/bin/shasum -a 256 "$IPA_PATH" | /usr/bin/awk '{print $1}')"

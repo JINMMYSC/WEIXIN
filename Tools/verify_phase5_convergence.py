@@ -25,6 +25,9 @@ def main() -> int:
     host_ent = text("ClawBase/Host/Host.entitlements")
     keyboard_ent = text("ClawBase/Keyboard/Keyboard.entitlements")
     project = text("ClawBase/project.yml")
+    integration_project = text("XcodeIntegration/project.yml")
+    integration_config = text("XcodeIntegration/Config.xcconfig")
+    build_script = text("ClawBase/ci_build_unsigned.sh")
 
     for token in [
         f'public static let appGroupIdentifier = "{APP_GROUP}"',
@@ -74,8 +77,32 @@ def main() -> int:
     if missing:
         raise AssertionError(f"system-extension source inventory incomplete: {missing}")
 
+    # Phase 5 must compile the system-extension surfaces rather than treating source presence as PASS.
+    for token in [
+        "WeTypeReplicaShare:",
+        "WeTypeReplicaWidget:",
+        "WeTypeReplicaVoiceActivity:",
+        "WTControlCenterButtons.swift",
+        "WTQuickSendShareViewController.swift",
+        "WTVoiceLiveActivityWidget.swift",
+    ]:
+        require(integration_project, token, "system-extension Xcode targets")
+
+    for token in [
+        "WT_SHARE_BUNDLE_ID = app.lgm.7517.share",
+        "WT_WIDGET_BUNDLE_ID = app.lgm.7517.widget",
+        "WT_VOICE_ACTIVITY_BUNDLE_ID = app.lgm.7517.voiceactivity",
+    ]:
+        require(integration_config, token, "distinct system-extension identities")
+
+    for scheme in ["WeTypeReplicaShare", "WeTypeReplicaWidget", "WeTypeReplicaVoiceActivity"]:
+        require(build_script, scheme, "compile-only system-extension regression")
+    require(build_script, "CODE_SIGNING_ALLOWED=NO", "unsigned system-extension compile")
+    require(build_script, "Phase 5 Share/Widget/Voice Activity compile-only targets: PASS", "build evidence")
+
     # The current release signing contract deliberately embeds one extension (the keyboard).
-    # Widget/Share sources are audited here but are not silently added without their own profiles.
+    # Share/Widget/Voice Activity are now compile-tested, but cannot be signed/embedded without
+    # their own provisioning profiles for the distinct bundle identifiers above.
     sign_script = text("ClawBase/ci_sign_and_validate.sh")
     require(sign_script, 'embedded extension count', "signed release extension contract")
     require(sign_script, '"1"', "signed release extension count")
@@ -83,8 +110,8 @@ def main() -> int:
     print("Phase 5 convergence contract: PASS")
     print(f"Shared App Group: {APP_GROUP}")
     print("Host/Keyboard lifecycle + memory-pressure hooks: PASS")
-    print("System-extension source inventory: PASS")
-    print("Packaging scope: Host + Keyboard only until additional extension provisioning profiles are supplied")
+    print("Share/Widget/Voice Activity source inventory + unsigned Xcode compile contract: PASS")
+    print("Signed packaging scope: Host + Keyboard until separate extension provisioning profiles are supplied")
     return 0
 
 
