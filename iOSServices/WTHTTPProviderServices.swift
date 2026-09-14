@@ -22,6 +22,10 @@ private struct WTTextResponse: Codable { var text: String }
 private struct WTCloudResponse: Codable { var candidates: [WTCloudCandidate] }
 private struct WTHotWordResponse: Codable { var items: [WTHotWordItem] }
 private struct WTMediaResponse: Codable { var items: [WTMediaCard] }
+private struct WTBookVideoResponse: Codable {
+    var items: [WTBookVideoCard]?
+    var ok: Bool?
+}
 
 public final class WTHTTPProviderClient: @unchecked Sendable {
     private let session: URLSession
@@ -106,6 +110,44 @@ public final class WTHTTPMediaService {
     public func search(kind: WTMediaContentKind, query: String) async throws -> [WTMediaCard] {
         let result: WTMediaResponse = try await client.post(endpoint, body: Body(kind: kind.rawValue, query: query), response: WTMediaResponse.self)
         return result.items
+    }
+}
+
+/// Clean-room provider boundary for the rich-content surface family called BookVideo in 3.5.3.
+/// The endpoint receives only user-visible query/action data and returns replica-owned cards.
+public final class WTHTTPBookVideoService: WTBookVideoService {
+    private struct Body: Codable {
+        var operation: String
+        var query: String?
+        var kinds: [String]?
+        var action: String?
+        var card: WTBookVideoCard?
+    }
+
+    private let endpoint: WTProviderEndpoint
+    private let client: WTHTTPProviderClient
+
+    public init(endpoint: WTProviderEndpoint, client: WTHTTPProviderClient = .init()) {
+        self.endpoint = endpoint
+        self.client = client
+    }
+
+    public func search(query: String, kinds: Set<WTBookVideoKind>) async throws -> [WTBookVideoCard] {
+        let body = Body(
+            operation: "search",
+            query: query,
+            kinds: kinds.map(\.rawValue).sorted(),
+            action: nil,
+            card: nil
+        )
+        let result: WTBookVideoResponse = try await client.post(endpoint, body: body, response: WTBookVideoResponse.self)
+        return result.items ?? []
+    }
+
+    public func perform(_ action: WTBookVideoAction, card: WTBookVideoCard) async throws {
+        let body = Body(operation: "action", query: nil, kinds: nil, action: action.rawValue, card: card)
+        let result: WTBookVideoResponse = try await client.post(endpoint, body: body, response: WTBookVideoResponse.self)
+        if result.ok == false { throw WTHTTPProviderError.malformedResponse }
     }
 }
 #endif

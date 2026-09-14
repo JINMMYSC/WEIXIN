@@ -18,19 +18,22 @@ public struct WTProviderConfiguration: Codable, Equatable, Sendable {
     public var cloudCandidate: WTProviderEndpoint?
     public var hotWords: WTProviderEndpoint?
     public var media: WTProviderEndpoint?
+    public var bookVideo: WTProviderEndpoint?
 
     public init(
         ai: WTProviderEndpoint? = nil,
         translation: WTProviderEndpoint? = nil,
         cloudCandidate: WTProviderEndpoint? = nil,
         hotWords: WTProviderEndpoint? = nil,
-        media: WTProviderEndpoint? = nil
+        media: WTProviderEndpoint? = nil,
+        bookVideo: WTProviderEndpoint? = nil
     ) {
         self.ai = ai
         self.translation = translation
         self.cloudCandidate = cloudCandidate
         self.hotWords = hotWords
         self.media = media
+        self.bookVideo = bookVideo
     }
 }
 

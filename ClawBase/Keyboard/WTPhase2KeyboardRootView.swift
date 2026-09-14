@@ -10,5 +10,11 @@ struct WTPhase2KeyboardRootView: View {
 
     var body: some View {
         WTPanelRootView(runtime: runtime)
+            .task {
+                await WTAdvancedProviderBinder.install(
+                    runtime: runtime,
+                    appGroupIdentifier: "group.7518554"
+                )
+            }
     }
 }

@@ -1,0 +1,30 @@
+name: Phase 12 Advanced Parity CI
+
+on:
+  push:
+    branches:
+      - work/v14-phase12-advanced-parity
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase12-advanced-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: |
+          if ! command -v xcodegen >/dev/null 2>&1; then brew install xcodegen; fi
+      - name: Run core/provider tests
+        run: swift test --parallel
+      - name: Build unsigned iOS products
+        run: |
+          chmod +x ClawBase/ci_build_unsigned.sh ClawBase/ci_prepare_librimekit.sh
+          ClawBase/ci_build_unsigned.sh
