@@ -80,6 +80,11 @@ private struct WTKeyCap: View {
     @ObservedObject var runtime: WTKeyboardRuntime
     let onTapPopupChanged: (Bool, String) -> Void
     @GestureState private var pressing = false
+    @Environment(\.colorScheme) private var colorScheme
+
+    private var styleValues: [String: String] {
+        WTStyleCatalog353.values(for: item.style)
+    }
 
     var body: some View {
         ZStack {
@@ -95,14 +100,14 @@ private struct WTKeyCap: View {
                     WTToolIconView(tool: .emoji, tint: textColor)
                 } else {
                     Text(displayTitle)
-                        .font(.system(size: fontSize(item) * runtime.fontScale, weight: .regular))
+                        .font(.system(size: fontSize(item) * runtime.fontScale, weight: fontWeight))
                         .foregroundStyle(textColor)
                         .minimumScaleFactor(0.55)
                         .lineLimit(1)
                 }
                 if let subtitle = subtitleText, !subtitle.isEmpty, !isEmojiKey {
                     Text(subtitle)
-                        .font(.system(size: CGFloat(WTTheme353.keySubtitleFontSize)))
+                        .font(.system(size: subtitleFontSize))
                         .foregroundStyle(secondaryTextColor)
                         .lineLimit(1)
                 }
@@ -178,38 +183,95 @@ private struct WTKeyCap: View {
     private var isGray: Bool {
         let style = item.style ?? ""
         if isReturnKey { return !runtime.returnKeyPresentation.usesAccent }
-        return style.contains("STYLE_GRAY") || style.contains("STYLE_DEL") || style.contains("STYLE_SHIFT")
+        return style.contains("STYLE_GRAY") || style.contains("STYLE_DEL") || style.contains("STYLE_SHIFT") || style.contains("STYLE_123") || style.contains("STYLE_SYM") || style.contains("STYLE_RETYPE")
     }
 
     private func backgroundColor(pressed: Bool) -> Color {
+        let fallback: Color
         if usesAccentStyle {
-            return pressed ? WTThemeColor353.grayPressedKey : WTThemeColor353.accent
+            fallback = pressed ? WTThemeColor353.grayPressedKey : WTThemeColor353.accent
+        } else if pressed {
+            fallback = isGray ? WTThemeColor353.grayPressedKey : WTThemeColor353.normalPressedKey
+        } else {
+            fallback = isGray ? WTThemeColor353.grayKey : WTThemeColor353.normalKey
         }
-        if pressed { return isGray ? WTThemeColor353.grayPressedKey : WTThemeColor353.normalPressedKey }
-        return isGray ? WTThemeColor353.grayKey : WTThemeColor353.normalKey
+        return extractedColor(for: pressed ? "HLBG" : "BG", fallback: fallback)
     }
 
     private var textColor: Color {
-        if usesAccentStyle { return pressing ? WTThemeColor353.primaryText : Color(wtHex: "#FEFEFE") }
-        return WTThemeColor353.primaryText
+        let fallback: Color
+        if usesAccentStyle {
+            fallback = pressing ? WTThemeColor353.primaryText : Color(wtHex: "#FEFEFE")
+        } else {
+            fallback = WTThemeColor353.primaryText
+        }
+        if pressing, let highlighted = extractedColorIfSimple(for: "HLTINT") { return highlighted }
+        return extractedColor(for: "TINT", fallback: fallback)
     }
-    private var secondaryTextColor: Color { WTThemeColor353.secondaryText }
-    private var borderColor: Color { isGray ? WTThemeColor353.grayBorder : WTThemeColor353.normalBorder }
-    private var shadowColor: Color { WTThemeColor353.keyShadow }
+
+    private var secondaryTextColor: Color {
+        extractedColor(for: "STINT", fallback: WTThemeColor353.secondaryText)
+    }
+
+    private var borderColor: Color {
+        extractedColor(for: "BORDER", fallback: isGray ? WTThemeColor353.grayBorder : WTThemeColor353.normalBorder)
+    }
+
+    private var shadowColor: Color {
+        extractedColor(for: "SHADOW", fallback: WTThemeColor353.keyShadow)
+    }
 
     private var subtitleText: String? {
         guard let up = WTKeyActionResolver.variant(item.upInput, state: runtime.state), !up.isEmpty else { return nil }
         return up
     }
 
-    private func fontSize(_ item: WTKeyboardItem) -> CGFloat {
-        if let raw = item.font, let first = WTRawArrayParser.values(raw).compactMap({ $0 }).first,
-           let size = Double(first.filter { $0.isNumber || $0 == "." }) {
-            return CGFloat(size)
+    private var subtitleFontSize: CGFloat {
+        if let raw = item.upFont ?? styleValues["UPFONT"], let size = numericFontSize(raw, stateAware: true) {
+            return size
         }
+        return CGFloat(WTTheme353.keySubtitleFontSize)
+    }
+
+    private var fontWeight: Font.Weight {
+        let raw = item.font ?? styleValues["FONT"] ?? ""
+        return raw.lowercased().contains("medium") ? .medium : .regular
+    }
+
+    private func fontSize(_ item: WTKeyboardItem) -> CGFloat {
+        if let raw = item.font, let size = numericFontSize(raw, stateAware: true) { return size }
+        if let raw = styleValues["FONT"], let size = numericFontSize(raw, stateAware: true) { return size }
         if (item.style ?? "").contains("T26_LETTER") { return CGFloat(WTTheme353.letterFontSize) }
         if (item.style ?? "").contains("T9_ABC") { return 18 }
         return CGFloat(WTTheme353.functionFontSize)
+    }
+
+    private func numericFontSize(_ raw: String, stateAware: Bool) -> CGFloat? {
+        let selected = stateAware ? (WTKeyActionResolver.variant(raw, state: runtime.state) ?? raw) : raw
+        let components = selected.split(separator: ",").map(String.init)
+        for component in components.reversed() {
+            let numeric = component.filter { $0.isNumber || $0 == "." }
+            if let value = Double(numeric), value > 0 { return CGFloat(value) }
+        }
+        return nil
+    }
+
+    /// style.ini mostly stores a light,dark pair directly (for example
+    /// `#FFFFFF,#BBBBBB66`). Rule-driven bracket arrays are mode/state expressions rather than
+    /// appearance pairs; those deliberately fall back to the existing state machine.
+    private func extractedColor(for key: String, fallback: Color) -> Color {
+        extractedColorIfSimple(for: key) ?? fallback
+    }
+
+    private func extractedColorIfSimple(for key: String) -> Color? {
+        guard let raw = styleValues[key]?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !raw.isEmpty, !raw.hasPrefix("[") else { return nil }
+        let parts = raw.split(separator: ",", omittingEmptySubsequences: false)
+            .map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { $0.hasPrefix("#") }
+        guard let light = parts.first else { return nil }
+        let selected = colorScheme == .dark && parts.count > 1 ? parts[1] : light
+        return Color(wtHex: selected)
     }
 }
 
