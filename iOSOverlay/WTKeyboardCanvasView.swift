@@ -109,7 +109,9 @@ private struct WTKeyCap: View {
 
     private var displayTitle: String {
         if isReturnKey { return runtime.returnKeyPresentation.title }
-        return WTKeyActionResolver.visibleTitle(for: item, state: runtime.state)
+        let resolved = WTKeyActionResolver.visibleTitle(for: item, state: runtime.state)
+        if (item.style ?? "").contains("STYLE_T9_ABC") { return resolved.uppercased() }
+        return resolved
     }
 
     private var usesAccentStyle: Bool {
@@ -126,7 +128,6 @@ private struct WTKeyCap: View {
 
     private func backgroundColor(pressed: Bool) -> Color {
         if usesAccentStyle {
-            // STYLE_RETURN's active rule uses #23C891 normally and its own gray/white HLBG when pressed.
             return pressed ? WTThemeColor353.grayPressedKey : WTThemeColor353.accent
         }
         if pressed { return isGray ? WTThemeColor353.grayPressedKey : WTThemeColor353.normalPressedKey }

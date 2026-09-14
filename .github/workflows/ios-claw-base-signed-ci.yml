@@ -3,7 +3,7 @@ name: iOS ClawBase Signed CI
 on:
   push:
     branches:
-      - work/v14-clawbase-ui
+      - work/v14-clawbase-t9-rime
 
 permissions:
   contents: read
@@ -24,7 +24,7 @@ jobs:
       WT_KEYBOARD_PROFILE_BASE64: ${{ secrets.WT_KEYBOARD_PROFILE_BASE64 }}
 
     steps:
-      - name: Check out Phase 2 UI branch
+      - name: Check out T9 plus Phase 3 bridge branch
         uses: actions/checkout@v4
 
       - name: Validate signing secret presence
@@ -42,7 +42,7 @@ jobs:
             brew install xcodegen
           fi
 
-      - name: Verify ClawBase Phase 2 CI contract
+      - name: Verify ClawBase T9 and Phase 3 adapter contract
         run: python3 Tools/verify_claw_base_ci.py
 
       - name: Build unsigned ClawBase package
@@ -101,7 +101,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ClawBase-3.0.1-2-phase2-ui-logs-${{ github.run_attempt }}
+          name: ClawBase-3.0.1-2-t9-phase3-logs-${{ github.run_attempt }}
           path: artifacts/claw-base/logs/
           if-no-files-found: warn
           retention-days: 30
@@ -110,7 +110,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: ClawBase-3.0.1-2-phase2-ui-signed-${{ github.run_attempt }}
+          name: ClawBase-3.0.1-2-t9-phase3-signed-${{ github.run_attempt }}
           path: artifacts/claw-base/ClawBase-3.0.1-2-signed.ipa
           if-no-files-found: error
           retention-days: 30

@@ -33,7 +33,10 @@ targets:
     sources:
       - path: Keyboard/HamsterKeyboardInputViewController.swift
       - path: Keyboard/WTPhase2KeyboardRootView.swift
+      - path: Keyboard/WTPhase3AdapterSmokeSession.swift
       - path: ../Sources/WeTypeReplicaCore
+      - path: ../HamsterBridge/WTHamsterRimeSessionAdapter.swift
+      - path: ../HamsterBridge/WTHamsterAdapterTemplate.swift
       - path: ../iOSShared/WTSemanticGlyph.swift
       - path: ../iOSOverlay/WTKeyboardRuntime.swift
       - path: ../iOSOverlay/WTKeyboardCanvasView.swift

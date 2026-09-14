@@ -2,7 +2,8 @@ import UIKit
 import SwiftUI
 
 final class HamsterKeyboardInputViewController: UIInputViewController {
-    private let engine = WTPreviewIMEEngine()
+    private let phase3Session = WTPhase3AdapterSmokeSession()
+    private lazy var engine: WTIMEEngine = WTHamsterRimeSessionAdapter(session: phase3Session)
     private var runtime: WTKeyboardRuntime?
     private var hostingController: UIHostingController<WTPhase2KeyboardRootView>?
     private var heightConstraint: NSLayoutConstraint?
@@ -11,7 +12,13 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
         super.viewDidLoad()
         view.backgroundColor = .clear
 
-        let runtime = WTKeyboardRuntime(state: WTKeyboardState(inputMode: .chinesePinyin26))
+        #if DEBUG
+        assert(WTPhase3AdapterSmokeSession.selfTest(), "Phase 3 adapter/T9 smoke test failed")
+        #endif
+
+        let initialMode: WTInputMode = .chinesePinyin9
+        phase3Session.wtSetInputMode(initialMode)
+        let runtime = WTKeyboardRuntime(state: WTKeyboardState(inputMode: initialMode))
         runtime.toolbarEnabled = false
         wireRuntime(runtime)
         self.runtime = runtime
