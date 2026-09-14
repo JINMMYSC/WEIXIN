@@ -12,7 +12,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
-        let host = UIHostingController(rootView: WTSettingsAppView())
+        let host = UIHostingController(rootView: WTHostSettings353View())
         host.view.backgroundColor = .systemBackground
 
         let window = UIWindow(windowScene: windowScene)
