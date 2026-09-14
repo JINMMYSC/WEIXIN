@@ -29,18 +29,7 @@
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>NSExtensionActivationRule</key>
-			<dict>
-				<key>NSExtensionActivationSupportsText</key>
-				<true/>
-				<key>NSExtensionActivationSupportsImageWithMaxCount</key>
-				<integer>10</integer>
-				<key>NSExtensionActivationSupportsFileWithMaxCount</key>
-				<integer>10</integer>
-				<key>NSExtensionActivationSupportsMovieWithMaxCount</key>
-				<integer>10</integer>
-				<key>NSExtensionActivationSupportsWebURLWithMaxCount</key>
-				<integer>10</integer>
-			</dict>
+			<string>SUBQUERY(extensionItems, $extensionItem, SUBQUERY($extensionItem.attachments, $attachment, ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.item" AND (NONE $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.directory" OR ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "com.apple.package") AND (NONE $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.url" OR ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.file-url")).@count == $extensionItem.attachments.@count).@count &gt; 0</string>
 		</dict>
 	</dict>
 	<key>WTAppGroupIdentifier</key>
