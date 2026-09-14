@@ -6,7 +6,10 @@ public struct WTCandidateBar: View {
 
     public var body: some View {
         VStack(spacing: 0) {
-            if !runtime.composition.isEmpty { compositionRow }
+            // The extracted 3.5.3 stack reserves an 18pt preedit strip above the 40pt
+            // candidate row.  Keep that strip even while idle so the 224pt key canvas below
+            // never changes height when composition begins or ends.
+            compositionRow
             if runtime.candidateExpanded { expandedGrid } else { compactRow }
             if runtime.candidateActionTarget != nil { candidateActionMenu }
         }
@@ -16,10 +19,11 @@ public struct WTCandidateBar: View {
 
     private var compositionRow: some View {
         HStack(spacing: 6) {
-            Text(runtime.composition)
+            Text(runtime.composition.isEmpty ? " " : runtime.composition)
                 .font(.system(size: 12))
                 .foregroundStyle(.secondary)
                 .lineLimit(1)
+                .accessibilityHidden(runtime.composition.isEmpty)
             Spacer(minLength: 0)
         }
         .padding(.horizontal, 10)
