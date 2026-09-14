@@ -8,6 +8,7 @@ PRELUDE_DIR="$VENDOR_DIR/rime-prelude"
 LUNA_DIR="$VENDOR_DIR/rime-luna-pinyin"
 DOUBLE_PINYIN_DIR="$VENDOR_DIR/rime-double-pinyin"
 WUBI_DIR="$VENDOR_DIR/rime-wubi"
+WUBI98_DIR="$VENDOR_DIR/98wubi-tables"
 STROKE_DIR="$VENDOR_DIR/rime-stroke"
 PINYIN_SIMP_DIR="$VENDOR_DIR/rime-pinyin-simp"
 RIME_SHARED_DIR="$VENDOR_DIR/RimeSharedSupport"
@@ -30,6 +31,9 @@ RIME_DOUBLE_PINYIN_REPOSITORY="https://github.com/rime/rime-double-pinyin.git"
 RIME_DOUBLE_PINYIN_COMMIT="01a13287cbd27819be1c34fa1ddc1b3643d5001b"
 RIME_WUBI_REPOSITORY="https://github.com/rime/rime-wubi.git"
 RIME_WUBI_COMMIT="152a0d3f3efe40cae216d1e3b338242446848d07"
+WUBI98_REPOSITORY="https://github.com/yanhuacuo/98wubi-tables.git"
+WUBI98_COMMIT="6b8b6fb9d3c34e0d5e3b17211e1f1c100e7eb697"
+WUBI98_TABLE="98五笔含词表-【单义】.txt"
 RIME_STROKE_REPOSITORY="https://github.com/rime/rime-stroke.git"
 RIME_STROKE_COMMIT="1e8fff9b9494ddec23b0cbc526bcfd8171a6fd48"
 RIME_PINYIN_SIMP_REPOSITORY="https://github.com/rime/rime-pinyin-simp.git"
@@ -65,8 +69,22 @@ checkout_exact "$RIME_PRELUDE_REPOSITORY" "$RIME_PRELUDE_COMMIT" "$PRELUDE_DIR"
 checkout_exact "$RIME_LUNA_REPOSITORY" "$RIME_LUNA_COMMIT" "$LUNA_DIR"
 checkout_exact "$RIME_DOUBLE_PINYIN_REPOSITORY" "$RIME_DOUBLE_PINYIN_COMMIT" "$DOUBLE_PINYIN_DIR"
 checkout_exact "$RIME_WUBI_REPOSITORY" "$RIME_WUBI_COMMIT" "$WUBI_DIR"
+checkout_exact "$WUBI98_REPOSITORY" "$WUBI98_COMMIT" "$WUBI98_DIR"
 checkout_exact "$RIME_STROKE_REPOSITORY" "$RIME_STROKE_COMMIT" "$STROKE_DIR"
 checkout_exact "$RIME_PINYIN_SIMP_REPOSITORY" "$RIME_PINYIN_SIMP_COMMIT" "$PINYIN_SIMP_DIR"
+
+[[ -f "$WUBI98_DIR/LICENSE" ]] || {
+  echo "PHASE3 DEPENDENCY ERROR: Wubi98 LICENSE missing" >&2
+  exit 1
+}
+/usr/bin/grep -qi "public domain" "$WUBI98_DIR/LICENSE" || {
+  echo "PHASE3 DEPENDENCY ERROR: Wubi98 source is not the audited public-domain revision" >&2
+  exit 1
+}
+[[ -f "$WUBI98_DIR/$WUBI98_TABLE" ]] || {
+  echo "PHASE3 DEPENDENCY ERROR: Wubi98 source table missing" >&2
+  exit 1
+}
 
 /usr/bin/curl --fail --location --retry 3 --retry-delay 2 --output "$ARCHIVE" "$FRAMEWORKS_URL"
 archive_bytes="$(/usr/bin/stat -f '%z' "$ARCHIVE")"
@@ -91,6 +109,7 @@ echo "rime-prelude commit: $RIME_PRELUDE_COMMIT"
 echo "rime-luna-pinyin commit: $RIME_LUNA_COMMIT"
 echo "rime-double-pinyin commit: $RIME_DOUBLE_PINYIN_COMMIT"
 echo "rime-wubi commit: $RIME_WUBI_COMMIT"
+echo "Wubi98 public-domain table commit: $WUBI98_COMMIT"
 echo "rime-stroke commit: $RIME_STROKE_COMMIT"
 echo "rime-pinyin-simp commit: $RIME_PINYIN_SIMP_COMMIT"
 
@@ -129,7 +148,9 @@ copy_root_rime_data "$PINYIN_SIMP_DIR"
 cp "$ROOT_DIR/ClawBase/RimeSchemas/claw_pinyin26.schema.yaml" "$RIME_SHARED_DIR/"
 cp "$ROOT_DIR/ClawBase/RimeSchemas/claw_pinyin9.schema.yaml" "$RIME_SHARED_DIR/"
 cp "$ROOT_DIR/ClawBase/RimeSchemas/claw_double_pinyin_sogou.schema.yaml" "$RIME_SHARED_DIR/"
+cp "$ROOT_DIR/ClawBase/RimeSchemas/claw_wubi98.schema.yaml" "$RIME_SHARED_DIR/"
 python3 "$ROOT_DIR/ClawBase/RimeSchemas/generate_fuzzy_variants.py" "$RIME_SHARED_DIR"
+python3 "$ROOT_DIR/ClawBase/RimeSchemas/generate_wubi98_dict.py" "$WUBI98_DIR/$WUBI98_TABLE" "$RIME_SHARED_DIR"
 
 cat > "$RIME_SHARED_DIR/CLAW_PHASE3_PROVENANCE.txt" <<EOF
 LibrimeKit=$LIBRIMEKIT_COMMIT
@@ -141,6 +162,9 @@ rime-prelude=$RIME_PRELUDE_COMMIT
 rime-luna-pinyin=$RIME_LUNA_COMMIT
 rime-double-pinyin=$RIME_DOUBLE_PINYIN_COMMIT
 rime-wubi=$RIME_WUBI_COMMIT
+wubi98-public-domain=$WUBI98_COMMIT
+wubi98-source-table=$WUBI98_TABLE
+wubi98-license=Unlicense-public-domain
 rime-stroke=$RIME_STROKE_COMMIT
 rime-pinyin-simp=$RIME_PINYIN_SIMP_COMMIT
 claw-double-pinyin-sogou=clean-room-public-mapping
@@ -163,6 +187,8 @@ required_rime_files=(
   wubi86.dict.yaml
   wubi_pinyin.schema.yaml
   wubi_trad.schema.yaml
+  claw_wubi98.schema.yaml
+  claw_wubi98.dict.yaml
   stroke.schema.yaml
   stroke.dict.yaml
   pinyin_simp.schema.yaml
