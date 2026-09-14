@@ -120,8 +120,8 @@ public final class WTClosureIMEEngine: WTIMEEngine {
         self.commitHandler = drainCommit
         self.modeHandler = setInputMode
         self.pageHandler = moveCandidatePage
-        self.selectHandler = selectHandler
-        self.deleteHandler = deleteHandler
+        self.selectHandler = selectCandidate
+        self.deleteHandler = deleteBackward
         self.resetHandler = reset
     }
 
