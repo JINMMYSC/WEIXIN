@@ -70,7 +70,47 @@ public struct WTWordSplittingView: View {
         let value = source.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !value.isEmpty else { return }
         loading = true
-        runtime.wordSplitOptions = await runtime.splitWords(value)
+        runtime.setPanelLoadState(.loading, for: .wordSplitting)
+        var options = await runtime.splitWords(value)
+        if options.isEmpty { options = localFallback(value) }
+        runtime.wordSplitOptions = options
+        runtime.setPanelLoadState(options.isEmpty ? .empty : .ready, for: .wordSplitting)
         loading = false
+    }
+
+    private func localFallback(_ value: String) -> [WTWordSplitOption] {
+        var unique: [[String]] = []
+        func append(_ parts: [String]) {
+            let cleaned = parts.filter { !$0.isEmpty }
+            guard cleaned.count > 1, !unique.contains(cleaned) else { return }
+            unique.append(cleaned)
+        }
+
+        let whitespace = value.split(whereSeparator: { $0.isWhitespace }).map(String.init)
+        append(whitespace)
+
+        let punctuation = CharacterSet.punctuationCharacters.union(.symbols)
+        var tokens: [String] = []
+        var current = ""
+        for scalar in value.unicodeScalars {
+            if punctuation.contains(scalar) || CharacterSet.whitespacesAndNewlines.contains(scalar) {
+                if !current.isEmpty { tokens.append(current); current = "" }
+            } else {
+                current.unicodeScalars.append(scalar)
+            }
+        }
+        if !current.isEmpty { tokens.append(current) }
+        append(tokens)
+
+        let characters = value.map(String.init).filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+        if characters.count > 1 && characters.count <= 16 {
+            append(characters)
+            if characters.count >= 4 {
+                append(stride(from: 0, to: characters.count, by: 2).map { index in
+                    characters[index..<min(index + 2, characters.count)].joined()
+                })
+            }
+        }
+        return unique.prefix(4).map(WTWordSplitOption.init(parts:))
     }
 }
