@@ -5,6 +5,8 @@ on:
     branches:
       - work/v14-clawbase-t9-rime
       - work/v14-clawbase-phase4
+      - work/v14-phase1-7-final
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -15,9 +17,9 @@ concurrency:
 
 jobs:
   sign:
-    name: Build, dual-profile sign, validate ClawBase IPA
+    name: Build all targets, dual-profile sign, validate engineering IPA
     runs-on: macos-15
-    timeout-minutes: 45
+    timeout-minutes: 55
     env:
       WT_SIGNING_P12_BASE64: ${{ secrets.WT_SIGNING_P12_BASE64 }}
       WT_SIGNING_P12_PASSWORD: ${{ secrets.WT_SIGNING_P12_PASSWORD }}
@@ -32,6 +34,7 @@ jobs:
         run: |
           sw_vers
           xcodebuild -version
+          swift --version
           uname -m
 
       - name: Validate signing secret presence
@@ -49,7 +52,7 @@ jobs:
             brew install xcodegen
           fi
 
-      - name: Verify ClawBase Phase 3 real-engine contract
+      - name: Verify Phase 1 install/signing identity contract
         run: python3 Tools/verify_claw_base_ci.py
 
       - name: Verify Phase 3 black-box matrix
@@ -73,13 +76,13 @@ jobs:
       - name: Verify Phase 3 Host settings surface
         run: python3 Tools/verify_phase3_host_surface.py
 
-      - name: Validate extracted Phase 3 layout names
+      - name: Validate extracted Phase 2/3 layout names
         run: python3 Tools/validate_phase3_layout_names.py
 
       - name: Verify extracted key style rendering
         run: python3 Tools/verify_ui_style_tokens.py
 
-      - name: Verify 79-case UI structural alignment
+      - name: Verify 79-case UI structural coverage
         run: python3 Tools/verify_ui_79_alignment.py
 
       - name: Verify device-visible 3.5.3 runtime geometry
@@ -88,7 +91,19 @@ jobs:
       - name: Verify Phase 4 panel completion contract
         run: python3 Tools/verify_phase4_completion.py
 
-      - name: Build unsigned ClawBase package with pinned librime
+      - name: Verify Phase 5 Host/system-extension/App Group/memory contract
+        run: python3 Tools/verify_phase5_completion.py
+
+      - name: Report Phase 6 same-device parity evidence
+        run: python3 Tools/verify_phase6_evidence.py --json artifacts/phase6/evidence-report.json
+
+      - name: Verify Phase 7 engineering stability/release contract
+        run: python3 Tools/verify_phase7_release.py
+
+      - name: Run Core and replay Swift tests
+        run: swift test --parallel
+
+      - name: Build unsigned Host, Keyboard and Phase 5 system-extension targets
         run: |
           chmod +x ClawBase/ci_build_unsigned.sh ClawBase/ci_prepare_librimekit.sh
           ClawBase/ci_build_unsigned.sh
@@ -140,20 +155,22 @@ jobs:
           WT_KEYBOARD_PROFILE_PATH="$WT_SIGNING_DIR/keyboard.mobileprovision" \
           ClawBase/ci_sign_and_validate.sh
 
-      - name: Upload ClawBase CI logs
+      - name: Upload Phase 1-7 CI logs and evidence report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ClawBase-3.0.1-2-phase4-logs-${{ github.run_attempt }}
-          path: artifacts/claw-base/logs/
+          name: ClawBase-3.0.1-2-phase1-7-logs-${{ github.run_attempt }}
+          path: |
+            artifacts/claw-base/logs/
+            artifacts/phase6/evidence-report.json
           if-no-files-found: warn
           retention-days: 30
 
-      - name: Upload signed ClawBase IPA
+      - name: Upload signed engineering IPA
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: ClawBase-3.0.1-2-phase4-signed-${{ github.run_attempt }}
+          name: ClawBase-3.0.1-2-phase1-7-engineering-signed-${{ github.run_attempt }}
           path: artifacts/claw-base/ClawBase-3.0.1-2-signed.ipa
           if-no-files-found: error
           retention-days: 30

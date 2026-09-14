@@ -40,6 +40,7 @@ targets:
         PRODUCT_NAME: ClawBaseHost
         INFOPLIST_FILE: Host/Info.plist
         "EXCLUDED_ARCHS[sdk=iphonesimulator*]": arm64
+
   HamsterKeyboard:
     type: app-extension
     platform: iOS
@@ -96,3 +97,68 @@ targets:
         SWIFT_OBJC_BRIDGING_HEADER: Keyboard/WTLibrimeBridge.h
         HEADER_SEARCH_PATHS: "$(inherited) $(SRCROOT)/Vendor/LibrimeKit/Frameworks/librime.xcframework/ios-arm64/Headers"
         "EXCLUDED_ARCHS[sdk=iphonesimulator*]": arm64
+
+  ClawBaseShare:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: ../Sources/WeTypeReplicaCore
+      - path: ../iOSShared
+      - path: ../iOSExtensions/WTQuickSendShareView.swift
+      - path: ../iOSExtensions/WTQuickSendShareViewController.swift
+      - path: ../iOSServices/WTBonjourTransferService.swift
+    dependencies:
+      - sdk: Network.framework
+      - sdk: UniformTypeIdentifiers.framework
+    entitlements:
+      path: ../XcodeIntegration/Entitlements/Share.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517.share
+        PRODUCT_NAME: ClawBaseShare
+        INFOPLIST_FILE: ../XcodeIntegration/Plists/Share-Info.plist
+        APPLICATION_EXTENSION_API_ONLY: YES
+        CODE_SIGNING_ALLOWED: NO
+
+  ClawBaseWidget:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: ../iOSShared
+      - path: ../iOSExtensions/WTVoiceWidgetView.swift
+      - path: ../iOSExtensions/WTWidgetBundle.swift
+      - path: ../iOSExtensions/WTControlCenterButtons.swift
+    dependencies:
+      - sdk: WidgetKit.framework
+      - sdk: ActivityKit.framework
+    entitlements:
+      path: ../XcodeIntegration/Entitlements/Widget.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517.widget
+        PRODUCT_NAME: ClawBaseWidget
+        INFOPLIST_FILE: ../XcodeIntegration/Plists/Widget-Info.plist
+        APPLICATION_EXTENSION_API_ONLY: YES
+        CODE_SIGNING_ALLOWED: NO
+
+  ClawBaseVoiceActivity:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "16.1"
+    sources:
+      - path: ../iOSShared
+      - path: ../iOSExtensions/WTVoiceLiveActivityWidget.swift
+    dependencies:
+      - sdk: WidgetKit.framework
+      - sdk: ActivityKit.framework
+    entitlements:
+      path: ../XcodeIntegration/Entitlements/VoiceActivity.entitlements
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517.voiceactivity
+        PRODUCT_NAME: ClawBaseVoiceActivity
+        INFOPLIST_FILE: ../XcodeIntegration/Plists/VoiceActivity-Info.plist
+        APPLICATION_EXTENSION_API_ONLY: YES
+        CODE_SIGNING_ALLOWED: NO

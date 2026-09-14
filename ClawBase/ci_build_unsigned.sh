@@ -7,11 +7,12 @@ ARTIFACTS_DIR="$ROOT_DIR/artifacts/claw-base"
 LOG_DIR="$ARTIFACTS_DIR/logs"
 SIM_DERIVED_DATA="$ARTIFACTS_DIR/DerivedData-Simulator"
 DEVICE_DERIVED_DATA="$ARTIFACTS_DIR/DerivedData-Device"
+SYSTEM_DERIVED_ROOT="$ARTIFACTS_DIR/DerivedData-SystemExtensions"
 UNSIGNED_DIR="$ARTIFACTS_DIR/unsigned"
 IPA_PATH="$ARTIFACTS_DIR/ClawBase-3.0.1-2-unsigned.ipa"
 
 rm -rf "$ARTIFACTS_DIR"
-mkdir -p "$LOG_DIR" "$UNSIGNED_DIR/Payload"
+mkdir -p "$LOG_DIR" "$UNSIGNED_DIR/Payload" "$SYSTEM_DERIVED_ROOT"
 
 run_logged() {
   local name="$1"
@@ -35,6 +36,24 @@ run_logged phase3-dependencies "$PROJECT_DIR/ci_prepare_librimekit.sh"
   cd "$PROJECT_DIR"
   run_logged xcodegen xcodegen generate --spec project.yml
 )
+
+# Phase 5/7: compile every final system-extension target unsigned. They are intentionally not
+# embedded in the two-profile engineering IPA until dedicated provisioning profiles are supplied.
+for scheme in ClawBaseShare ClawBaseWidget ClawBaseVoiceActivity; do
+  run_logged "device-$scheme" \
+    xcodebuild \
+      -project "$PROJECT_DIR/ClawBase.xcodeproj" \
+      -scheme "$scheme" \
+      -configuration Release \
+      -sdk iphoneos \
+      -destination 'generic/platform=iOS' \
+      -derivedDataPath "$SYSTEM_DERIVED_ROOT/$scheme" \
+      CODE_SIGNING_ALLOWED=NO \
+      CODE_SIGNING_REQUIRED=NO \
+      CODE_SIGN_IDENTITY= \
+      DEVELOPMENT_TEAM= \
+      build
+done
 
 run_logged simulator-ClawBaseHost \
   xcodebuild \
@@ -112,7 +131,7 @@ keyboard_rtl="$(plist_value "$KEYBOARD_INFO" NSExtension:NSExtensionAttributes:P
 [[ "$keyboard_rtl" == "false" ]] || fail "PrefersRightToLeft must be false"
 
 extension_count="$(find "$APP_PATH/PlugIns" -mindepth 1 -maxdepth 1 -type d -name '*.appex' | wc -l | tr -d '[:space:]')"
-[[ "$extension_count" == "1" ]] || fail "Expected exactly one embedded extension, got $extension_count"
+[[ "$extension_count" == "1" ]] || fail "Expected exactly one embedded extension in the two-profile engineering IPA, got $extension_count"
 
 ditto "$APP_PATH" "$UNSIGNED_DIR/Payload/ClawBaseHost.app"
 (
@@ -128,7 +147,8 @@ ditto "$APP_PATH" "$UNSIGNED_DIR/Payload/ClawBaseHost.app"
   echo "Keyboard extension point: $keyboard_extension_point"
   echo "Keyboard principal class: $keyboard_principal_class"
   echo "Phase 3 real librime resources: PASS"
-  echo "Embedded extension count: $extension_count"
+  echo "Phase 5 system-extension unsigned compilation: PASS"
+  echo "Embedded engineering extension count: $extension_count"
   echo "Unsigned IPA: $IPA_PATH"
   echo "Unsigned IPA SHA-256: $(/usr/bin/shasum -a 256 "$IPA_PATH" | /usr/bin/awk '{print $1}')"
 } | tee "$LOG_DIR/package.log"
