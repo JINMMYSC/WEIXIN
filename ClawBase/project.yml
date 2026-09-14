@@ -32,6 +32,15 @@ targets:
     deploymentTarget: "15.1"
     sources:
       - path: Keyboard/HamsterKeyboardInputViewController.swift
+      - path: Keyboard/WTPhase2KeyboardRootView.swift
+      - path: ../Sources/WeTypeReplicaCore
+      - path: ../iOSShared/WTSemanticGlyph.swift
+      - path: ../iOSOverlay/WTKeyboardRuntime.swift
+      - path: ../iOSOverlay/WTKeyboardCanvasView.swift
+      - path: ../iOSOverlay/WTCandidateBar.swift
+      - path: ../iOSOverlay/WTThemeColor353.swift
+      - path: ../iOSOverlay/WTChrome.swift
+      - path: ../iOSOverlay/WTBasicGlyphView.swift
     entitlements:
       path: Keyboard/Keyboard.entitlements
     settings:
