@@ -3,7 +3,7 @@
 schema:
   schema_id: claw_pinyin9
   name: CLAW 九宫格
-  version: "0.1"
+  version: "0.2"
 
 switches:
   - name: ascii_mode
@@ -31,18 +31,14 @@ engine:
     - uniquifier
 
 speller:
-  alphabet: "987654321abcdefghijklmnopqrstuvwxyz"
-  initials: "987654321abcdefghijklmnopqrstuvwxyz"
+  alphabet: "23456789"
+  initials: "23456789"
   delimiter: "1'"
   algebra:
-    - derive/[abc]/2/
-    - derive/[def]/3/
-    - derive/[ghi]/4/
-    - derive/[jkl]/5/
-    - derive/[mno]/6/
-    - derive/[pqrs]/7/
-    - derive/[tuv]/8/
-    - derive/[wxyz]/9/
+    # Standard T9 transliteration: map every pinyin letter in a spelling to its keypad digit.
+    # Using independent `derive/[abc]/2/` rules only generated one-letter substitutions and did
+    # not produce complete spellings such as nihao -> 64426.
+    - xlit/abcdefghijklmnopqrstuvwxyz/22233344455566677778889999/
 
 translator:
   dictionary: luna_pinyin

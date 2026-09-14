@@ -8,6 +8,20 @@ import Foundation
 final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     private static let appGroupID = "group.7518554"
 
+    /// Rime only deploys schemas listed by `default.yaml` plus the user's `default.custom.yaml`.
+    /// The public rime-prelude default does not list CLAW's custom T9/full-pinyin schemas, so the
+    /// Release keyboard must stage this deterministic overlay before librime initializes.
+    private static let phase3DefaultCustomYAML = """
+    patch:
+      schema_list:
+        - schema: claw_pinyin26
+        - schema: claw_pinyin9
+        - schema: double_pinyin
+        - schema: wubi86
+        - schema: stroke
+        - schema: pinyin_simp
+    """
+
     private let bridge: WTLibrimeBridge
     private var logicalMode: WTInputMode = .chinesePinyin9
     private var snapshotStorage: WTLibrimeContextSnapshot
@@ -20,6 +34,7 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
             ?? fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let userURL = userRoot.appendingPathComponent("RimeUserData", isDirectory: true)
         try? fileManager.createDirectory(at: userURL, withIntermediateDirectories: true)
+        Self.stagePhase3DefaultCustomization(in: userURL)
 
         let sharedPath = sharedURL?.path ?? bundle.bundlePath
         bridge = WTLibrimeBridge(sharedDataDir: sharedPath, userDataDir: userURL.path)
@@ -73,8 +88,17 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
     func wtApplyModeDescriptor(_ descriptor: WTRimeModeDescriptor, logicalMode mode: WTInputMode) {
         logicalMode = mode
         bridge.reset()
+
         if let schemaID = descriptor.schemaID, !schemaID.isEmpty {
-            _ = bridge.selectSchema(schemaID)
+            let selected = bridge.selectSchema(schemaID)
+            if !selected {
+                // Keep 26-key/English usable even if a custom schema deployment is damaged.
+                // T9 intentionally has no Latin fallback because silently accepting digits would
+                // hide a broken Phase 3 deployment instead of producing Chinese candidates.
+                for fallback in Self.fallbackSchemaIDs(for: mode) {
+                    if bridge.selectSchema(fallback) { break }
+                }
+            }
         }
         for (option, value) in descriptor.options {
             bridge.setOption(option, value: value)
@@ -116,6 +140,28 @@ final class WTLibrimeRimeSession: WTHamsterRimeSessionProtocol {
         guard logicalMode == .chinesePinyin9 else { return input.lowercased() }
         if let digit = Self.t9GroupToDigit[input.uppercased()] { return digit }
         return input
+    }
+
+    private static func stagePhase3DefaultCustomization(in userURL: URL) {
+        let target = userURL.appendingPathComponent("default.custom.yaml", isDirectory: false)
+        let expected = Data(phase3DefaultCustomYAML.utf8)
+        if let existing = try? Data(contentsOf: target), existing == expected { return }
+        try? expected.write(to: target, options: .atomic)
+    }
+
+    private static func fallbackSchemaIDs(for mode: WTInputMode) -> [String] {
+        switch mode {
+        case .chinesePinyin26, .english26:
+            return ["pinyin_simp", "luna_pinyin"]
+        case .doublePinyin:
+            return ["double_pinyin", "pinyin_simp"]
+        case .wubi:
+            return ["wubi86"]
+        case .stroke:
+            return ["stroke"]
+        case .chinesePinyin9, .handwriting:
+            return []
+        }
     }
 
     private static let t9GroupToDigit: [String: String] = [
