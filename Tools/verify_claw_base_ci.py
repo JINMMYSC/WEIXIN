@@ -42,6 +42,9 @@ def main() -> int:
         ROOT / "ClawBase" / "RimeSchemas" / "claw_pinyin26.schema.yaml",
         ROOT / "ClawBase" / "RimeSchemas" / "claw_pinyin9.schema.yaml",
         ROOT / "ClawBase" / "RimeSchemas" / "claw_wubi98.schema.yaml",
+        ROOT / "XcodeIntegration" / "Plists" / "Share-Info.plist",
+        ROOT / "XcodeIntegration" / "Plists" / "Widget-Info.plist",
+        ROOT / "XcodeIntegration" / "Plists" / "VoiceActivity-Info.plist",
     ]
     for path in required:
         require(path.is_file(), f"missing required file: {path.relative_to(ROOT)}")
@@ -59,22 +62,31 @@ def main() -> int:
     sign_script = SIGN_SCRIPT.read_text(encoding="utf-8")
     workflow = WORKFLOW.read_text(encoding="utf-8")
 
-    # Frozen install identity. Phase 5 adds other app-extension targets, but there must still be
-    # exactly one keyboard-service target with the frozen keyboard bundle identity.
+    # Frozen install identity plus Phase 8 full extension topology.
     for token in (
         "MARKETING_VERSION: 3.0.1", "CURRENT_PROJECT_VERSION: 2",
         "PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517\n",
         "PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517.123\n",
+        "PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517.share\n",
+        "PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517.widget\n",
+        "PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517.voiceactivity\n",
         "WT_APP_GROUP_ID: group.7518554", "GENERATE_INFOPLIST_FILE: NO",
     ):
         require(token in project, f"install identity drifted: {token}")
     require(project.count("type: application") == 1, "expected exactly one Host target")
+    require(project.count("type: app-extension") == 4, "expected Keyboard + Share + Widget + VoiceActivity targets")
     require("HamsterKeyboard:\n    type: app-extension" in project, "Keyboard app-extension target missing")
+    for dependency in (
+        "- target: HamsterKeyboard\n        embed: true",
+        "- target: ClawBaseShare\n        embed: true",
+        "- target: ClawBaseWidget\n        embed: true",
+        "- target: ClawBaseVoiceActivity\n        embed: true",
+    ):
+        require(dependency in project, f"Host embedded dependency missing: {dependency.splitlines()[0]}")
     require(project.count("PRODUCT_BUNDLE_IDENTIFIER: app.lgm.7517.123\n") == 1,
             "expected exactly one frozen Keyboard bundle identity")
 
-    # Current Phase 3 source topology. The old slice-only verifier intentionally no longer
-    # forbids iOSApp/iOSServices/iOSOverlay: Phase 3 now depends on those migrated modules.
+    # Current Phase 3 source topology.
     for source in (
         "Keyboard/HamsterKeyboardInputViewController.swift",
         "Keyboard/WTPhase2KeyboardRootView.swift",
@@ -116,7 +128,6 @@ def main() -> int:
     require("libc++.tbd" in project and "CoreFoundation.framework" in project,
             "librime system dependencies missing")
 
-    # Real C API input/context/commit chain.
     for token in (
         "RimeCreateSession", "RimeGetContext", "RimeProcessKey", "RimeGetCommit",
         "RimeClearComposition", "rime_get_api", "RimeSyncUserData",
@@ -132,7 +143,6 @@ def main() -> int:
     require('schemaID: "claw_pinyin26"' in backend_profile, "full-pinyin mapping missing")
     require('schemaID: "claw_pinyin9"' in backend_profile, "T9 mapping missing")
 
-    # Exact public dependency/provenance pins.
     for token in (
         "d1a4c26aaa6dc2e081f7933ec852fc3732321efa",
         "08dd95f5d9282346f0d4a3e8fc6b20811dc3d063",
@@ -171,23 +181,49 @@ def main() -> int:
     require(host_entitlements.get("com.apple.security.application-groups") == ["group.7518554"], "Host App Group mismatch")
     require(keyboard_entitlements.get("com.apple.security.application-groups") == ["group.7518554"], "Keyboard App Group mismatch")
 
-    # Signing order and final artifact contract.
+    # Full unsigned package is the new engineering contract: all four extensions must be embedded.
     for token in (
-        'EXPECTED_VERSION="3.0.1"', 'EXPECTED_BUILD="2"',
-        "X5G6AN3DYX.app.lgm.7517", "X5G6AN3DYX.app.lgm.7517.123",
-        "group.7518554", "build_minimal_entitlements", "require_minimal_signed_entitlements",
-        "codesign --verify --strict", "codesign --verify --deep --strict",
+        'SHARE_PATH="$APP_PATH/PlugIns/ClawBaseShare.appex"',
+        'WIDGET_PATH="$APP_PATH/PlugIns/ClawBaseWidget.appex"',
+        'VOICE_ACTIVITY_PATH="$APP_PATH/PlugIns/ClawBaseVoiceActivity.appex"',
+        '[[ "$extension_count" == "4" ]]',
+        'Full extension embedding: PASS',
     ):
-        require(token in sign_script, f"signed validation missing: {token}")
-    require(sign_script.index("# SIGN_KEYBOARD_FIRST") < sign_script.index("# SIGN_HOST_LAST"),
-            "Keyboard must be signed before Host")
-    require("work/v14-clawbase-t9-rime" in workflow, "signed workflow branch mismatch")
-    require("work/v14-signed-device" not in workflow, "frozen Phase 1 branch must stay untouched")
-    require("ClawBase/ci_build_unsigned.sh" in workflow and "ClawBase/ci_sign_and_validate.sh" in workflow,
-            "signed workflow must build then sign")
-    require("ClawBase-3.0.1-2-signed.ipa" in workflow, "signed IPA artifact path mismatch")
+        require(token in build_script, f"Phase 8 unsigned package validation missing: {token}")
 
-    print("ClawBase Phase 3 final-candidate verifier passed")
+    # Signing contract supports either the existing Host+Keyboard profiles or a complete extra
+    # Share/Widget/VoiceActivity profile set. It must never partially sign an extension set.
+    for token in (
+        'EXPECTED_TEAM_ID="X5G6AN3DYX"', 'EXPECTED_APP_GROUP="group.7518554"',
+        'EXPECTED_VERSION="3.0.1"', 'EXPECTED_BUILD="2"',
+        '[host]="app.lgm.7517"', '[keyboard]="app.lgm.7517.123"',
+        '[share]="app.lgm.7517.share"', '[widget]="app.lgm.7517.widget"',
+        '[voiceactivity]="app.lgm.7517.voiceactivity"',
+        'application_id()', 'build_minimal_entitlements',
+        'Share/Widget/VoiceActivity profiles must be provided together',
+        'full package signing required but extension profiles are missing',
+        '/usr/bin/codesign --verify --strict', '/usr/bin/codesign --verify --deep --strict',
+    ):
+        require(token in sign_script, f"Phase 8 signed validation missing: {token}")
+    require(sign_script.index("sign_component keyboard") < sign_script.index("sign_component host"),
+            "Keyboard must be signed before Host")
+    require(sign_script.index("sign_component share") < sign_script.index("sign_component host"),
+            "Share must be signed before Host")
+    require(sign_script.index("sign_component widget") < sign_script.index("sign_component host"),
+            "Widget must be signed before Host")
+    require(sign_script.index("sign_component voiceactivity") < sign_script.index("sign_component host"),
+            "VoiceActivity must be signed before Host")
+
+    require("work/v14-phase8-package-parity" in workflow, "Phase 8 signed workflow branch missing")
+    require("work/v14-signed-device" not in workflow, "frozen Phase 1 branch must stay untouched")
+    for token in (
+        "WT_SHARE_PROFILE_BASE64", "WT_WIDGET_PROFILE_BASE64", "WT_VOICE_ACTIVITY_PROFILE_BASE64",
+        "ClawBase/ci_build_unsigned.sh", "ClawBase/ci_sign_and_validate.sh",
+        "ClawBase-3.0.1-2-signed.ipa",
+    ):
+        require(token in workflow, f"Phase 8 workflow contract missing: {token}")
+
+    print("ClawBase Phase 8 package verifier passed")
     return 0
 
 
@@ -195,5 +231,5 @@ if __name__ == "__main__":
     try:
         raise SystemExit(main())
     except AssertionError as error:
-        print(f"ClawBase Phase 3 verifier failed: {error}", file=sys.stderr)
+        print(f"ClawBase Phase 8 verifier failed: {error}", file=sys.stderr)
         raise SystemExit(1)
