@@ -12,13 +12,14 @@ public struct WTKeyboardCanvasView: View {
 
     public var body: some View {
         GeometryReader { proxy in
-            // Preserve the extracted layout aspect ratio.  The old independent X/Y scales
-            // squeezed the 414x224 WeType canvas whenever the preedit row appeared.
+            // WeType's extracted canvas is 414x224, but iOS keyboard widths vary by device.
+            // Keep the measured 224-point vertical geometry intact and adapt only the horizontal
+            // axis to the current keyboard width.  The controller now reserves the full candidate
+            // + preedit + 224pt canvas, so Y no longer gets compressed while composing.
             let sx = (proxy.size.width * runtime.keyboardAdjustment.widthScale) / layout.baseSize.width
             let sy = (proxy.size.height * runtime.keyboardAdjustment.heightScale) / layout.baseSize.height
-            let scale = min(sx, sy)
-            let contentWidth = layout.baseSize.width * scale
-            let contentHeight = layout.baseSize.height * scale
+            let contentWidth = layout.baseSize.width * sx
+            let contentHeight = layout.baseSize.height * sy
             let originX = (proxy.size.width - contentWidth) / 2 + proxy.size.width * runtime.keyboardAdjustment.horizontalOffset
             let originY = (proxy.size.height - contentHeight) / 2 + proxy.size.height * runtime.keyboardAdjustment.verticalOffset
             ZStack(alignment: .topLeading) {
@@ -26,18 +27,18 @@ public struct WTKeyboardCanvasView: View {
                 ForEach(layout.items, id: \.id) { item in
                     if let r = item.rect {
                         WTKeyCap(item: item, runtime: runtime)
-                            .frame(width: r.width * scale, height: r.height * scale)
+                            .frame(width: r.width * sx, height: r.height * sy)
                             .position(
-                                x: originX + (r.x + r.width / 2) * scale,
-                                y: originY + (r.y + r.height / 2) * scale
+                                x: originX + (r.x + r.width / 2) * sx,
+                                y: originY + (r.y + r.height / 2) * sy
                             )
                     }
                 }
                 if let popup = runtime.longPressPopup, let rect = popup.sourceRect {
                     WTLongPressPopupView(runtime: runtime, popup: popup)
                         .position(
-                            x: min(max(originX + (rect.x + rect.width / 2) * scale, 90), proxy.size.width - 90),
-                            y: max(originY + (rect.y - 26) * scale, 28)
+                            x: min(max(originX + (rect.x + rect.width / 2) * sx, 90), proxy.size.width - 90),
+                            y: max(originY + (rect.y - 26) * sy, 28)
                         )
                         .zIndex(50)
                 }
