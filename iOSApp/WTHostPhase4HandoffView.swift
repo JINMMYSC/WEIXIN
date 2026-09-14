@@ -53,7 +53,9 @@ public struct WTHostPhase4RouteView: View {
             WTPhase4DocumentPicker { url in stage(url: url, kind: "quick-send") }
         }
         .sheet(isPresented: $showPhotoPicker) {
-            WTPhase4PhotoPicker { data, suggestedName in stage(data: data, name: suggestedName, kind: "picture") }
+            WTPhase4PhotoPicker { data, suggestedName in
+                stagePhoto(data: data, name: suggestedName)
+            }
         }
     }
 
@@ -87,6 +89,14 @@ public struct WTHostPhase4RouteView: View {
         do {
             let data = try Data(contentsOf: url)
             try stage(data: data, name: url.lastPathComponent, kind: kind)
+        } catch {
+            failure = error.localizedDescription
+        }
+    }
+
+    private func stagePhoto(data: Data, name: String) {
+        do {
+            try stage(data: data, name: name, kind: "picture")
         } catch {
             failure = error.localizedDescription
         }
