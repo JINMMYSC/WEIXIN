@@ -3,6 +3,7 @@ import SwiftUI
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private static let appGroupID = "group.7518554"
+    private static let supportedSchemes: Set<String> = ["wetype", "wtreplica"]
     var window: UIWindow?
 
     func scene(
@@ -11,7 +12,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
-
         let host = UIHostingController(rootView: WTSettingsAppView())
         host.view.backgroundColor = .systemBackground
 
@@ -31,13 +31,13 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     private func openPhase4Route(_ url: URL) {
-        guard url.scheme?.lowercased() == "wtreplica" else { return }
+        guard let scheme = url.scheme?.lowercased(), Self.supportedSchemes.contains(scheme) else { return }
         switch url.host?.lowercased() {
         case "voice":
             openVoice(url)
-        case "quick-send":
+        case "quick-send", "quicksend", "transfer":
             presentRoute(.quickSend)
-        case "picture":
+        case "picture", "image":
             presentRoute(.picture)
         default:
             break
