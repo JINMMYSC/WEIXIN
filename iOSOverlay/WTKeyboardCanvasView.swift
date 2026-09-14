@@ -12,10 +12,13 @@ public struct WTKeyboardCanvasView: View {
 
     public var body: some View {
         GeometryReader { proxy in
+            // Preserve the extracted layout aspect ratio.  The old independent X/Y scales
+            // squeezed the 414x224 WeType canvas whenever the preedit row appeared.
             let sx = (proxy.size.width * runtime.keyboardAdjustment.widthScale) / layout.baseSize.width
             let sy = (proxy.size.height * runtime.keyboardAdjustment.heightScale) / layout.baseSize.height
-            let contentWidth = layout.baseSize.width * sx
-            let contentHeight = layout.baseSize.height * sy
+            let scale = min(sx, sy)
+            let contentWidth = layout.baseSize.width * scale
+            let contentHeight = layout.baseSize.height * scale
             let originX = (proxy.size.width - contentWidth) / 2 + proxy.size.width * runtime.keyboardAdjustment.horizontalOffset
             let originY = (proxy.size.height - contentHeight) / 2 + proxy.size.height * runtime.keyboardAdjustment.verticalOffset
             ZStack(alignment: .topLeading) {
@@ -23,18 +26,18 @@ public struct WTKeyboardCanvasView: View {
                 ForEach(layout.items, id: \.id) { item in
                     if let r = item.rect {
                         WTKeyCap(item: item, runtime: runtime)
-                            .frame(width: r.width * sx, height: r.height * sy)
+                            .frame(width: r.width * scale, height: r.height * scale)
                             .position(
-                                x: originX + (r.x + r.width / 2) * sx,
-                                y: originY + (r.y + r.height / 2) * sy
+                                x: originX + (r.x + r.width / 2) * scale,
+                                y: originY + (r.y + r.height / 2) * scale
                             )
                     }
                 }
                 if let popup = runtime.longPressPopup, let rect = popup.sourceRect {
                     WTLongPressPopupView(runtime: runtime, popup: popup)
                         .position(
-                            x: min(max(originX + (rect.x + rect.width / 2) * sx, 90), proxy.size.width - 90),
-                            y: max(originY + (rect.y - 26) * sy, 28)
+                            x: min(max(originX + (rect.x + rect.width / 2) * scale, 90), proxy.size.width - 90),
+                            y: max(originY + (rect.y - 26) * scale, 28)
                         )
                         .zIndex(50)
                 }
@@ -59,12 +62,16 @@ private struct WTKeyCap: View {
                 )
                 .shadow(color: shadowColor, radius: 0.5, y: 1)
             VStack(spacing: 0) {
-                Text(displayTitle)
-                    .font(.system(size: fontSize(item) * runtime.fontScale, weight: .regular))
-                    .foregroundStyle(textColor)
-                    .minimumScaleFactor(0.55)
-                    .lineLimit(1)
-                if let subtitle = subtitleText, !subtitle.isEmpty {
+                if isEmojiKey {
+                    WTToolIconView(tool: .emoji, tint: textColor)
+                } else {
+                    Text(displayTitle)
+                        .font(.system(size: fontSize(item) * runtime.fontScale, weight: .regular))
+                        .foregroundStyle(textColor)
+                        .minimumScaleFactor(0.55)
+                        .lineLimit(1)
+                }
+                if let subtitle = subtitleText, !subtitle.isEmpty, !isEmojiKey {
                     Text(subtitle)
                         .font(.system(size: 9))
                         .foregroundStyle(secondaryTextColor)
@@ -102,6 +109,8 @@ private struct WTKeyCap: View {
     private var isDeleteKey: Bool {
         item.function == "delete" || item.id.uppercased().contains("DEL") || item.id.uppercased().contains("BACKSPACE")
     }
+
+    private var isEmojiKey: Bool { item.function == "emoji" }
 
     private var isReturnKey: Bool {
         item.id == "KEY_RETURN" || item.function == "return" || item.function == "newline"
