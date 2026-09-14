@@ -76,8 +76,13 @@ def main() -> int:
     require(generator_path.is_file(), "Wubi98 generator missing")
     generator = generator_path.read_text(encoding="utf-8")
     for token in (
-        'encoding="utf-8-sig"', 'line.split("\\t")', 'name: claw_wubi98',
-        'columns:', 'MIN_ENTRIES = 10000',
+        'data.startswith((b"\\xff\\xfe", b"\\xfe\\xff"))',
+        'data.decode("utf-16")',
+        'data.decode("utf-8-sig")',
+        'line.split("\\t")',
+        'name: claw_wubi98',
+        'columns:',
+        'MIN_ENTRIES = 10000',
     ):
         require(token in generator, f"Wubi98 generator contract missing: {token}")
 
