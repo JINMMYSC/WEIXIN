@@ -50,6 +50,12 @@ jobs:
           chmod +x ClawBase/ci_build_unsigned.sh
           ClawBase/ci_build_unsigned.sh
 
+      - name: Probe pinned public LibrimeKit frameworks
+        shell: bash
+        run: |
+          chmod +x ClawBase/ci_probe_librimekit.sh
+          ClawBase/ci_probe_librimekit.sh
+
       - name: Prepare ephemeral signing identity and profiles
         shell: bash
         run: |
