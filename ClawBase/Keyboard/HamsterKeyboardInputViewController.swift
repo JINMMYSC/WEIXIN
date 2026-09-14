@@ -3,6 +3,9 @@ import SwiftUI
 
 final class HamsterKeyboardInputViewController: UIInputViewController {
     private static let appGroupID = "group.7518554"
+    private static let simplifiedNotification = Notification.Name("WTPhase3SimplifiedChanged")
+    private static let fuzzyRetroflexNotification = Notification.Name("WTPhase3FuzzyRetroflexChanged")
+    private static let fuzzyNLNotification = Notification.Name("WTPhase3FuzzyNLChanged")
 
     private lazy var phase3Session: WTHamsterRimeSessionProtocol = {
         #if DEBUG
@@ -20,6 +23,11 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     private var serviceBinder: WTKeyboardServiceBinder?
     private var hostingController: UIHostingController<WTPhase2KeyboardRootView>?
     private var heightConstraint: NSLayoutConstraint?
+    private var phase3ObserverTokens: [NSObjectProtocol] = []
+
+    deinit {
+        for token in phase3ObserverTokens { NotificationCenter.default.removeObserver(token) }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,12 +37,11 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
         assert(WTPhase3AdapterSmokeSession.selfTest(), "Phase 3 adapter/T9 smoke test failed")
         #endif
 
-        // The binder restores the last Chinese/English mode after the closures are wired.
-        // T9 is only the cold-install fallback; extension relaunch no longer forces T9 every time.
         let initialMode: WTInputMode = .chinesePinyin9
         engine.setInputMode(initialMode)
         let runtime = WTKeyboardRuntime(state: WTKeyboardState(inputMode: initialMode))
         wireRuntime(runtime)
+        registerPhase3SettingObservers()
         self.runtime = runtime
 
         let services = WTKeyboardServiceBinder(
@@ -48,6 +55,13 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
         services.bind()
         serviceBinder = services
 
+        // The screenshot-reference surface does not show the optional tool strip between the
+        // candidate row and keys. Keep it hidden on a fresh install, but respect an explicit
+        // shared setting if the user enabled it in the containing app.
+        let defaults = UserDefaults(suiteName: Self.appGroupID)
+        runtime.toolbarEnabled = (defaults?.object(forKey: WTSharedPreferenceKey.toolbarEnabled) as? Bool) ?? false
+
+        applyStoredPhase3Settings()
         refreshFromEngine()
         installPhase2Root(runtime: runtime)
         installKeyboardHeightConstraint()
@@ -57,6 +71,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
         super.viewWillAppear(animated)
         serviceBinder?.reloadSharedSettings()
         serviceBinder?.consumeServiceResponses()
+        applyStoredPhase3Settings()
         refreshFromEngine()
     }
 
@@ -67,8 +82,6 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
 
     override func textWillChange(_ textInput: UITextInput?) {
         super.textWillChange(textInput)
-        // Composition belongs to one host text session. Never leak old Rime preedit/candidates
-        // when iOS moves the keyboard to a different field/application.
         engine.reset()
         runtime?.composition = ""
         runtime?.candidates = []
@@ -92,8 +105,6 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     }
 
     private func installKeyboardHeightConstraint() {
-        // The extracted WeType 3.5.3 canvas is exactly 414x224. Candidate/preedit is
-        // 40+18 points, so 282pt keeps every key's measured Y coordinate stable.
         let measuredHeight = WTTheme353.keyboardHeight + WTTheme353.compositionHeight + WTTheme353.candidateCompactHeight
         let constraint = view.heightAnchor.constraint(equalToConstant: CGFloat(measuredHeight))
         constraint.priority = UILayoutPriority(999)
@@ -121,19 +132,46 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
         hostingController = host
     }
 
-    private func wireRuntime(_ runtime: WTKeyboardRuntime) {
-        runtime.insertText = { [weak self] text in
-            self?.textDocumentProxy.insertText(text)
+    private func registerPhase3SettingObservers() {
+        let center = NotificationCenter.default
+        phase3ObserverTokens.append(center.addObserver(forName: Self.simplifiedNotification, object: nil, queue: .main) { [weak self] note in
+            guard let value = note.object as? NSNumber else { return }
+            self?.phase3Engine.setSimplifiedChinese(value.boolValue)
+            self?.refreshFromEngine()
+        })
+        phase3ObserverTokens.append(center.addObserver(forName: Self.fuzzyRetroflexNotification, object: nil, queue: .main) { [weak self] note in
+            guard let value = note.object as? NSNumber else { return }
+            self?.phase3Engine.setFuzzyPinyin(.retroflexInitials, enabled: value.boolValue)
+            self?.refreshFromEngine()
+        })
+        phase3ObserverTokens.append(center.addObserver(forName: Self.fuzzyNLNotification, object: nil, queue: .main) { [weak self] note in
+            guard let value = note.object as? NSNumber else { return }
+            self?.phase3Engine.setFuzzyPinyin(.nasalLateral, enabled: value.boolValue)
+            self?.refreshFromEngine()
+        })
+    }
+
+    private func applyStoredPhase3Settings() {
+        let defaults = UserDefaults(suiteName: Self.appGroupID)
+        let simplified = (defaults?.object(forKey: "wt.script.simplified") as? Bool) ?? true
+        let master = (defaults?.object(forKey: "wt.pinyin.blur") as? Bool) ?? true
+        let retroflex = master && ["wt.fuzzy.z_zh", "wt.fuzzy.c_ch", "wt.fuzzy.s_sh"].contains {
+            defaults?.object(forKey: $0) as? Bool == true
         }
+        let nl = master && ((defaults?.object(forKey: "wt.fuzzy.n_l") as? Bool) ?? false)
+        phase3Engine.setSimplifiedChinese(simplified)
+        phase3Engine.setFuzzyPinyin(.retroflexInitials, enabled: retroflex)
+        phase3Engine.setFuzzyPinyin(.nasalLateral, enabled: nl)
+    }
+
+    private func wireRuntime(_ runtime: WTKeyboardRuntime) {
+        runtime.insertText = { [weak self] text in self?.textDocumentProxy.insertText(text) }
 
         runtime.commitDirectText = { [weak self] text in
             guard let self else { return }
             if self.engine.context.isComposing {
-                if let first = self.engine.selectCandidate(at: 0), !first.isEmpty {
-                    self.textDocumentProxy.insertText(first)
-                } else {
-                    self.engine.reset()
-                }
+                if let first = self.engine.selectCandidate(at: 0), !first.isEmpty { self.textDocumentProxy.insertText(first) }
+                else { self.engine.reset() }
             }
             self.textDocumentProxy.insertText(text)
             self.refreshFromEngine()
@@ -143,9 +181,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
             guard let self else { return }
             if self.engine.context.isComposing {
                 self.engine.deleteBackward()
-                if let committed = self.engine.drainCommit(), !committed.isEmpty {
-                    self.textDocumentProxy.insertText(committed)
-                }
+                if let committed = self.engine.drainCommit(), !committed.isEmpty { self.textDocumentProxy.insertText(committed) }
             } else {
                 self.textDocumentProxy.deleteBackward()
             }
@@ -156,9 +192,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
             guard let self else { return }
             if self.engine.context.isComposing {
                 if self.engine.process(" ") {
-                    if let committed = self.engine.drainCommit(), !committed.isEmpty {
-                        self.textDocumentProxy.insertText(committed)
-                    }
+                    if let committed = self.engine.drainCommit(), !committed.isEmpty { self.textDocumentProxy.insertText(committed) }
                 } else if let first = self.engine.selectCandidate(at: 0) {
                     self.textDocumentProxy.insertText(first)
                 }
@@ -170,25 +204,18 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
 
         runtime.submitReturn = { [weak self] in
             guard let self else { return }
-            if self.engine.context.isComposing, let first = self.engine.selectCandidate(at: 0) {
-                self.textDocumentProxy.insertText(first)
-            } else {
-                self.textDocumentProxy.insertText("\n")
-            }
+            if self.engine.context.isComposing, let first = self.engine.selectCandidate(at: 0) { self.textDocumentProxy.insertText(first) }
+            else { self.textDocumentProxy.insertText("\n") }
             self.refreshFromEngine()
         }
 
-        runtime.advanceToNextInputMode = { [weak self] in
-            self?.advanceToNextInputMode()
-        }
+        runtime.advanceToNextInputMode = { [weak self] in self?.advanceToNextInputMode() }
 
         runtime.sendCharacterToRime = { [weak self] text in
             guard let self else { return }
             let handled = self.engine.process(text)
             if handled {
-                if let committed = self.engine.drainCommit(), !committed.isEmpty {
-                    self.textDocumentProxy.insertText(committed)
-                }
+                if let committed = self.engine.drainCommit(), !committed.isEmpty { self.textDocumentProxy.insertText(committed) }
             } else {
                 self.textDocumentProxy.insertText(text)
             }
@@ -197,9 +224,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
 
         runtime.selectCandidate = { [weak self] index in
             guard let self else { return }
-            if let text = self.engine.selectCandidate(at: index) {
-                self.textDocumentProxy.insertText(text)
-            }
+            if let text = self.engine.selectCandidate(at: index) { self.textDocumentProxy.insertText(text) }
             self.refreshFromEngine()
         }
 
@@ -208,11 +233,7 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
             _ = self.engine.moveCandidatePage(direction)
             self.refreshFromEngine()
         }
-
-        runtime.refreshIMEContext = { [weak self] in
-            self?.refreshFromEngine()
-        }
-
+        runtime.refreshIMEContext = { [weak self] in self?.refreshFromEngine() }
         runtime.inputModeDidChange = { [weak self] mode in
             self?.engine.setInputMode(mode)
             self?.refreshFromEngine()
