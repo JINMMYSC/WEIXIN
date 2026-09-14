@@ -1,9 +1,11 @@
 # CLAW TALK Phase 3 public Rime schema: 26-key full pinyin.
-# Use the pinned mobile-oriented simplified-pinyin dictionary for phrase ranking.
+# The pinned public luna_pinyin dictionary preserves traditional source forms; the zh_hans
+# OpenCC filter converts them to simplified when enabled.  This makes the runtime 简/繁 toggle
+# real instead of trying to recover traditional characters from an already-simplified dictionary.
 schema:
   schema_id: claw_pinyin26
   name: CLAW 全拼
-  version: "0.2"
+  version: "0.3"
   dependencies:
     - stroke
 
@@ -61,9 +63,10 @@ speller:
     - derive/([iu])a(o|ng?)$/a$1$2/
 
 translator:
-  dictionary: pinyin_simp
+  dictionary: luna_pinyin
   prism: claw_pinyin26
   enable_user_dict: true
+  enable_sentence: true
   preedit_format:
     - xform/([nl])v/$1ü/
     - xform/([nl])ue/$1üe/
