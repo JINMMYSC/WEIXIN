@@ -81,6 +81,9 @@ jobs:
       - name: Verify 79-case UI static alignment
         run: python3 Tools/verify_ui_79_alignment.py
 
+      - name: Verify device-visible 3.5.3 runtime geometry
+        run: python3 Tools/verify_phase3_device_ui_contract.py
+
       - name: Build unsigned ClawBase package with pinned librime
         run: |
           chmod +x ClawBase/ci_build_unsigned.sh ClawBase/ci_prepare_librimekit.sh

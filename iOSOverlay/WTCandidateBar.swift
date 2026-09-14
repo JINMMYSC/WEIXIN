@@ -6,46 +6,47 @@ public struct WTCandidateBar: View {
 
     public var body: some View {
         VStack(spacing: 0) {
-            // The extracted 3.5.3 stack reserves an 18pt preedit strip above the 40pt
-            // candidate row.  Keep that strip even while idle so the 224pt key canvas below
-            // never changes height when composition begins or ends.
             compositionRow
             if runtime.candidateExpanded { expandedGrid } else { compactRow }
             if runtime.candidateActionTarget != nil { candidateActionMenu }
         }
-        .background(WTChrome353.surface)
-        .overlay(alignment: .bottom) { Rectangle().fill(WTChrome353.separator).frame(height: 0.5) }
+        .frame(minHeight: 58, alignment: .top)
+        .background(WTThemeColor353.keyboardBackground)
     }
 
     private var compositionRow: some View {
         HStack(spacing: 6) {
-            Text(runtime.composition.isEmpty ? " " : runtime.composition)
-                .font(.system(size: 12))
-                .foregroundStyle(.secondary)
+            Text(runtime.composition)
+                .font(.system(size: 13, weight: .regular))
+                .foregroundStyle(WTChrome353.primaryText)
                 .lineLimit(1)
-                .accessibilityHidden(runtime.composition.isEmpty)
             Spacer(minLength: 0)
         }
-        .padding(.horizontal, 10)
+        .padding(.horizontal, 8)
         .frame(height: WTTheme353.compositionHeight)
     }
 
     private var compactRow: some View {
         HStack(spacing: 0) {
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: 0) {
+                LazyHStack(spacing: 4) {
                     ForEach(Array(runtime.candidates.enumerated()), id: \.offset) { index, word in
                         candidateButton(index: index, word: word)
                     }
                 }
+                .padding(.horizontal, 4)
             }
-            if runtime.candidates.count > 4 {
-                Button { withAnimation(.easeOut(duration: runtime.visualCalibration.candidateExpandDuration)) { runtime.candidateExpanded = true } } label: {
-                    WTBasicGlyphView(.chevronDown, tint: WTChrome353.secondary, size: 13, lineWidth: 1.8)
+            if runtime.candidates.count > 2 {
+                Button {
+                    withAnimation(.easeOut(duration: runtime.visualCalibration.candidateExpandDuration)) {
+                        runtime.candidateExpanded = true
+                    }
+                } label: {
+                    WTBasicGlyphView(.chevronDown, tint: WTChrome353.primaryText.opacity(0.72), size: 13, lineWidth: 1.8)
                         .frame(width: 38, height: runtime.visualCalibration.candidateHeight)
                 }
                 .buttonStyle(.plain)
-                .background(WTChrome353.surface)
+                .background(WTThemeColor353.keyboardBackground)
             }
         }
         .frame(height: runtime.visualCalibration.candidateHeight)
@@ -73,7 +74,11 @@ public struct WTCandidateBar: View {
                 .buttonStyle(.plain)
                 .disabled(!runtime.candidatePageState.hasNext)
 
-                Button { withAnimation(.easeOut(duration: runtime.visualCalibration.candidateExpandDuration)) { runtime.candidateExpanded = false } } label: {
+                Button {
+                    withAnimation(.easeOut(duration: runtime.visualCalibration.candidateExpandDuration)) {
+                        runtime.candidateExpanded = false
+                    }
+                } label: {
                     WTBasicGlyphView(.chevronUp, tint: WTChrome353.secondary, size: 13, lineWidth: 1.8)
                         .frame(width: 38, height: 34)
                 }
@@ -82,24 +87,30 @@ public struct WTCandidateBar: View {
             .frame(height: 34)
 
             ScrollView {
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 4), spacing: 0) {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 4), spacing: 4) {
                     ForEach(Array(runtime.candidates.enumerated()), id: \.offset) { index, word in
                         candidateButton(index: index, word: word)
                             .frame(maxWidth: .infinity)
                     }
                 }
+                .padding(4)
             }
             .frame(maxHeight: 150)
         }
+        .background(WTThemeColor353.keyboardBackground)
     }
 
     private func candidateButton(index: Int, word: String) -> some View {
         Button { runtime.chooseCandidate(index) } label: {
             Text(word)
                 .font(.system(size: WTTheme353.candidateFontSize))
-                .foregroundStyle(.primary)
-                .padding(.horizontal, 13)
-                .frame(minHeight: runtime.visualCalibration.candidateHeight)
+                .foregroundStyle(index == 0 ? WTChrome353.accent : WTChrome353.primaryText)
+                .padding(.horizontal, 10)
+                .frame(minHeight: runtime.visualCalibration.candidateHeight - 4)
+                .background(
+                    RoundedRectangle(cornerRadius: 6, style: .continuous)
+                        .fill(index == 0 ? WTChrome353.elevatedSurface : Color.clear)
+                )
                 .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
