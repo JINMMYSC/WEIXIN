@@ -16,6 +16,7 @@ def text(path: str) -> str:
 
 def main() -> int:
     geometry = text("Sources/WeTypeReplicaCore/WT353RuntimeLayoutGeometry.swift")
+    gesture_model = text("Sources/WeTypeReplicaCore/GestureParity353.swift")
     panel = text("iOSOverlay/WTPanelRootView.swift")
     candidate = text("iOSOverlay/WTCandidateBar.swift")
     canvas = text("iOSOverlay/WTKeyboardCanvasView.swift")
@@ -69,13 +70,29 @@ def main() -> int:
         'beginLongPressGlideIfPossible()',
         'updateLongPressGlide(value)',
         'finishLongPressGlide()',
-        'value.translation.width / 33',
+        'WT353GestureModel.longPressIndex(',
+        'WT353GestureModel.directionalGesture(',
+        'WT353GestureModel.deleteClearIsArmed(',
+        'WT353GestureModel.deleteTargetSteps(',
+        'WT353GestureModel.isTapDelete(',
         'showsLeftSingleHandShortcut',
         'showsRightSingleHandShortcut',
         'runtime.toggleOneHanded(side)',
         'WTSemanticGlyph(name: side == .left ? "keyboard.arrow.left" : "keyboard.arrow.right")',
     ):
         require(token in canvas, f"device-visible key chrome/gesture missing: {token}")
+
+    for token in (
+        "public struct WT353GestureCalibration",
+        "longPressGlideStep: Double = 33",
+        "verticalSwipeThreshold: Double = 18",
+        "deleteClearVerticalThreshold: Double = 28",
+        "deleteRepeatInitialDelay: Double = 0.110",
+        "deleteRepeatInterval: Double = 0.078",
+    ):
+        require(token in gesture_model, f"central 3.5.3 gesture calibration missing: {token}")
+    require("value.translation.width / 33" not in canvas,
+            "shipping canvas must not duplicate calibrated long-press glide literals")
     require("case shift, delete" in glyph, "clean-room shift/delete glyphs missing")
 
     for token in (
@@ -98,7 +115,7 @@ def main() -> int:
     ):
         require(token in controller, f"delete gesture controller contract missing: {token}")
 
-    print("Phase 3 device-visible UI contract: PASS (resolved T26/T9/stroke geometry + candidate/idle chrome + key glyphs + delete hold/drag/restore/clear + long-press glide/one-hand shortcuts)")
+    print("Phase 3 device-visible UI contract: PASS (resolved T26/T9/stroke geometry + centralized gesture calibration + candidate/idle chrome + key glyphs + delete hold/drag/restore/clear + long-press glide/one-hand shortcuts)")
     return 0
 
 
