@@ -69,7 +69,7 @@ def main() -> int:
         'beginLongPressGlideIfPossible()',
         'updateLongPressGlide(value)',
         'finishLongPressGlide()',
-        'value.translation.width / 42',
+        'value.translation.width / 33',
         'showsHandwritingShortcut',
         'runtime.state.present(.handwriting)',
         'WTSemanticGlyph(name: "hand.draw")',
