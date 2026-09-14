@@ -1,0 +1,108 @@
+name: Phase 5 Full Package Signed Certification
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sign-full-package:
+    name: Sign Host + Keyboard + Share + Widget + Voice Activity
+    runs-on: macos-15
+    timeout-minutes: 45
+    env:
+      WT_SIGNING_P12_BASE64: ${{ secrets.WT_SIGNING_P12_BASE64 }}
+      WT_SIGNING_P12_PASSWORD: ${{ secrets.WT_SIGNING_P12_PASSWORD }}
+      WT_HOST_PROFILE_BASE64: ${{ secrets.WT_HOST_PROFILE_BASE64 }}
+      WT_KEYBOARD_PROFILE_BASE64: ${{ secrets.WT_KEYBOARD_PROFILE_BASE64 }}
+      WT_SHARE_PROFILE_BASE64: ${{ secrets.WT_SHARE_PROFILE_BASE64 }}
+      WT_WIDGET_PROFILE_BASE64: ${{ secrets.WT_WIDGET_PROFILE_BASE64 }}
+      WT_VOICE_ACTIVITY_PROFILE_BASE64: ${{ secrets.WT_VOICE_ACTIVITY_PROFILE_BASE64 }}
+    steps:
+      - name: Check out parity certification branch
+        uses: actions/checkout@v4
+
+      - name: Require all five provisioning profiles
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          for name in WT_SIGNING_P12_BASE64 WT_SIGNING_P12_PASSWORD WT_HOST_PROFILE_BASE64 WT_KEYBOARD_PROFILE_BASE64 WT_SHARE_PROFILE_BASE64 WT_WIDGET_PROFILE_BASE64 WT_VOICE_ACTIVITY_PROFILE_BASE64; do
+            [[ -n "${!name:-}" ]] || { echo "Missing required secret: $name" >&2; exit 1; }
+          done
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Verify Phase 5 metadata contract
+        run: python3 Tools/verify_phase5_extension_metadata.py
+
+      - name: Build full unsigned package
+        run: |
+          chmod +x ClawBase/ci_prepare_librimekit.sh ClawBase/ci_build_unsigned_full.sh
+          ClawBase/ci_build_unsigned_full.sh
+
+      - name: Prepare ephemeral signing identity and five profiles
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          SIGNING_DIR="$RUNNER_TEMP/clawbase-full-signing"
+          KEYCHAIN_PATH="$RUNNER_TEMP/clawbase-full-signing.keychain-db"
+          KEYCHAIN_PASSWORD="$(openssl rand -hex 24)"
+          rm -rf "$SIGNING_DIR" "$KEYCHAIN_PATH"
+          mkdir -p "$SIGNING_DIR"; chmod 700 "$SIGNING_DIR"
+          printf '%s' "$WT_SIGNING_P12_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/signing.p12"
+          printf '%s' "$WT_HOST_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/host.mobileprovision"
+          printf '%s' "$WT_KEYBOARD_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/keyboard.mobileprovision"
+          printf '%s' "$WT_SHARE_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/share.mobileprovision"
+          printf '%s' "$WT_WIDGET_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/widget.mobileprovision"
+          printf '%s' "$WT_VOICE_ACTIVITY_PROFILE_BASE64" | /usr/bin/base64 -D > "$SIGNING_DIR/voiceactivity.mobileprovision"
+          chmod 600 "$SIGNING_DIR"/*
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security import "$SIGNING_DIR/signing.p12" -k "$KEYCHAIN_PATH" -P "$WT_SIGNING_P12_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH" >/dev/null
+          security list-keychains -d user -s "$KEYCHAIN_PATH"
+          SIGNING_IDENTITY="$(security find-identity -v -p codesigning "$KEYCHAIN_PATH" | awk '/[0-9A-Fa-f]{40}/ {print $2; exit}')"
+          [[ -n "$SIGNING_IDENTITY" ]] || { echo "No usable signing identity imported" >&2; exit 1; }
+          echo "WT_SIGNING_IDENTITY=$SIGNING_IDENTITY" >> "$GITHUB_ENV"
+          echo "WT_SIGNING_DIR=$SIGNING_DIR" >> "$GITHUB_ENV"
+          echo "WT_KEYCHAIN_PATH=$KEYCHAIN_PATH" >> "$GITHUB_ENV"
+
+      - name: Sign and validate all five bundles
+        shell: bash
+        run: |
+          chmod +x ClawBase/ci_sign_and_validate_full.sh
+          WT_HOST_PROFILE_PATH="$WT_SIGNING_DIR/host.mobileprovision" \
+          WT_KEYBOARD_PROFILE_PATH="$WT_SIGNING_DIR/keyboard.mobileprovision" \
+          WT_SHARE_PROFILE_PATH="$WT_SIGNING_DIR/share.mobileprovision" \
+          WT_WIDGET_PROFILE_PATH="$WT_SIGNING_DIR/widget.mobileprovision" \
+          WT_VOICE_ACTIVITY_PROFILE_PATH="$WT_SIGNING_DIR/voiceactivity.mobileprovision" \
+          ClawBase/ci_sign_and_validate_full.sh
+
+      - name: Upload full signed IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: ClawBase-3.0.1-2-full-signed-${{ github.run_attempt }}
+          path: artifacts/claw-base-full/ClawBase-3.0.1-2-full-signed.ipa
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload full signing logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ClawBase-3.0.1-2-full-signing-logs-${{ github.run_attempt }}
+          path: artifacts/claw-base-full/logs
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Destroy ephemeral signing material
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          [[ -n "${WT_KEYCHAIN_PATH:-}" ]] && security delete-keychain "$WT_KEYCHAIN_PATH" 2>/dev/null || true
+          [[ -n "${WT_SIGNING_DIR:-}" ]] && rm -rf "$WT_SIGNING_DIR" || true
+          rm -f "$RUNNER_TEMP/clawbase-full-signing.keychain-db"
