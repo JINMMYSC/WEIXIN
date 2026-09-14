@@ -28,22 +28,18 @@ def main() -> int:
     prepare = text("ClawBase/ci_prepare_librimekit.sh")
     pinyin26 = text("ClawBase/RimeSchemas/claw_pinyin26.schema.yaml")
     pinyin9 = text("ClawBase/RimeSchemas/claw_pinyin9.schema.yaml")
+    sogou = text("ClawBase/RimeSchemas/claw_double_pinyin_sogou.schema.yaml")
 
     for source in ("../iOSShared", "../iOSOverlay", "../HamsterBridge", "../iOSServices"):
         require(source in project, f"missing complete migrated keyboard source group: {source}")
     require("WTPanelRootView(runtime: runtime)" in root,
             "ClawBase live root must use the complete V14 panel router")
     for token in (
-        "case .emoji:",
-        "WTEmojiPanelView(runtime: runtime)",
-        "case .inputModeSwitcher:",
-        "WTInputModeSwitcherView(runtime: runtime)",
-        "case .number:",
-        "case .symbols:",
-        "WTLayouts353Resolved.t26Pinyin",
-        "WTLayouts353Resolved.t9Pinyin",
-        "WTLayouts353Resolved.t26Wubi",
-        "WTLayouts353Resolved.t9Stroke",
+        "case .emoji:", "WTEmojiPanelView(runtime: runtime)",
+        "case .inputModeSwitcher:", "WTInputModeSwitcherView(runtime: runtime)",
+        "case .number:", "case .symbols:",
+        "WTLayouts353Resolved.t26Pinyin", "WTLayouts353Resolved.t9Pinyin",
+        "WTLayouts353Resolved.t26Wubi", "WTLayouts353Resolved.t9Stroke",
     ):
         require(token in panel_root, f"complete live panel router missing token: {token}")
     require('case "emoji": state.present(.emoji)' in runtime,
@@ -61,13 +57,9 @@ def main() -> int:
             "typed Phase 3 script/fuzzy controls missing")
     require("WTFuzzyPinyinOption" in profile, "fuzzy option model missing")
     for token in (
-        "claw_pinyin26_fuzzy_zhz",
-        "claw_pinyin26_fuzzy_ln",
-        "claw_pinyin26_fuzzy_all",
-        "wt.script.simplified",
-        "wt.pinyin.blur",
-        "wt.fuzzy.z_zh",
-        "wt.fuzzy.n_l",
+        "claw_pinyin26_fuzzy_zhz", "claw_pinyin26_fuzzy_ln", "claw_pinyin26_fuzzy_all",
+        "wt.script.simplified", "wt.pinyin.blur", "wt.fuzzy.z_zh", "wt.fuzzy.n_l",
+        "wt.double.scheme", "double_pinyin_flypy", "double_pinyin_mspy", "claw_double_pinyin_sogou",
         "group.7518554",
     ):
         require(token in session, f"real session missing Phase 3 behavior token: {token}")
@@ -78,13 +70,15 @@ def main() -> int:
             "pinyin schemas must use the public OpenCC simplified filter")
     require("enable_user_dict: true" in pinyin26 and "enable_user_dict: true" in pinyin9,
             "pinyin user dictionary learning must stay enabled")
+    require("schema_id: claw_double_pinyin_sogou" in sogou and "dictionary: luna_pinyin" in sogou,
+            "Sogou double-pinyin must stay clean-room and use the pinned public dictionary")
     require("derive/^zh/z/" in generator and "derive/^n/l/" in generator,
             "fuzzy schema generator missing required fuzzy pairs")
     for name in (
         "luna_pinyin.dict.yaml",
-        "claw_pinyin26_fuzzy_zhz.schema.yaml",
-        "claw_pinyin26_fuzzy_ln.schema.yaml",
-        "claw_pinyin26_fuzzy_all.schema.yaml",
+        "claw_pinyin26_fuzzy_zhz.schema.yaml", "claw_pinyin26_fuzzy_ln.schema.yaml", "claw_pinyin26_fuzzy_all.schema.yaml",
+        "double_pinyin.schema.yaml", "double_pinyin_flypy.schema.yaml", "double_pinyin_mspy.schema.yaml",
+        "claw_double_pinyin_sogou.schema.yaml",
     ):
         require(name in prepare, f"CI does not require Phase 3 Rime resource: {name}")
 
