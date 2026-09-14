@@ -43,11 +43,11 @@ public struct WTKeyboardCanvasView: View {
                 if let popup = keyPopup {
                     let keyWidth = popup.sourceRect.width * sx
                     let keyHeight = popup.sourceRect.height * sy
-                    let popupWidth = max(46, keyWidth * runtime.visualCalibration.keyPopupScale)
-                    let popupHeight = max(54, keyHeight * 1.34 * runtime.visualCalibration.keyPopupScale)
-                    let centerX = originX + (popup.sourceRect.x + popup.sourceRect.width / 2) * sx
-                    let clampedX = min(max(centerX, popupWidth / 2 + 2), proxy.size.width - popupWidth / 2 - 2)
-                    let keyTop = originY + popup.sourceRect.y * sy
+                    let popupWidth: CGFloat = max(46, CGFloat(keyWidth) * CGFloat(runtime.visualCalibration.keyPopupScale))
+                    let popupHeight: CGFloat = max(54, CGFloat(keyHeight) * 1.34 * CGFloat(runtime.visualCalibration.keyPopupScale))
+                    let centerX: CGFloat = CGFloat(originX + (popup.sourceRect.x + popup.sourceRect.width / 2) * sx)
+                    let clampedX: CGFloat = min(max(centerX, popupWidth / 2 + 2), proxy.size.width - popupWidth / 2 - 2)
+                    let keyTop: CGFloat = CGFloat(originY + popup.sourceRect.y * sy)
                     WTKeyTapPopupView(title: popup.title)
                         .frame(width: popupWidth, height: popupHeight)
                         .position(x: clampedX, y: keyTop - popupHeight / 2 + 7)
