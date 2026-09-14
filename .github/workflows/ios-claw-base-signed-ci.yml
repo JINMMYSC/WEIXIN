@@ -48,6 +48,9 @@ jobs:
       - name: Verify Phase 3 black-box matrix
         run: python3 Tools/verify_phase3_blackbox_matrix.py
 
+      - name: Verify Phase 3 functional completion
+        run: python3 Tools/verify_phase3_completion.py
+
       - name: Build unsigned ClawBase package with pinned librime
         run: |
           chmod +x ClawBase/ci_build_unsigned.sh ClawBase/ci_prepare_librimekit.sh
