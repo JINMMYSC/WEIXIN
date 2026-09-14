@@ -5,9 +5,8 @@ public struct WTVoicePanelView: View {
     public init(runtime: WTKeyboardRuntime) { self.runtime = runtime }
 
     public var body: some View {
-        VStack(spacing: 0) {
-            WTPanelHeader(title: "语音输入", onBack: { runtime.cancelVoice(); runtime.state.back() })
-            let panelState = runtime.panelLoadState(.voice)
+        let panelState = runtime.panelLoadState(.voice)
+        Group {
             switch panelState {
             case .permissionDenied, .offline, .failed, .fallback:
                 WTPhase4PanelStateView(
@@ -18,86 +17,114 @@ public struct WTVoicePanelView: View {
                     requestPermission: { runtime.startVoice() }
                 )
             default:
-                voiceSurface
+                inlineVoiceKeyboard
             }
         }
-        .background(WTChrome353.surface)
+        .background(WTChrome353.panelBackground)
+        .onAppear {
+            if isIdle { runtime.startVoice() }
+        }
     }
 
-    private var voiceSurface: some View {
+    private var inlineVoiceKeyboard: some View {
         VStack(spacing: 0) {
-            Spacer(minLength: 6)
-            ZStack {
-                Circle().fill(WTChrome353.accent.opacity(0.10)).frame(width: 80, height: 80)
-                WTPulsingVoiceGlyph(name: iconName, isBusy: isBusy, isFailure: isFailure)
-            }
-            Text(statusText)
-                .font(.system(size: 14))
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .lineLimit(3)
-                .padding(.horizontal, 26)
-                .padding(.top, 8)
-            if isBusy { wave }
-            Spacer(minLength: 4)
-            HStack(spacing: 16) {
-                if isBusy {
-                    Button("取消") { runtime.cancelVoice() }
-                        .font(.system(size: 13, weight: .medium)).frame(width: 74, height: 34)
-                        .background(WTChrome353.panelBackground).clipShape(Capsule())
-                    Button("结束") { runtime.stopVoice() }.buttonStyle(WTGreenPillButtonStyle())
-                } else {
-                    Button("开始语音") { runtime.startVoice() }.buttonStyle(WTGreenPillButtonStyle())
+            statusBar
+                .frame(height: 58)
+                .background(WTThemeColor353.keyboardBackground)
+
+            WTKeyboardCanvasView(layout: keyboardLayout, runtime: runtime)
+                .frame(height: CGFloat(keyboardLayout.baseSize.height))
+                .overlay(alignment: .bottom) {
+                    if isBusy {
+                        Button { runtime.stopVoice() } label: {
+                            Text("轻触结束")
+                                .font(.system(size: 13, weight: .medium))
+                                .foregroundStyle(WTChrome353.secondary)
+                                .frame(width: 184, height: 38)
+                                .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .padding(.bottom, 3)
+                    }
                 }
+        }
+    }
+
+    private var statusBar: some View {
+        HStack(spacing: 8) {
+            Spacer(minLength: 44)
+            VStack(spacing: 2) {
+                Text(primaryStatus)
+                    .font(.system(size: 14, weight: .regular))
+                    .foregroundStyle(WTChrome353.secondary)
+                    .lineLimit(1)
+                Text(secondaryStatus)
+                    .font(.system(size: 11, weight: .regular))
+                    .foregroundStyle(WTChrome353.secondary.opacity(0.72))
+                    .lineLimit(1)
+            }
+            .frame(maxWidth: .infinity)
+
+            Button { isBusy ? runtime.stopVoice() : runtime.startVoice() } label: {
+                ZStack {
+                    Circle()
+                        .fill(WTChrome353.accent.opacity(0.20))
+                        .frame(width: 44, height: 44)
+                    Circle()
+                        .fill(WTChrome353.accent)
+                        .frame(width: 34, height: 34)
+                    WTSemanticGlyph(name: "mic")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundStyle(.white)
+                }
+                .frame(width: 48, height: 48)
             }
             .buttonStyle(.plain)
-            .frame(height: 48)
-            .padding(.bottom, 4)
+            .padding(.trailing, 8)
         }
     }
 
-    private var wave: some View {
-        HStack(alignment: .center, spacing: 3) {
-            ForEach(0..<16, id: \.self) { i in
-                Capsule().fill(WTChrome353.accent.opacity(0.75)).frame(width: 2, height: CGFloat(7 + (i % 5) * 4))
-            }
-        }
-        .frame(height: 26).padding(.top, 4)
+    private var isIdle: Bool {
+        if case .idle = runtime.voiceState { return true }
+        return false
     }
 
     private var isBusy: Bool {
-        switch runtime.voiceState { case .preparing, .recording, .recognizing: return true; default: return false }
-    }
-    private var isFailure: Bool { if case .failed = runtime.voiceState { return true }; return false }
-    private var iconName: String {
-        switch runtime.voiceState { case .failed: return "exclamationmark"; case .result: return "checkmark"; default: return "waveform" }
-    }
-    private var statusText: String {
         switch runtime.voiceState {
-        case .idle: return "点击开始说话"
-        case .preparing: return "正在准备语音输入…"
-        case .recording(let partial): return partial.isEmpty ? "正在聆听…" : partial
-        case .recognizing: return "正在识别…"
-        case .result(let text): return text
-        case .failed(let error): return error
+        case .preparing, .recording, .recognizing: return true
+        default: return false
         }
     }
-}
 
-private struct WTPulsingVoiceGlyph: View {
-    let name: String
-    let isBusy: Bool
-    let isFailure: Bool
-    @State private var pulse = false
+    private var primaryStatus: String {
+        switch runtime.voiceState {
+        case .idle: return "语音转文字"
+        case .preparing, .recording, .recognizing: return "语音转文字中…"
+        case .result(let text): return text.isEmpty ? "语音转文字" : text
+        case .failed(let message): return message
+        }
+    }
 
-    var body: some View {
-        WTSemanticGlyph(name: name)
-            .font(.system(size: 34, weight: .medium))
-            .foregroundStyle(isFailure ? Color.red : WTChrome353.accent)
-            .scaleEffect(isBusy && pulse ? 1.08 : 0.96)
-            .opacity(isBusy && pulse ? 0.72 : 1.0)
-            .animation(isBusy ? .easeInOut(duration: 0.72).repeatForever(autoreverses: true) : .default, value: pulse)
-            .onAppear { pulse = isBusy }
-            .onChange(of: isBusy) { busy in pulse = busy }
+    private var secondaryStatus: String {
+        switch runtime.voiceState {
+        case .preparing, .recording, .recognizing: return "轻触结束"
+        case .idle: return "轻触开始"
+        case .result: return "识别完成"
+        case .failed: return "轻触重试"
+        }
+    }
+
+    private var keyboardLayout: WTKeyboardLayout {
+        let raw: WTKeyboardLayout
+        switch runtime.state.inputMode {
+        case .chinesePinyin26: raw = WTLayouts353Resolved.t26Pinyin
+        case .chinesePinyin9: raw = WTLayouts353Resolved.t9Pinyin
+        case .english26: raw = WTLayouts353Resolved.t26En
+        case .doublePinyin: raw = WTLayouts353Resolved.t26Pinyin
+        case .wubi: raw = WTLayouts353Resolved.t26Wubi
+        case .stroke: raw = WTLayouts353Resolved.t9Stroke
+        case .handwriting: raw = WTLayouts353Resolved.t26InnerHw
+        }
+        return WT353RuntimeLayoutGeometry.primaryLayout(raw, mode: runtime.state.inputMode)
     }
 }

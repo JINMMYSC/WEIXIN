@@ -2,9 +2,8 @@ import SwiftUI
 
 public struct WTStrokePoint: Hashable { public var point: CGPoint; public var time: TimeInterval }
 
-/// Phase 4 handwriting surface reconstructed from the shipped 3.5.3 handwriting control plane.
-/// The original panel reserves a 40pt candidate strip, a handwriting field with an upper-right
-/// delete key, and a 40pt bottom control row.  Artwork remains clean-room.
+/// Screenshot-driven Phase 4 handwriting surface. The 3.5.3 reference keeps the 40pt candidate
+/// strip, 124pt writing field and 40pt control row, then exposes the global globe/mic footer.
 public struct WTHandwritingCanvasView: View {
     @ObservedObject var runtime: WTKeyboardRuntime
     @State private var strokes: [[WTStrokePoint]] = []
@@ -15,65 +14,94 @@ public struct WTHandwritingCanvasView: View {
 
     public var body: some View {
         VStack(spacing: 0) {
-            candidateStrip
-                .frame(height: 40)
-                .background(WTChrome353.surface)
-                .overlay(alignment: .bottom) { Rectangle().fill(WTChrome353.separator).frame(height: 0.5) }
+            VStack(spacing: 0) {
+                candidateStrip
+                    .frame(height: 40)
+                    .background(WTChrome353.panelBackground)
 
-            ZStack(alignment: .topTrailing) {
-                inkCanvas
-                handwritingStatus
-                Button { deleteStrokeOrText() } label: {
-                    WTSemanticGlyph(name: "delete.left")
-                        .font(.system(size: 20, weight: .medium))
-                        .frame(width: 42, height: 40)
+                ZStack {
+                    ghostKeyGrid
+                    inkCanvas
+                    handwritingStatus
                 }
-                .buttonStyle(.plain)
-                .background(WTThemeColor353.grayKey)
-                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-                .padding(.trailing, 3)
-            }
-            .frame(height: 124)
-            .background(WTChrome353.surface)
+                .frame(height: 124)
+                .background(WTChrome353.panelBackground)
 
-            bottomControlRow
-                .frame(height: 40)
-                .background(WTThemeColor353.keyboardBackground)
+                bottomControlRow
+                    .frame(height: 40)
+                    .background(WTThemeColor353.keyboardBackground)
+            }
+            .frame(height: 204)
+
+            footer
+                .frame(height: 46)
+
+            Color.clear.frame(height: 32)
         }
-        .frame(height: 204)
-        .background(WTChrome353.surface)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .background(WTChrome353.panelBackground)
         .onDisappear { recognitionTask?.cancel() }
     }
 
     @ViewBuilder private var candidateStrip: some View {
         if runtime.handwritingCandidates.isEmpty {
-            HStack(spacing: 8) {
-                Text(strokes.isEmpty ? "手写输入" : "继续书写以识别")
-                    .font(.system(size: 12)).foregroundStyle(WTChrome353.secondary)
+            HStack {
                 Spacer()
-                Button("清除") { clearInk() }
-                    .font(.system(size: 11, weight: .medium)).foregroundStyle(WTChrome353.accent)
-                    .disabled(strokes.isEmpty && current.isEmpty)
             }
-            .padding(.horizontal, 10)
         } else {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 0) {
-                    ForEach(Array(runtime.handwritingCandidates.enumerated()), id: \.offset) { _, word in
-                        Button(word) {
+                    ForEach(Array(runtime.handwritingCandidates.enumerated()), id: \.offset) { index, word in
+                        Button {
                             runtime.insertText(word)
                             clearInk()
+                        } label: {
+                            Text(word)
+                                .font(.system(size: 18, weight: .regular))
+                                .foregroundStyle(index == 0 ? WTChrome353.accent : WTChrome353.primaryText)
+                                .padding(.horizontal, 11)
+                                .frame(height: 40)
+                                .background(index == 0 ? WTChrome353.elevatedSurface : Color.clear)
+                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                         }
-                        .font(.system(size: 19))
-                        .foregroundStyle(WTChrome353.primaryText)
                         .buttonStyle(.plain)
-                        .padding(.horizontal, 13)
-                        .frame(height: 40)
                     }
                 }
-                .padding(.horizontal, 3)
+                .padding(.horizontal, 4)
             }
         }
+    }
+
+    private var ghostKeyGrid: some View {
+        GeometryReader { proxy in
+            let gap: CGFloat = 5
+            let margin: CGFloat = 5
+            let leftWidth = max(CGFloat(54), proxy.size.width * 0.17)
+            let rightX = margin + leftWidth + gap
+            let rightWidth = proxy.size.width - rightX - margin
+            let cellWidth = (rightWidth - gap * 3) / 4
+            let cellHeight = (proxy.size.height - gap * 2) / 3
+
+            ZStack(alignment: .topLeading) {
+                RoundedRectangle(cornerRadius: 5, style: .continuous)
+                    .fill(WTChrome353.elevatedSurface.opacity(0.72))
+                    .frame(width: leftWidth, height: proxy.size.height)
+                    .offset(x: margin)
+
+                ForEach(0..<12, id: \.self) { index in
+                    let row = index / 4
+                    let col = index % 4
+                    RoundedRectangle(cornerRadius: 5, style: .continuous)
+                        .fill(WTChrome353.elevatedSurface.opacity(0.72))
+                        .frame(width: cellWidth, height: cellHeight)
+                        .offset(
+                            x: rightX + CGFloat(col) * (cellWidth + gap),
+                            y: CGFloat(row) * (cellHeight + gap)
+                        )
+                }
+            }
+        }
+        .allowsHitTesting(false)
     }
 
     private var inkCanvas: some View {
@@ -83,7 +111,11 @@ public struct WTHandwritingCanvasView: View {
                 var path = Path()
                 path.move(to: first.point)
                 for p in stroke.dropFirst() { path.addLine(to: p.point) }
-                context.stroke(path, with: .color(WTChrome353.primaryText), style: StrokeStyle(lineWidth: 3.4, lineCap: .round, lineJoin: .round))
+                context.stroke(
+                    path,
+                    with: .color(WTChrome353.primaryText),
+                    style: StrokeStyle(lineWidth: 3.4, lineCap: .round, lineJoin: .round)
+                )
             }
         }
         .contentShape(Rectangle())
@@ -103,59 +135,95 @@ public struct WTHandwritingCanvasView: View {
         let state = runtime.panelLoadState(.handwriting)
         switch state {
         case .loading:
-            ProgressView().tint(WTChrome353.accent).padding(.top, 48).frame(maxWidth: .infinity)
+            ProgressView().tint(WTChrome353.accent)
         case .failed(let message), .fallback(let message), .offline(let message), .permissionDenied(let message):
-            VStack(spacing: 5) {
-                WTSemanticGlyph(name: "info.circle").font(.system(size: 18)).foregroundStyle(WTChrome353.secondary)
-                Text(message).font(.system(size: 10)).foregroundStyle(WTChrome353.secondary).lineLimit(2).multilineTextAlignment(.center)
-            }
-            .padding(.horizontal, 54).padding(.top, 38).frame(maxWidth: .infinity)
-            .allowsHitTesting(false)
+            Text(message)
+                .font(.system(size: 10))
+                .foregroundStyle(WTChrome353.secondary)
+                .lineLimit(2)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 70)
+                .allowsHitTesting(false)
         default:
-            EmptyView()
+            if strokes.isEmpty && current.isEmpty {
+                Text("字迹未消失也可以继续写")
+                    .font(.system(size: 12, weight: .regular))
+                    .foregroundStyle(WTChrome353.secondary)
+                    .allowsHitTesting(false)
+            }
         }
     }
 
     private var bottomControlRow: some View {
         GeometryReader { proxy in
-            let gap: CGFloat = 4
-            let spaceWidth = min(CGFloat(92), proxy.size.width * 0.222)
-            let returnWidth = min(CGFloat(84), proxy.size.width * 0.203)
-            let smallWidth = max(CGFloat(28), (proxy.size.width - spaceWidth - returnWidth - gap * 7) / 6)
+            let gap: CGFloat = 5
+            let margin: CGFloat = 5
+            let backWidth: CGFloat = 70
+            let deleteWidth: CGFloat = 58
+            let returnWidth: CGFloat = 70
+            let fillerWidth = max(CGFloat(32), proxy.size.width - margin * 2 - gap * 4 - backWidth - deleteWidth - returnWidth)
+
             HStack(spacing: gap) {
-                bottomTextKey("符号", width: smallWidth) { runtime.state.present(.fullSymbols) }
-                bottomTextKey("123", width: smallWidth) { runtime.state.present(.number) }
-                bottomIconKey("face.smiling", width: smallWidth) { runtime.state.present(.emoji) }
-                bottomIconKey("globe", width: smallWidth) { runtime.advanceToNextInputMode() }
-                bottomTextKey("英", width: smallWidth) { runtime.chooseInputMode(.english26) }
-                bottomTextKey("ABC", width: smallWidth) { runtime.chooseInputMode(runtime.state.lastChineseMode) }
-                bottomTextKey("空格", width: spaceWidth) { runtime.submitSpace() }
-                bottomTextKey(runtime.returnKeyPresentation.title, width: returnWidth, accent: runtime.returnKeyPresentation.usesAccent) { runtime.submitReturn() }
+                Button { runtime.state.back() } label: {
+                    WTSemanticGlyph(name: "arrow.left")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundStyle(.white)
+                        .frame(width: backWidth, height: 36)
+                        .background(WTChrome353.accent)
+                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                }
+                .buttonStyle(.plain)
+
+                Button { clearInk() } label: {
+                    Color.clear.frame(width: 34, height: 36)
+                        .background(WTThemeColor353.normalKey)
+                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                }
+                .buttonStyle(.plain)
+
+                Button { runtime.submitSpace() } label: {
+                    Color.clear.frame(width: fillerWidth, height: 36)
+                        .background(WTThemeColor353.normalKey)
+                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                }
+                .buttonStyle(.plain)
+
+                Button { deleteStrokeOrText() } label: {
+                    WTSemanticGlyph(name: "delete.left")
+                        .font(.system(size: 18, weight: .medium))
+                        .frame(width: deleteWidth, height: 36)
+                        .background(WTThemeColor353.grayKey)
+                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                }
+                .buttonStyle(.plain)
+
+                Button { runtime.submitReturn() } label: {
+                    Text(runtime.returnKeyPresentation.title)
+                        .font(.system(size: 13, weight: .medium))
+                        .frame(width: returnWidth, height: 36)
+                        .background(WTThemeColor353.grayKey)
+                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                }
+                .buttonStyle(.plain)
             }
-            .padding(.horizontal, 2)
+            .padding(.horizontal, margin)
             .frame(maxHeight: .infinity)
         }
     }
 
-    private func bottomTextKey(_ title: String, width: CGFloat, accent: Bool = false, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Text(title).font(.system(size: title.count > 3 ? 11 : 13, weight: .medium)).lineLimit(1).minimumScaleFactor(0.65)
-                .frame(width: width, height: 36)
+    private var footer: some View {
+        HStack {
+            Button { runtime.advanceToNextInputMode() } label: {
+                WTSemanticGlyph(name: "globe").font(.system(size: 22)).frame(width: 54, height: 42)
+            }
+            .buttonStyle(.plain)
+            Spacer()
+            Button { runtime.state.present(.voice) } label: {
+                WTSemanticGlyph(name: "mic").font(.system(size: 22)).frame(width: 54, height: 42)
+            }
+            .buttonStyle(.plain)
         }
-        .buttonStyle(.plain)
-        .foregroundStyle(accent ? Color.white : WTChrome353.primaryText)
-        .background(accent ? WTChrome353.accent : WTThemeColor353.normalKey)
-        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-    }
-
-    private func bottomIconKey(_ name: String, width: CGFloat, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            WTSemanticGlyph(name: name).font(.system(size: 17)).frame(width: width, height: 36)
-        }
-        .buttonStyle(.plain)
-        .foregroundStyle(WTChrome353.primaryText)
-        .background(WTThemeColor353.grayKey)
-        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+        .padding(.horizontal, 12)
     }
 
     private func deleteStrokeOrText() {
