@@ -38,9 +38,14 @@ for token in ['maxTransferAttempts = 3', 'hasRetryableFailure(maxAttempts: maxTr
 
 memory=text('Sources/WeTypeReplicaCore/MemoryPressurePolicy.swift')
 runtime=text('iOSOverlay/WTKeyboardRuntime.swift')
+canvas=text('iOSOverlay/WTKeyboardCanvasView.swift')
 for token in ['WTKeyboardMemoryPressureBudget', 'trimmedClipboard']:
     if token not in memory: errors.append(f'memory budget missing {token}')
 if 'releaseTransientCaches(budget:' not in runtime: errors.append('runtime memory-pressure budget not wired')
+for token in ['resolvedFrame(', 'WTKeyboardGeometryResolver353.resolve', 'sourceRect: sourceRect ?? sourceItem?.rect']:
+    if token not in runtime: errors.append(f'Phase14 keyboard geometry runtime missing {token}')
+for token in ['useMeasuredFrames', 'runtime.resolvedFrame(', 'geometryRect: renderRect', '.frame(width: renderRect.width * renderSx']:
+    if token not in canvas: errors.append(f'Phase14 keyboard geometry canvas missing {token}')
 
 profile=text('Sources/WeTypeReplicaCore/InputModeBackendProfile.swift')
 bridge=text('HamsterBridge/WTHamsterRimeSessionAdapter.swift')

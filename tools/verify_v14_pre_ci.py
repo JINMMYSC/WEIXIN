@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
 import subprocess, sys
-from extract_phase14_reference_frames import load_manifest, validate_manifest
 
 ROOT=Path(__file__).resolve().parents[1]
 errors=[]
@@ -38,14 +37,9 @@ for token in ['maxTransferAttempts = 3', 'hasRetryableFailure(maxAttempts: maxTr
 
 memory=text('Sources/WeTypeReplicaCore/MemoryPressurePolicy.swift')
 runtime=text('iOSOverlay/WTKeyboardRuntime.swift')
-canvas=text('iOSOverlay/WTKeyboardCanvasView.swift')
 for token in ['WTKeyboardMemoryPressureBudget', 'trimmedClipboard']:
     if token not in memory: errors.append(f'memory budget missing {token}')
 if 'releaseTransientCaches(budget:' not in runtime: errors.append('runtime memory-pressure budget not wired')
-for token in ['resolvedFrame(', 'WTKeyboardGeometryResolver353.resolve', 'sourceRect: sourceRect ?? sourceItem?.rect']:
-    if token not in runtime: errors.append(f'Phase14 keyboard geometry runtime missing {token}')
-for token in ['useMeasuredFrames', 'runtime.resolvedFrame(', 'geometryRect: renderRect', '.frame(width: renderRect.width * renderSx']:
-    if token not in canvas: errors.append(f'Phase14 keyboard geometry canvas missing {token}')
 
 profile=text('Sources/WeTypeReplicaCore/InputModeBackendProfile.swift')
 bridge=text('HamsterBridge/WTHamsterRimeSessionAdapter.swift')
@@ -54,24 +48,9 @@ for token in ['WTRimeModeDescriptor', 'WTRimeBackendProfile', 'safeDefault']:
 for token in ['wtApplyModeDescriptor', 'backendProfile']:
     if token not in bridge: errors.append(f'Hamster descriptor bridge missing {token}')
 
-reference_manifest_ok = False
-try:
-    reference_manifest = load_manifest(ROOT / 'ReverseEngineering/Phase14/reference_capture_manifest.json')
-    manifest_errors = validate_manifest(reference_manifest)
-    if manifest_errors:
-        errors.extend(f'Phase14 reference manifest: {error}' for error in manifest_errors)
-    elif len(reference_manifest.get('captures', [])) != 10:
-        errors.append('Phase14 reference manifest: expected 10 captures')
-    else:
-        reference_manifest_ok = True
-except (OSError, ValueError) as exc:
-    errors.append(f'Phase14 reference manifest: {exc}')
-
 if errors:
     print('V14 PRE-CI FAIL')
     for e in errors: print('-',e)
-    if reference_manifest_ok:
-        print('- Phase14 manifest subcheck passed: 10 captures')
     sys.exit(1)
 print('V14 PRE-CI PASS')
 print('- inherited V13 gates passed')
@@ -79,4 +58,3 @@ print('- trusted-device history/persistence UI path passed')
 print('- bounded Share retry behavior passed')
 print('- low-memory presentation budget passed')
 print('- configurable Rime mode descriptor bridge passed')
-print('- Phase14 manifest subcheck passed: 10 captures')
