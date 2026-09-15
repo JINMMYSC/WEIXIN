@@ -16,19 +16,19 @@ public enum WTTheme353 {
     public static let toolbarHeight: Double = 40
     public static let panelHeaderHeight: Double = 40
 
-    public static let keyboardBackground = WTRGBAHex("#D1D4DA", "#1C1C1E")
+    public static let keyboardBackground = WTRGBAHex(WTPhase14Palette353.keyboardBackground, "#1C1C1E")
     public static let panelBackground = WTRGBAHex("#F2F3F5", "#1C1C1E")
     public static let surface = WTRGBAHex("#FFFFFF", "#2C2C2E")
     public static let elevatedSurface = WTRGBAHex("#FFFFFF", "#3A3A3C")
     public static let separator = WTRGBAHex("#00000014", "#FFFFFF1A")
 
-    public static let normalBackground = WTRGBAHex("#FFFFFF", "#BBBBBB66")
+    public static let normalBackground = WTRGBAHex(WTPhase14Palette353.normalKey, "#BBBBBB66")
     public static let normalPressedBackground = WTRGBAHex("#B7BCC4", "#66666666")
     public static let normalText = WTRGBAHex("#000000", "#FEFEFE")
     public static let normalSecondaryText = WTRGBAHex("#00000066", "#FEFEFE66")
-    public static let grayBackground = WTRGBAHex("#B7BCC4", "#55555566")
+    public static let grayBackground = WTRGBAHex(WTPhase14Palette353.grayKey, "#55555566")
     public static let grayPressedBackground = WTRGBAHex("#FCFCFE", "#BBBBBB66")
-    public static let accent = WTRGBAHex("#23C891", "#23C891")
+    public static let accent = WTRGBAHex(WTPhase14Palette353.accent, "#23C891")
     public static let accentGreen = "#23C891"
     public static let destructive = WTRGBAHex("#FA5151", "#FA5151")
 
