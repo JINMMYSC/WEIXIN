@@ -11,6 +11,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MANIFEST = ROOT / "ReverseEngineering" / "Phase14" / "reference_capture_manifest.json"
+EXPECTED_CAPTURE_IDS = ["01", "02", "04", "06", "07", "08", "10", "14", "23", "27"]
 
 
 def load_manifest(path: Path) -> dict:
@@ -20,8 +21,10 @@ def load_manifest(path: Path) -> dict:
 def validate_manifest(manifest: dict) -> list[str]:
     errors: list[str] = []
     ids: set[str] = set()
+    capture_ids: list[str] = []
     for capture in manifest.get("captures", []):
         capture_id = str(capture.get("id", ""))
+        capture_ids.append(capture_id)
         if capture_id in ids:
             errors.append(f"duplicate capture id: {capture_id}")
         ids.add(capture_id)
@@ -29,6 +32,8 @@ def validate_manifest(manifest: dict) -> list[str]:
             errors.append(f"absolute video path: {capture_id}")
         if capture.get("expectedPixels") != [1290, 2796]:
             errors.append(f"unexpected dimensions: {capture_id}")
+    if capture_ids != EXPECTED_CAPTURE_IDS:
+        errors.append(f"unexpected Phase14 capture ids: {capture_ids}")
     return errors
 
 
