@@ -241,7 +241,8 @@ func testMeasuredLightPalette() {
     XCTAssertEqual(WTPhase14Palette353.keyboardBackground, "#DDDEE2")
     XCTAssertEqual(WTPhase14Palette353.normalKey, "#FFFFFF")
     XCTAssertEqual(WTPhase14Palette353.grayKey, "#AFB4BD")
-    XCTAssertEqual(WTPhase14Palette353.accent, "#1FC085")
+    XCTAssertEqual(WTPhase14Palette353.accent, "#23C891")
+    XCTAssertEqual(WTPhase14Palette353.voiceActiveAccent, "#1FC085")
     XCTAssertEqual(WTPhase14Palette353.hostBackground, "#E2F1F0")
 }
 ```
@@ -296,7 +297,8 @@ public enum WTPhase14Palette353 {
     public static let keyboardBackground = "#DDDEE2"
     public static let normalKey = "#FFFFFF"
     public static let grayKey = "#AFB4BD"
-    public static let accent = "#1FC085"
+    public static let accent = "#23C891"
+    public static let voiceActiveAccent = "#1FC085"
     public static let hostBackground = "#E2F1F0"
 }
 

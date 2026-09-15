@@ -43,7 +43,8 @@ This phase does not claim 79-scene parity. It establishes the measurement and re
 - Light keyboard background baseline: `#DDDEE2`.
 - Normal key surface baseline: `#FFFFFF`.
 - Gray function-key baseline: `#AFB4BD`.
-- Brand accent starting baseline: `#1FC085`; feature-specific measurements may override it when a clean crop proves a different source color.
+- Shared brand accent baseline: `#23C891`, matching the extracted 3.5.3 style resource.
+- Voice active-state accent baseline: `#1FC085`, scoped to the voice surface because the HEVC frame sample must not override the extracted shared token.
 - Key shadows must remain subtle and must be asserted by sampled pixels outside the key body, not approximated from the resource declaration alone.
 
 ### Nine-key geometry
