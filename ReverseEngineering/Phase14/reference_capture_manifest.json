@@ -1,0 +1,108 @@
+{
+  "formatVersion": 1,
+  "targetVersion": "3.5.3",
+  "device": "iPhone 15 Pro Max",
+  "os": "iOS 26.2.1",
+  "captures": [
+    {
+      "id": "01",
+      "scene": "keyboard26-light",
+      "video": "视频8/IMG_1263_part_008.mp4",
+      "timestampSeconds": 130.0,
+      "expectedPixels": [1290, 2796],
+      "excludeMasks": [[1080, 140, 210, 210]],
+      "state": "English 26-key idle; geometry proxy only because Chinese 26 canonical state is absent",
+      "eligibleForStrictReview": false
+    },
+    {
+      "id": "02",
+      "scene": "keyboard9-light",
+      "video": "视频1/IMG_1263_part_001.mp4",
+      "timestampSeconds": 10.0,
+      "expectedPixels": [1290, 2796],
+      "excludeMasks": [[1080, 140, 210, 210]],
+      "state": "Chinese nine-key candidates visible",
+      "eligibleForStrictReview": true
+    },
+    {
+      "id": "04",
+      "scene": "symbol-cn-light",
+      "video": "视频1/IMG_1263_part_001.mp4",
+      "timestampSeconds": 30.0,
+      "expectedPixels": [1290, 2796],
+      "excludeMasks": [[1080, 140, 210, 210]],
+      "state": "Chinese symbol grid visible",
+      "eligibleForStrictReview": true
+    },
+    {
+      "id": "06",
+      "scene": "emoji-light",
+      "video": "视频1/IMG_1263_part_001.mp4",
+      "timestampSeconds": 60.0,
+      "expectedPixels": [1290, 2796],
+      "excludeMasks": [[1080, 140, 210, 210]],
+      "state": "Emoji grid visible",
+      "eligibleForStrictReview": true
+    },
+    {
+      "id": "07",
+      "scene": "clipboard-light",
+      "video": "视频5/IMG_1263_part_005_part_003.mp4",
+      "timestampSeconds": 25.0,
+      "expectedPixels": [1290, 2796],
+      "excludeMasks": [[1080, 140, 210, 210]],
+      "state": "Clipboard list visible",
+      "eligibleForStrictReview": true
+    },
+    {
+      "id": "08",
+      "scene": "handwriting-light",
+      "video": "视频8/IMG_1263_part_008.mp4",
+      "timestampSeconds": 100.0,
+      "expectedPixels": [1290, 2796],
+      "excludeMasks": [[1080, 140, 210, 210]],
+      "state": "Handwriting canvas with written character and candidates",
+      "eligibleForStrictReview": true
+    },
+    {
+      "id": "10",
+      "scene": "voice-listening-light",
+      "video": "视频8/IMG_1263_part_008.mp4",
+      "timestampSeconds": 222.0,
+      "expectedPixels": [1290, 2796],
+      "excludeMasks": [[1080, 140, 210, 210]],
+      "state": "Voice-to-text listening page active",
+      "eligibleForStrictReview": true
+    },
+    {
+      "id": "14",
+      "scene": "plus-light",
+      "video": "视频1/IMG_1263_part_001.mp4",
+      "timestampSeconds": 80.0,
+      "expectedPixels": [1290, 2796],
+      "excludeMasks": [[1080, 140, 210, 210]],
+      "state": "Plus feature grid visible",
+      "eligibleForStrictReview": true
+    },
+    {
+      "id": "23",
+      "scene": "settings-home-light",
+      "video": "视频1/IMG_1263_part_001.mp4",
+      "timestampSeconds": 100.0,
+      "expectedPixels": [1290, 2796],
+      "excludeMasks": [[1080, 420, 210, 210]],
+      "state": "Host settings home two-column grid at top",
+      "eligibleForStrictReview": true
+    },
+    {
+      "id": "27",
+      "scene": "settings-display-light",
+      "video": "视频1/IMG_1263_part_001.mp4",
+      "timestampSeconds": 200.0,
+      "expectedPixels": [1290, 2796],
+      "excludeMasks": [[1080, 140, 210, 210]],
+      "state": "Display settings page top",
+      "eligibleForStrictReview": true
+    }
+  ]
+}
