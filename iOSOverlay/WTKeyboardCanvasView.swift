@@ -15,7 +15,11 @@ public struct WTKeyboardCanvasView: View {
         GeometryReader { proxy in
             let sx = (proxy.size.width * runtime.keyboardAdjustment.widthScale) / layout.baseSize.width
             let sy = (proxy.size.height * runtime.keyboardAdjustment.heightScale) / layout.baseSize.height
-            let contentWidth = layout.baseSize.width * sx
+            let useMeasuredFrames = proxy.size.width == 430
+                && runtime.keyboardAdjustment.widthScale == 1
+                && layout.name.hasPrefix("t26_pinyin")
+            let renderSx = useMeasuredFrames ? 1.0 : sx
+            let contentWidth = useMeasuredFrames ? Double(proxy.size.width) : layout.baseSize.width * sx
             let contentHeight = layout.baseSize.height * sy
             let originX = (proxy.size.width - contentWidth) / 2 + proxy.size.width * runtime.keyboardAdjustment.horizontalOffset
             let originY = (proxy.size.height - contentHeight) / 2 + proxy.size.height * runtime.keyboardAdjustment.verticalOffset
@@ -25,30 +29,36 @@ public struct WTKeyboardCanvasView: View {
 
                 ForEach(layout.items, id: \.id) { item in
                     if let r = item.rect {
+                        let renderRect = runtime.resolvedFrame(
+                            for: item,
+                            in: layout,
+                            viewportWidth: Double(proxy.size.width)
+                        ) ?? r
                         WTKeyCap(
                             item: item,
                             runtime: runtime,
+                            geometryRect: renderRect,
                             onTapPopupChanged: { visible, title in
                                 withAnimation(.easeOut(duration: runtime.visualCalibration.keyPopupDuration)) {
-                                    keyPopup = visible ? WTKeyTapPopupState(keyID: item.id, title: title, sourceRect: r) : nil
+                                    keyPopup = visible ? WTKeyTapPopupState(keyID: item.id, title: title, sourceRect: renderRect) : nil
                                 }
                             }
                         )
-                        .frame(width: r.width * sx, height: r.height * sy)
+                        .frame(width: renderRect.width * renderSx, height: renderRect.height * sy)
                         .position(
-                            x: originX + (r.x + r.width / 2) * sx,
-                            y: originY + (r.y + r.height / 2) * sy
+                            x: originX + (renderRect.x + renderRect.width / 2) * renderSx,
+                            y: originY + (renderRect.y + renderRect.height / 2) * sy
                         )
                         .zIndex(keyPopup?.keyID == item.id ? 40 : 0)
                     }
                 }
 
                 if let popup = keyPopup {
-                    let keyWidth = popup.sourceRect.width * sx
+                    let keyWidth = popup.sourceRect.width * renderSx
                     let keyHeight = popup.sourceRect.height * sy
                     let popupWidth: CGFloat = max(46, CGFloat(keyWidth) * CGFloat(runtime.visualCalibration.keyPopupScale))
                     let popupHeight: CGFloat = max(54, CGFloat(keyHeight) * 1.34 * CGFloat(runtime.visualCalibration.keyPopupScale))
-                    let centerX: CGFloat = CGFloat(originX + (popup.sourceRect.x + popup.sourceRect.width / 2) * sx)
+                    let centerX: CGFloat = CGFloat(originX + (popup.sourceRect.x + popup.sourceRect.width / 2) * renderSx)
                     let clampedX: CGFloat = min(max(centerX, popupWidth / 2 + 2), proxy.size.width - popupWidth / 2 - 2)
                     let keyTop: CGFloat = CGFloat(originY + popup.sourceRect.y * sy)
                     WTKeyTapPopupView(title: popup.title)
@@ -62,7 +72,7 @@ public struct WTKeyboardCanvasView: View {
                 if let popup = runtime.longPressPopup, let rect = popup.sourceRect {
                     WTLongPressPopupView(runtime: runtime, popup: popup)
                         .position(
-                            x: min(max(originX + (rect.x + rect.width / 2) * sx, 145), proxy.size.width - 145),
+                            x: min(max(originX + (rect.x + rect.width / 2) * renderSx, 145), proxy.size.width - 145),
                             y: originY + (rect.y - 28) * sy
                         )
                         .zIndex(50)
@@ -82,6 +92,7 @@ private struct WTKeyTapPopupState: Equatable {
 private struct WTKeyCap: View {
     let item: WTKeyboardItem
     @ObservedObject var runtime: WTKeyboardRuntime
+    let geometryRect: WTRect
     let onTapPopupChanged: (Bool, String) -> Void
     @GestureState private var pressing = false
     @Environment(\.colorScheme) private var colorScheme
@@ -165,10 +176,11 @@ private struct WTKeyCap: View {
                             keyID: item.id,
                             items: ["换行", "。", "？", "！", "@", "…"],
                             defaultIndex: 1,
-                            sourceRect: item.rect
+                            sourceRect: geometryRect
                         )
                     } else {
-                        runtime.handle(item, gesture: .longPress)
+                        let action = WTKeyActionResolver.action(for: item, gesture: .longPress, state: runtime.state)
+                        runtime.handle(action, sourceItem: item, sourceRect: geometryRect)
                     }
                     beginLongPressGlideIfPossible()
                 }

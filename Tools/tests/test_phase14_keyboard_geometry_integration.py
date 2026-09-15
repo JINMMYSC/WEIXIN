@@ -10,15 +10,15 @@ class Phase14KeyboardGeometryIntegrationTests(unittest.TestCase):
         canvas = (ROOT / "iOSOverlay/WTKeyboardCanvasView.swift").read_text(encoding="utf-8")
         runtime = (ROOT / "iOSOverlay/WTKeyboardRuntime.swift").read_text(encoding="utf-8")
 
-        self.assertIn("resolvedFrame(for: item, viewportWidth:", runtime)
+        self.assertIn("resolvedFrame(\n        for item: WTKeyboardItem", runtime)
         self.assertIn("WTKeyboardGeometryResolver353.resolve", runtime)
-        self.assertIn("runtime.resolvedFrame(for: item, viewportWidth:", canvas)
-        self.assertIn(".frame(width: renderRect.width * sx", canvas)
-        self.assertIn("sourceRect: renderRect", canvas)
-        self.assertIn("sourceRect: runtime.resolvedFrame(for: item", canvas)
+        self.assertIn("runtime.resolvedFrame(\n                            for: item", canvas)
+        self.assertIn(".frame(width: renderRect.width * renderSx", canvas)
+        self.assertIn("geometryRect: renderRect", canvas)
+        self.assertIn("sourceRect: geometryRect", canvas)
 
 
     def test_phase14_canvas_keeps_raw_layout_fallback_for_non_measured_viewports(self):
         runtime = (ROOT / "iOSOverlay/WTKeyboardRuntime.swift").read_text(encoding="utf-8")
-        self.assertIn("viewportWidth == 430", runtime)
-        self.assertIn("return item.rect", runtime)
+        self.assertIn("viewportWidth == 430, layout.name.hasPrefix(\"t26_pinyin\")", runtime)
+        self.assertIn("return sourceRect", runtime)

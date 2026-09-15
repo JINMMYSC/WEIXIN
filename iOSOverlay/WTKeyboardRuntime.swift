@@ -215,12 +215,30 @@ public final class WTKeyboardRuntime: ObservableObject {
         phase4PanelStates[panel.rawValue] = value
     }
 
+    /// Returns the final visual frame for a key at the measured 430-point viewport.
+    /// Other viewport sizes keep the layout's source rectangle so the canvas can apply its
+    /// existing proportional scaling and calibration adjustments.
+    public func resolvedFrame(
+        for item: WTKeyboardItem,
+        in layout: WTKeyboardLayout,
+        viewportWidth: Double
+    ) -> WTRect? {
+        guard let sourceRect = item.rect else { return nil }
+        guard viewportWidth == 430, layout.name.hasPrefix("t26_pinyin") else { return sourceRect }
+        return WTKeyboardGeometryResolver353.resolve(layout: layout, viewportWidth: viewportWidth)
+            .first(where: { $0.id == item.id })?.frame ?? sourceRect
+    }
+
     public func handle(_ item: WTKeyboardItem, gesture: WTKeyGesture = .tap) {
         let action = WTKeyActionResolver.action(for: item, gesture: gesture, state: state)
         handle(action, sourceItem: item)
     }
 
-    public func handle(_ action: WTResolvedKeyAction, sourceItem: WTKeyboardItem? = nil) {
+    public func handle(
+        _ action: WTResolvedKeyAction,
+        sourceItem: WTKeyboardItem? = nil,
+        sourceRect: WTRect? = nil
+    ) {
         switch action {
         case .none:
             return
@@ -233,7 +251,12 @@ public final class WTKeyboardRuntime: ObservableObject {
             state.consumeOneShotShiftIfNeeded()
             refreshIMEContext()
         case .longPressOptions(let items, let defaultIndex):
-            longPressPopup = .init(keyID: sourceItem?.id ?? "", items: items, defaultIndex: defaultIndex, sourceRect: sourceItem?.rect)
+            longPressPopup = .init(
+                keyID: sourceItem?.id ?? "",
+                items: items,
+                defaultIndex: defaultIndex,
+                sourceRect: sourceRect ?? sourceItem?.rect
+            )
         case .function(let fn):
             handleFunction(fn)
         }
