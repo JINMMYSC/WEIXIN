@@ -44,15 +44,21 @@ def main() -> int:
     require('-scheme "$scheme"' in build, "system-extension loop must build each selected scheme")
     require("-scheme ClawBaseHost" in build, "unsigned build must compile ClawBaseHost")
 
+    require("declare -A" not in sign,
+            "signing script must remain compatible with macOS Bash 3.2 (no declare -A)")
+    for function_name in ("relative_path", "bundle_id", "profile_path"):
+        require(f"{function_name}() {{" in sign,
+                f"Bash 3.2-compatible {function_name} lookup is missing")
+
     # The original script used marker comments. Phase 8 factors signing into sign_component(),
     # so validate the executable call order instead: every embedded extension must be signed
     # before the containing Host, and Host must be the final sign_component invocation.
     host_call = sign.find('sign_component host "$SIGNED_APP"')
-    keyboard_call = sign.find('sign_component keyboard "$SIGNED_APP/${RELATIVE[keyboard]}"')
+    keyboard_call = sign.find('sign_component keyboard "$SIGNED_APP/$(relative_path keyboard)"')
     require(keyboard_call >= 0 and host_call > keyboard_call,
             "signing order must remain Keyboard-first / Host-last")
     for name in ("share", "widget", "voiceactivity"):
-        extension_call = sign.find(f'sign_component {name} "$SIGNED_APP/${{RELATIVE[{name}]}}"')
+        extension_call = sign.find(f'sign_component {name} "$SIGNED_APP/$(relative_path {name})"')
         require(extension_call >= 0 and host_call > extension_call,
                 f"{name} must be signed before Host")
     require(sign.rfind("sign_component ") == host_call,

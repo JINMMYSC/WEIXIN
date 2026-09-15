@@ -25,34 +25,45 @@ EXPECTED_VERSION="3.5.3"
 EXPECTED_BUILD="3.5.3"
 EXPECTED_KEYBOARD_PRINCIPAL="HamsterKeyboard.HamsterKeyboardInputViewController"
 
-declare -A RELATIVE=(
-  [keyboard]="PlugIns/HamsterKeyboard.appex"
-  [share]="PlugIns/ClawBaseShare.appex"
-  [widget]="PlugIns/ClawBaseWidget.appex"
-  [voiceactivity]="PlugIns/ClawBaseVoiceActivity.appex"
-)
-declare -A BUNDLE_ID=(
-  [host]="app.lgm.7517"
-  [keyboard]="app.lgm.7517.123"
-  [share]="app.lgm.7517.share"
-  [widget]="app.lgm.7517.widget"
-  [voiceactivity]="app.lgm.7517.voiceactivity"
-)
-declare -A PROFILE=(
-  [host]="$HOST_PROFILE"
-  [keyboard]="$KEYBOARD_PROFILE"
-  [share]="$SHARE_PROFILE"
-  [widget]="$WIDGET_PROFILE"
-  [voiceactivity]="$VOICE_ACTIVITY_PROFILE"
-)
-
 cleanup() { rm -rf "$TEMP_DIR"; }
 trap cleanup EXIT
 fail() { echo "CLAW BASE SIGNING ERROR: $*" >&2; exit 1; }
 plist_value() { /usr/libexec/PlistBuddy -c "Print :$2" "$1" 2>/dev/null; }
 require_equal() { [[ "$2" == "$3" ]] || fail "$1 mismatch: expected '$3', got '$2'"; }
 
-application_id() { echo "$EXPECTED_TEAM_ID.${BUNDLE_ID[$1]}"; }
+relative_path() {
+  case "$1" in
+    keyboard) echo "PlugIns/HamsterKeyboard.appex" ;;
+    share) echo "PlugIns/ClawBaseShare.appex" ;;
+    widget) echo "PlugIns/ClawBaseWidget.appex" ;;
+    voiceactivity) echo "PlugIns/ClawBaseVoiceActivity.appex" ;;
+    *) fail "unknown component '$1'" ;;
+  esac
+}
+
+bundle_id() {
+  case "$1" in
+    host) echo "app.lgm.7517" ;;
+    keyboard) echo "app.lgm.7517.123" ;;
+    share) echo "app.lgm.7517.share" ;;
+    widget) echo "app.lgm.7517.widget" ;;
+    voiceactivity) echo "app.lgm.7517.voiceactivity" ;;
+    *) fail "unknown component '$1'" ;;
+  esac
+}
+
+profile_path() {
+  case "$1" in
+    host) echo "$HOST_PROFILE" ;;
+    keyboard) echo "$KEYBOARD_PROFILE" ;;
+    share) echo "$SHARE_PROFILE" ;;
+    widget) echo "$WIDGET_PROFILE" ;;
+    voiceactivity) echo "$VOICE_ACTIVITY_PROFILE" ;;
+    *) fail "unknown component '$1'" ;;
+  esac
+}
+
+application_id() { echo "$EXPECTED_TEAM_ID.$(bundle_id "$1")"; }
 
 require_group() {
   local plist="$1" key_path="$2" label="$3"
@@ -84,19 +95,19 @@ build_minimal_entitlements() {
 }
 
 validate_bundle_metadata() {
-  require_equal "Host CFBundleIdentifier" "$(plist_value "$SIGNED_APP/Info.plist" CFBundleIdentifier)" "${BUNDLE_ID[host]}"
+  require_equal "Host CFBundleIdentifier" "$(plist_value "$SIGNED_APP/Info.plist" CFBundleIdentifier)" "$(bundle_id host)"
   require_equal "Host version" "$(plist_value "$SIGNED_APP/Info.plist" CFBundleShortVersionString)" "$EXPECTED_VERSION"
   require_equal "Host build" "$(plist_value "$SIGNED_APP/Info.plist" CFBundleVersion)" "$EXPECTED_BUILD"
   local name path info
   for name in keyboard share widget voiceactivity; do
-    path="$SIGNED_APP/${RELATIVE[$name]}"
+    path="$SIGNED_APP/$(relative_path "$name")"
     [[ -d "$path" ]] || continue
     info="$path/Info.plist"
-    require_equal "$name CFBundleIdentifier" "$(plist_value "$info" CFBundleIdentifier)" "${BUNDLE_ID[$name]}"
+    require_equal "$name CFBundleIdentifier" "$(plist_value "$info" CFBundleIdentifier)" "$(bundle_id "$name")"
     require_equal "$name version" "$(plist_value "$info" CFBundleShortVersionString)" "$EXPECTED_VERSION"
     require_equal "$name build" "$(plist_value "$info" CFBundleVersion)" "$EXPECTED_BUILD"
   done
-  local keyboard_info="$SIGNED_APP/${RELATIVE[keyboard]}/Info.plist"
+  local keyboard_info="$SIGNED_APP/$(relative_path keyboard)/Info.plist"
   require_equal "Keyboard extension point" "$(plist_value "$keyboard_info" NSExtension:NSExtensionPointIdentifier)" "com.apple.keyboard-service"
   require_equal "Keyboard principal class" "$(plist_value "$keyboard_info" NSExtension:NSExtensionPrincipalClass)" "$EXPECTED_KEYBOARD_PRINCIPAL"
   require_equal "Keyboard RequestsOpenAccess" "$(plist_value "$keyboard_info" NSExtension:NSExtensionAttributes:RequestsOpenAccess)" "true"
@@ -117,7 +128,8 @@ validate_profile() {
 }
 
 sign_component() {
-  local name="$1" path="$2" profile="${PROFILE[$name]}"
+  local name="$1" path="$2" profile
+  profile="$(profile_path "$name")"
   validate_profile "$name" "$profile"
   rm -rf "$path/_CodeSignature"
   /bin/cp "$profile" "$path/embedded.mobileprovision"
@@ -146,16 +158,16 @@ unsigned_extension_count="$(find "$SIGNED_APP/PlugIns" -mindepth 1 -maxdepth 1 -
 require_equal "unsigned embedded extension count" "$unsigned_extension_count" "4"
 
 if [[ "$FULL_PACKAGE" != "1" ]]; then
-  rm -rf "$SIGNED_APP/${RELATIVE[share]}" "$SIGNED_APP/${RELATIVE[widget]}" "$SIGNED_APP/${RELATIVE[voiceactivity]}"
+  rm -rf "$SIGNED_APP/$(relative_path share)" "$SIGNED_APP/$(relative_path widget)" "$SIGNED_APP/$(relative_path voiceactivity)"
 fi
 validate_bundle_metadata
 
 # Extensions must be signed before the containing Host app.
-sign_component keyboard "$SIGNED_APP/${RELATIVE[keyboard]}"
+sign_component keyboard "$SIGNED_APP/$(relative_path keyboard)"
 if [[ "$FULL_PACKAGE" == "1" ]]; then
-  sign_component share "$SIGNED_APP/${RELATIVE[share]}"
-  sign_component widget "$SIGNED_APP/${RELATIVE[widget]}"
-  sign_component voiceactivity "$SIGNED_APP/${RELATIVE[voiceactivity]}"
+  sign_component share "$SIGNED_APP/$(relative_path share)"
+  sign_component widget "$SIGNED_APP/$(relative_path widget)"
+  sign_component voiceactivity "$SIGNED_APP/$(relative_path voiceactivity)"
 fi
 sign_component host "$SIGNED_APP"
 
@@ -177,8 +189,8 @@ ipa_sha256="$(/usr/bin/shasum -a 256 "$SIGNED_IPA" | /usr/bin/awk '{print $1}')"
 {
   echo "ClawBase signed validation: PASS"
   echo "Package mode: $package_mode"
-  echo "Host bundle ID: ${BUNDLE_ID[host]}"
-  echo "Keyboard bundle ID: ${BUNDLE_ID[keyboard]}"
+  echo "Host bundle ID: $(bundle_id host)"
+  echo "Keyboard bundle ID: $(bundle_id keyboard)"
   [[ "$FULL_PACKAGE" == "1" ]] && echo "Share/Widget/VoiceActivity signing: PASS" || echo "Share/Widget/VoiceActivity signing: BLOCKED_BY_MISSING_PROFILES"
   echo "Version/build: $EXPECTED_VERSION ($EXPECTED_BUILD)"
   echo "Shared App Group: $EXPECTED_APP_GROUP"
