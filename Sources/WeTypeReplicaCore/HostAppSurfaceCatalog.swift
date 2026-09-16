@@ -107,12 +107,19 @@ public enum WTHostHomeCatalog353 {
         .init(title: "布局和显示", subtitle: "表情键、数字键盘、候选字、高度调节等", assetFamily: "icon_layout", destination: "displaySetting"),
         .init(title: "按键效果", subtitle: "声音、触感、按键气泡", assetFamily: "icon_app_setup_vibration", destination: "keystrokeEffect"),
         .init(title: "定制工具栏", subtitle: "收起键盘等常用功能固定在工具栏", assetFamily: "icon_app_setup_customize_toolbar", destination: "toolbarCustomization"),
-        .init(title: "辅助输入", subtitle: "智能加空格、模糊拼音、英文首字母大写等", assetFamily: "icon_app_setup_keyboard", destination: "auxiliaryInput"),        .init(title: "跨设备粘贴传送", subtitle: "隔空传文件、文字、图片跨设备粘贴、词库同步", assetFamily: "icon_app_setup_multiple_devices", destination: "multiDevice"),
+        .init(title: "辅助输入", subtitle: "智能加空格、模糊拼音、英文首字母大写等", assetFamily: "icon_app_setup_keyboard", destination: "auxiliaryInput"),
+        .init(title: "跨设备粘贴传送", subtitle: "隔空传文件、文字、图片跨设备粘贴、词库同步", assetFamily: "icon_app_setup_multiple_devices", destination: "multiDevice"),
         .init(title: "剪贴板", subtitle: "快速使用复制内容", assetFamily: "icon_clipboard", destination: "clipboard"),
         .init(title: "键盘管理", subtitle: "全键盘、九宫格、手写、五笔、双拼、笔画输入", assetFamily: "icon_app_setup_keyboard", destination: "keyboardManagement"),
         .init(title: "语音转文字", subtitle: "设置语音免跳转方式", assetFamily: "icon_app_setup_voice", destination: "voice"),
         .init(title: "拼写 Plus", subtitle: "智能拼写、表情、颜文字等智能推荐", assetFamily: "icon_app_setup_pluslogo", destination: "plus"),
         .init(title: "单机模式", subtitle: "无需联网，纯本地使用", assetFamily: "icon_app_setup_air", destination: "experiments")
+    ]
+    public static let moreCards: [WTHostHomeCard353] = [
+        .init(title: "隐私与权限", subtitle: "权限、个人词库、隐私设置", assetFamily: "icon_app_setup_privacy", destination: "privacy"),
+        .init(title: "电脑版", subtitle: "使用电脑端微信输入法", assetFamily: "icon_app_setup_computer", destination: "desktop"),
+        .init(title: "关于", subtitle: "版本与产品信息", assetFamily: "icon_app_setup_about", destination: "about"),
+        .init(title: "帮助与反馈", subtitle: "帮助说明与问题反馈", assetFamily: "icon_app_setup_help", destination: "help")
     ]
 }
 

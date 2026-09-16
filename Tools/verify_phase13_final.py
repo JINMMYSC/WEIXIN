@@ -29,7 +29,7 @@ def main() -> int:
     keyboard = text("iOSOverlay/WTKeyboardCanvasView.swift")
     gesture = text("Sources/WeTypeReplicaCore/GestureParity353.swift")
     host = text("iOSApp/WTSettingsAppView.swift")
-    setup = text("iOSApp/WTHostSettings353View.swift")
+    setup = text("Sources/WeTypeReplicaCore/HostAppSurfaceCatalog.swift")
 
     for token in (
         "MARKETING_VERSION: 3.5.3",
@@ -82,8 +82,9 @@ def main() -> int:
     require('CFBundleShortVersionString' in host, "About page must read built version metadata")
 
     expected_setup_titles = [
-        "键盘管理", "显示设置", "工具栏设置", "按键效果", "剪贴板", "语音输入", "微信输入法+",
-        "隔空传送", "多设备", "电脑端", "迁移助手", "隐私", "帮助与反馈", "关于微信输入法",
+        "布局和显示", "按键效果", "定制工具栏", "辅助输入", "跨设备粘贴传送",
+        "剪贴板", "键盘管理", "语音转文字", "拼写 Plus", "单机模式",
+        "隐私与权限", "电脑版", "关于", "帮助与反馈",
     ]
     positions = [setup.find(f'title: "{title}"') for title in expected_setup_titles]
     require(all(p >= 0 for p in positions), "SetupMain is missing an observed 3.5.3 entry")

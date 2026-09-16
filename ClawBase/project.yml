@@ -22,6 +22,8 @@ targets:
         buildPhase: resources
       - path: ../iOSApp/WTSettingsAppView.swift
       - path: ../iOSApp/WTHostSettings353View.swift
+      - path: ../iOSApp/WTHostHome353View.swift
+      - path: ../iOSApp/WTDisplaySettings353View.swift
       - path: ../iOSApp/WTHostVoiceCaptureView.swift
       - path: ../iOSApp/WTHostPhase4HandoffView.swift
       - path: ../iOSServices/WTHostSpeechRecognitionService.swift

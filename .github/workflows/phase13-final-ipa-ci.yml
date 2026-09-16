@@ -81,6 +81,8 @@ jobs:
         run: python3 Tools/verify_phase3_input_chain.py
       - name: Verify Host settings surface
         run: python3 Tools/verify_phase3_host_surface.py
+      - name: Verify Phase 14 shipping UI is wired into ClawBase
+        run: python3 Tools/verify_phase14_shipping_surface.py
       - name: Validate extracted layout names
         run: python3 Tools/validate_phase3_layout_names.py
       - name: Verify key style rendering contract
