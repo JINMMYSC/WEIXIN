@@ -84,3 +84,62 @@ public enum WTHostMainEntryCatalog353 {
 
     public static var families: Set<String> { Set(entries.map(\.assetFamily)) }
 }
+
+public struct WTHostHomeCard353: Equatable, Sendable {
+    public let title: String
+    public let subtitle: String
+    public let assetFamily: String
+    public let destination: String
+    public init(title: String, subtitle: String, assetFamily: String, destination: String) {
+        self.title = title
+        self.subtitle = subtitle
+        self.assetFamily = assetFamily
+        self.destination = destination
+    }
+}
+
+public enum WTHostHomeCatalog353 {
+    public static let outerMargin = 20.0
+    public static let columnSpacing = 14.0
+    public static let cardCornerRadius = 16.0
+    public static let backgroundHex = "#E2F1F0"
+    public static let cards: [WTHostHomeCard353] = [
+        .init(title: "布局和显示", subtitle: "表情键、数字键盘、候选字、高度调节等", assetFamily: "icon_layout", destination: "displaySetting"),
+        .init(title: "按键效果", subtitle: "声音、触感、按键气泡", assetFamily: "icon_app_setup_vibration", destination: "keystrokeEffect"),
+        .init(title: "定制工具栏", subtitle: "收起键盘等常用功能固定在工具栏", assetFamily: "icon_app_setup_customize_toolbar", destination: "toolbarCustomization"),
+        .init(title: "辅助输入", subtitle: "智能加空格、模糊拼音、英文首字母大写等", assetFamily: "icon_app_setup_keyboard", destination: "auxiliaryInput"),        .init(title: "跨设备粘贴传送", subtitle: "隔空传文件、文字、图片跨设备粘贴、词库同步", assetFamily: "icon_app_setup_multiple_devices", destination: "multiDevice"),
+        .init(title: "剪贴板", subtitle: "快速使用复制内容", assetFamily: "icon_clipboard", destination: "clipboard"),
+        .init(title: "键盘管理", subtitle: "全键盘、九宫格、手写、五笔、双拼、笔画输入", assetFamily: "icon_app_setup_keyboard", destination: "keyboardManagement"),
+        .init(title: "语音转文字", subtitle: "设置语音免跳转方式", assetFamily: "icon_app_setup_voice", destination: "voice"),
+        .init(title: "拼写 Plus", subtitle: "智能拼写、表情、颜文字等智能推荐", assetFamily: "icon_app_setup_pluslogo", destination: "plus"),
+        .init(title: "单机模式", subtitle: "无需联网，纯本地使用", assetFamily: "icon_app_setup_air", destination: "experiments")
+    ]
+}
+
+public struct WTDisplaySettingsRow353: Equatable, Sendable, Identifiable {
+    public let id: String
+    public let title: String
+    public let preferenceKey: String
+    public init(id: String, title: String, preferenceKey: String) {
+        self.id = id; self.title = title; self.preferenceKey = preferenceKey
+    }
+}
+
+public struct WTDisplaySettingsSection353: Equatable, Sendable, Identifiable {
+    public let id: String
+    public let rows: [WTDisplaySettingsRow353]
+    public init(id: String, rows: [WTDisplaySettingsRow353]) { self.id = id; self.rows = rows }
+}
+public enum WTDisplaySettingsCatalog353 {
+    public static let sections: [WTDisplaySettingsSection353] = [
+        .init(id: "keyboard", rows: [
+            .init(id: "emojiKey", title: "表情键", preferenceKey: "wt.display.emoji"),
+            .init(id: "numberKeyboard", title: "数字键盘", preferenceKey: "wt.display.number9"),
+            .init(id: "candidate", title: "候选字", preferenceKey: "wt.display.candidate")
+        ]),
+        .init(id: "layout", rows: [
+            .init(id: "height", title: "键盘高度", preferenceKey: "wt.display.keyboardHeight"),
+            .init(id: "pinyinPosition", title: "拼音显示位置", preferenceKey: "wt.display.pinyinPosition")
+        ])
+    ]
+}

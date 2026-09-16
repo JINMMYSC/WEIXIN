@@ -16,7 +16,7 @@ struct WTReplicaApp: App {
 
     var body: some Scene {
         WindowGroup {
-            WTSettingsAppView()
+            WTHostHome353View()
                 .onOpenURL(perform: handleURL)
                 .sheet(item: $voiceRoute) { route in
                     WTHostVoiceCaptureView(
