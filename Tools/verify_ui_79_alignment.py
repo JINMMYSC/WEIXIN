@@ -56,7 +56,8 @@ def main() -> int:
 
     for token in (
         "let sx =", "let sy =", "layout.baseSize.width", "layout.baseSize.height",
-        "r.width * sx", "r.height * sy", "WTKeyTapPopupView", "WTLongPressPopupView",
+        "runtime.resolvedFrame(", "renderRect.width * renderSx", "renderRect.height * sy",
+        "geometryRect: renderRect", "WTKeyTapPopupView", "WTLongPressPopupView",
         "runtime.visualCalibration.keyPopupScale", "runtime.visualCalibration.keyPopupDuration",
         "T26_LETTER", "WTTheme353.letterFontSize", "WTTheme353.keySubtitleFontSize",
         "The original 3.5.3 key popup rises above",
