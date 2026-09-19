@@ -208,10 +208,27 @@ public struct WTSettingsDetailView: View {
         Form {
             content
         }
+        .listStyle(.insetGrouped)
+        .pageBackground()
         .navigationTitle(destination.title)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             if destination == .transfer { transferCode = loadOrCreateTransferCode() }
+        }
+    }
+
+    /// Applies the measured 3.5.3 page background. `scrollContentBackground` needs iOS 16,
+    /// so the deployment-floor path configures the UIKit backing view instead.
+    @ViewBuilder private func pageBackground() -> some View {
+        if #available(iOS 16.0, *) {
+            scrollContentBackground(.hidden)
+                .background(Color(wtHex: WTHostSettingsChrome353.pageBackground).ignoresSafeArea())
+        } else {
+            background(Color(wtHex: WTHostSettingsChrome353.pageBackground).ignoresSafeArea())
+                .onAppear {
+                    UITableView.appearance().backgroundColor =
+                        UIColor(wtHex: WTHostSettingsChrome353.pageBackground)
+                }
         }
     }
 

@@ -6,7 +6,7 @@ public struct WTDisplaySettings353View: View {
 
     public var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(spacing: 16) {
+            VStack(spacing: CGFloat(WTHostSettingsChrome353.groupSpacing)) {
                 numberLayoutCard
                 togglePreviewCard(
                     title: "键盘上显示表情键",
@@ -22,10 +22,10 @@ public struct WTDisplaySettings353View: View {
                 sidebarCard
                 pinyinPositionCard
             }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 16)
+            .padding(.horizontal, CGFloat(WTHostSettingsChrome353.sideMargin))
+            .padding(.vertical, CGFloat(WTHostSettingsChrome353.groupSpacing))
         }
-        .background(Color(wtHex: "#F0F0F0").ignoresSafeArea())
+        .background(Color(wtHex: WTHostSettingsChrome353.pageBackground).ignoresSafeArea())
         .navigationTitle("布局和显示")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -43,8 +43,11 @@ public struct WTDisplaySettings353View: View {
             }
         }
         .padding(18)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .background(Color(wtHex: WTHostSettingsChrome353.cardBackground))
+        .clipShape(RoundedRectangle(
+            cornerRadius: CGFloat(WTHostSettingsChrome353.cardCornerRadius),
+            style: .continuous
+        ))
     }
 
     private func selectionLabel(_ title: String, selected: Bool) -> some View {
@@ -79,8 +82,11 @@ public struct WTDisplaySettings353View: View {
                 .frame(maxWidth: .infinity)
         }
         .padding(18)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .background(Color(wtHex: WTHostSettingsChrome353.cardBackground))
+        .clipShape(RoundedRectangle(
+            cornerRadius: CGFloat(WTHostSettingsChrome353.cardCornerRadius),
+            style: .continuous
+        ))
     }
 
     private var keyboardHeightCard: some View {
@@ -100,8 +106,11 @@ public struct WTDisplaySettings353View: View {
             WTSettingsKeyboardPreview353(kind: .height)
         }
         .padding(18)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .background(Color(wtHex: WTHostSettingsChrome353.cardBackground))
+        .clipShape(RoundedRectangle(
+            cornerRadius: CGFloat(WTHostSettingsChrome353.cardCornerRadius),
+            style: .continuous
+        ))
     }
 
     private var sidebarCard: some View {
@@ -119,8 +128,11 @@ public struct WTDisplaySettings353View: View {
             }
         }
         .padding(18)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .background(Color(wtHex: WTHostSettingsChrome353.cardBackground))
+        .clipShape(RoundedRectangle(
+            cornerRadius: CGFloat(WTHostSettingsChrome353.cardCornerRadius),
+            style: .continuous
+        ))
     }
 
     private var pinyinPositionCard: some View {
@@ -133,8 +145,11 @@ public struct WTDisplaySettings353View: View {
             }
         }
         .padding(18)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .background(Color(wtHex: WTHostSettingsChrome353.cardBackground))
+        .clipShape(RoundedRectangle(
+            cornerRadius: CGFloat(WTHostSettingsChrome353.cardCornerRadius),
+            style: .continuous
+        ))
     }
 
     private func choicePreview(_ title: String, selected: Bool) -> some View {

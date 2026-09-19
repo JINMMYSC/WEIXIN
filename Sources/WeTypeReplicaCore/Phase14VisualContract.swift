@@ -78,6 +78,21 @@ public enum WTMeasuredKeyboard353 {
     public static let bottomBarVoiceFrame = WTRect(x: 378, y: 243.33, width: 18.67, height: 28.33)
 }
 
+/// Host settings chrome measured from the same 3.5.3 recordings. Every setup page shares one
+/// background, one card radius and one row rhythm; only the rows themselves differ.
+public enum WTHostSettingsChrome353 {
+    public static let pageBackground = "#F0F0F0"
+    public static let cardBackground = "#FFFFFF"
+    public static let cardCornerRadius: Double = 14
+    public static let sideMargin: Double = 20
+    public static let groupSpacing: Double = 16
+    public static let rowHeight: Double = 44
+    public static let tallRowHeight: Double = 64
+    /// Measured home-grid rhythm, kept next to the page chrome it belongs to.
+    public static let homeCardCornerRadius: Double = 16
+    public static let homeColumnSpacing: Double = 14
+}
+
 /// Resolves the extracted INI rectangles into the frames the shipped product actually draws.
 ///
 /// The extracted resources describe a 414 pt design grid with placeholder function keys, so

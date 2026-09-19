@@ -28,4 +28,15 @@ final class Phase14HostSurfaceTests: XCTestCase {
         let ids = WTDisplaySettingsCatalog353.sections.flatMap(\.rows).map(\.id)
         XCTAssertEqual(Set(ids).count, ids.count)
     }
+
+    func testHostSettingsChromeMatchesTheMeasuredPages() {
+        let chrome = WTHostSettingsChrome353.self
+        XCTAssertEqual(chrome.pageBackground, "#F0F0F0")
+        XCTAssertEqual(chrome.cardBackground, "#FFFFFF")
+        XCTAssertEqual(chrome.cardCornerRadius, 14, accuracy: 0.01)
+        XCTAssertEqual(chrome.sideMargin, 20, accuracy: 0.01)
+        XCTAssertEqual(chrome.groupSpacing, 16, accuracy: 0.01)
+        XCTAssertEqual(chrome.rowHeight, 44, accuracy: 0.01)
+        XCTAssertEqual(chrome.tallRowHeight, 64, accuracy: 0.01)
+    }
 }
