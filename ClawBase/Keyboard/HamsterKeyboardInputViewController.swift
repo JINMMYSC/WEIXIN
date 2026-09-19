@@ -108,7 +108,8 @@ final class HamsterKeyboardInputViewController: UIInputViewController {
     }
 
     private func installKeyboardHeightConstraint() {
-        let measuredHeight = WTTheme353.keyboardHeight + WTTheme353.compositionHeight + WTTheme353.candidateCompactHeight
+        // Measured 3.5.3 surface: 72.33 pt header above a 298.67 pt canvas.
+        let measuredHeight = WTTheme353.keyboardHeaderHeight + WTTheme353.keyboardCanvasHeight
         let constraint = view.heightAnchor.constraint(equalToConstant: CGFloat(measuredHeight))
         constraint.priority = UILayoutPriority(999)
         constraint.isActive = true

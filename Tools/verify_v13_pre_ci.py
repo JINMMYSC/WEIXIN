@@ -10,7 +10,7 @@ def text(rel):
     if not p.exists():
         errors.append(f'missing {rel}')
         return ''
-    return p.read_text(errors='ignore')
+    return p.read_text(encoding='utf-8', errors='ignore')
 
 r=subprocess.run([sys.executable, str(ROOT/'Tools/verify_v12_pre_ci.py')], cwd=ROOT, capture_output=True, text=True)
 if r.returncode != 0:

@@ -11,7 +11,7 @@ def text(rel):
     if not p.exists():
         errors.append(f'missing {rel}')
         return ''
-    return p.read_text(errors='ignore')
+    return p.read_text(encoding='utf-8', errors='ignore')
 
 r=subprocess.run([sys.executable, str(ROOT/'Tools/verify_v13_pre_ci.py')], cwd=ROOT, capture_output=True, text=True)
 if r.returncode != 0:
@@ -44,8 +44,18 @@ for token in ['WTKeyboardMemoryPressureBudget', 'trimmedClipboard']:
 if 'releaseTransientCaches(budget:' not in runtime: errors.append('runtime memory-pressure budget not wired')
 for token in ['resolvedFrame(', 'WTKeyboardGeometryResolver353.resolve', 'sourceRect: sourceRect ?? sourceItem?.rect']:
     if token not in runtime: errors.append(f'Phase14 keyboard geometry runtime missing {token}')
-for token in ['useMeasuredFrames', 'runtime.resolvedFrame(', 'geometryRect: renderRect', '.frame(width: renderRect.width * renderSx']:
+for token in ['useMeasuredFrames', 'runtime.resolvedFrame(', 'geometryRect: renderRect', '.frame(width: renderRect.width * renderSx', 'WTKeyboardBottomBar353(runtime: runtime)']:
     if token not in canvas: errors.append(f'Phase14 keyboard geometry canvas missing {token}')
+
+measured=text('Sources/WeTypeReplicaCore/Phase14VisualContract.swift')
+for token in ['WTMeasuredKeyboard353', 'panelTop: Double = 561', 'panelHeight: Double = 371',
+              'headerHeight: Double = 72.33', 'canvasHeight: Double = 298.67',
+              't26BottomRowWidths: [Double] = [79.33, 36, 154.33, 39.67, 85.33]',
+              't9NumberWidth: Double = 83.67', 'bottomBarLanguageFrame', 'bottomBarVoiceFrame']:
+    if token not in measured: errors.append(f'Phase14 measured keyboard contract missing {token}')
+theme=text('Sources/WeTypeReplicaCore/ThemeTokens.swift')
+for token in ['keyboardHeaderHeight', 'keyboardCanvasHeight', 'keyboardPanelHeight']:
+    if token not in theme: errors.append(f'Phase14 measured keyboard theme token missing {token}')
 
 profile=text('Sources/WeTypeReplicaCore/InputModeBackendProfile.swift')
 bridge=text('HamsterBridge/WTHamsterRimeSessionAdapter.swift')

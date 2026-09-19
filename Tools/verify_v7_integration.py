@@ -18,8 +18,8 @@ required=[
 missing=[x for x in required if not (root/x).exists()]
 if missing:
     print('missing:', missing); sys.exit(1)
-data=json.loads((root/'ReverseEngineering/V7/icon_geometry.json').read_text())
+data=json.loads((root/'ReverseEngineering/V7/icon_geometry.json').read_text(encoding='utf-8'))
 assert data['count'] >= 180
-project=yaml.safe_load((root/'XcodeIntegration/project.yml').read_text())
+project=yaml.safe_load((root/'XcodeIntegration/project.yml').read_text(encoding='utf-8'))
 assert {'WeTypeReplicaApp','WeTypeReplicaKeyboard','WeTypeReplicaShare','WeTypeReplicaWidget'} <= set(project['targets'])
 print(f"V7 integration OK; measured icon families={data['count']}")

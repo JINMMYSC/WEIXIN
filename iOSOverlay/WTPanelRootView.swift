@@ -39,14 +39,14 @@ public struct WTPanelRootView: View {
             VStack(spacing: 0) {
                 if runtime.state.inputMode == .stroke { WTStrokeFilterView(runtime: runtime) }
                 WTKeyboardCanvasView(layout: keyboardLayout, runtime: runtime)
-                    .frame(height: CGFloat(keyboardLayout.baseSize.height))
+                    .frame(height: CGFloat(WTTheme353.keyboardCanvasHeight))
             }
         case .number:
             WTKeyboardCanvasView(layout: numberLayout, runtime: runtime)
-                .frame(height: CGFloat(numberLayout.baseSize.height))
+                .frame(height: CGFloat(WTTheme353.keyboardCanvasHeight))
         case .symbols:
             WTKeyboardCanvasView(layout: symbolLayout, runtime: runtime)
-                .frame(height: CGFloat(symbolLayout.baseSize.height))
+                .frame(height: CGFloat(WTTheme353.keyboardCanvasHeight))
         case .emoji:
             WTEmojiPanelView(runtime: runtime)
         case .clipboard:
@@ -180,7 +180,7 @@ private struct WTIdleInputBar353: View {
                 Spacer(minLength: 0)
             }
         }
-        .frame(height: 58)
+        .frame(height: CGFloat(WTTheme353.keyboardHeaderHeight))
         .background(WTThemeColor353.keyboardBackground)
     }
 }

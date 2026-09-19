@@ -218,13 +218,21 @@ public final class WTKeyboardRuntime: ObservableObject {
     /// Returns the final visual frame for a key at the measured 430-point viewport.
     /// Other viewport sizes keep the layout's source rectangle so the canvas can apply its
     /// existing proportional scaling and calibration adjustments.
+    public func usesMeasuredFrames(
+        for layout: WTKeyboardLayout,
+        viewportWidth: Double
+    ) -> Bool {
+        viewportWidth == WTMeasuredKeyboard353.viewportWidth
+            && WTKeyboardGeometryResolver353.hasMeasuredGeometry(layout)
+    }
+
     public func resolvedFrame(
         for item: WTKeyboardItem,
         in layout: WTKeyboardLayout,
         viewportWidth: Double
     ) -> WTRect? {
         guard let sourceRect = item.rect else { return nil }
-        guard viewportWidth == 430, layout.name.hasPrefix("t26_pinyin") else { return sourceRect }
+        guard usesMeasuredFrames(for: layout, viewportWidth: viewportWidth) else { return sourceRect }
         return WTKeyboardGeometryResolver353.resolve(layout: layout, viewportWidth: viewportWidth)
             .first(where: { $0.id == item.id })?.frame ?? sourceRect
     }
@@ -315,6 +323,18 @@ public final class WTKeyboardRuntime: ObservableObject {
     public func chooseInputMode(_ mode: WTInputMode) {
         state.switchInputMode(to: mode)
         inputModeDidChange(mode)
+        stateDidChange(state)
+        refreshIMEContext()
+    }
+
+    /// The measured 3.5.3 bottom bar shows `中` for Chinese layouts and `英` for English.
+    public var usesLatinLanguageLabel: Bool { state.inputMode == .english26 }
+
+    /// Mirrors the bottom-bar language switch, which uses the same state path as the
+    /// extracted `langswitch` key function.
+    public func toggleInputLanguage() {
+        state.toggleLanguage()
+        inputModeDidChange(state.inputMode)
         stateDidChange(state)
         refreshIMEContext()
     }

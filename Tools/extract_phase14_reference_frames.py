@@ -68,7 +68,10 @@ def extract_capture(capture: dict, video_root: Path, output: Path, ffmpeg: str) 
         "3",
         str(frame),
     ]
-    result = subprocess.run(command, capture_output=True, text=True)
+    # FFmpeg writes UTF-8 diagnostics; Windows hosts default to a legacy code page and would
+    # otherwise raise UnicodeDecodeError inside the reader thread instead of reporting failure.
+    result = subprocess.run(command, capture_output=True, text=True,
+                            encoding="utf-8", errors="replace")
     if result.returncode != 0:
         detail = result.stderr.strip() or result.stdout.strip()
         raise RuntimeError(f"extraction failed: {capture.get('id', '')}: {detail}")

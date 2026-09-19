@@ -51,7 +51,7 @@ def main() -> int:
         require(token in panel_root, f"complete live panel router missing token: {token}")
     require('case "emoji": state.present(.emoji)' in runtime,
             "emoji key does not transition to the live emoji panel")
-    require("WTTheme353.keyboardHeight + WTTheme353.compositionHeight + WTTheme353.candidateCompactHeight" in controller,
+    require("WTTheme353.keyboardHeaderHeight + WTTheme353.keyboardCanvasHeight" in controller,
             "controller does not reserve the full measured keyboard+candidate height")
     require("WTKeyboardServiceBinder(" in controller and "services.bind()" in controller,
             "ClawBase controller is not bound to V14 App Group persistence/services")

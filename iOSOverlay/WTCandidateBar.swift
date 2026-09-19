@@ -10,7 +10,7 @@ public struct WTCandidateBar: View {
             if runtime.candidateExpanded { expandedGrid } else { compactRow }
             if runtime.candidateActionTarget != nil { candidateActionMenu }
         }
-        .frame(minHeight: 58, alignment: .top)
+        .frame(minHeight: CGFloat(WTTheme353.keyboardHeaderHeight), alignment: .top)
         .background(WTThemeColor353.keyboardBackground)
     }
 

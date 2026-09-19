@@ -6,9 +6,9 @@ ROOT = Path(__file__).resolve().parents[1]
 errors=[]
 
 # 1. Minimum deployment target must match the original 3.5.3 baseline.
-project=(ROOT/'XcodeIntegration/project.yml').read_text()
-config=(ROOT/'XcodeIntegration/Config.xcconfig').read_text()
-package=(ROOT/'Package.swift').read_text()
+project=(ROOT/'XcodeIntegration/project.yml').read_text(encoding='utf-8')
+config=(ROOT/'XcodeIntegration/Config.xcconfig').read_text(encoding='utf-8')
+package=(ROOT/'Package.swift').read_text(encoding='utf-8')
 if 'IPHONEOS_DEPLOYMENT_TARGET: 15.1' not in project:
     errors.append('project.yml global deployment target is not 15.1')
 if 'deploymentTarget: "16.0"' not in project:
@@ -33,7 +33,7 @@ forbidden = {
 shipping_roots=['iOSApp','iOSOverlay','iOSExtensions','iOSServices','iOSShared']
 for base in shipping_roots:
     for path in (ROOT/base).rglob('*.swift'):
-        text=path.read_text()
+        text=path.read_text(encoding='utf-8')
         for token,reason in forbidden.items():
             if token in text:
                 errors.append(f'{path.relative_to(ROOT)} contains {token}: {reason}')
@@ -57,13 +57,13 @@ for name in ['App-Info.plist','Keyboard-Info.plist']:
         errors.append(f'{name} missing WTAppGroupIdentifier build setting')
 
 # 5. Shared settings keys used by the keyboard need to live in the core catalog.
-prefs=(ROOT/'Sources/WeTypeReplicaCore/SharedPreferences.swift').read_text()
+prefs=(ROOT/'Sources/WeTypeReplicaCore/SharedPreferences.swift').read_text(encoding='utf-8')
 for key in ['wt.feedback.sound','wt.feedback.haptic','wt.onehand.mode','wt.display.fontScale','wt.rect.width','wt.rect.height','wt.cloud.enabled','wt.voice.enabled','wt.clipboard.enabled','wt.toolbar.enabled']:
     if key not in prefs:
         errors.append(f'shared preference key not catalogued: {key}')
 
 # 6. Release controller must make the missing production engine explicit; debug may use preview engine.
-controller=(ROOT/'iOSExtensions/WTKeyboardInputViewController.swift').read_text()
+controller=(ROOT/'iOSExtensions/WTKeyboardInputViewController.swift').read_text(encoding='utf-8')
 if 'WTPreviewIMEEngine()' not in controller or '#if DEBUG' not in controller:
     errors.append('debug preview engine fallback missing')
 if 'return nil' not in controller:

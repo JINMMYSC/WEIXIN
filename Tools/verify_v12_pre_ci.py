@@ -10,7 +10,7 @@ def text(rel):
     if not p.exists():
         errors.append(f'missing {rel}')
         return ''
-    return p.read_text(errors='ignore')
+    return p.read_text(encoding='utf-8', errors='ignore')
 
 # Preserve all V11 gates.
 r=subprocess.run([sys.executable, str(ROOT/'Tools/verify_v11_pre_ci.py')], cwd=ROOT, capture_output=True, text=True)
@@ -46,8 +46,14 @@ if share_plist.exists():
     obj=plistlib.loads(share_plist.read_bytes())
     if obj.get('WTAppGroupIdentifier') != '$(WT_APP_GROUP_ID)': errors.append('Share-Info.plist missing WTAppGroupIdentifier')
     rule=obj.get('NSExtension',{}).get('NSExtensionAttributes',{}).get('NSExtensionActivationRule',{})
-    for key in ['NSExtensionActivationSupportsFileWithMaxCount','NSExtensionActivationSupportsImageWithMaxCount','NSExtensionActivationSupportsMovieWithMaxCount','NSExtensionActivationSupportsWebURLWithMaxCount']:
-        if key not in rule: errors.append(f'share activation rule missing {key}')
+    # The shipped plist expresses the rule as a SUBQUERY that accepts files, URLs and images
+    # while rejecting directories; older revisions used the four maximum-count keys.
+    if isinstance(rule, str):
+        for token in ['public.item','public.url','public.file-url','public.directory']:
+            if token not in rule: errors.append(f'share activation SUBQUERY missing {token}')
+    else:
+        for key in ['NSExtensionActivationSupportsFileWithMaxCount','NSExtensionActivationSupportsImageWithMaxCount','NSExtensionActivationSupportsMovieWithMaxCount','NSExtensionActivationSupportsWebURLWithMaxCount']:
+            if key not in rule: errors.append(f'share activation rule missing {key}')
 
 # 4. Live Activity has request deep-link + lifecycle metadata/final states.
 attrs=text('iOSShared/WTVoiceActivityAttributes.swift')

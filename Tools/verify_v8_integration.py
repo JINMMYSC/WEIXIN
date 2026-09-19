@@ -24,15 +24,15 @@ required = [
 missing = [x for x in required if not (root / x).exists()]
 if missing:
     print('missing:', missing); sys.exit(1)
-metrics = json.loads((root/'ReverseEngineering/V8/diff_selftest/metrics.json').read_text())
+metrics = json.loads((root/'ReverseEngineering/V8/diff_selftest/metrics.json').read_text(encoding='utf-8'))
 assert metrics['mae_0_255'] == 0
 assert metrics['exact_pixel_fraction'] == 1.0
 system_symbols = 0
 for f in (root/'iOSOverlay').glob('*.swift'):
-    system_symbols += len(re.findall(r'Image\(systemName:', f.read_text()))
+    system_symbols += len(re.findall(r'Image\(systemName:', f.read_text(encoding='utf-8', errors='replace')))
 assert system_symbols <= 36, system_symbols
-palette = json.loads((root/'ReverseEngineering/V8/WBColor353.json').read_text())
+palette = json.loads((root/'ReverseEngineering/V8/WBColor353.json').read_text(encoding='utf-8'))
 assert palette
-corpus = json.loads((root/'ReverseEngineering/V8/IME_BEHAVIOR_CORPUS.json').read_text())
+corpus = json.loads((root/'ReverseEngineering/V8/IME_BEHAVIOR_CORPUS.json').read_text(encoding='utf-8'))
 assert len(corpus['probes']) >= 30
 print(f'V8 integration OK; remaining iOSOverlay SF Symbol usages={system_symbols}; diff self-test exact=1.0')

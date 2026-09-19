@@ -16,6 +16,15 @@ public enum WTTheme353 {
     public static let toolbarHeight: Double = 40
     public static let panelHeaderHeight: Double = 40
 
+    /// Measured 3.5.3 panel split on iPhone 15 Pro Max: the keyboard surface is 371 pt tall,
+    /// made of a 72.33 pt header above a 298.67 pt canvas that carries the key rows and the
+    /// bottom bar. `keyboardHeight` above remains the height of the key rows themselves.
+    public static let keyboardHeaderHeight: Double = WTMeasuredKeyboard353.headerHeight
+    public static let keyboardCanvasHeight: Double = WTMeasuredKeyboard353.canvasHeight
+    public static let keyboardPanelHeight: Double = WTMeasuredKeyboard353.panelHeight
+    public static let keyboardBottomBarHeight: Double =
+        WTMeasuredKeyboard353.canvasHeight - WTMeasuredKeyboard353.keyAreaHeight
+
     public static let keyboardBackground = WTRGBAHex(WTPhase14Palette353.keyboardBackground, "#1C1C1E")
     public static let panelBackground = WTRGBAHex("#F2F3F5", "#1C1C1E")
     public static let surface = WTRGBAHex("#FFFFFF", "#2C2C2E")

@@ -13,16 +13,22 @@ public struct WTKeyboardCanvasView: View {
 
     public var body: some View {
         GeometryReader { proxy in
-            let sx = (proxy.size.width * runtime.keyboardAdjustment.widthScale) / layout.baseSize.width
-            let sy = (proxy.size.height * runtime.keyboardAdjustment.heightScale) / layout.baseSize.height
-            let useMeasuredFrames = proxy.size.width == 430
-                && runtime.keyboardAdjustment.widthScale == 1
-                && layout.name.hasPrefix("t26_pinyin")
-            let renderSx = useMeasuredFrames ? 1.0 : sx
-            let contentWidth = useMeasuredFrames ? Double(proxy.size.width) : layout.baseSize.width * sx
-            let contentHeight = layout.baseSize.height * sy
-            let originX = (proxy.size.width - contentWidth) / 2 + proxy.size.width * runtime.keyboardAdjustment.horizontalOffset
-            let originY = (proxy.size.height - contentHeight) / 2 + proxy.size.height * runtime.keyboardAdjustment.verticalOffset
+            let widthScale = CGFloat(runtime.keyboardAdjustment.widthScale)
+            let heightScale = CGFloat(runtime.keyboardAdjustment.heightScale)
+            let sx = (proxy.size.width * widthScale) / CGFloat(layout.baseSize.width)
+            // The canvas also carries the measured bottom bar, so the vertical scale comes from
+            // the key area height rather than from the full canvas height.
+            let sy = CGFloat(WTMeasuredKeyboard353.keyAreaHeight) * heightScale
+                / CGFloat(layout.baseSize.height)
+            let useMeasuredFrames = runtime.keyboardAdjustment.widthScale == 1
+                && runtime.usesMeasuredFrames(for: layout, viewportWidth: Double(proxy.size.width))
+            let renderSx: CGFloat = useMeasuredFrames ? 1 : sx
+            let contentWidth: CGFloat = useMeasuredFrames
+                ? proxy.size.width
+                : CGFloat(layout.baseSize.width) * sx
+            let originX = (proxy.size.width - contentWidth) / 2
+                + proxy.size.width * CGFloat(runtime.keyboardAdjustment.horizontalOffset)
+            let originY = proxy.size.height * CGFloat(runtime.keyboardAdjustment.verticalOffset)
 
             ZStack(alignment: .topLeading) {
                 WTThemeColor353.keyboardBackground
@@ -77,9 +83,55 @@ public struct WTKeyboardCanvasView: View {
                         )
                         .zIndex(50)
                 }
+
+                if useMeasuredFrames {
+                    WTKeyboardBottomBar353(runtime: runtime)
+                        .frame(width: proxy.size.width,
+                               height: CGFloat(WTTheme353.keyboardBottomBarHeight),
+                               alignment: .topLeading)
+                        .offset(y: CGFloat(WTMeasuredKeyboard353.keyAreaHeight))
+                        .zIndex(5)
+                }
             }
         }
-        // The original 3.5.3 key popup rises above the 224pt key canvas.
+        // The original 3.5.3 key popup rises above the 224pt key area.
+    }
+}
+
+/// Measured 3.5.3 bottom bar: language switch on the left, voice input on the right.
+/// Both frames come from the same 1290 x 2796 reference frames as the key rows.
+private struct WTKeyboardBottomBar353: View {
+    @ObservedObject var runtime: WTKeyboardRuntime
+
+    var body: some View {
+        let language = WTMeasuredKeyboard353.bottomBarLanguageFrame
+        let voice = WTMeasuredKeyboard353.bottomBarVoiceFrame
+        ZStack(alignment: .topLeading) {
+            Button {
+                runtime.toggleInputLanguage()
+            } label: {
+                Text(runtime.usesLatinLanguageLabel ? "英" : "中")
+                    .font(.system(size: 20, weight: .regular))
+                    .foregroundStyle(WTChrome353.primaryText)
+                    .frame(width: CGFloat(language.width), height: CGFloat(language.height))
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .offset(x: CGFloat(language.x), y: CGFloat(language.y))
+            .accessibilityIdentifier("keyboard.bottom.language")
+
+            Button {
+                runtime.presentTool(.voice)
+            } label: {
+                WTToolIconView(tool: .voice, tint: WTChrome353.primaryText)
+                    .frame(width: CGFloat(voice.width), height: CGFloat(voice.height))
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .offset(x: CGFloat(voice.x), y: CGFloat(voice.y))
+            .accessibilityIdentifier("keyboard.bottom.voice")
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 }
 
