@@ -107,6 +107,14 @@ confirm the replica inherits it.
 
 ## Known remaining gaps
 
+- Two manifest timestamps do not show the scene they claim: `08_handwriting-light.png` is the
+  nine-key grid (identical 72 / 83.67 / 72 columns and 49.33 pt rows) and
+  `10_voice-listening-light.png` is a settings-style page (three 77 pt white rows on
+  `#F0F0F0`). Re-pick those two timestamps before the handwriting and voice panels are
+  measured, otherwise the conclusions will describe the wrong surface.
+- The Chinese symbol panel row 3 measured five keys where the extracted resource lists six;
+  the sixth (`KEY_38`, ASCII `.`) is omitted because the measured row cannot hold it. Confirm
+  on device that the same punctuation set is shown there.
 - The Chinese symbol panel (`04`) was measured on the same frames: rows 1 and 2 carry ten
   36 pt keys on the letter-key grid, and row 3 is a 48.33 pt shift, five 44.67 pt symbol
   keys from x 90.67 on a 51 pt pitch, then a 48.33 pt delete. The extracted
