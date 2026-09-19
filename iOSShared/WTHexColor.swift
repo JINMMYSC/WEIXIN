@@ -1,18 +1,14 @@
 import SwiftUI
 import UIKit
+import Foundation
 
 /// Shared hex colour helpers. They live in `iOSShared` so the Host app, the keyboard
-/// extension and the other extensions can all build colours from the extracted 3.5.3
-/// hex strings without depending on the keyboard overlay target.
+/// extension and the other extensions can all build colours from the extracted 3.5.3 hex
+/// strings without depending on the keyboard overlay target. Only generic hex parsing
+/// belongs here: `WTRGBAHex` and the dynamic-pair helper stay with the Core-aware targets.
 public extension Color {
     init(wtHex: String) {
         self.init(uiColor: UIColor(wtHex: wtHex))
-    }
-
-    static func wtDynamic(_ pair: WTRGBAHex) -> Color {
-        Color(uiColor: UIColor { traits in
-            UIColor(wtHex: traits.userInterfaceStyle == .dark ? pair.dark : pair.light)
-        })
     }
 }
 

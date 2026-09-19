@@ -4,6 +4,17 @@ import UIKit
 // `Color(wtHex:)`, `Color.wtDynamic(_:)` and `UIColor(wtHex:)` live in
 // `iOSShared/WTHexColor.swift` so every target, including the Host app, can use them.
 
+public extension Color {
+    /// Resolves an extracted light/dark pair. This stays in the overlay target because
+    /// `WTRGBAHex` comes from `WeTypeReplicaCore`, which the widget and live-activity
+    /// extensions do not compile.
+    static func wtDynamic(_ pair: WTRGBAHex) -> Color {
+        Color(uiColor: UIColor { traits in
+            UIColor(wtHex: traits.userInterfaceStyle == .dark ? pair.dark : pair.light)
+        })
+    }
+}
+
 public enum WTThemeColor353 {
     public static let keyboardBackground = Color.wtDynamic(WTTheme353.keyboardBackground)
     public static let panelBackground = Color.wtDynamic(WTAppPalette353.panelBackground)
