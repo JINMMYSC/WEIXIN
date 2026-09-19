@@ -152,7 +152,10 @@ final class Phase14VisualContractTests: XCTestCase {
         XCTAssertEqual(panels.plusCardSize, 81.67, accuracy: 0.01)
         XCTAssertEqual(panels.plusCardSize + panels.plusCardSpacing, 102.67, accuracy: 0.05)
         XCTAssertEqual(panels.plusLeadingInset + 4 * panels.plusCardSize
-                       + 3 * panels.plusCardSpacing, 415.68, accuracy: 0.5)
+                       + 3 * panels.plusCardSpacing, 413.35, accuracy: 0.1)
+        // The measured grid leaves 16.65 pt on the trailing edge.
+        XCTAssertEqual(430.0 - (panels.plusLeadingInset + 4 * panels.plusCardSize
+                                + 3 * panels.plusCardSpacing), 16.65, accuracy: 0.1)
         XCTAssertEqual(panels.plusCardBackground, "#F7F6F8")
 
         // Clipboard: 47.5 pt rows, 8 pt apart.
