@@ -38,16 +38,16 @@ public struct WTHostHome353View: View {
             ZStack {
                 Circle().fill(Color(wtHex: "#2FCB91"))
                 Text("P")
-                    .font(.system(size: 34, weight: .heavy, design: .rounded).italic())
+                    .font(.system(size: 18, weight: .heavy, design: .rounded).italic())
                     .foregroundStyle(.white)
                     .offset(x: -1, y: -1)
             }
-            .frame(width: 52, height: 52)
+            .frame(width: 29, height: 29)
             .overlay(Circle().stroke(Color.white.opacity(0.85), lineWidth: 2))
 
             VStack(alignment: .leading, spacing: 1) {
                 Text("微信输入法")
-                    .font(.system(size: 27, weight: .semibold))
+                    .font(.system(size: 17, weight: .semibold))
                     .foregroundStyle(Color(wtHex: "#191919"))
                 Text("简洁、好用、打字快")
                     .font(.system(size: 13.5, weight: .regular))
@@ -55,7 +55,7 @@ public struct WTHostHome353View: View {
             }
             Spacer()
         }
-        .frame(height: 64)
+        .frame(height: 30)
     }
 
     private var featureCard: some View {
@@ -66,7 +66,7 @@ public struct WTHostHome353View: View {
                     .padding(.horizontal, 72)
                     .padding(.vertical, 22)
             }
-            .frame(height: 184)
+            .frame(height: 224)
 
             HStack(alignment: .center, spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
@@ -86,7 +86,7 @@ public struct WTHostHome353View: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
             .padding(.horizontal, 16)
-            .frame(height: 68)
+            .frame(height: 46)
         }
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
@@ -142,9 +142,9 @@ public struct WTHostHome353View: View {
         .padding(.horizontal, 16)
         .padding(.top, 17)
         .padding(.bottom, 14)
-        .frame(maxWidth: .infinity, minHeight: 130, maxHeight: 130, alignment: .topLeading)
+        .frame(maxWidth: .infinity, minHeight: 134, maxHeight: 134, alignment: .topLeading)
         .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 
     @ViewBuilder
