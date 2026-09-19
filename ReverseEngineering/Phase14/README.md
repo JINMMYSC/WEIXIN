@@ -87,6 +87,16 @@ The toolbar and the candidate list share one 32 pt row at panel-relative y 31..6
 The number of visible tool buttons follows the user's toolbar configuration; the row is
 filled from the right, and an extra configured tool appears at x 109.
 
+### Panel bodies
+
+Measured from the extracted scene frames, all in points on the 430 pt keyboard width:
+
+| Panel | Measured |
+|---|---|
+| Emoji | nine columns on a 46.2 pt pitch, 40 pt rows, ~29 pt glyphs, first row top y 626.33 |
+| Plus | four 81.67 pt square `#F7F6F8` cards on a 102.67 pt pitch, leading inset 23.67, first row top y 643.67 |
+| Clipboard | 47.5 pt rows separated by 8 pt, first row top y 645.33 |
+
 ### Surface corners
 
 The keyboard background starts at y 561 with a rounded top corner. Fitting the measured

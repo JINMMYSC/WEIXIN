@@ -138,4 +138,26 @@ final class Phase14VisualContractTests: XCTestCase {
         XCTAssertEqual(measured.toolSlotPitch - measured.toolButtonSize, 14, accuracy: 0.01)
         XCTAssertEqual(measured.viewportWidth - measured.toolRowTrailingX, 13, accuracy: 0.01)
     }
+
+    func testMeasuredPanelGeometryMatchesTheReferenceFrames() {
+        let panels = WTMeasuredPanels353.self
+
+        // Emoji: nine columns of 46.2 pt pitch inside the 430 pt keyboard width.
+        XCTAssertEqual(panels.emojiColumns, 9)
+        XCTAssertEqual(panels.emojiColumnPitch, 46.2, accuracy: 0.1)
+        XCTAssertEqual(Double(panels.emojiColumns) * panels.emojiColumnPitch, 415.8, accuracy: 1.0)
+        XCTAssertEqual(panels.emojiRowPitch, 40, accuracy: 0.1)
+
+        // Plus: four 81.67 pt cards on a 102.67 pt pitch.
+        XCTAssertEqual(panels.plusCardSize, 81.67, accuracy: 0.01)
+        XCTAssertEqual(panels.plusCardSize + panels.plusCardSpacing, 102.67, accuracy: 0.05)
+        XCTAssertEqual(panels.plusLeadingInset + 4 * panels.plusCardSize
+                       + 3 * panels.plusCardSpacing, 415.68, accuracy: 0.5)
+        XCTAssertEqual(panels.plusCardBackground, "#F7F6F8")
+
+        // Clipboard: 47.5 pt rows, 8 pt apart.
+        XCTAssertEqual(panels.clipboardRowHeight, 47.5, accuracy: 0.01)
+        XCTAssertEqual(panels.clipboardRowSpacing, 8, accuracy: 0.01)
+        XCTAssertEqual(panels.clipboardRowHeight + panels.clipboardRowSpacing, 55.5, accuracy: 0.01)
+    }
 }

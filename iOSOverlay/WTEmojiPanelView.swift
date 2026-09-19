@@ -85,15 +85,23 @@ public struct WTEmojiPanelView: View {
             WTPhase4PanelStateView(state: .empty, emptyTitle: "暂无最近使用", emptySubtitle: "使用过的 Emoji 会显示在这里。")
         } else {
             ScrollView {
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 8), spacing: 5) {
+                // Measured 3.5.3 emoji grid: nine columns on a 46.2 pt pitch with 40 pt rows.
+                LazyVGrid(
+                    columns: Array(repeating: GridItem(.flexible(), spacing: 0),
+                                   count: WTMeasuredPanels353.emojiColumns),
+                    spacing: 0
+                ) {
                     ForEach(Array(values.enumerated()), id: \.offset) { _, symbol in
                         Button { runtime.chooseEmoji(symbol) } label: {
-                            Text(symbol).font(.system(size: 29)).frame(maxWidth: .infinity, minHeight: 39)
+                            Text(symbol)
+                                .font(.system(size: CGFloat(WTMeasuredPanels353.emojiSymbolSize)))
+                                .frame(maxWidth: .infinity,
+                                       minHeight: CGFloat(WTMeasuredPanels353.emojiRowPitch))
                         }
                         .buttonStyle(.plain)
                     }
                 }
-                .padding(.horizontal, 6)
+                .padding(.horizontal, 9.6)
                 .padding(.vertical, 6)
             }
         }

@@ -58,7 +58,8 @@ public struct WTClipboardPanelView: View {
 
     private var list: some View {
         ScrollView {
-            LazyVStack(spacing: 7) {
+            // Measured 3.5.3 clipboard panel: 47.5 pt rows separated by 8 pt.
+            LazyVStack(spacing: CGFloat(WTMeasuredPanels353.clipboardRowSpacing)) {
                 ForEach(runtime.clipboardItems) { entry in
                     HStack(alignment: .top, spacing: 8) {
                         Button { runtime.insertClipboard(entry) } label: {
@@ -90,6 +91,7 @@ public struct WTClipboardPanelView: View {
                         }
                     }
                     .padding(10)
+                    .frame(minHeight: CGFloat(WTMeasuredPanels353.clipboardRowHeight))
                     .background(WTChrome353.surface)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 }

@@ -79,6 +79,31 @@ public enum WTMeasuredKeyboard353 {
 }
 
 /// Host settings chrome measured from the same 3.5.3 recordings. Every setup page shares one
+/// Panel bodies measured from the same frames. Each value is the final drawn geometry, not a
+/// design-grid placeholder.
+public enum WTMeasuredPanels353 {
+    /// Emoji panel: nine columns, 46.2 pt pitch, 40 pt rows.
+    public static let emojiColumns = 9
+    public static let emojiColumnPitch: Double = 46.2
+    public static let emojiRowPitch: Double = 40
+    public static let emojiSymbolSize: Double = 29
+    public static let emojiFirstRowTop: Double = 626.33
+
+    /// Plus panel: four 81.67 pt square cards on a 102.67 pt pitch.
+    public static let plusCardSize: Double = 81.67
+    public static let plusCardSpacing: Double = 21
+    public static let plusLeadingInset: Double = 23.67
+    public static let plusFirstRowTop: Double = 643.67
+    public static let plusCardBackground = "#F7F6F8"
+
+    /// Clipboard panel: 47.5 pt rows with 8 pt gaps.
+    public static let clipboardRowHeight: Double = 47.5
+    public static let clipboardRowSpacing: Double = 8
+    public static let clipboardFirstRowTop: Double = 645.33
+    public static let clipboardCardBackground = "#FFFFFF"
+}
+
+/// Host settings chrome measured from the same 3.5.3 recordings. Every setup page shares one
 /// background, one card radius and one row rhythm; only the rows themselves differ.
 public enum WTHostSettingsChrome353 {
     public static let pageBackground = "#F0F0F0"

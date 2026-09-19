@@ -30,16 +30,34 @@ public struct WTPlusPanelView: View {
                         Picker("", selection: $section) { Text("全部").tag(0); Text("智能").tag(1); Text("效率").tag(2) }
                             .pickerStyle(.segmented)
 
-                        ForEach(visibleCards, id: \.0) { card in
-                            Button { if enabled { runtime.presentTool(card.2) } } label: {
-                                HStack(spacing: 10) {
-                                    WTSemanticGlyph(name: card.1).frame(width: 28)
-                                    VStack(alignment: .leading, spacing: 2) { Text(card.0).font(.system(size: 14)); Text(enabled ? "已开启" : "总开关已关闭").font(.system(size: 10)).foregroundStyle(.secondary) }
-                                    Spacer(); WTSemanticGlyph(name: "chevron.right").font(.system(size: 10)).foregroundStyle(.tertiary)
+                        // Measured 3.5.3 Plus panel: four 81.67 pt square cards on a 102.67 pt pitch.
+                        LazyVGrid(
+                            columns: Array(
+                                repeating: GridItem(
+                                    .fixed(CGFloat(WTMeasuredPanels353.plusCardSize)),
+                                    spacing: CGFloat(WTMeasuredPanels353.plusCardSpacing)
+                                ),
+                                count: 4
+                            ),
+                            alignment: .leading,
+                            spacing: CGFloat(WTMeasuredPanels353.plusCardSpacing)
+                        ) {
+                            ForEach(visibleCards, id: \.0) { card in
+                                Button { if enabled { runtime.presentTool(card.2) } } label: {
+                                    VStack(spacing: 6) {
+                                        WTSemanticGlyph(name: card.1).font(.system(size: 22))
+                                        Text(card.0).font(.system(size: 12)).lineLimit(1)
+                                    }
+                                    .frame(width: CGFloat(WTMeasuredPanels353.plusCardSize),
+                                           height: CGFloat(WTMeasuredPanels353.plusCardSize))
+                                    .background(Color(wtHex: WTMeasuredPanels353.plusCardBackground))
+                                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                                 }
-                                .padding(.horizontal, 12).frame(height: 48).background(WTChrome353.surface).clipShape(RoundedRectangle(cornerRadius: 10))
-                            }.buttonStyle(.plain).disabled(!enabled)
+                                .buttonStyle(.plain)
+                                .disabled(!enabled)
+                            }
                         }
+                        .padding(.leading, 14)
                     }.padding(10)
                 }
             }.background(WTChrome353.panelBackground)
