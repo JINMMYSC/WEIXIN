@@ -197,8 +197,9 @@ final class Phase14VisualContractTests: XCTestCase {
         XCTAssertEqual(delete.x, 377, accuracy: 0.01)
         XCTAssertLessThanOrEqual(previousEnd, delete.x)
 
-        // The bottom row keeps its resource geometry scaled into the 430 pt viewport.
+        // The bottom row keeps its resource geometry scaled once into the 430 pt viewport.
         let space = try XCTUnwrap(frames["KEY_SPACE"])
-        XCTAssertGreaterThan(space.width, 90)
+        XCTAssertEqual(space.width, 46.0 * 430.0 / 414.0, accuracy: 0.1)
+        XCTAssertEqual(space.y, 173, accuracy: 0.01)
     }
 }
