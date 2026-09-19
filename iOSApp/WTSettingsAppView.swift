@@ -199,6 +199,24 @@ private struct WTSettingsRowModel {
     }
 }
 
+/// Applies the measured 3.5.3 host page background to a settings page.
+/// `scrollContentBackground` requires iOS 16, so the deployment-floor path configures the
+/// UIKit backing view instead.
+private extension View {
+    @ViewBuilder func wtSettingsPageBackground() -> some View {
+        if #available(iOS 16.0, *) {
+            scrollContentBackground(.hidden)
+                .background(Color(wtHex: WTHostSettingsChrome353.pageBackground).ignoresSafeArea())
+        } else {
+            background(Color(wtHex: WTHostSettingsChrome353.pageBackground).ignoresSafeArea())
+                .onAppear {
+                    UITableView.appearance().backgroundColor =
+                        UIColor(wtHex: WTHostSettingsChrome353.pageBackground)
+                }
+        }
+    }
+}
+
 public struct WTSettingsDetailView: View {
     let destination: WTSettingsDestination
     @State private var transferCode = ""
@@ -209,26 +227,11 @@ public struct WTSettingsDetailView: View {
             content
         }
         .listStyle(.insetGrouped)
-        .pageBackground()
+        .wtSettingsPageBackground()
         .navigationTitle(destination.title)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             if destination == .transfer { transferCode = loadOrCreateTransferCode() }
-        }
-    }
-
-    /// Applies the measured 3.5.3 page background. `scrollContentBackground` needs iOS 16,
-    /// so the deployment-floor path configures the UIKit backing view instead.
-    @ViewBuilder private func pageBackground() -> some View {
-        if #available(iOS 16.0, *) {
-            scrollContentBackground(.hidden)
-                .background(Color(wtHex: WTHostSettingsChrome353.pageBackground).ignoresSafeArea())
-        } else {
-            background(Color(wtHex: WTHostSettingsChrome353.pageBackground).ignoresSafeArea())
-                .onAppear {
-                    UITableView.appearance().backgroundColor =
-                        UIColor(wtHex: WTHostSettingsChrome353.pageBackground)
-                }
         }
     }
 
