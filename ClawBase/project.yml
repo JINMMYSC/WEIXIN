@@ -30,6 +30,7 @@ targets:
       - path: ../iOSServices/WTVoiceLiveActivityController.swift
       - path: ../iOSShared/WTVoiceActivityAttributes.swift
       - path: ../iOSShared/WTSemanticGlyph.swift
+      - path: ../iOSShared/WTHexColor.swift
       - path: ../Sources/WeTypeReplicaCore
     dependencies:
       - target: HamsterKeyboard
@@ -70,6 +71,7 @@ targets:
         buildPhase: resources
       - path: ../Sources/WeTypeReplicaCore
       - path: ../iOSShared/WTSemanticGlyph.swift
+      - path: ../iOSShared/WTHexColor.swift
       - path: ../iOSOverlay
       - path: ../HamsterBridge
       - path: ../iOSServices
