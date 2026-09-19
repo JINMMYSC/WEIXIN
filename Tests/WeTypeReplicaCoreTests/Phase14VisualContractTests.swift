@@ -163,4 +163,42 @@ final class Phase14VisualContractTests: XCTestCase {
         XCTAssertEqual(panels.clipboardRowSpacing, 8, accuracy: 0.01)
         XCTAssertEqual(panels.clipboardRowHeight + panels.clipboardRowSpacing, 55.5, accuracy: 0.01)
     }
+
+    func testSymbolPanelUsesTheMeasuredLetterGridAndFiveKeyRow() throws {
+        let frames = Dictionary(uniqueKeysWithValues: WTKeyboardGeometryResolver353
+            .resolve(layout: WTLayouts353Resolved.t26CnSymbol, viewportWidth: 430)
+            .map { ($0.id, $0.frame) })
+        let measured = WTMeasuredKeyboard353.self
+
+        // Rows 1 and 2 repeat the letter-key grid.
+        for (index, id) in ["KEY_11", "KEY_12", "KEY_13", "KEY_14", "KEY_15"].enumerated() {
+            let key = try XCTUnwrap(frames[id])
+            XCTAssertEqual(key.x, measured.keyInset + Double(index) * measured.letterKeyPitch,
+                           accuracy: 0.01)
+            XCTAssertEqual(key.width, measured.letterKeyWidth, accuracy: 0.01)
+            XCTAssertEqual(key.height, measured.t26RowHeight, accuracy: 0.01)
+        }
+
+        // Row 3: switch, five 44.67 pt punctuation keys, delete. The sixth resource key does
+        // not fit the measured row and is omitted.
+        XCTAssertNil(frames["KEY_38"])
+        let symbolSwitch = try XCTUnwrap(frames["KEY_SYMB"])
+        XCTAssertEqual(symbolSwitch.x, 5, accuracy: 0.01)
+        XCTAssertEqual(symbolSwitch.width, 48.33, accuracy: 0.01)
+
+        var previousEnd = symbolSwitch.x + symbolSwitch.width
+        for id in ["KEY_33", "KEY_34", "KEY_35", "KEY_36", "KEY_37"] {
+            let key = try XCTUnwrap(frames[id], "missing \(id)")
+            XCTAssertEqual(key.width, 44.67, accuracy: 0.01)
+            XCTAssertGreaterThanOrEqual(key.x, previousEnd, "\(id) overlaps the previous key")
+            previousEnd = key.x + key.width
+        }
+        let delete = try XCTUnwrap(frames["KEY_DEL"])
+        XCTAssertEqual(delete.x, 377, accuracy: 0.01)
+        XCTAssertLessThanOrEqual(previousEnd, delete.x)
+
+        // The bottom row keeps its resource geometry scaled into the 430 pt viewport.
+        let space = try XCTUnwrap(frames["KEY_SPACE"])
+        XCTAssertGreaterThan(space.width, 90)
+    }
 }

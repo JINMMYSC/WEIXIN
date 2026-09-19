@@ -76,6 +76,11 @@ public enum WTMeasuredKeyboard353 {
     /// Bottom-bar items measured below the key rows, in canvas coordinates.
     public static let bottomBarLanguageFrame = WTRect(x: 29, y: 245.33, width: 27, height: 26.67)
     public static let bottomBarVoiceFrame = WTRect(x: 378, y: 243.33, width: 18.67, height: 28.33)
+
+    /// Chinese symbol panel row 3: five 44.67 pt punctuation keys starting at x 90.67.
+    public static let symbolKeyOrigin: Double = 90.67
+    public static let symbolKeyWidth: Double = 44.67
+    public static let symbolKeyPitch: Double = 51
 }
 
 /// Host settings chrome measured from the same 3.5.3 recordings. Every setup page shares one
@@ -126,7 +131,9 @@ public enum WTHostSettingsChrome353 {
 public enum WTKeyboardGeometryResolver353 {
     /// Layouts whose final frames were measured from the reference device.
     public static func hasMeasuredGeometry(_ layout: WTKeyboardLayout) -> Bool {
-        layout.items.contains { $0.id == "KEY_Q" } || layout.items.contains { $0.id == "KEY_ABC" }
+        layout.items.contains { $0.id == "KEY_Q" }
+            || layout.items.contains { $0.id == "KEY_ABC" }
+            || layout.items.contains { $0.id == "KEY_33" }
     }
 
     public static func resolve(
@@ -142,15 +149,92 @@ public enum WTKeyboardGeometryResolver353 {
         // proportional scale. Returning pre-scaled frames here would scale them twice.
         guard viewportWidth == WTMeasuredKeyboard353.viewportWidth else { return raw }
         if layout.items.contains(where: { $0.id == "KEY_Q" }) {
-            return measuredT26(raw)
+            return measuredT26(raw, viewportWidth: viewportWidth,
+                               designWidth: layout.baseSize.width)
         }
         if layout.items.contains(where: { $0.id == "KEY_ABC" }) {
-            return measuredT9(raw)
+            return measuredT9(raw, viewportWidth: viewportWidth,
+                              designWidth: layout.baseSize.width)
+        }
+        if layout.items.contains(where: { $0.id == "KEY_33" }) {
+            return measuredSymbol(raw, viewportWidth: viewportWidth,
+                                  designWidth: layout.baseSize.width)
         }
         return raw
     }
 
-    private static func measuredT26(_ frames: [WTResolvedKeyFrame353]) -> [WTResolvedKeyFrame353] {
+    /// Items outside the measured rows keep their design rectangle, scaled once to the
+    /// viewport, because the canvas renders measured layouts without a second scale.
+    private static func assemble(
+        _ frames: [WTResolvedKeyFrame353],
+        overrides: [String: WTRect],
+        hidden: Set<String> = [],
+        viewportWidth: Double,
+        designWidth: Double
+    ) -> [WTResolvedKeyFrame353] {
+        let scale = viewportWidth / designWidth
+        return frames.compactMap { frame in
+            guard !hidden.contains(frame.id) else { return nil }
+            if let rect = overrides[frame.id] {
+                return WTResolvedKeyFrame353(id: frame.id, frame: rect)
+            }
+            return WTResolvedKeyFrame353(
+                id: frame.id,
+                frame: WTRect(
+                    x: frame.frame.x * scale,
+                    y: frame.frame.y,
+                    width: frame.frame.width * scale,
+                    height: frame.frame.height
+                )
+            )
+        }
+    }
+
+    /// Chinese symbol panel measured on the same frames: rows 1 and 2 repeat the letter-key
+    /// grid, row 3 is a 48.33 pt switch plus five 44.67 pt punctuation keys on a 51 pt pitch,
+    /// and the sixth resource key (`KEY_38`) does not fit that measured row.
+    private static func measuredSymbol(
+        _ frames: [WTResolvedKeyFrame353],
+        viewportWidth: Double,
+        designWidth: Double
+    ) -> [WTResolvedKeyFrame353] {
+        let measured = WTMeasuredKeyboard353.self
+        let framesByID = Dictionary(uniqueKeysWithValues: frames.map { ($0.id, $0.frame) })
+        let firstRow = ["KEY_11", "KEY_12", "KEY_13", "KEY_14", "KEY_15",
+                        "KEY_16", "KEY_17", "KEY_18", "KEY_19", "KEY_10"]
+        let secondRow = ["KEY_21", "KEY_22", "KEY_23", "KEY_24", "KEY_25",
+                         "KEY_26", "KEY_27", "KEY_28", "KEY_29", "KEY_20"]
+        let punctuation = ["KEY_33", "KEY_34", "KEY_35", "KEY_36", "KEY_37"]
+
+        var overrides: [String: WTRect] = [:]
+        place(row: firstRow, origin: measured.keyInset, pitch: measured.letterKeyPitch,
+              width: measured.letterKeyWidth, frames: framesByID, into: &overrides)
+        place(row: secondRow, origin: measured.keyInset, pitch: measured.letterKeyPitch,
+              width: measured.letterKeyWidth, frames: framesByID, into: &overrides)
+
+        if let rowY = framesByID["KEY_SYMB"]?.y {
+            overrides["KEY_SYMB"] = WTRect(x: measured.keyInset, y: rowY,
+                                           width: measured.functionKeyWidth,
+                                           height: measured.t26RowHeight)
+            let origin = measured.symbolKeyOrigin
+            let width = measured.symbolKeyWidth
+            for (index, id) in punctuation.enumerated() {
+                overrides[id] = WTRect(x: origin + Double(index) * measured.symbolKeyPitch, y: rowY,
+                                       width: width, height: measured.t26RowHeight)
+            }
+            overrides["KEY_DEL"] = WTRect(x: 377, y: rowY, width: measured.functionKeyWidth,
+                                          height: measured.t26RowHeight)
+        }
+
+        return assemble(frames, overrides: overrides, hidden: ["KEY_38"],
+                        viewportWidth: viewportWidth, designWidth: designWidth)
+    }
+
+    private static func measuredT26(
+        _ frames: [WTResolvedKeyFrame353],
+        viewportWidth: Double,
+        designWidth: Double
+    ) -> [WTResolvedKeyFrame353] {
         let measured = WTMeasuredKeyboard353.self
         let framesByID = Dictionary(uniqueKeysWithValues: frames.map { ($0.id, $0.frame) })
         let firstRow = ["KEY_Q", "KEY_W", "KEY_E", "KEY_R", "KEY_T",
@@ -184,14 +268,15 @@ public enum WTKeyboardGeometryResolver353 {
                           frames: framesByID, into: &overrides)
         }
 
-        return frames.compactMap { frame in
-            guard !measured.t26HiddenIDs.contains(frame.id) else { return nil }
-            guard let rect = overrides[frame.id] else { return frame }
-            return WTResolvedKeyFrame353(id: frame.id, frame: rect)
-        }
+        return assemble(frames, overrides: overrides, hidden: measured.t26HiddenIDs,
+                        viewportWidth: viewportWidth, designWidth: designWidth)
     }
 
-    private static func measuredT9(_ frames: [WTResolvedKeyFrame353]) -> [WTResolvedKeyFrame353] {
+    private static func measuredT9(
+        _ frames: [WTResolvedKeyFrame353],
+        viewportWidth: Double,
+        designWidth: Double
+    ) -> [WTResolvedKeyFrame353] {
         let measured = WTMeasuredKeyboard353.self
         let framesByID = Dictionary(uniqueKeysWithValues: frames.map { ($0.id, $0.frame) })
         let numberIDs = ["KEY_1", "KEY_2", "KEY_3", "KEY_4", "KEY_5", "KEY_6",
@@ -229,10 +314,8 @@ public enum WTKeyboardGeometryResolver353 {
             }
         }
 
-        return frames.map { frame in
-            guard let rect = overrides[frame.id] else { return frame }
-            return WTResolvedKeyFrame353(id: frame.id, frame: rect)
-        }
+        return assemble(frames, overrides: overrides,
+                        viewportWidth: viewportWidth, designWidth: designWidth)
     }
 
     private static func place(
