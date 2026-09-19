@@ -95,4 +95,3 @@ final class Phase14VisualContractTests: XCTestCase {
         XCTAssertEqual(WTMeasuredKeyboard353.keyAreaHeight, 224)
     }
 }
-}
