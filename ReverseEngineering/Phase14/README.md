@@ -112,14 +112,13 @@ confirm the replica inherits it.
   `10_voice-listening-light.png` is a settings-style page (three 77 pt white rows on
   `#F0F0F0`). Re-pick those two timestamps before the handwriting and voice panels are
   measured, otherwise the conclusions will describe the wrong surface.
-- The Chinese symbol panel row 3 measured five keys where the extracted resource lists six;
-  the sixth (`KEY_38`, ASCII `.`) is omitted because the measured row cannot hold it. Confirm
-  on device that the same punctuation set is shown there.
-- The Chinese symbol panel (`04`) was measured on the same frames: rows 1 and 2 carry ten
-  36 pt keys on the letter-key grid, and row 3 is a 48.33 pt shift, five 44.67 pt symbol
-  keys from x 90.67 on a 51 pt pitch, then a 48.33 pt delete. The extracted
-  `t26_cn_symbol` resource lists six 42 pt keys in that row, so the extra entry needs the
-  same glyph-by-glyph identification the letter rows received before the row is changed.
+- The Chinese symbol keyboard has at least two pages in the recordings. The page the extracted
+  `t26_cn_symbol` resource describes carries six punctuation keys in row 3 (43.33 pt wide from
+  x 69.33 on a 49.67 pt pitch), and a second page carries only five (44.67 pt wide from
+  x 90.67 on a 51 pt pitch). The replica implements the six-key page; the five-key page is not
+  reproduced yet.
+- Rows 1 and 2 of the symbol panel carry ten 36 pt keys on the letter-key grid, identical to
+  the 26-key letter rows.
 - The symbol panel's bottom row shows a green key at x 5 and one further key near x 310;
   its middle is empty in the reference frame, which still needs a second frame to confirm.
 - The nine-key `1` key carries no tap input in the extracted INI (only `UPINPUT: 1` and the

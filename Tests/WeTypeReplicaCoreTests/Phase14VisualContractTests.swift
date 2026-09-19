@@ -179,20 +179,20 @@ final class Phase14VisualContractTests: XCTestCase {
             XCTAssertEqual(key.height, measured.t26RowHeight, accuracy: 0.01)
         }
 
-        // Row 3: switch, five 44.67 pt punctuation keys, delete. The sixth resource key does
-        // not fit the measured row and is omitted.
-        XCTAssertNil(frames["KEY_38"])
+        // Row 3: switch, six 43.33 pt punctuation keys, delete — measured on the six-key page
+        // the extracted resource describes.
         let symbolSwitch = try XCTUnwrap(frames["KEY_SYMB"])
         XCTAssertEqual(symbolSwitch.x, 5, accuracy: 0.01)
         XCTAssertEqual(symbolSwitch.width, 48.33, accuracy: 0.01)
 
         var previousEnd = symbolSwitch.x + symbolSwitch.width
-        for id in ["KEY_33", "KEY_34", "KEY_35", "KEY_36", "KEY_37"] {
+        for id in ["KEY_33", "KEY_34", "KEY_35", "KEY_36", "KEY_37", "KEY_38"] {
             let key = try XCTUnwrap(frames[id], "missing \(id)")
-            XCTAssertEqual(key.width, 44.67, accuracy: 0.01)
+            XCTAssertEqual(key.width, 43.33, accuracy: 0.01)
             XCTAssertGreaterThanOrEqual(key.x, previousEnd, "\(id) overlaps the previous key")
             previousEnd = key.x + key.width
         }
+        XCTAssertEqual(try XCTUnwrap(frames["KEY_33"]).x, 69.33, accuracy: 0.01)
         let delete = try XCTUnwrap(frames["KEY_DEL"])
         XCTAssertEqual(delete.x, 377, accuracy: 0.01)
         XCTAssertLessThanOrEqual(previousEnd, delete.x)

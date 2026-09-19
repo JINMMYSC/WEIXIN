@@ -77,10 +77,11 @@ public enum WTMeasuredKeyboard353 {
     public static let bottomBarLanguageFrame = WTRect(x: 29, y: 245.33, width: 27, height: 26.67)
     public static let bottomBarVoiceFrame = WTRect(x: 378, y: 243.33, width: 18.67, height: 28.33)
 
-    /// Chinese symbol panel row 3: five 44.67 pt punctuation keys starting at x 90.67.
-    public static let symbolKeyOrigin: Double = 90.67
-    public static let symbolKeyWidth: Double = 44.67
-    public static let symbolKeyPitch: Double = 51
+    /// Chinese symbol panel row 3 measured on the six-key page: shift, six 43.33 pt
+    /// punctuation keys from x 69.33 on a 49.67 pt pitch, then delete.
+    public static let symbolKeyOrigin: Double = 69.33
+    public static let symbolKeyWidth: Double = 43.33
+    public static let symbolKeyPitch: Double = 49.67
 }
 
 /// Host settings chrome measured from the same 3.5.3 recordings. Every setup page shares one
@@ -191,8 +192,9 @@ public enum WTKeyboardGeometryResolver353 {
     }
 
     /// Chinese symbol panel measured on the same frames: rows 1 and 2 repeat the letter-key
-    /// grid, row 3 is a 48.33 pt switch plus five 44.67 pt punctuation keys on a 51 pt pitch,
-    /// and the sixth resource key (`KEY_38`) does not fit that measured row.
+    /// grid and row 3 is a 48.33 pt switch plus six 43.33 pt punctuation keys on a 49.67 pt
+    /// pitch, which is the page the extracted resource describes. The recording also contains
+    /// a second page with only five punctuation keys in that row.
     private static func measuredSymbol(
         _ frames: [WTResolvedKeyFrame353],
         viewportWidth: Double,
@@ -204,7 +206,7 @@ public enum WTKeyboardGeometryResolver353 {
                         "KEY_16", "KEY_17", "KEY_18", "KEY_19", "KEY_10"]
         let secondRow = ["KEY_21", "KEY_22", "KEY_23", "KEY_24", "KEY_25",
                          "KEY_26", "KEY_27", "KEY_28", "KEY_29", "KEY_20"]
-        let punctuation = ["KEY_33", "KEY_34", "KEY_35", "KEY_36", "KEY_37"]
+        let punctuation = ["KEY_33", "KEY_34", "KEY_35", "KEY_36", "KEY_37", "KEY_38"]
 
         var overrides: [String: WTRect] = [:]
         place(row: firstRow, origin: measured.keyInset, pitch: measured.letterKeyPitch,
@@ -226,7 +228,7 @@ public enum WTKeyboardGeometryResolver353 {
                                           height: measured.t26RowHeight)
         }
 
-        return assemble(frames, overrides: overrides, hidden: ["KEY_38"],
+        return assemble(frames, overrides: overrides,
                         viewportWidth: viewportWidth, designWidth: designWidth)
     }
 
