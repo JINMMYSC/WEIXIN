@@ -145,42 +145,55 @@ public struct WTPanelRootView: View {
 private struct WTIdleInputBar353: View {
     @ObservedObject var runtime: WTKeyboardRuntime
 
+    private var buttonSize: CGFloat { CGFloat(WTMeasuredKeyboard353.toolButtonSize) }
+    private var toolGap: CGFloat {
+        CGFloat(WTMeasuredKeyboard353.toolSlotPitch - WTMeasuredKeyboard353.toolButtonSize)
+    }
+    private var trailingInset: CGFloat {
+        CGFloat(WTMeasuredKeyboard353.viewportWidth - WTMeasuredKeyboard353.toolRowTrailingX)
+    }
+    /// The measured 3.5.3 toolbar keeps at most seven right-aligned slots.
+    private var visibleTools: [WTKeyboardTool] { Array(runtime.toolbarOrder.suffix(7)) }
+
     var body: some View {
         HStack(spacing: 0) {
             Button { runtime.state.present(.controlCenter) } label: {
                 ZStack {
                     Circle()
                         .fill(WTChrome353.elevatedSurface)
-                        .frame(width: 36, height: 36)
+                        .frame(width: buttonSize, height: buttonSize)
                     Text("P")
-                        .font(.system(size: 25, weight: .heavy, design: .rounded).italic())
+                        .font(.system(size: 20, weight: .heavy, design: .rounded).italic())
                         .foregroundStyle(WTChrome353.accent)
                         .offset(x: -1, y: -1)
                 }
-                .frame(width: 58, height: 58)
+                .frame(width: buttonSize, height: buttonSize)
             }
             .buttonStyle(.plain)
+            .padding(.leading, CGFloat(WTMeasuredKeyboard353.productButtonX))
 
             if runtime.toolbarEnabled {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 0) {
-                        ForEach(runtime.toolbarOrder) { tool in
-                            Button { runtime.presentTool(tool) } label: {
-                                WTToolIconView(
-                                    tool: tool,
-                                    tint: tool == .askAI ? WTChrome353.accent : WTChrome353.primaryText.opacity(0.82)
-                                )
-                                .frame(width: 42, height: 58)
-                            }
-                            .buttonStyle(.plain)
+                Spacer(minLength: 0)
+                HStack(spacing: toolGap) {
+                    ForEach(visibleTools) { tool in
+                        Button { runtime.presentTool(tool) } label: {
+                            WTToolIconView(
+                                tool: tool,
+                                tint: tool == .askAI ? WTChrome353.accent : WTChrome353.primaryText.opacity(0.82)
+                            )
+                            .frame(width: buttonSize, height: buttonSize)
                         }
+                        .buttonStyle(.plain)
                     }
                 }
+                .padding(.trailing, trailingInset)
             } else {
                 Spacer(minLength: 0)
             }
         }
-        .frame(height: CGFloat(WTTheme353.keyboardHeaderHeight))
+        .frame(height: CGFloat(WTTheme353.keyboardHeaderRowHeight))
+        .padding(.top, CGFloat(WTTheme353.keyboardHeaderRowTop))
+        .frame(height: CGFloat(WTTheme353.keyboardHeaderHeight), alignment: .top)
         .background(WTThemeColor353.keyboardBackground)
     }
 }

@@ -94,4 +94,48 @@ final class Phase14VisualContractTests: XCTestCase {
                        WTMeasuredKeyboard353.panelHeight, accuracy: 0.01)
         XCTAssertEqual(WTMeasuredKeyboard353.keyAreaHeight, 224)
     }
+
+    func testT26CapsUseTheMeasuredRowHeight() throws {
+        let frames = Dictionary(uniqueKeysWithValues: WTKeyboardGeometryResolver353
+            .resolve(layout: WTLayouts353.t26Pinyin, viewportWidth: 430)
+            .map { ($0.id, $0.frame) })
+        for id in ["KEY_Q", "KEY_A", "KEY_Z", "KEY_123", "KEY_SPACE"] {
+            let frame = try XCTUnwrap(frames[id])
+            XCTAssertEqual(frame.height, WTMeasuredKeyboard353.t26RowHeight, accuracy: 0.01)
+        }
+    }
+
+    func testT9RowsUseTheMeasuredRowTopsAndHeight() throws {
+        let frames = Dictionary(uniqueKeysWithValues: WTKeyboardGeometryResolver353
+            .resolve(layout: WTLayouts353.t9Pinyin, viewportWidth: 430)
+            .map { ($0.id, $0.frame) })
+        let expected = ["KEY_1": 3.0, "KEY_4": 59.0, "KEY_7": 115.0, "KEY_SPACE": 171.0]
+        for (id, top) in expected {
+            let frame = try XCTUnwrap(frames[id], "missing \(id)")
+            XCTAssertEqual(frame.y, top, accuracy: 0.01)
+            XCTAssertEqual(frame.height, WTMeasuredKeyboard353.t9RowHeight, accuracy: 0.01)
+        }
+    }
+
+    func testT9PunctuationColumnSharesTheMeasuredRowPitch() throws {
+        let resolved = WT353RuntimeLayoutGeometry.resolvedT9(WTLayouts353.t9Pinyin)
+        let frames = Dictionary(uniqueKeysWithValues: WTKeyboardGeometryResolver353
+            .resolve(layout: resolved, viewportWidth: 430)
+            .map { ($0.id, $0.frame) })
+        for index in 0..<4 {
+            let frame = try XCTUnwrap(frames["WT353_T9_PUNCT_\(index)"])
+            XCTAssertEqual(frame.y, WTMeasuredKeyboard353.t9RowTops[index], accuracy: 0.01)
+            XCTAssertEqual(frame.width, WTMeasuredKeyboard353.t9GutterWidth, accuracy: 0.01)
+            XCTAssertEqual(frame.height, WTMeasuredKeyboard353.t9RowHeight, accuracy: 0.01)
+        }
+    }
+
+    func testHeaderRowMatchesTheMeasuredToolbarGrid() {
+        let measured = WTMeasuredKeyboard353.self
+        XCTAssertEqual(measured.headerRowTop, 31, accuracy: 0.01)
+        XCTAssertEqual(measured.headerRowHeight, 32, accuracy: 0.01)
+        XCTAssertEqual(measured.headerRowTop + measured.headerRowHeight, 63, accuracy: 0.01)
+        XCTAssertEqual(measured.toolSlotPitch - measured.toolButtonSize, 14, accuracy: 0.01)
+        XCTAssertEqual(measured.viewportWidth - measured.toolRowTrailingX, 13, accuracy: 0.01)
+    }
 }

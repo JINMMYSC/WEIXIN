@@ -71,16 +71,37 @@ The measured frames are 27 x 26.67 pt at x 29, y 877 and 18.67 x 28.33 pt at x 3
 y 876.67. The emoji panel widens the left item to x 21..56, which is why the band is
 treated as keyboard chrome rather than host content.
 
+### Header row
+
+The toolbar and the candidate list share one 32 pt row at panel-relative y 31..63
+(screen y 592..624) in every keyboard state that was measured.
+
+| Item | Measured |
+|---|---|
+| Product button | 32 x 32 pt at x 13 |
+| Tool buttons | 32 x 32 pt on a 46 pt pitch, right-aligned so the last slot ends at x 417 |
+| Tool slot gap | 14 pt between caps |
+| Candidate text | ink from y 597 to 619, first glyph at x 16.3 |
+| Candidate font | ~20 pt (17 pt wide CJK cell on a 19.5 pt advance) |
+
+The number of visible tool buttons follows the user's toolbar configuration; the row is
+filled from the right, and an extra configured tool appears at x 109.
+
+### Surface corners
+
+The keyboard background starts at y 561 with a rounded top corner. Fitting the measured
+inset profile (`20.33 pt` at 1 pt below the top edge, `11.33 pt` at 5 pt, `3.33 pt` at 15 pt)
+gives a radius of about 28 pt. The host content shows through the corner, so this is
+expected to be the platform keyboard container on iOS 26; it needs one device check to
+confirm the replica inherits it.
+
 ## Known remaining gaps
 
-These were measured at the same time but are not yet implemented:
-
-- The header still renders a 58 pt product button and 42 pt scroll items. The reference
-  draws 32 x 32 pt items on a 48 pt pitch, the first at x 13 and the remainder
-  right-aligned to x 417.
-- The reference candidate row occupies panel-relative y 26..63; the replica centres its
-  header content inside the 72.33 pt header instead.
-- Nine-key punctuation keys in the reference align to the 56 pt row pitch from canvas
-  y 3; the replica still places them on a 40.5 pt pitch.
-- Reference key caps are 45.33 pt tall for the 26-key rows; the replica keeps the
-  extracted 46 pt design height.
+- The nine-key `1` key carries no tap input in the extracted INI (only `UPINPUT: 1` and the
+  long-press list), so the replica leaves it inert. Confirm on device whether the shipped
+  keyboard inserts a digit or punctuation there.
+- The expanded candidate grid, long-press popups, control centre and panel transitions
+  have not been measured frame by frame.
+- Host app pages beyond the home grid and the display-settings page still need the same
+  measured treatment.
+- Dark mode and the surfaces outside the ten selected Phase 14 scenes remain out of scope.

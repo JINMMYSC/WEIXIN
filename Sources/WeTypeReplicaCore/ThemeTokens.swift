@@ -24,6 +24,9 @@ public enum WTTheme353 {
     public static let keyboardPanelHeight: Double = WTMeasuredKeyboard353.panelHeight
     public static let keyboardBottomBarHeight: Double =
         WTMeasuredKeyboard353.canvasHeight - WTMeasuredKeyboard353.keyAreaHeight
+    /// Shared header row for the toolbar and the candidate list.
+    public static let keyboardHeaderRowTop: Double = WTMeasuredKeyboard353.headerRowTop
+    public static let keyboardHeaderRowHeight: Double = WTMeasuredKeyboard353.headerRowHeight
 
     public static let keyboardBackground = WTRGBAHex(WTPhase14Palette353.keyboardBackground, "#1C1C1E")
     public static let panelBackground = WTRGBAHex("#F2F3F5", "#1C1C1E")
@@ -47,7 +50,7 @@ public enum WTTheme353 {
     public static let letterFontSize: Double = 24
     public static let keySubtitleFontSize: Double = 9
     public static let functionFontSize: Double = 16
-    public static let candidateFontSize: Double = 18
+    public static let candidateFontSize: Double = WTMeasuredKeyboard353.candidateFontSize
     public static let toolbarIconSize: Double = 20
 }
 

@@ -37,7 +37,24 @@ public enum WTMeasuredKeyboard353 {
     public static let letterKeyWidth: Double = 36
     public static let letterKeyPitch: Double = 42.667
     public static let functionKeyWidth: Double = 48.33
-    public static let rowHeight: Double = 46
+    /// Measured cap height of the 26-key rows; the extracted INI uses 46.
+    public static let t26RowHeight: Double = 45.33
+    public static let rowHeight: Double = 45.33
+
+    /// Header content row shared by the toolbar and the candidate list. Both sit at
+    /// panel-relative y 31 with a 32 pt row, whatever the header is showing.
+    public static let headerRowTop: Double = 31
+    public static let headerRowHeight: Double = 32
+    public static let productButtonX: Double = 13
+    public static let productButtonSize: Double = 32
+    public static let toolButtonSize: Double = 32
+    public static let toolSlotPitch: Double = 46
+    /// The trailing tool slot ends here, so tools fill the row from the right.
+    public static let toolRowTrailingX: Double = 417
+    public static let candidateLeadingInset: Double = 13
+    public static let candidateFontSize: Double = 20
+    /// Measured radius of the keyboard surface's top corners on iOS 26.
+    public static let panelTopCornerRadius: Double = 28
     /// Measured widths and origins of the 26-key bottom row, left to right.
     public static let t26BottomRowIDs = ["KEY_123", "KEY_,", "KEY_SPACE", "KEY_CHANGE", "KEY_RETURN"]
     public static let t26BottomRowWidths: [Double] = [79.33, 36, 154.33, 39.67, 85.33]
@@ -50,6 +67,8 @@ public enum WTMeasuredKeyboard353 {
     public static let t9GutterLeadingX: Double = 5
     public static let t9NumberOrigins: [Double] = [83.33, 173.33, 263.67]
     public static let t9GutterTrailingX: Double = 353.33
+    public static let t9RowTops: [Double] = [3, 59, 115, 171]
+    public static let t9RowHeight: Double = 49.33
     public static let t9BottomRowIDs = ["KEY_SYMB", "KEY_123", "KEY_SPACE", "KEY_ABC", "KEY_RETURN"]
     public static let t9BottomRowWidths: [Double] = [72, 49.33, 152, 49.33, 72]
     public static let t9BottomRowOrigins: [Double] = [5, 83.33, 139.33, 297.67, 353.33]
@@ -138,24 +157,35 @@ public enum WTKeyboardGeometryResolver353 {
         let numberIDs = ["KEY_1", "KEY_2", "KEY_3", "KEY_4", "KEY_5", "KEY_6",
                          "KEY_7", "KEY_8", "KEY_9"]
 
+        // The extracted rectangles merge the first number key and the list cell into one tall
+        // block; the shipped product draws four separate rows of 49.33 pt at y 3, 59, 115, 171.
+        func rowTop(for sourceY: Double) -> Double {
+            measured.t9RowTops.min { abs($0 - sourceY) < abs($1 - sourceY) } ?? sourceY
+        }
+        func normalized(_ id: String, x: Double, width: Double) -> WTRect? {
+            guard let frame = framesByID[id] else { return nil }
+            return WTRect(x: x, y: rowTop(for: frame.y), width: width,
+                          height: measured.t9RowHeight)
+        }
+
         var overrides: [String: WTRect] = [:]
         for (index, id) in numberIDs.enumerated() {
-            overrideFrame(id, x: measured.t9NumberOrigins[index % 3], width: measured.t9NumberWidth,
-                          frames: framesByID, into: &overrides)
+            overrides[id] = normalized(id, x: measured.t9NumberOrigins[index % 3],
+                                       width: measured.t9NumberWidth)
         }
         for (index, id) in measured.t9BottomRowIDs.enumerated() {
-            overrideFrame(id, x: measured.t9BottomRowOrigins[index],
-                          width: measured.t9BottomRowWidths[index],
-                          frames: framesByID, into: &overrides)
+            overrides[id] = normalized(id, x: measured.t9BottomRowOrigins[index],
+                                       width: measured.t9BottomRowWidths[index])
         }
         // Remaining gutter items keep the measured column width on either side.
-        for (id, frame) in framesByID where !measured.t9BottomRowIDs.contains(id) {
+        for (id, frame) in framesByID
+        where !measured.t9BottomRowIDs.contains(id) && overrides[id] == nil {
             if frame.x < 40 {
-                overrides[id] = WTRect(x: measured.t9GutterLeadingX, y: frame.y,
-                                       width: measured.t9GutterWidth, height: frame.height)
+                overrides[id] = normalized(id, x: measured.t9GutterLeadingX,
+                                           width: measured.t9GutterWidth)
             } else if frame.x > 330 {
-                overrides[id] = WTRect(x: measured.t9GutterTrailingX, y: frame.y,
-                                       width: measured.t9GutterWidth, height: frame.height)
+                overrides[id] = normalized(id, x: measured.t9GutterTrailingX,
+                                           width: measured.t9GutterWidth)
             }
         }
 
@@ -179,7 +209,7 @@ public enum WTKeyboardGeometryResolver353 {
                 x: origin + Double(index) * pitch,
                 y: rowY,
                 width: width,
-                height: frames[id]?.height ?? WTMeasuredKeyboard353.rowHeight
+                height: WTMeasuredKeyboard353.t26RowHeight
             )
         }
     }
@@ -192,6 +222,7 @@ public enum WTKeyboardGeometryResolver353 {
         into overrides: inout [String: WTRect]
     ) {
         guard let frame = frames[id] else { return }
-        overrides[id] = WTRect(x: x, y: frame.y, width: width, height: frame.height)
+        overrides[id] = WTRect(x: x, y: frame.y, width: width,
+                               height: WTMeasuredKeyboard353.t26RowHeight)
     }
 }

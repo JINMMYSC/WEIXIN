@@ -22,6 +22,7 @@ def main() -> int:
     candidate = text("iOSOverlay/WTCandidateBar.swift")
     chrome = text("iOSOverlay/WTChrome.swift")
     panel = text("iOSOverlay/WTPanelRootView.swift")
+    contract = text("Sources/WeTypeReplicaCore/Phase14VisualContract.swift")
 
     paired_cases = (
         "keyboard26", "keyboard9", "candidate-expanded", "symbol-cn", "symbol-en",
@@ -50,9 +51,21 @@ def main() -> int:
         "toolbarHeight: Double = 40", "panelHeaderHeight: Double = 40",
         "keyCornerRadius: Double = 5", "letterFontSize: Double = 24",
         "keySubtitleFontSize: Double = 9", "functionFontSize: Double = 16",
-        "candidateFontSize: Double = 18",
+        # Measured from the 3.5.3 frames rather than the extracted INI default of 18.
+        "candidateFontSize: Double = WTMeasuredKeyboard353.candidateFontSize",
+        "keyboardHeaderRowTop: Double = WTMeasuredKeyboard353.headerRowTop",
+        "keyboardHeaderRowHeight: Double = WTMeasuredKeyboard353.headerRowHeight",
     ):
         require(token in theme, f"extracted 3.5.3 metric drifted: {token}")
+
+    for token in (
+        "headerRowTop: Double = 31", "headerRowHeight: Double = 32",
+        "productButtonX: Double = 13", "productButtonSize: Double = 32",
+        "toolSlotPitch: Double = 46", "toolRowTrailingX: Double = 417",
+        "candidateFontSize: Double = 20", "panelTopCornerRadius: Double = 28",
+        "t9RowHeight: Double = 49.33", "t26RowHeight: Double = 45.33",
+    ):
+        require(token in contract, f"measured 3.5.3 keyboard contract drifted: {token}")
 
     for token in (
         "let sx =", "let sy =", "layout.baseSize.width", "layout.baseSize.height",

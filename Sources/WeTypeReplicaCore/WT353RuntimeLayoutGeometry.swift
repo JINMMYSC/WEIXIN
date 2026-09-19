@@ -43,7 +43,9 @@ public enum WT353RuntimeLayoutGeometry {
         let punctuation = ["，", "。", "！", "？"].enumerated().map { index, symbol in
             WTKeyboardItem(
                 id: "WT353_T9_PUNCT_\(index)",
-                rect: WTRect(x: 5, y: 3 + Double(index) * 40.5, width: 69, height: 40.5),
+                // Measured 3.5.3 nine-key rows: the punctuation column shares the 56 pt row
+                // pitch of the number grid instead of the extracted 40.5 pt placeholder.
+                rect: WTRect(x: 5, y: 3 + Double(index) * 56, width: 69, height: 49.33),
                 input: symbol,
                 title: symbol,
                 function: "funcQuote",

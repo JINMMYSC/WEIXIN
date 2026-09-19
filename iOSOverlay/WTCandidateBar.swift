@@ -6,28 +6,26 @@ public struct WTCandidateBar: View {
 
     public var body: some View {
         VStack(spacing: 0) {
-            compositionRow
             if runtime.candidateExpanded { expandedGrid } else { compactRow }
             if runtime.candidateActionTarget != nil { candidateActionMenu }
         }
+        // The measured 3.5.3 header shows the candidate list on the same 32 pt row as the
+        // toolbar, 31 pt below the panel top; the pinyin string shares that row.
+        .padding(.top, runtime.candidateExpanded ? 0 : CGFloat(WTTheme353.keyboardHeaderRowTop))
         .frame(minHeight: CGFloat(WTTheme353.keyboardHeaderHeight), alignment: .top)
         .background(WTThemeColor353.keyboardBackground)
     }
 
-    private var compositionRow: some View {
-        HStack(spacing: 6) {
-            Text(runtime.composition)
-                .font(.system(size: 13, weight: .regular))
-                .foregroundStyle(WTChrome353.primaryText)
-                .lineLimit(1)
-            Spacer(minLength: 0)
-        }
-        .padding(.horizontal, 8)
-        .frame(height: WTTheme353.compositionHeight)
-    }
-
     private var compactRow: some View {
         HStack(spacing: 0) {
+            if !runtime.composition.isEmpty {
+                Text(runtime.composition)
+                    .font(.system(size: WTTheme353.candidateFontSize * 0.8, weight: .regular))
+                    .foregroundStyle(WTChrome353.primaryText.opacity(0.6))
+                    .lineLimit(1)
+                    .padding(.leading, CGFloat(WTMeasuredKeyboard353.candidateLeadingInset))
+                    .padding(.trailing, 6)
+            }
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 4) {
                     ForEach(Array(runtime.candidates.enumerated()), id: \.offset) { index, word in
@@ -43,13 +41,13 @@ public struct WTCandidateBar: View {
                     }
                 } label: {
                     WTBasicGlyphView(.chevronDown, tint: WTChrome353.primaryText.opacity(0.72), size: 13, lineWidth: 1.8)
-                        .frame(width: 38, height: runtime.visualCalibration.candidateHeight)
+                        .frame(width: 38, height: CGFloat(WTTheme353.keyboardHeaderRowHeight))
                 }
                 .buttonStyle(.plain)
                 .background(WTThemeColor353.keyboardBackground)
             }
         }
-        .frame(height: runtime.visualCalibration.candidateHeight)
+        .frame(height: CGFloat(WTTheme353.keyboardHeaderRowHeight))
     }
 
     private var expandedGrid: some View {
@@ -106,7 +104,8 @@ public struct WTCandidateBar: View {
                 .font(.system(size: WTTheme353.candidateFontSize))
                 .foregroundStyle(index == 0 ? WTChrome353.accent : WTChrome353.primaryText)
                 .padding(.horizontal, 10)
-                .frame(minHeight: runtime.visualCalibration.candidateHeight - 4)
+                .frame(minHeight: min(CGFloat(runtime.visualCalibration.candidateHeight),
+                                      CGFloat(WTTheme353.keyboardHeaderRowHeight)))
                 .background(
                     RoundedRectangle(cornerRadius: 6, style: .continuous)
                         .fill(index == 0 ? WTChrome353.elevatedSurface : Color.clear)
