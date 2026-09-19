@@ -216,10 +216,8 @@ public final class WTKeyboardServiceBinder {
     /// without changing any other surface.
     private func bindDeepSeekProvider() {
         let configuration = WTDeepSeekConfigurationStore.load(appGroupIdentifier: appGroupIdentifier)
-        guard configuration.isConfigured else {
-            runtime.setPanelLoadState(.fallback("未配置 DeepSeek API Key；可在主 App 设置里填写后启用"), for: .askAI)
-            return
-        }
+        // Leave the generic HTTP provider bindings untouched when no key is present.
+        guard configuration.isConfigured else { return }
         let provider = WTDeepSeekProvider(configuration: configuration)
         deepSeekProvider = provider
 
@@ -227,8 +225,8 @@ public final class WTKeyboardServiceBinder {
             runtime.setPanelLoadState(.idle, for: panel)
         }
 
-        runtime.runAI = { [weak self, weak provider] tool, text in
-            guard let self, let provider else { return "" }
+        runtime.runAI = { [weak self] tool, text in
+            guard let self else { return "" }
             let panel: WTPanel = tool == .polish || tool == .rewrite ? .textPolish : .askAI
             self.runtime.setPanelLoadState(.loading, for: panel)
             do {
@@ -241,8 +239,8 @@ public final class WTKeyboardServiceBinder {
             }
         }
 
-        runtime.translate = { [weak self, weak provider] text, source, target in
-            guard let self, let provider else { return "" }
+        runtime.translate = { [weak self] text, source, target in
+            guard let self else { return "" }
             self.runtime.setPanelLoadState(.loading, for: .translate)
             do {
                 let result = try await provider.translate(text: text, from: source, to: target)
@@ -254,8 +252,8 @@ public final class WTKeyboardServiceBinder {
             }
         }
 
-        runtime.correctionSuggestions = { [weak self, weak provider] text in
-            guard let self, let provider else { return [] }
+        runtime.correctionSuggestions = { [weak self] text in
+            guard let self else { return [] }
             self.runtime.setPanelLoadState(.loading, for: .correction)
             do {
                 let result = try await provider.correct(text: text)
@@ -268,8 +266,8 @@ public final class WTKeyboardServiceBinder {
             }
         }
 
-        runtime.splitWords = { [weak self, weak provider] text in
-            guard let self, let provider else { return [] }
+        runtime.splitWords = { [weak self] text in
+            guard let self else { return [] }
             self.runtime.setPanelLoadState(.loading, for: .wordSplitting)
             do {
                 let words = try await provider.splitWords(text: text)
