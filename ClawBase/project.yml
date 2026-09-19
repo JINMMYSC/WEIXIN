@@ -24,10 +24,13 @@ targets:
       - path: ../iOSApp/WTHostSettings353View.swift
       - path: ../iOSApp/WTHostHome353View.swift
       - path: ../iOSApp/WTDisplaySettings353View.swift
+      - path: ../iOSApp/WTDeepSeekSettingsView.swift
       - path: ../iOSApp/WTHostVoiceCaptureView.swift
       - path: ../iOSApp/WTHostPhase4HandoffView.swift
       - path: ../iOSServices/WTHostSpeechRecognitionService.swift
       - path: ../iOSServices/WTVoiceLiveActivityController.swift
+      - path: ../iOSServices/WTSharedStoreFactory.swift
+      - path: ../iOSServices/WTDeepSeekProvider.swift
       - path: ../iOSShared/WTVoiceActivityAttributes.swift
       - path: ../iOSShared/WTSemanticGlyph.swift
       - path: ../iOSShared/WTHexColor.swift

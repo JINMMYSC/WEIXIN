@@ -19,6 +19,18 @@ replica surfaces:
 
 ## 2. Behaviour still missing (27 surfaces)
 
+### Wired after this audit
+
+Two chains were completed and are now inside the shipped targets:
+
+| Chain | How it works |
+|---|---|
+| DeepSeek text services | The user enters an API key on the host (`AI 功能` page). It is stored in the App Group container, never in the repository or CI, and the keyboard binds AI, translation, correction and word splitting to `WTDeepSeekProvider` whenever a key is present. |
+| Voice input | The keyboard writes a request id into the App Group and opens `wtreplica://voice`; the host runs `WTHostSpeechRecognitionService` on the native Speech framework and returns the transcript through the service mailbox. |
+
+Still missing are the media and host-content providers (stickers/GIF, cloud candidates, WeChat
+Finder cards) and the on-device handwriting recogniser, which no text API can supply.
+
 These are the features where the official app produces content and the replica cannot yet:
 
 | Area | Original surfaces | What is missing |

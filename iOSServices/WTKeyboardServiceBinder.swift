@@ -17,6 +17,7 @@ public final class WTKeyboardServiceBinder {
     private var transferService: WTBonjourTransferService?
     private var handwritingRecognizer: WTVisionHandwritingRecognizer?
     private var correctionService: WTLocalCorrectionService?
+    private var deepSeekProvider: WTDeepSeekProvider?
     private var aiService: WTHTTPAIService?
     private var translationService: WTHTTPTranslationService?
     private var hotWordService: WTHTTPHotWordService?
@@ -50,6 +51,7 @@ public final class WTKeyboardServiceBinder {
         bindPersistence()
         bindLocalServices()
         bindNetworkProviders()
+        bindDeepSeekProvider()
         bindTransfer()
         bindHostHandoffs()
         bindVoiceBridge()
@@ -205,6 +207,80 @@ public final class WTKeyboardServiceBinder {
                         self.runtime.setPanelLoadState(.permissionDenied(error.localizedDescription), for: .clipboard)
                     }
                 }
+            }
+        }
+    }
+
+    /// Applies the user-supplied DeepSeek chain. It runs after the local and generic network
+    /// providers so a configured key upgrades AI, translation, correction and word splitting
+    /// without changing any other surface.
+    private func bindDeepSeekProvider() {
+        let configuration = WTDeepSeekConfigurationStore.load(appGroupIdentifier: appGroupIdentifier)
+        guard configuration.isConfigured else {
+            runtime.setPanelLoadState(.fallback("未配置 DeepSeek API Key；可在主 App 设置里填写后启用"), for: .askAI)
+            return
+        }
+        let provider = WTDeepSeekProvider(configuration: configuration)
+        deepSeekProvider = provider
+
+        for panel in [WTPanel.askAI, .textPolish, .translate, .correction, .wordSplitting] {
+            runtime.setPanelLoadState(.idle, for: panel)
+        }
+
+        runtime.runAI = { [weak self, weak provider] tool, text in
+            guard let self, let provider else { return "" }
+            let panel: WTPanel = tool == .polish || tool == .rewrite ? .textPolish : .askAI
+            self.runtime.setPanelLoadState(.loading, for: panel)
+            do {
+                let result = try await provider.askAI(tool: tool, text: text)
+                self.runtime.setPanelLoadState(result.isEmpty ? .empty : .ready, for: panel)
+                return result
+            } catch {
+                self.runtime.setPanelLoadState(Self.loadState(for: error), for: panel)
+                return ""
+            }
+        }
+
+        runtime.translate = { [weak self, weak provider] text, source, target in
+            guard let self, let provider else { return "" }
+            self.runtime.setPanelLoadState(.loading, for: .translate)
+            do {
+                let result = try await provider.translate(text: text, from: source, to: target)
+                self.runtime.setPanelLoadState(result.isEmpty ? .empty : .ready, for: .translate)
+                return result
+            } catch {
+                self.runtime.setPanelLoadState(Self.loadState(for: error), for: .translate)
+                return ""
+            }
+        }
+
+        runtime.correctionSuggestions = { [weak self, weak provider] text in
+            guard let self, let provider else { return [] }
+            self.runtime.setPanelLoadState(.loading, for: .correction)
+            do {
+                let result = try await provider.correct(text: text)
+                let suggestions = result.isEmpty || result == text ? [] : [result]
+                self.runtime.setPanelLoadState(suggestions.isEmpty ? .empty : .ready, for: .correction)
+                return suggestions
+            } catch {
+                self.runtime.setPanelLoadState(Self.loadState(for: error), for: .correction)
+                return []
+            }
+        }
+
+        runtime.splitWords = { [weak self, weak provider] text in
+            guard let self, let provider else { return [] }
+            self.runtime.setPanelLoadState(.loading, for: .wordSplitting)
+            do {
+                let words = try await provider.splitWords(text: text)
+                // One option carries the model's segmentation; the view falls back to its own
+                // splitter when the model returns nothing usable.
+                let options = words.count > 1 ? [WTWordSplitOption(parts: words)] : []
+                self.runtime.setPanelLoadState(options.isEmpty ? .empty : .ready, for: .wordSplitting)
+                return options
+            } catch {
+                self.runtime.setPanelLoadState(Self.loadState(for: error), for: .wordSplitting)
+                return []
             }
         }
     }

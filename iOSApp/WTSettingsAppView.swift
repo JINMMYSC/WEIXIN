@@ -317,6 +317,7 @@ public struct WTSettingsDetailView: View {
                 Toggle("候选栏显示纠错提示", isOn: appStorage("wt.correction.candidate", defaultValue: true))
             }
         case .ai:
+            WTSettingsDeepSeekSection()
             Section("AI 工具") {
                 Toggle("问 AI", isOn: appStorage("wt.ai.ask", defaultValue: true))
                 Toggle("文字润色", isOn: appStorage("wt.ai.polish", defaultValue: true))
